@@ -3,7 +3,7 @@
 | | |
 |---|---|
 | Date | 2026-10-28 |
-| Git SHA | `b4529ca` |
+| Git SHA | `81e07cc` |
 | Models | extract `claude-sonnet-5-5` (effort `low`) |
 | Backend | `claude_code` |
 | Prompt versions | extract `1` |

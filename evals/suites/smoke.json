@@ -1,0 +1,16 @@
+{
+  "name": "smoke",
+  "description": "10 fixed receipts covering every verdict, a totals mismatch, card and patient-name redaction, and every merchant type. Runs in CI.",
+  "receipts": [
+    "r0001",
+    "r0002",
+    "r0003",
+    "r0006",
+    "r0008",
+    "r0007",
+    "r0009",
+    "r0011",
+    "r0005",
+    "r0012"
+  ]
+}

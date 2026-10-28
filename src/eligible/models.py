@@ -50,3 +50,37 @@ class GoldenReceipt(BaseModel):
     totals_mismatch: bool
     pii: list[PII] = []
     seed: int
+
+
+# Extraction output (SPEC §2.2). Every field gets a 0-1 confidence; < LOW_CONFIDENCE is flagged.
+LOW_CONFIDENCE = 0.6
+
+
+class FieldConfidence(BaseModel):
+    name: float = Field(ge=0, le=1)
+    quantity: float = Field(ge=0, le=1)
+    unit_price: float = Field(ge=0, le=1)
+    amount: float = Field(ge=0, le=1)
+
+
+class LineItem(BaseModel):
+    raw_text: str
+    name: str
+    quantity: int | None
+    unit_price: Decimal | None
+    amount: Decimal
+    confidence: FieldConfidence
+
+    def low_confidence_fields(self) -> list[str]:
+        return [f for f, c in self.confidence.model_dump().items() if c < LOW_CONFIDENCE]
+
+
+class Receipt(BaseModel):
+    merchant: str | None
+    merchant_type: MerchantType
+    date: date | None
+    items: list[LineItem]
+    subtotal: Decimal | None
+    tax: Decimal | None
+    total: Decimal | None
+    read_quality: Literal["good", "partial", "poor"]

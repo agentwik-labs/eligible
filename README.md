@@ -15,8 +15,8 @@ This is a portfolio project. It exists to show, in one repo, the skills AI engin
 | Python backend | FastAPI, Pydantic, pytest, uv |
 
 ## Status
-M0 (skeleton and the metered LLM client) and M1 (synthetic data, golden labels, knowledge
-sources) are done. See [PROGRESS.md](PROGRESS.md). There are no
+M0 (metered LLM client), M1 (synthetic data and knowledge sources) and M2 (redaction and
+extraction, with its first eval) are done. See [PROGRESS.md](PROGRESS.md). There are no
 eval results yet, and this README will show only numbers copied from a committed eval report.
 
 ## Quickstart
@@ -31,8 +31,8 @@ uv run python -m eligible.demo             # offline demo: budget stop, cache sa
 uv run python -m data.generate             # regenerate the 60 synthetic receipts + labels
 uv run python -m eligible.knowledge.sources   # re-parse IRS sources into citable sections
 ```
-These arrive with their milestones: `python -m retrieve.ingest`
-(M3), `python -m evals.run --suite smoke|full` (M2–M4), `python -m eligible.mcp_server` (M6).
+`uv run python -m evals.run --suite smoke|full` runs the evals (extraction so far). These
+arrive with their milestones: `python -m retrieve.ingest` (M3), `python -m eligible.mcp_server` (M6).
 
 ## Cost and token efficiency
 Every LLM call goes through one metered client (`src/eligible/llm/`):

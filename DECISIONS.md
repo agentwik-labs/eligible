@@ -69,3 +69,25 @@ mix is within 1 point of DATA.md §2 on every class.
 ## 2026-10-28: Bundled DejaVu Sans Mono
 Receipt PNGs use a committed copy of DejaVu Sans Mono (free license in `data/fonts/`), so
 images render the same on every machine and in CI.
+
+## 2026-10-28: Claude Code CLI as a second LLM backend
+There is no API key yet, and the owner said to use Claude for now. `llm/claude_code.py` is a
+second `LLMClient` implementation that runs `claude -p` on the signed-in Claude login: our
+system prompt replaces Claude Code's, all tools and MCP servers are off, and it runs in an
+empty directory. It reports the same usage fields as the API, and on a measured call its own
+`costUSD` matched `llm/pricing.py` to within $0.0000002. `ELIGIBLE_LLM_BACKEND=auto` picks
+the API when `ANTHROPIC_API_KEY` is set. CLAUDE.md names the `anthropic` SDK, which stays the
+production backend; the CLI is a stand-in. Costs in reports are API-equivalent.
+
+Side effects: the CLI writes its prompt cache with the 1-hour TTL (2x input price instead of
+1.25x), and it can't send images, so extraction runs on receipt text for now.
+
+## 2026-10-28: Extraction is measured on receipt text until images can be sent
+SPEC §1 accepts receipt text or an image. The Claude Code backend sends text only, so the M2
+eval reads `data/receipts/*.txt`. Image extraction (and the noisy/rotated adversarial set)
+gets measured once the API backend is available. Text extraction is the easier task, and the
+M2 numbers should be read that way.
+
+## 2026-10-28: Smoke suite composition
+`evals/suites/smoke.json` holds 10 receipts chosen in code to cover every verdict, a totals
+mismatch, a card number and a patient name. It has 73 items. CI runs it.

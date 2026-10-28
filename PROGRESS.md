@@ -48,4 +48,38 @@
 - The retrieval trap is now in the data: Pub 502 says OTC drugs are excluded, and the
   CARES Act / Pub 969 say they're eligible. M3 retrieval and M4 verdicts will be measured on it.
 
-**Next: M2** redaction and structured extraction, plus the first extraction eval.
+
+## M2: Redaction and extraction (2026-10-28)
+
+**Done**
+- `redact.py`: Luhn-checked card numbers, phones, emails, and names after "Patient:"/"Name:".
+  14 unit tests, plus a test that no personal data in any of the 60 receipts survives.
+- `extract/`: one structured-output call per receipt with a strict JSON schema and per-field
+  confidence. Prompt in `prompts/extract.md` (version 1). Money stays exact (Decimal).
+- `llm/claude_code.py`: Claude Code CLI backend, so evals run without an API key (DECISIONS).
+- `evals/run.py`, `evals/metrics.py`: suites, the EVALS.md §2.1 metrics, a pre-run cost
+  estimate with the budget check, gates, and the report format from EVALS.md §4.
+
+**Results** (`evals/reports/`, text input, Sonnet 5.5 at effort low, Claude Code backend)
+| Metric | Smoke (10) | Full (60) |
+|---|---|---|
+| Item recall / precision | 100% / 100% | 100% / 100% |
+| Amount, quantity, merchant, date, total | 100% | 100% |
+| Totals mismatches caught | 1 of 1 | 6 of 6, 0 false alarms |
+| Redaction leaks | 0 | 0 |
+| Unreadable lines flagged by low confidence | | 23 of 23 (1 of 418 other items) |
+| Cost per receipt (uncached) | $0.0142 | $0.0146 |
+| Prompt tokens from cache | 67% | 65% |
+| Latency p95 | 12.1 s | 11.6 s |
+
+**Read with care**
+- Clean synthetic text is easy, so 100% says the pipeline works, not that extraction is
+  solved. The harder cases are images and the adversarial set (M5).
+- Every amount was reported at 0.95+ confidence and every amount was right, so calibration
+  has no spread to judge yet.
+- Output is 1,050+ tokens per receipt and about 70% of the cost. The confidence block on every
+  field is most of it. That's the first cost lever for M5.
+- Cost is already near the projection's $0.0125 for extraction, so the decide step decides
+  whether the < $0.01/receipt aim is reachable.
+
+**Next: M3** ingestion, BM25 plus vectors, fusion, reranking, and the retrieval ablation.

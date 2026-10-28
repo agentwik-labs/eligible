@@ -1,0 +1,175 @@
+{
+  "receipt_id": "r0040",
+  "merchant": "LAKESIDE FAMILY DENTAL",
+  "merchant_type": "dental",
+  "date": "2026-08-18",
+  "items": [
+    {
+      "raw_text": "DENTAL FLOSS 50YD",
+      "name": "dental floss, 50 yd",
+      "quantity": 1,
+      "unit_price": "2.99",
+      "amount": "2.99",
+      "verdict": "not_eligible",
+      "gold_source_ids": [
+        "elist:toothbrush-toothpaste",
+        "p502:personal-use-items"
+      ],
+      "note": "Pub 502 names toothbrush and toothpaste as nondeductible personal expenses."
+    },
+    {
+      "raw_text": "D1208 FLUORIDE VARNISH",
+      "name": "fluoride varnish treatment",
+      "quantity": 1,
+      "unit_price": "35.0",
+      "amount": "35.00",
+      "verdict": "eligible",
+      "gold_source_ids": [
+        "elist:dental-treatment",
+        "p502:dental-treatment"
+      ],
+      "note": "Prevention and alleviation of dental disease (cleanings, sealants, fluoride, X-rays, fillings, extractions) is includible."
+    },
+    {
+      "raw_text": "IN-OFFICE WHITENING",
+      "name": "in-office teeth whitening",
+      "quantity": 1,
+      "unit_price": "350.0",
+      "amount": "350.00",
+      "verdict": "not_eligible",
+      "gold_source_ids": [
+        "elist:teeth-whitening",
+        "p502:teeth-whitening"
+      ],
+      "note": "Amounts paid to whiten teeth aren't includible."
+    },
+    {
+      "raw_text": "MOUTHWASH MINT 1L",
+      "name": "mint mouthwash, 1 liter",
+      "quantity": 1,
+      "unit_price": "6.49",
+      "amount": "6.49",
+      "verdict": "not_eligible",
+      "gold_source_ids": [
+        "elist:toothbrush-toothpaste",
+        "p502:personal-use-items"
+      ],
+      "note": "Pub 502 names toothbrush and toothpaste as nondeductible personal expenses."
+    },
+    {
+      "raw_text": "TOOTHPASTE FLUOR 4.8OZ",
+      "name": "fluoride toothpaste, 4.8 oz",
+      "quantity": 1,
+      "unit_price": "3.99",
+      "amount": "3.99",
+      "verdict": "not_eligible",
+      "gold_source_ids": [
+        "elist:toothbrush-toothpaste",
+        "p502:personal-use-items"
+      ],
+      "note": "Pub 502 names toothbrush and toothpaste as nondeductible personal expenses."
+    },
+    {
+      "raw_text": "TOOTHBRUSH SOFT 2PK",
+      "name": "soft toothbrush, 2 pack",
+      "quantity": 1,
+      "unit_price": "4.49",
+      "amount": "4.49",
+      "verdict": "not_eligible",
+      "gold_source_ids": [
+        "elist:toothbrush-toothpaste",
+        "p502:personal-use-items"
+      ],
+      "note": "Pub 502 names toothbrush and toothpaste as nondeductible personal expenses."
+    },
+    {
+      "raw_text": "NO SHOW FEE",
+      "name": "missed appointment fee",
+      "quantity": 1,
+      "unit_price": "50.0",
+      "amount": "50.00",
+      "verdict": "not_eligible",
+      "gold_source_ids": [
+        "elist:missed-appointment",
+        "p502:what-are-medical-expenses"
+      ],
+      "note": "A missed-appointment fee pays for no diagnosis or treatment, so it isn't medical care."
+    },
+    {
+      "raw_text": "D2392 RESIN 2SURF POST",
+      "name": "composite filling, two surfaces, posterior",
+      "quantity": 1,
+      "unit_price": "210.0",
+      "amount": "210.00",
+      "verdict": "eligible",
+      "gold_source_ids": [
+        "elist:dental-treatment",
+        "p502:dental-treatment"
+      ],
+      "note": "Prevention and alleviation of dental disease (cleanings, sealants, fluoride, X-rays, fillings, extractions) is includible."
+    },
+    {
+      "raw_text": "ORTHO TX PMT 3 OF 24",
+      "name": "orthodontic treatment payment 3 of 24",
+      "quantity": 1,
+      "unit_price": "225.0",
+      "amount": "225.00",
+      "verdict": "eligible",
+      "gold_source_ids": [
+        "elist:orthodontics",
+        "p502:dental-treatment"
+      ],
+      "note": "Dental treatment, including braces, to alleviate dental disease is includible."
+    },
+    {
+      "raw_text": "D0274 BITEWINGS 4FILM",
+      "name": "dental x-rays, 4 bitewings",
+      "quantity": 1,
+      "unit_price": "68.0",
+      "amount": "68.00",
+      "verdict": "eligible",
+      "gold_source_ids": [
+        "elist:dental-treatment",
+        "p502:dental-treatment"
+      ],
+      "note": "Prevention and alleviation of dental disease (cleanings, sealants, fluoride, X-rays, fillings, extractions) is includible."
+    },
+    {
+      "raw_text": "D7140 EXTRACTION",
+      "name": "tooth extraction",
+      "quantity": 1,
+      "unit_price": "185.0",
+      "amount": "185.00",
+      "verdict": "eligible",
+      "gold_source_ids": [
+        "elist:dental-treatment",
+        "p502:dental-treatment"
+      ],
+      "note": "Prevention and alleviation of dental disease (cleanings, sealants, fluoride, X-rays, fillings, extractions) is includible."
+    },
+    {
+      "raw_text": "D1110 PROPHY ADULT",
+      "name": "adult dental cleaning (prophylaxis)",
+      "quantity": 1,
+      "unit_price": "115.0",
+      "amount": "115.00",
+      "verdict": "eligible",
+      "gold_source_ids": [
+        "elist:dental-treatment",
+        "p502:dental-treatment"
+      ],
+      "note": "Prevention and alleviation of dental disease (cleanings, sealants, fluoride, X-rays, fillings, extractions) is includible."
+    }
+  ],
+  "subtotal_printed": "1255.96",
+  "tax": "0.00",
+  "total": "1255.96",
+  "totals_mismatch": false,
+  "pii": [
+    {
+      "kind": "card_number",
+      "value": "378282246310005"
+    }
+  ],
+  "seed": 20261028
+}

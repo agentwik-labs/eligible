@@ -1,0 +1,157 @@
+{
+  "receipt_id": "r0054",
+  "merchant": "PEAK FITNESS & SPA",
+  "merchant_type": "other",
+  "date": "2026-04-03",
+  "items": [
+    {
+      "raw_text": "DEPT 54 ITEM",
+      "name": "unidentified item, department 54",
+      "quantity": 1,
+      "unit_price": "14.99",
+      "amount": "14.99",
+      "verdict": "needs_review",
+      "gold_source_ids": [
+        "elist:unidentified-dept-code",
+        "p502:what-are-medical-expenses"
+      ],
+      "note": "The line shows only a store department code; no rule can be applied to an unknown item."
+    },
+    {
+      "raw_text": "SVC DOG TRAINING FEE",
+      "name": "service dog training fee",
+      "quantity": 1,
+      "unit_price": "400.0",
+      "amount": "400.00",
+      "verdict": "eligible",
+      "gold_source_ids": [
+        "elist:service-animal-care",
+        "p502:guide-dog-or-other-service-animal"
+      ],
+      "note": "Costs of buying, training and maintaining a guide dog or other service animal, including food and veterinary care, are includible."
+    },
+    {
+      "raw_text": "WHEELCHAIR STD 18IN",
+      "name": "standard wheelchair, 18 in seat",
+      "quantity": 1,
+      "unit_price": "189.0",
+      "amount": "189.00",
+      "verdict": "eligible",
+      "gold_source_ids": [
+        "elist:wheelchair",
+        "p502:wheelchair"
+      ],
+      "note": "A wheelchair used for relief of sickness or disability is includible, as is its upkeep."
+    },
+    {
+      "raw_text": "BAND AID FLX 30CT",
+      "name": "flexible fabric adhesive bandages, 30 count",
+      "quantity": 1,
+      "unit_price": "4.99",
+      "amount": "4.99",
+      "verdict": "eligible",
+      "gold_source_ids": [
+        "elist:bandages",
+        "p502:bandages"
+      ],
+      "note": "Medical supplies such as bandages are includible."
+    },
+    {
+      "raw_text": "SWIM LESSONS 4WK",
+      "name": "swimming lessons, 4 weeks",
+      "quantity": 1,
+      "unit_price": "120.0",
+      "amount": "120.00",
+      "verdict": "not_eligible",
+      "gold_source_ids": [
+        "elist:lessons",
+        "p502:dancing-lessons",
+        "p502:swimming-lessons"
+      ],
+      "note": "Dancing or swimming lessons for general health aren't includible, even if a doctor recommends them."
+    },
+    {
+      "raw_text": "CHKN BRST BNLS 2LB",
+      "name": "boneless chicken breast, 2 lb",
+      "quantity": 1,
+      "unit_price": "9.98",
+      "amount": "9.98",
+      "verdict": "not_eligible",
+      "gold_source_ids": [
+        "elist:grocery-food",
+        "p502:weight-loss-program",
+        "p502:what-are-medical-expenses"
+      ],
+      "note": "Food that is normally consumed to satisfy nutritional needs isn't medical care."
+    },
+    {
+      "raw_text": "MASSAGE GUN PERCUSS",
+      "name": "percussion massage gun",
+      "quantity": 1,
+      "unit_price": "99.99",
+      "amount": "99.99",
+      "verdict": "not_eligible",
+      "gold_source_ids": [
+        "elist:massage-chair-gun",
+        "p502:health-club-dues",
+        "p502:personal-use-items"
+      ],
+      "note": "Devices that relieve general physical discomfort not related to a medical condition aren't medical care."
+    },
+    {
+      "raw_text": "MED TAPE PAPER 1IN",
+      "name": "paper medical tape, 1 in",
+      "quantity": 1,
+      "unit_price": "3.79",
+      "amount": "3.79",
+      "verdict": "eligible",
+      "gold_source_ids": [
+        "elist:bandages",
+        "p502:bandages"
+      ],
+      "note": "Medical supplies such as bandages are includible."
+    },
+    {
+      "raw_text": "NAPROXEN SOD 220MG 24CT",
+      "name": "naproxen sodium 220 mg, 24 count",
+      "quantity": 1,
+      "unit_price": "7.29",
+      "amount": "7.29",
+      "verdict": "eligible",
+      "gold_source_ids": [
+        "elist:otc-pain-reliever",
+        "p969:distributions-from-an-fsa",
+        "cares:sec-3702"
+      ],
+      "note": "OTC medicines are medical care for FSAs and HRAs whether or not prescribed; CARES Act §3702 removed the prescription-only limit for expenses after 2019."
+    },
+    {
+      "raw_text": "LD TUTORING 4 SESS",
+      "name": "learning disability tutoring, 4 sessions",
+      "quantity": 1,
+      "unit_price": "320.0",
+      "amount": "320.00",
+      "verdict": "needs_prescription",
+      "gold_source_ids": [
+        "elist:special-education-tutoring",
+        "p502:special-education"
+      ],
+      "note": "Tutoring by a specially trained teacher for a child's learning disability is includible when paid on a doctor's recommendation."
+    }
+  ],
+  "subtotal_printed": "1170.03",
+  "tax": "17.15",
+  "total": "1187.18",
+  "totals_mismatch": false,
+  "pii": [
+    {
+      "kind": "card_number",
+      "value": "378282246310005"
+    },
+    {
+      "kind": "email",
+      "value": "shopper64@example.com"
+    }
+  ],
+  "seed": 20261028
+}

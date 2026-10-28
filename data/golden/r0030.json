@@ -1,0 +1,120 @@
+{
+  "receipt_id": "r0030",
+  "merchant": "NORTHSIDE WELLNESS CENTER",
+  "merchant_type": "other",
+  "date": "2026-07-13",
+  "items": [
+    {
+      "raw_text": "SVC DOG TRAINING FEE",
+      "name": "service dog training fee",
+      "quantity": 1,
+      "unit_price": "400.0",
+      "amount": "400.00",
+      "verdict": "eligible",
+      "gold_source_ids": [
+        "elist:service-animal-care",
+        "p502:guide-dog-or-other-service-animal"
+      ],
+      "note": "Costs of buying, training and maintaining a guide dog or other service animal, including food and veterinary care, are includible."
+    },
+    {
+      "raw_text": "GAUZE PADS 4X4 25CT",
+      "name": "gauze pads 4x4 in, 25 count",
+      "quantity": 1,
+      "unit_price": "6.49",
+      "amount": "6.49",
+      "verdict": "eligible",
+      "gold_source_ids": [
+        "elist:bandages",
+        "p502:bandages"
+      ],
+      "note": "Medical supplies such as bandages are includible."
+    },
+    {
+      "raw_text": "GYM MEMBERSHIP MONTHLY",
+      "name": "gym membership, monthly",
+      "quantity": 1,
+      "unit_price": "39.99",
+      "amount": "39.99",
+      "verdict": "not_eligible",
+      "gold_source_ids": [
+        "elist:gym-membership",
+        "p502:health-club-dues"
+      ],
+      "note": "Health club dues and amounts paid to improve general health aren't includible."
+    },
+    {
+      "raw_text": "CRUTCHES ALUM ADULT",
+      "name": "aluminum adult crutches",
+      "quantity": 1,
+      "unit_price": "39.99",
+      "amount": "39.99",
+      "verdict": "eligible",
+      "gold_source_ids": [
+        "elist:crutches",
+        "p502:crutches"
+      ],
+      "note": "Buying or renting crutches is includible."
+    },
+    {
+      "raw_text": "ASPIRIN LO DOSE 81MG 120",
+      "name": "low dose aspirin 81 mg, 120 count",
+      "quantity": 2,
+      "unit_price": "5.99",
+      "amount": "11.98",
+      "verdict": "eligible",
+      "gold_source_ids": [
+        "elist:otc-pain-reliever",
+        "p969:distributions-from-an-fsa",
+        "cares:sec-3702"
+      ],
+      "note": "OTC medicines are medical care for FSAs and HRAs whether or not prescribed; CARES Act §3702 removed the prescription-only limit for expenses after 2019."
+    },
+    {
+      "raw_text": "MED TAPE PAPER 1IN",
+      "name": "paper medical tape, 1 in",
+      "quantity": 1,
+      "unit_price": "3.79",
+      "amount": "3.79",
+      "verdict": "eligible",
+      "gold_source_ids": [
+        "elist:bandages",
+        "p502:bandages"
+      ],
+      "note": "Medical supplies such as bandages are includible."
+    },
+    {
+      "raw_text": "ACETAMIN ES 500MG 100CT",
+      "name": "acetaminophen extra strength 500 mg, 100 count",
+      "quantity": 1,
+      "unit_price": "10.49",
+      "amount": "10.49",
+      "verdict": "eligible",
+      "gold_source_ids": [
+        "elist:otc-pain-reliever",
+        "p969:distributions-from-an-fsa",
+        "cares:sec-3702"
+      ],
+      "note": "OTC medicines are medical care for FSAs and HRAs whether or not prescribed; CARES Act §3702 removed the prescription-only limit for expenses after 2019."
+    },
+    {
+      "raw_text": "WINE CAB SAUV 750ML",
+      "name": "cabernet sauvignon, 750 ml",
+      "quantity": 1,
+      "unit_price": "12.99",
+      "amount": "12.99",
+      "verdict": "not_eligible",
+      "gold_source_ids": [
+        "elist:tobacco-alcohol",
+        "p502:personal-use-items"
+      ],
+      "note": "Tobacco and alcohol are personal purchases with no medical purpose."
+    }
+  ],
+  "subtotal_printed": "525.72",
+  "tax": "3.71",
+  "total": "529.43",
+  "totals_mismatch": false,
+  "pii": [],
+  "seed": 20261028
+}

@@ -1,0 +1,136 @@
+{
+  "receipt_id": "r0002",
+  "merchant": "BLUE HERON PHARMACY",
+  "merchant_type": "pharmacy",
+  "date": "2026-08-21",
+  "items": [
+    {
+      "raw_text": "CETIRIZINE 10MG 45CT",
+      "name": "cetirizine 10 mg, 45 count",
+      "quantity": 1,
+      "unit_price": "16.49",
+      "amount": "16.49",
+      "verdict": "eligible",
+      "gold_source_ids": [
+        "elist:otc-allergy",
+        "p969:distributions-from-an-fsa",
+        "cares:sec-3702"
+      ],
+      "note": "Allergy medicines are OTC medicines, eligible without a prescription after 2019."
+    },
+    {
+      "raw_text": "WHOLE MILK GAL",
+      "name": "whole milk, 1 gallon",
+      "quantity": 1,
+      "unit_price": "3.89",
+      "amount": "3.89",
+      "verdict": "not_eligible",
+      "gold_source_ids": [
+        "elist:grocery-food",
+        "p502:weight-loss-program",
+        "p502:what-are-medical-expenses"
+      ],
+      "note": "Food that is normally consumed to satisfy nutritional needs isn't medical care."
+    },
+    {
+      "raw_text": "EXTRA STR 24C",
+      "name": "unidentified item, description cut off",
+      "quantity": 2,
+      "unit_price": "8.99",
+      "amount": "17.98",
+      "verdict": "needs_review",
+      "gold_source_ids": [
+        "elist:truncated-line",
+        "p502:what-are-medical-expenses"
+      ],
+      "note": "The printed description is cut off, so the item can't be identified."
+    },
+    {
+      "raw_text": "COOL MIST HUMIDIFIER",
+      "name": "cool mist humidifier",
+      "quantity": 1,
+      "unit_price": "39.99",
+      "amount": "39.99",
+      "verdict": "needs_prescription",
+      "gold_source_ids": [
+        "elist:humidifier",
+        "p502:personal-use-items",
+        "p502:what-are-medical-expenses"
+      ],
+      "note": "A household item is includible only if used primarily to alleviate an illness; plans require a letter of medical necessity to show that."
+    },
+    {
+      "raw_text": "MED TAPE PAPER 1IN",
+      "name": "paper medical tape, 1 in",
+      "quantity": 2,
+      "unit_price": "3.79",
+      "amount": "7.58",
+      "verdict": "eligible",
+      "gold_source_ids": [
+        "elist:bandages",
+        "p502:bandages"
+      ],
+      "note": "Medical supplies such as bandages are includible."
+    },
+    {
+      "raw_text": "DAILY MOISTURIZER 16OZ",
+      "name": "daily moisturizing lotion, 16 oz",
+      "quantity": 1,
+      "unit_price": "8.99",
+      "amount": "8.99",
+      "verdict": "not_eligible",
+      "gold_source_ids": [
+        "elist:skincare-lotion",
+        "p502:personal-use-items"
+      ],
+      "note": "Ordinary skin care is a personal-use item, not medical care."
+    },
+    {
+      "raw_text": "RETINOL SERUM 1OZ",
+      "name": "retinol anti-aging serum, 1 oz",
+      "quantity": 1,
+      "unit_price": "24.99",
+      "amount": "24.99",
+      "verdict": "not_eligible",
+      "gold_source_ids": [
+        "elist:anti-aging",
+        "p502:cosmetic-surgery",
+        "p502:personal-use-items"
+      ],
+      "note": "Products directed at improving appearance aren't medical care."
+    },
+    {
+      "raw_text": "HBA MISC",
+      "name": "unidentified health and beauty item",
+      "quantity": 1,
+      "unit_price": "12.49",
+      "amount": "12.49",
+      "verdict": "needs_review",
+      "gold_source_ids": [
+        "elist:unidentified-hba",
+        "p969:distributions-from-an-fsa",
+        "p502:personal-use-items"
+      ],
+      "note": "The line names only a department (health and beauty), which mixes eligible medicine with ineligible personal care; the item can't be classified."
+    },
+    {
+      "raw_text": "CONDOMS LUBR 12CT",
+      "name": "lubricated condoms, 12 count",
+      "quantity": 1,
+      "unit_price": "11.99",
+      "amount": "11.99",
+      "verdict": "eligible",
+      "gold_source_ids": [
+        "elist:condoms",
+        "p502:condoms"
+      ],
+      "note": "Condoms are includible."
+    }
+  ],
+  "subtotal_printed": "144.39",
+  "tax": "4.78",
+  "total": "149.17",
+  "totals_mismatch": false,
+  "pii": [],
+  "seed": 20261028
+}

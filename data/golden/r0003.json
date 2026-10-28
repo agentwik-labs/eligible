@@ -1,0 +1,69 @@
+{
+  "receipt_id": "r0003",
+  "merchant": "MEGAMART SUPERCENTER #2210",
+  "merchant_type": "big_box",
+  "date": "2026-03-16",
+  "items": [
+    {
+      "raw_text": "BREAD WHL WHT 20OZ",
+      "name": "whole wheat bread, 20 oz",
+      "quantity": 1,
+      "unit_price": "3.49",
+      "amount": "3.49",
+      "verdict": "not_eligible",
+      "gold_source_ids": [
+        "elist:grocery-food",
+        "p502:weight-loss-program",
+        "p502:what-are-medical-expenses"
+      ],
+      "note": "Food that is normally consumed to satisfy nutritional needs isn't medical care."
+    },
+    {
+      "raw_text": "HEATING PAD XL",
+      "name": "electric heating pad, XL",
+      "quantity": 1,
+      "unit_price": "29.99",
+      "amount": "29.99",
+      "verdict": "dual_purpose",
+      "gold_source_ids": [
+        "elist:hot-cold-therapy",
+        "p502:what-are-medical-expenses",
+        "p502:personal-use-items"
+      ],
+      "note": "Sources don't name them; heat and cold packs are equipment for treating an injury but also have ordinary uses. Eligible only when used to treat a condition."
+    },
+    {
+      "raw_text": "ATHLETIC SOCKS 6PR",
+      "name": "athletic socks, 6 pairs",
+      "quantity": 2,
+      "unit_price": "14.99",
+      "amount": "29.98",
+      "verdict": "not_eligible",
+      "gold_source_ids": [
+        "elist:clothing-household",
+        "p502:personal-use-items"
+      ],
+      "note": "Clothing and household goods are ordinarily used for personal purposes."
+    },
+    {
+      "raw_text": "SLEEP AID DIPHEN 32CT",
+      "name": "diphenhydramine sleep aid, 32 count",
+      "quantity": 1,
+      "unit_price": "7.99",
+      "amount": "7.99",
+      "verdict": "eligible",
+      "gold_source_ids": [
+        "elist:otc-sleep-aid",
+        "p969:distributions-from-an-fsa",
+        "cares:sec-3702"
+      ],
+      "note": "Medicated sleep aids are OTC drugs, eligible without a prescription after 2019."
+    }
+  ],
+  "subtotal_printed": "71.45",
+  "tax": "4.44",
+  "total": "75.89",
+  "totals_mismatch": false,
+  "pii": [],
+  "seed": 20261028
+}

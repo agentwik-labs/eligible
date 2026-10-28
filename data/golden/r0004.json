@@ -1,0 +1,69 @@
+{
+  "receipt_id": "r0004",
+  "merchant": "MEGAMART SUPERCENTER #2210",
+  "merchant_type": "big_box",
+  "date": "2026-07-07",
+  "items": [
+    {
+      "raw_text": "KETOTIFEN EYE DRP 5ML",
+      "name": "ketotifen allergy eye drops, 5 ml",
+      "quantity": 1,
+      "unit_price": "14.99",
+      "amount": "14.99",
+      "verdict": "eligible",
+      "gold_source_ids": [
+        "elist:otc-eye-drops",
+        "p969:distributions-from-an-fsa",
+        "cares:sec-3702"
+      ],
+      "note": "Medicated and lubricating eye drops are OTC medicines, eligible after 2019."
+    },
+    {
+      "raw_text": "BAND AID FLX 30CT",
+      "name": "flexible fabric adhesive bandages, 30 count",
+      "quantity": 1,
+      "unit_price": "4.99",
+      "amount": "4.99",
+      "verdict": "eligible",
+      "gold_source_ids": [
+        "elist:bandages",
+        "p502:bandages"
+      ],
+      "note": "Medical supplies such as bandages are includible."
+    },
+    {
+      "raw_text": "MAGAZINE HEALTH MO",
+      "name": "health magazine, monthly issue",
+      "quantity": 1,
+      "unit_price": "6.99",
+      "amount": "6.99",
+      "verdict": "not_eligible",
+      "gold_source_ids": [
+        "elist:magazines-books",
+        "p502:braille-books-and-magazines",
+        "p502:personal-use-items"
+      ],
+      "note": "Regular printed books are personal items; only the extra cost of Braille editions is includible."
+    },
+    {
+      "raw_text": "SLEEP AID DIPHEN 32CT",
+      "name": "diphenhydramine sleep aid, 32 count",
+      "quantity": 2,
+      "unit_price": "7.99",
+      "amount": "15.98",
+      "verdict": "eligible",
+      "gold_source_ids": [
+        "elist:otc-sleep-aid",
+        "p969:distributions-from-an-fsa",
+        "cares:sec-3702"
+      ],
+      "note": "Medicated sleep aids are OTC drugs, eligible without a prescription after 2019."
+    }
+  ],
+  "subtotal_printed": "42.95",
+  "tax": "0.49",
+  "total": "43.44",
+  "totals_mismatch": false,
+  "pii": [],
+  "seed": 20261028
+}

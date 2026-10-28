@@ -1,0 +1,73 @@
+{
+  "receipt_id": "r0038",
+  "merchant": "BRIGHT EYES VISION CENTER",
+  "merchant_type": "optical",
+  "date": "2026-03-20",
+  "items": [
+    {
+      "raw_text": "BLUE LIGHT GLASSES",
+      "name": "blue light filtering glasses, non-prescription",
+      "quantity": 1,
+      "unit_price": "29.99",
+      "amount": "29.99",
+      "verdict": "dual_purpose",
+      "gold_source_ids": [
+        "elist:blue-light-glasses",
+        "p502:eyeglasses",
+        "p502:personal-use-items"
+      ],
+      "note": "Not named in the sources; glasses without a prescription that don't correct vision are eligible only if needed for a medical reason."
+    },
+    {
+      "raw_text": "LUBR EYE DRP 0.5OZ",
+      "name": "lubricant eye drops, 0.5 oz",
+      "quantity": 1,
+      "unit_price": "9.99",
+      "amount": "9.99",
+      "verdict": "eligible",
+      "gold_source_ids": [
+        "elist:otc-eye-drops",
+        "p969:distributions-from-an-fsa",
+        "cares:sec-3702"
+      ],
+      "note": "Medicated and lubricating eye drops are OTC medicines, eligible after 2019."
+    },
+    {
+      "raw_text": "FRAME TITAN 52-18",
+      "name": "eyeglass frame, titanium",
+      "quantity": 1,
+      "unit_price": "149.0",
+      "amount": "149.00",
+      "verdict": "eligible",
+      "gold_source_ids": [
+        "elist:eyeglasses-prescription",
+        "p502:eyeglasses"
+      ],
+      "note": "Eyeglasses needed for medical reasons are includible."
+    },
+    {
+      "raw_text": "SUNGLASSES POLARZD",
+      "name": "non-prescription polarized sunglasses",
+      "quantity": 1,
+      "unit_price": "24.99",
+      "amount": "24.99",
+      "verdict": "not_eligible",
+      "gold_source_ids": [
+        "elist:non-prescription-sunglasses",
+        "p502:personal-use-items"
+      ],
+      "note": "Non-prescription sunglasses are an item ordinarily used for personal purposes."
+    }
+  ],
+  "subtotal_printed": "213.97",
+  "tax": "3.85",
+  "total": "217.82",
+  "totals_mismatch": false,
+  "pii": [
+    {
+      "kind": "email",
+      "value": "shopper48@example.com"
+    }
+  ],
+  "seed": 20261028
+}

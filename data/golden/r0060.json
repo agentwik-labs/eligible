@@ -1,0 +1,96 @@
+{
+  "receipt_id": "r0060",
+  "merchant": "FRESHFIELD MARKET",
+  "merchant_type": "grocery",
+  "date": "2026-03-02",
+  "items": [
+    {
+      "raw_text": "HYDROCORT 1% CRM 1OZ",
+      "name": "hydrocortisone 1% cream, 1 oz",
+      "quantity": 1,
+      "unit_price": "4.99",
+      "amount": "4.99",
+      "verdict": "eligible",
+      "gold_source_ids": [
+        "elist:otc-antibiotic-ointment",
+        "p969:distributions-from-an-fsa",
+        "cares:sec-3702"
+      ],
+      "note": "Medicated skin ointments and creams are OTC medicines, eligible after 2019."
+    },
+    {
+      "raw_text": "DEODORANT STICK 2.6OZ",
+      "name": "deodorant stick, 2.6 oz",
+      "quantity": 1,
+      "unit_price": "5.49",
+      "amount": "5.49",
+      "verdict": "not_eligible",
+      "gold_source_ids": [
+        "elist:deodorant-soap",
+        "p502:personal-use-items"
+      ],
+      "note": "Ordinary hygiene products are personal-use items."
+    },
+    {
+      "raw_text": "SORE THROAT LOZ 18CT",
+      "name": "benzocaine sore throat lozenges, 18 count",
+      "quantity": 2,
+      "unit_price": "6.49",
+      "amount": "12.98",
+      "verdict": "eligible",
+      "gold_source_ids": [
+        "elist:cough-drops",
+        "p969:distributions-from-an-fsa",
+        "cares:sec-3702"
+      ],
+      "note": "Medicated cough drops and throat lozenges are OTC medicines, eligible after 2019."
+    },
+    {
+      "raw_text": "ELASTIC BNDG 3IN",
+      "name": "elastic bandage wrap, 3 in",
+      "quantity": 2,
+      "unit_price": "7.99",
+      "amount": "15.98",
+      "verdict": "eligible",
+      "gold_source_ids": [
+        "elist:bandages",
+        "p502:bandages"
+      ],
+      "note": "Medical supplies such as bandages are includible."
+    },
+    {
+      "raw_text": "CHLD ACETAMIN SUSP 4OZ",
+      "name": "children's acetaminophen suspension, 4 oz",
+      "quantity": 1,
+      "unit_price": "8.49",
+      "amount": "8.49",
+      "verdict": "eligible",
+      "gold_source_ids": [
+        "elist:otc-children-medicine",
+        "p969:distributions-from-an-fsa",
+        "cares:sec-3702"
+      ],
+      "note": "Children's OTC medicines are OTC medicines, eligible after 2019."
+    },
+    {
+      "raw_text": "PSE DECONGEST 12HR 10CT",
+      "name": "pseudoephedrine 12-hour decongestant, 10 count",
+      "quantity": 1,
+      "unit_price": "9.99",
+      "amount": "9.99",
+      "verdict": "eligible",
+      "gold_source_ids": [
+        "elist:otc-cold-flu",
+        "p969:distributions-from-an-fsa",
+        "cares:sec-3702"
+      ],
+      "note": "Cold, flu and cough medicines are OTC medicines, eligible without a prescription after 2019."
+    }
+  ],
+  "subtotal_printed": "57.92",
+  "tax": "0.38",
+  "total": "58.30",
+  "totals_mismatch": false,
+  "pii": [],
+  "seed": 20261028
+}

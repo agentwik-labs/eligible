@@ -1,0 +1,26 @@
+             CORNER DRUG CO             
+         88 SAMPLE ST, RIVERTON         
+            TEL 407-555-0168            
+           05/13/2026  10:28            
+----------------------------------------
+PATIENT: JOHN EXAMPLE
+MILK STORAGE BTL 10PK            37.98 T
+  2 @ 18.99
+SPF30 FACE LOTION 2OZ            15.99 T
+PROBIOTIC 30CT                   24.99 T
+CPAP FILTERS 6PK                 14.99  
+RX 4420114 LISINOPRIL             8.00  
+  2 @ 4.00
+WHEY PROTEIN 2LB                 34.99 T
+BP MONITOR UPPER ARM             49.99  
+GRAB BAR 24IN SS                 34.99  
+CEREAL OAT 18OZ                   4.99 T
+----------------------------------------
+SUBTOTAL                        226.91
+TAX                               8.33
+TOTAL                           235.24
+CARD 378282246310005
+RX PICKUP PH: (321) 555-0188
+
+                ITEMS 11                
+         THANK YOU FOR SHOPPING         

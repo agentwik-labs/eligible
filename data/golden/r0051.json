@@ -1,0 +1,108 @@
+{
+  "receipt_id": "r0051",
+  "merchant": "PEAK FITNESS & SPA",
+  "merchant_type": "other",
+  "date": "2026-04-04",
+  "items": [
+    {
+      "raw_text": "SVC DOG TRAINING FEE",
+      "name": "service dog training fee",
+      "quantity": 1,
+      "unit_price": "400.0",
+      "amount": "400.00",
+      "verdict": "eligible",
+      "gold_source_ids": [
+        "elist:service-animal-care",
+        "p502:guide-dog-or-other-service-animal"
+      ],
+      "note": "Costs of buying, training and maintaining a guide dog or other service animal, including food and veterinary care, are includible."
+    },
+    {
+      "raw_text": "BATH TOWEL WHT",
+      "name": "white bath towel",
+      "quantity": 1,
+      "unit_price": "9.99",
+      "amount": "9.99",
+      "verdict": "not_eligible",
+      "gold_source_ids": [
+        "elist:clothing-household",
+        "p502:personal-use-items"
+      ],
+      "note": "Clothing and household goods are ordinarily used for personal purposes."
+    },
+    {
+      "raw_text": "WELLNESS INST 2WK PROG",
+      "name": "health institute program, 2 weeks",
+      "quantity": 1,
+      "unit_price": "1200.0",
+      "amount": "1200.00",
+      "verdict": "needs_prescription",
+      "gold_source_ids": [
+        "elist:health-institute",
+        "p502:health-institute"
+      ],
+      "note": "Treatment at a health institute is includible only if prescribed by a physician who states it is necessary to alleviate a disability or illness."
+    },
+    {
+      "raw_text": "BEER IPA 6PK 12OZ",
+      "name": "IPA beer, 6 pack",
+      "quantity": 1,
+      "unit_price": "10.99",
+      "amount": "10.99",
+      "verdict": "not_eligible",
+      "gold_source_ids": [
+        "elist:tobacco-alcohol",
+        "p502:personal-use-items"
+      ],
+      "note": "Tobacco and alcohol are personal purchases with no medical purpose."
+    },
+    {
+      "raw_text": "IBUPRF 200MG 50CT",
+      "name": "ibuprofen 200 mg, 50 count",
+      "quantity": 1,
+      "unit_price": "8.99",
+      "amount": "8.99",
+      "verdict": "eligible",
+      "gold_source_ids": [
+        "elist:otc-pain-reliever",
+        "p969:distributions-from-an-fsa",
+        "cares:sec-3702"
+      ],
+      "note": "OTC medicines are medical care for FSAs and HRAs whether or not prescribed; CARES Act §3702 removed the prescription-only limit for expenses after 2019."
+    },
+    {
+      "raw_text": "ASPIRIN LO DOSE 81MG 120",
+      "name": "low dose aspirin 81 mg, 120 count",
+      "quantity": 1,
+      "unit_price": "5.99",
+      "amount": "5.99",
+      "verdict": "eligible",
+      "gold_source_ids": [
+        "elist:otc-pain-reliever",
+        "p969:distributions-from-an-fsa",
+        "cares:sec-3702"
+      ],
+      "note": "OTC medicines are medical care for FSAs and HRAs whether or not prescribed; CARES Act §3702 removed the prescription-only limit for expenses after 2019."
+    },
+    {
+      "raw_text": "MASSAGE 60MIN",
+      "name": "massage, 60 minutes",
+      "quantity": 1,
+      "unit_price": "95.0",
+      "amount": "95.00",
+      "verdict": "needs_prescription",
+      "gold_source_ids": [
+        "elist:massage-therapy",
+        "p502:therapy",
+        "p502:health-club-dues"
+      ],
+      "note": "Therapy received as medical treatment is includible; massage qualifies only with a physician's prescription or letter of medical necessity for a condition, not for general well-being."
+    }
+  ],
+  "subtotal_printed": "530.96",
+  "tax": "1.47",
+  "total": "532.43",
+  "totals_mismatch": true,
+  "pii": [],
+  "seed": 20261028
+}

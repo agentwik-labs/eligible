@@ -1,0 +1,186 @@
+{
+  "receipt_id": "r0047",
+  "merchant": "CORNER DRUG CO",
+  "merchant_type": "pharmacy",
+  "date": "2026-05-26",
+  "items": [
+    {
+      "raw_text": "OXYMETAZ NASAL 0.5OZ",
+      "name": "oxymetazoline nasal spray, 0.5 oz",
+      "quantity": 1,
+      "unit_price": "6.49",
+      "amount": "6.49",
+      "verdict": "eligible",
+      "gold_source_ids": [
+        "elist:otc-nasal-spray",
+        "p969:distributions-from-an-fsa",
+        "cares:sec-3702"
+      ],
+      "note": "Medicated nasal sprays are OTC medicines, eligible without a prescription after 2019."
+    },
+    {
+      "raw_text": "TOOTHBRUSH SOFT 2PK",
+      "name": "soft toothbrush, 2 pack",
+      "quantity": 1,
+      "unit_price": "4.49",
+      "amount": "4.49",
+      "verdict": "not_eligible",
+      "gold_source_ids": [
+        "elist:toothbrush-toothpaste",
+        "p502:personal-use-items"
+      ],
+      "note": "Pub 502 names toothbrush and toothpaste as nondeductible personal expenses."
+    },
+    {
+      "raw_text": "BP MONITOR UPPER ARM",
+      "name": "upper arm blood pressure monitor",
+      "quantity": 1,
+      "unit_price": "49.99",
+      "amount": "49.99",
+      "verdict": "eligible",
+      "gold_source_ids": [
+        "elist:blood-pressure-monitor",
+        "p502:diagnostic-devices"
+      ],
+      "note": "Devices used in diagnosing and treating illness are includible."
+    },
+    {
+      "raw_text": "BREAST PUMP DBL ELEC",
+      "name": "double electric breast pump",
+      "quantity": 1,
+      "unit_price": "159.99",
+      "amount": "159.99",
+      "verdict": "eligible",
+      "gold_source_ids": [
+        "elist:breast-pump",
+        "p502:breast-pumps-and-supplies"
+      ],
+      "note": "Breast pumps and supplies that assist lactation are includible."
+    },
+    {
+      "raw_text": "PAPER TOWELS 6RL",
+      "name": "paper towels, 6 rolls",
+      "quantity": 1,
+      "unit_price": "9.99",
+      "amount": "9.99",
+      "verdict": "not_eligible",
+      "gold_source_ids": [
+        "elist:household-cleaning",
+        "p502:personal-use-items"
+      ],
+      "note": "Household items ordinarily used for family purposes aren't medical care."
+    },
+    {
+      "raw_text": "TENS UNIT DUAL CH",
+      "name": "dual channel TENS unit",
+      "quantity": 1,
+      "unit_price": "39.99",
+      "amount": "39.99",
+      "verdict": "dual_purpose",
+      "gold_source_ids": [
+        "elist:tens-unit",
+        "p502:what-are-medical-expenses"
+      ],
+      "note": "Not named in the sources; a TENS unit is equipment for treating pain but also sold for general muscle relaxation. Eligible only for a condition."
+    },
+    {
+      "raw_text": "DICLOFENAC GEL 100G",
+      "name": "diclofenac pain relief gel, 100 g",
+      "quantity": 1,
+      "unit_price": "12.99",
+      "amount": "12.99",
+      "verdict": "eligible",
+      "gold_source_ids": [
+        "elist:otc-topical-pain",
+        "p969:distributions-from-an-fsa",
+        "cares:sec-3702"
+      ],
+      "note": "Medicated topical pain relievers are OTC medicines, eligible after 2019."
+    },
+    {
+      "raw_text": "BEER IPA 6PK 12OZ",
+      "name": "IPA beer, 6 pack",
+      "quantity": 1,
+      "unit_price": "10.99",
+      "amount": "10.99",
+      "verdict": "not_eligible",
+      "gold_source_ids": [
+        "elist:tobacco-alcohol",
+        "p502:personal-use-items"
+      ],
+      "note": "Tobacco and alcohol are personal purchases with no medical purpose."
+    },
+    {
+      "raw_text": "HEMORRHOID OINT 1OZ",
+      "name": "hemorrhoid ointment, 1 oz",
+      "quantity": 2,
+      "unit_price": "9.49",
+      "amount": "18.98",
+      "verdict": "eligible",
+      "gold_source_ids": [
+        "elist:otc-hemorrhoid",
+        "p969:distributions-from-an-fsa",
+        "cares:sec-3702"
+      ],
+      "note": "Hemorrhoid treatments are OTC medicines, eligible after 2019."
+    },
+    {
+      "raw_text": "HEATING PAD XL",
+      "name": "electric heating pad, XL",
+      "quantity": 1,
+      "unit_price": "29.99",
+      "amount": "29.99",
+      "verdict": "dual_purpose",
+      "gold_source_ids": [
+        "elist:hot-cold-therapy",
+        "p502:what-are-medical-expenses",
+        "p502:personal-use-items"
+      ],
+      "note": "Sources don't name them; heat and cold packs are equipment for treating an injury but also have ordinary uses. Eligible only when used to treat a condition."
+    },
+    {
+      "raw_text": "NICOTINE GUM 4MG 100CT",
+      "name": "nicotine gum 4 mg, 100 count",
+      "quantity": 1,
+      "unit_price": "44.99",
+      "amount": "44.99",
+      "verdict": "eligible",
+      "gold_source_ids": [
+        "elist:otc-nicotine-replacement",
+        "p969:distributions-from-an-fsa",
+        "cares:sec-3702",
+        "p502:stop-smoking-programs"
+      ],
+      "note": "Pub 502 excludes non-prescribed stop-smoking drugs from the deduction, but for HSA/FSA reimbursement they are OTC medicines, eligible after 2019."
+    },
+    {
+      "raw_text": "FIRST AID KIT 100PC",
+      "name": "first aid kit, 100 pieces",
+      "quantity": 1,
+      "unit_price": "19.99",
+      "amount": "19.99",
+      "verdict": "eligible",
+      "gold_source_ids": [
+        "elist:first-aid-kit",
+        "p502:bandages",
+        "p502:what-are-medical-expenses"
+      ],
+      "note": "A first aid kit is a set of medical supplies such as bandages."
+    }
+  ],
+  "subtotal_printed": "408.87",
+  "tax": "6.68",
+  "total": "415.55",
+  "totals_mismatch": false,
+  "pii": [
+    {
+      "kind": "patient_name",
+      "value": "JANE Q SAMPLE"
+    },
+    {
+      "kind": "phone",
+      "value": "(321) 555-0156"
+    }
+  ],
+  "seed": 20261028
+}

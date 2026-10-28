@@ -1,0 +1,137 @@
+{
+  "receipt_id": "r0059",
+  "merchant": "BRIGHTWAY STORES #118",
+  "merchant_type": "big_box",
+  "date": "2026-09-10",
+  "items": [
+    {
+      "raw_text": "MASSAGE GUN PERCUSS",
+      "name": "percussion massage gun",
+      "quantity": 1,
+      "unit_price": "99.99",
+      "amount": "99.99",
+      "verdict": "not_eligible",
+      "gold_source_ids": [
+        "elist:massage-chair-gun",
+        "p502:health-club-dues",
+        "p502:personal-use-items"
+      ],
+      "note": "Devices that relieve general physical discomfort not related to a medical condition aren't medical care."
+    },
+    {
+      "raw_text": "FRAME TITAN 52-18",
+      "name": "eyeglass frame, titanium",
+      "quantity": 1,
+      "unit_price": "149.0",
+      "amount": "149.00",
+      "verdict": "eligible",
+      "gold_source_ids": [
+        "elist:eyeglasses-prescription",
+        "p502:eyeglasses"
+      ],
+      "note": "Eyeglasses needed for medical reasons are includible."
+    },
+    {
+      "raw_text": "HEPA REPLACEMNT FLTR",
+      "name": "HEPA air purifier replacement filter",
+      "quantity": 1,
+      "unit_price": "39.99",
+      "amount": "39.99",
+      "verdict": "needs_prescription",
+      "gold_source_ids": [
+        "elist:air-purifier",
+        "p502:capital-expenses",
+        "p502:personal-use-items"
+      ],
+      "note": "Equipment whose main purpose is medical care is includible; for an ordinary household air purifier that purpose must be documented by a physician."
+    },
+    {
+      "raw_text": "FEXOFEN 180MG 30CT",
+      "name": "fexofenadine 180 mg, 30 count",
+      "quantity": 1,
+      "unit_price": "18.99",
+      "amount": "18.99",
+      "verdict": "eligible",
+      "gold_source_ids": [
+        "elist:otc-allergy",
+        "p969:distributions-from-an-fsa",
+        "cares:sec-3702"
+      ],
+      "note": "Allergy medicines are OTC medicines, eligible without a prescription after 2019."
+    },
+    {
+      "raw_text": "NICOTINE GUM 4MG 100CT",
+      "name": "nicotine gum 4 mg, 100 count",
+      "quantity": 1,
+      "unit_price": "44.99",
+      "amount": "44.99",
+      "verdict": "eligible",
+      "gold_source_ids": [
+        "elist:otc-nicotine-replacement",
+        "p969:distributions-from-an-fsa",
+        "cares:sec-3702",
+        "p502:stop-smoking-programs"
+      ],
+      "note": "Pub 502 excludes non-prescribed stop-smoking drugs from the deduction, but for HSA/FSA reimbursement they are OTC medicines, eligible after 2019."
+    },
+    {
+      "raw_text": "ACETAMIN ES 500MG 100CT",
+      "name": "acetaminophen extra strength 500 mg, 100 count",
+      "quantity": 1,
+      "unit_price": "10.49",
+      "amount": "10.49",
+      "verdict": "eligible",
+      "gold_source_ids": [
+        "elist:otc-pain-reliever",
+        "p969:distributions-from-an-fsa",
+        "cares:sec-3702"
+      ],
+      "note": "OTC medicines are medical care for FSAs and HRAs whether or not prescribed; CARES Act §3702 removed the prescription-only limit for expenses after 2019."
+    },
+    {
+      "raw_text": "CHOC BAR MILK 1.5OZ",
+      "name": "milk chocolate bar, 1.5 oz",
+      "quantity": 1,
+      "unit_price": "1.79",
+      "amount": "1.79",
+      "verdict": "not_eligible",
+      "gold_source_ids": [
+        "elist:candy",
+        "p502:personal-use-items"
+      ],
+      "note": "Candy is a personal item, not medical care."
+    },
+    {
+      "raw_text": "CONTACTS 2WK 6PK",
+      "name": "two-week contact lenses, 6 pack",
+      "quantity": 1,
+      "unit_price": "39.99",
+      "amount": "39.99",
+      "verdict": "eligible",
+      "gold_source_ids": [
+        "elist:contact-lenses",
+        "p502:contact-lenses"
+      ],
+      "note": "Contact lenses needed for medical reasons are includible."
+    },
+    {
+      "raw_text": "PULSE OXIMETER FNGR",
+      "name": "fingertip pulse oximeter",
+      "quantity": 1,
+      "unit_price": "29.99",
+      "amount": "29.99",
+      "verdict": "eligible",
+      "gold_source_ids": [
+        "elist:pulse-oximeter",
+        "p502:diagnostic-devices"
+      ],
+      "note": "A pulse oximeter is a device used in diagnosing and monitoring illness."
+    }
+  ],
+  "subtotal_printed": "435.22",
+  "tax": "7.12",
+  "total": "442.34",
+  "totals_mismatch": false,
+  "pii": [],
+  "seed": 20261028
+}

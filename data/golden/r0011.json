@@ -1,0 +1,64 @@
+{
+  "receipt_id": "r0011",
+  "merchant": "WELLSPRING PHARMACY #0412",
+  "merchant_type": "pharmacy",
+  "date": "2026-04-07",
+  "items": [
+    {
+      "raw_text": "FIRST AID KIT 100PC",
+      "name": "first aid kit, 100 pieces",
+      "quantity": 1,
+      "unit_price": "19.99",
+      "amount": "19.99",
+      "verdict": "eligible",
+      "gold_source_ids": [
+        "elist:first-aid-kit",
+        "p502:bandages",
+        "p502:what-are-medical-expenses"
+      ],
+      "note": "A first aid kit is a set of medical supplies such as bandages."
+    },
+    {
+      "raw_text": "DM COUGH SYRUP 4OZ",
+      "name": "dextromethorphan cough syrup, 4 oz",
+      "quantity": 1,
+      "unit_price": "8.79",
+      "amount": "8.79",
+      "verdict": "eligible",
+      "gold_source_ids": [
+        "elist:otc-cold-flu",
+        "p969:distributions-from-an-fsa",
+        "cares:sec-3702"
+      ],
+      "note": "Cold, flu and cough medicines are OTC medicines, eligible without a prescription after 2019."
+    },
+    {
+      "raw_text": "BAND AID FLX 30CT",
+      "name": "flexible fabric adhesive bandages, 30 count",
+      "quantity": 1,
+      "unit_price": "4.99",
+      "amount": "4.99",
+      "verdict": "eligible",
+      "gold_source_ids": [
+        "elist:bandages",
+        "p502:bandages"
+      ],
+      "note": "Medical supplies such as bandages are includible."
+    }
+  ],
+  "subtotal_printed": "24.98",
+  "tax": "0.00",
+  "total": "24.98",
+  "totals_mismatch": true,
+  "pii": [
+    {
+      "kind": "patient_name",
+      "value": "PAT PLACEHOLDER"
+    },
+    {
+      "kind": "phone",
+      "value": "(321) 555-0160"
+    }
+  ],
+  "seed": 20261028
+}

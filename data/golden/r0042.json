@@ -1,0 +1,53 @@
+{
+  "receipt_id": "r0042",
+  "merchant": "ORANGE GROVE MEDICAL GROUP",
+  "merchant_type": "medical_provider",
+  "date": "2026-09-22",
+  "items": [
+    {
+      "raw_text": "CHIRO ADJUSTMENT",
+      "name": "chiropractic adjustment",
+      "quantity": 1,
+      "unit_price": "65.0",
+      "amount": "65.00",
+      "verdict": "eligible",
+      "gold_source_ids": [
+        "elist:chiropractor",
+        "p502:chiropractor"
+      ],
+      "note": "Fees paid to a chiropractor for medical care are includible."
+    },
+    {
+      "raw_text": "WT LOSS PROG MONTHLY",
+      "name": "weight loss program, monthly fee",
+      "quantity": 1,
+      "unit_price": "49.0",
+      "amount": "49.00",
+      "verdict": "needs_prescription",
+      "gold_source_ids": [
+        "elist:weight-loss-program",
+        "p502:weight-loss-program"
+      ],
+      "note": "A weight-loss program is includible only as treatment for a specific disease diagnosed by a physician (such as obesity or hypertension)."
+    },
+    {
+      "raw_text": "BOTOX COSMETIC 20U",
+      "name": "cosmetic botox, 20 units",
+      "quantity": 1,
+      "unit_price": "300.0",
+      "amount": "300.00",
+      "verdict": "not_eligible",
+      "gold_source_ids": [
+        "elist:cosmetic-procedure",
+        "p502:cosmetic-surgery"
+      ],
+      "note": "Cosmetic procedures directed at improving appearance aren't includible."
+    }
+  ],
+  "subtotal_printed": "414.00",
+  "tax": "0.00",
+  "total": "414.00",
+  "totals_mismatch": false,
+  "pii": [],
+  "seed": 20261028
+}

@@ -1,0 +1,18 @@
+       WELLSPRING PHARMACY #0412        
+     1200 EXAMPLE BLVD, SPRINGFIELD     
+            TEL 407-555-0117            
+           04/07/2026  19:11            
+----------------------------------------
+PATIENT: PAT PLACEHOLDER
+FIRST AID KIT 100PC              19.99  
+DM COUGH SYRUP 4OZ                8.79  
+BAND AID FLX 30CT                 4.99  
+----------------------------------------
+SUBTOTAL                         24.98
+TAX                               0.00
+TOTAL                            24.98
+VISA ************4183
+RX PICKUP PH: (321) 555-0160
+
+                ITEMS 3                 
+         THANK YOU FOR SHOPPING         

@@ -1,0 +1,121 @@
+{
+  "receipt_id": "r0050",
+  "merchant": "MEGAMART SUPERCENTER #2210",
+  "merchant_type": "big_box",
+  "date": "2026-01-16",
+  "items": [
+    {
+      "raw_text": "HEPA REPLACEMNT FLTR",
+      "name": "HEPA air purifier replacement filter",
+      "quantity": 1,
+      "unit_price": "39.99",
+      "amount": "39.99",
+      "verdict": "needs_prescription",
+      "gold_source_ids": [
+        "elist:air-purifier",
+        "p502:capital-expenses",
+        "p502:personal-use-items"
+      ],
+      "note": "Equipment whose main purpose is medical care is includible; for an ordinary household air purifier that purpose must be documented by a physician."
+    },
+    {
+      "raw_text": "TOOTHPASTE FLUOR 4.8OZ",
+      "name": "fluoride toothpaste, 4.8 oz",
+      "quantity": 1,
+      "unit_price": "3.99",
+      "amount": "3.99",
+      "verdict": "not_eligible",
+      "gold_source_ids": [
+        "elist:toothbrush-toothpaste",
+        "p502:personal-use-items"
+      ],
+      "note": "Pub 502 names toothbrush and toothpaste as nondeductible personal expenses."
+    },
+    {
+      "raw_text": "EXTRA STR 24C",
+      "name": "unidentified item, description cut off",
+      "quantity": 1,
+      "unit_price": "8.99",
+      "amount": "8.99",
+      "verdict": "needs_review",
+      "gold_source_ids": [
+        "elist:truncated-line",
+        "p502:what-are-medical-expenses"
+      ],
+      "note": "The printed description is cut off, so the item can't be identified."
+    },
+    {
+      "raw_text": "PILL ORGANIZER 7DAY",
+      "name": "7-day pill organizer",
+      "quantity": 1,
+      "unit_price": "4.99",
+      "amount": "4.99",
+      "verdict": "not_eligible",
+      "gold_source_ids": [
+        "elist:pill-organizer",
+        "p502:personal-use-items"
+      ],
+      "note": "A pill box is an ordinary household item, not equipment used to diagnose or treat illness."
+    },
+    {
+      "raw_text": "RAZOR 5BLD CART 4CT",
+      "name": "5-blade razor cartridges, 4 count",
+      "quantity": 1,
+      "unit_price": "21.99",
+      "amount": "21.99",
+      "verdict": "not_eligible",
+      "gold_source_ids": [
+        "elist:hair-removal",
+        "p502:electrolysis-or-hair-removal",
+        "p502:cosmetic-surgery"
+      ],
+      "note": "Hair removal (electrolysis) is cosmetic and isn't includible."
+    },
+    {
+      "raw_text": "CHLD ACETAMIN SUSP 4OZ",
+      "name": "children's acetaminophen suspension, 4 oz",
+      "quantity": 1,
+      "unit_price": "8.49",
+      "amount": "8.49",
+      "verdict": "eligible",
+      "gold_source_ids": [
+        "elist:otc-children-medicine",
+        "p969:distributions-from-an-fsa",
+        "cares:sec-3702"
+      ],
+      "note": "Children's OTC medicines are OTC medicines, eligible after 2019."
+    },
+    {
+      "raw_text": "FACIAL TISSUE 3BX",
+      "name": "facial tissues, 3 boxes",
+      "quantity": 1,
+      "unit_price": "5.99",
+      "amount": "5.99",
+      "verdict": "not_eligible",
+      "gold_source_ids": [
+        "elist:paper-goods",
+        "p502:personal-use-items"
+      ],
+      "note": "Household and personal paper goods are personal-use items."
+    },
+    {
+      "raw_text": "MAX REL ROLL-ON",
+      "name": "unidentified item, description cut off",
+      "quantity": 1,
+      "unit_price": "9.49",
+      "amount": "9.49",
+      "verdict": "needs_review",
+      "gold_source_ids": [
+        "elist:truncated-line",
+        "p502:what-are-medical-expenses"
+      ],
+      "note": "The printed description is cut off, so the item can't be identified."
+    }
+  ],
+  "subtotal_printed": "103.92",
+  "tax": "3.88",
+  "total": "107.80",
+  "totals_mismatch": false,
+  "pii": [],
+  "seed": 20261028
+}

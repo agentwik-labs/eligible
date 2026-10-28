@@ -1,0 +1,114 @@
+{
+  "receipt_id": "r0020",
+  "merchant": "BLUE HERON PHARMACY",
+  "merchant_type": "pharmacy",
+  "date": "2026-04-29",
+  "items": [
+    {
+      "raw_text": "FLUTICASONE NSL SPR 120",
+      "name": "fluticasone nasal spray, 120 sprays",
+      "quantity": 1,
+      "unit_price": "17.99",
+      "amount": "17.99",
+      "verdict": "eligible",
+      "gold_source_ids": [
+        "elist:otc-nasal-spray",
+        "p969:distributions-from-an-fsa",
+        "cares:sec-3702"
+      ],
+      "note": "Medicated nasal sprays are OTC medicines, eligible without a prescription after 2019."
+    },
+    {
+      "raw_text": "OVULATION TEST 20CT",
+      "name": "ovulation test strips, 20 count",
+      "quantity": 1,
+      "unit_price": "21.99",
+      "amount": "21.99",
+      "verdict": "dual_purpose",
+      "gold_source_ids": [
+        "elist:ovulation-test",
+        "p502:fertility-enhancement",
+        "p502:diagnostic-devices"
+      ],
+      "note": "Not named in the sources; fertility testing is includible when used to overcome an inability to have children, but routine family planning use isn't clearly covered."
+    },
+    {
+      "raw_text": "EGGS LG DZ",
+      "name": "large eggs, dozen",
+      "quantity": 1,
+      "unit_price": "4.29",
+      "amount": "4.29",
+      "verdict": "not_eligible",
+      "gold_source_ids": [
+        "elist:grocery-food",
+        "p502:weight-loss-program",
+        "p502:what-are-medical-expenses"
+      ],
+      "note": "Food that is normally consumed to satisfy nutritional needs isn't medical care."
+    },
+    {
+      "raw_text": "CHLD ACETAMIN SUSP 4OZ",
+      "name": "children's acetaminophen suspension, 4 oz",
+      "quantity": 1,
+      "unit_price": "8.49",
+      "amount": "8.49",
+      "verdict": "eligible",
+      "gold_source_ids": [
+        "elist:otc-children-medicine",
+        "p969:distributions-from-an-fsa",
+        "cares:sec-3702"
+      ],
+      "note": "Children's OTC medicines are OTC medicines, eligible after 2019."
+    },
+    {
+      "raw_text": "TOILET SAFETY RAIL",
+      "name": "toilet safety rail",
+      "quantity": 1,
+      "unit_price": "49.99",
+      "amount": "49.99",
+      "verdict": "needs_prescription",
+      "gold_source_ids": [
+        "elist:home-accessibility",
+        "p502:capital-expenses"
+      ],
+      "note": "Grab bars, railings and ramps are includible in full when installed to accommodate a disabled condition; the receipt can't show that, so plans require medical documentation."
+    },
+    {
+      "raw_text": "MULTIVIT ADULT 100CT",
+      "name": "adult multivitamin, 100 count",
+      "quantity": 1,
+      "unit_price": "12.99",
+      "amount": "12.99",
+      "verdict": "dual_purpose",
+      "gold_source_ids": [
+        "elist:vitamins-supplements",
+        "p502:nutritional-supplements"
+      ],
+      "note": "Vitamins and supplements aren't includible unless recommended by a medical practitioner as treatment for a specific diagnosed condition."
+    },
+    {
+      "raw_text": "PULSE OXIMETER FNGR",
+      "name": "fingertip pulse oximeter",
+      "quantity": 1,
+      "unit_price": "29.99",
+      "amount": "29.99",
+      "verdict": "eligible",
+      "gold_source_ids": [
+        "elist:pulse-oximeter",
+        "p502:diagnostic-devices"
+      ],
+      "note": "A pulse oximeter is a device used in diagnosing and monitoring illness."
+    }
+  ],
+  "subtotal_printed": "145.73",
+  "tax": "2.75",
+  "total": "148.48",
+  "totals_mismatch": false,
+  "pii": [
+    {
+      "kind": "card_number",
+      "value": "5555555555554444"
+    }
+  ],
+  "seed": 20261028
+}

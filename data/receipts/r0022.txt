@@ -1,0 +1,24 @@
+             CORNER DRUG CO             
+         88 SAMPLE ST, RIVERTON         
+            TEL 407-555-0175            
+           03/02/2026  20:22            
+----------------------------------------
+PATIENT: JOHN EXAMPLE
+CHLD ACETAMIN SUSP 4OZ            8.49  
+WHITENING STRIPS 20CT            44.99 T
+CRUTCHES ALUM ADULT              39.99  
+MAX REL ROLL-ON                   9.49 T
+MENTHOL PAIN RUB 3OZ              8.49  
+BLISTER CUSHION 6CT               7.49  
+FACE WASH GENTLE 8OZ              7.49 T
+DISINFECT SPRAY 19OZ              6.49 T
+HEPA REPLACEMNT FLTR             39.99  
+----------------------------------------
+SUBTOTAL                        165.42
+TAX                               4.79
+TOTAL                           170.21
+VISA ************9134
+RX PICKUP PH: (321) 555-0163
+
+                ITEMS 9                 
+         THANK YOU FOR SHOPPING         

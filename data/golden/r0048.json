@@ -1,0 +1,135 @@
+{
+  "receipt_id": "r0048",
+  "merchant": "CORNER DRUG CO",
+  "merchant_type": "pharmacy",
+  "date": "2026-08-04",
+  "items": [
+    {
+      "raw_text": "ELASTIC BNDG 3IN",
+      "name": "elastic bandage wrap, 3 in",
+      "quantity": 1,
+      "unit_price": "7.99",
+      "amount": "7.99",
+      "verdict": "eligible",
+      "gold_source_ids": [
+        "elist:bandages",
+        "p502:bandages"
+      ],
+      "note": "Medical supplies such as bandages are includible."
+    },
+    {
+      "raw_text": "ANKLE SUPPORT SLV M",
+      "name": "ankle support sleeve, medium",
+      "quantity": 1,
+      "unit_price": "14.99",
+      "amount": "14.99",
+      "verdict": "dual_purpose",
+      "gold_source_ids": [
+        "elist:braces-supports",
+        "p502:what-are-medical-expenses"
+      ],
+      "note": "Supports aren't named in the sources; they are medical equipment when used to treat an injury or condition, not when worn for general athletic use."
+    },
+    {
+      "raw_text": "OVULATION TEST 20CT",
+      "name": "ovulation test strips, 20 count",
+      "quantity": 1,
+      "unit_price": "21.99",
+      "amount": "21.99",
+      "verdict": "dual_purpose",
+      "gold_source_ids": [
+        "elist:ovulation-test",
+        "p502:fertility-enhancement",
+        "p502:diagnostic-devices"
+      ],
+      "note": "Not named in the sources; fertility testing is includible when used to overcome an inability to have children, but routine family planning use isn't clearly covered."
+    },
+    {
+      "raw_text": "DM COUGH SYRUP 4OZ",
+      "name": "dextromethorphan cough syrup, 4 oz",
+      "quantity": 1,
+      "unit_price": "8.79",
+      "amount": "8.79",
+      "verdict": "eligible",
+      "gold_source_ids": [
+        "elist:otc-cold-flu",
+        "p969:distributions-from-an-fsa",
+        "cares:sec-3702"
+      ],
+      "note": "Cold, flu and cough medicines are OTC medicines, eligible without a prescription after 2019."
+    },
+    {
+      "raw_text": "AMPLIFIED PHONE 40DB",
+      "name": "amplified telephone, 40 dB",
+      "quantity": 1,
+      "unit_price": "69.99",
+      "amount": "69.99",
+      "verdict": "needs_prescription",
+      "gold_source_ids": [
+        "elist:tty-telephone",
+        "p502:telephone"
+      ],
+      "note": "Special telephone equipment that lets a person who is deaf, hard of hearing or speech disabled communicate is includible; an amplified phone sold to anyone needs documentation of that use."
+    },
+    {
+      "raw_text": "CBD GUMMIES 25MG 30CT",
+      "name": "CBD gummies 25 mg, 30 count",
+      "quantity": 1,
+      "unit_price": "39.99",
+      "amount": "39.99",
+      "verdict": "not_eligible",
+      "gold_source_ids": [
+        "elist:cbd-products",
+        "p502:nutritional-supplements"
+      ],
+      "note": "CBD products are herbal/'natural' supplements taken for general well-being, not medical care."
+    },
+    {
+      "raw_text": "CETIRIZINE 10MG 45CT",
+      "name": "cetirizine 10 mg, 45 count",
+      "quantity": 1,
+      "unit_price": "16.49",
+      "amount": "16.49",
+      "verdict": "eligible",
+      "gold_source_ids": [
+        "elist:otc-allergy",
+        "p969:distributions-from-an-fsa",
+        "cares:sec-3702"
+      ],
+      "note": "Allergy medicines are OTC medicines, eligible without a prescription after 2019."
+    },
+    {
+      "raw_text": "COOL MIST HUMIDIFIER",
+      "name": "cool mist humidifier",
+      "quantity": 1,
+      "unit_price": "39.99",
+      "amount": "39.99",
+      "verdict": "needs_prescription",
+      "gold_source_ids": [
+        "elist:humidifier",
+        "p502:personal-use-items",
+        "p502:what-are-medical-expenses"
+      ],
+      "note": "A household item is includible only if used primarily to alleviate an illness; plans require a letter of medical necessity to show that."
+    },
+    {
+      "raw_text": "TUB TRANSFER RAIL",
+      "name": "bathtub transfer rail",
+      "quantity": 1,
+      "unit_price": "44.99",
+      "amount": "44.99",
+      "verdict": "needs_prescription",
+      "gold_source_ids": [
+        "elist:home-accessibility",
+        "p502:capital-expenses"
+      ],
+      "note": "Grab bars, railings and ramps are includible in full when installed to accommodate a disabled condition; the receipt can't show that, so plans require medical documentation."
+    }
+  ],
+  "subtotal_printed": "265.21",
+  "tax": "5.39",
+  "total": "270.60",
+  "totals_mismatch": false,
+  "pii": [],
+  "seed": 20261028
+}

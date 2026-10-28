@@ -1,0 +1,56 @@
+{
+  "receipt_id": "r0033",
+  "merchant": "FRESHFIELD MARKET",
+  "merchant_type": "grocery",
+  "date": "2026-04-22",
+  "items": [
+    {
+      "raw_text": "CONDOMS LUBR 12CT",
+      "name": "lubricated condoms, 12 count",
+      "quantity": 1,
+      "unit_price": "11.99",
+      "amount": "11.99",
+      "verdict": "eligible",
+      "gold_source_ids": [
+        "elist:condoms",
+        "p502:condoms"
+      ],
+      "note": "Condoms are includible."
+    },
+    {
+      "raw_text": "LOPERAMIDE 2MG 24CT",
+      "name": "loperamide 2 mg, 24 count",
+      "quantity": 1,
+      "unit_price": "7.49",
+      "amount": "7.49",
+      "verdict": "eligible",
+      "gold_source_ids": [
+        "elist:otc-digestive",
+        "p969:distributions-from-an-fsa",
+        "cares:sec-3702"
+      ],
+      "note": "Digestive medicines (antacids, acid reducers, anti-diarrheals, laxatives) are OTC medicines, eligible after 2019."
+    },
+    {
+      "raw_text": "PANTILINERS 60CT",
+      "name": "pantiliners, 60 count",
+      "quantity": 2,
+      "unit_price": "5.99",
+      "amount": "11.98",
+      "verdict": "eligible",
+      "gold_source_ids": [
+        "elist:menstrual-care",
+        "cares:sec-3702",
+        "p969:distributions-from-an-hsa",
+        "p969:distributions-from-an-fsa"
+      ],
+      "note": "Menstrual care products (tampon, pad, liner, cup, sponge or similar) are treated as medical care for HSAs, FSAs and HRAs after 2019."
+    }
+  ],
+  "subtotal_printed": "31.46",
+  "tax": "0.00",
+  "total": "31.46",
+  "totals_mismatch": false,
+  "pii": [],
+  "seed": 20261028
+}

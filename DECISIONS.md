@@ -37,3 +37,35 @@ accuracy still meet their EVALS.md gates. Until then, the stack stays as specifi
 SPEC §7 lists `Dockerfile`, `docker-compose.yml`, `evals.yml` and modules like `decide.py`.
 M0 creates the directories and packages; each file is added in the milestone that fills it,
 so the repo never contains empty stubs that look finished.
+
+## 2026-10-28: The question is HSA/FSA reimbursement, not the tax deduction
+Pub 502 is written for the itemized deduction and says non-prescribed drugs aren't includible.
+For HSAs and FSAs, CARES Act §3702 removed that limit for expenses after 2019, and Pub 969
+says so in plain words for FSAs and HRAs. The list follows the HSA/FSA rule and cites both,
+and the Pub 502 rule stays in the index as a deliberate retrieval trap.
+
+## 2026-10-28: CARES Act text from govinfo.gov
+DATA.md says to cite congress.gov, which returned 403 to automated download. govinfo.gov
+serves the same enrolled public law (Pub. L. 116-136). Only §3702 is indexed.
+
+## 2026-10-28: Vitamins are dual_purpose, as DATA.md says, though the source reads stricter
+Pub 502 allows supplements only when "recommended by a medical practitioner as treatment for
+a specific medical condition diagnosed by a physician", which is close to the
+`needs_prescription` definition. DATA.md §4 lists vitamins as dual purpose, so the list
+follows the docs. Worth revisiting if the evals show the model splitting these two classes.
+
+## 2026-10-28: Golden schema extensions
+DATA.md §2 shows the minimal label. The golden files add `raw_text` (to match extracted items
+to labels), `quantity`, `unit_price`, `subtotal_printed`, `tax`, `pii` (what the redaction
+eval must catch) and `seed`. Each list entry also carries `merchants` and `products`
+(receipt text, normalized name, price), which the generator needs.
+
+## 2026-10-28: Verdict mix enforced with a quota, not per-item sampling
+Sampling each item's verdict independently gave 4% `needs_prescription` (target 10%):
+pharmacies are 40% of receipts and sell few such items. The generator assigns verdicts
+across all item slots, weighted by what's still needed among what each merchant sells. The
+mix is within 1 point of DATA.md §2 on every class.
+
+## 2026-10-28: Bundled DejaVu Sans Mono
+Receipt PNGs use a committed copy of DejaVu Sans Mono (free license in `data/fonts/`), so
+images render the same on every machine and in CI.

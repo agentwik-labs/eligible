@@ -21,5 +21,31 @@
 1. Public repo approved: `agentwik-labs/eligible`.
 2. Approved: M5 tries Haiku 5.5 for extraction, kept only if the gates still pass.
 
-**Next: M1** synthetic receipts plus golden labels (`data/generate.py`), `eligibility_list.yaml`
-(~150 items), and IRS sources downloaded with retrieval dates.
+
+## M1: Synthetic data and ground truth (2026-10-28)
+
+**Done**
+- Sources: Pub 502 (HTML and PDF), Pub 969, CARES Act §3702 (govinfo.gov) and Notice 2013-71
+  in `data/knowledge/raw/`. `SOURCES.md` lists the URL, retrieval date and SHA-256 of each.
+- Parsing into 205 citable sections with heading paths (`data/knowledge/sections.jsonl`).
+  It handles IRS quirks: list entries at the same heading level as their list title, plus
+  "Caution" callouts and worksheet boxes.
+- `eligibility_list.yaml`: 154 entries and 273 receipt products. Every entry cites sections,
+  and a test checks they exist.
+- `data/generate.py`: 60 receipts (text and PNG) with golden labels, seed 20261028. The
+  verdict mix is within 1 point of DATA.md §2, the merchant mix is exact, 6 receipts have a
+  totals mismatch, and some carry fake personal data for the redaction tests.
+- `data/golden/AUDIT.md`: the agent's spot-check of 20 receipts (4 findings, 2 fixed).
+
+**Acceptance**
+- 60 receipts with golden JSON validate against `GoldenReceipt`: yes (`tests/test_data.py`).
+- Verdict distribution matches DATA.md §2: yes, within 2 points (a test enforces this).
+- Every list entry has a source: yes, and every source resolves to a parsed section.
+- The dataset regenerates byte-for-byte from its seed (a test enforces this).
+
+**Open**
+- The human spot-check (AUDIT.md pass 2) is the owner's.
+- The retrieval trap is now in the data: Pub 502 says OTC drugs are excluded, and the
+  CARES Act / Pub 969 say they're eligible. M3 retrieval and M4 verdicts will be measured on it.
+
+**Next: M2** redaction and structured extraction, plus the first extraction eval.

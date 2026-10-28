@@ -1,0 +1,74 @@
+{
+  "receipt_id": "r0043",
+  "merchant": "FRESHFIELD MARKET",
+  "merchant_type": "grocery",
+  "date": "2026-05-30",
+  "items": [
+    {
+      "raw_text": "STOOL SOFTNR 100MG 60",
+      "name": "docusate stool softener 100 mg, 60 count",
+      "quantity": 1,
+      "unit_price": "6.29",
+      "amount": "6.29",
+      "verdict": "eligible",
+      "gold_source_ids": [
+        "elist:otc-digestive",
+        "p969:distributions-from-an-fsa",
+        "cares:sec-3702"
+      ],
+      "note": "Digestive medicines (antacids, acid reducers, anti-diarrheals, laxatives) are OTC medicines, eligible after 2019."
+    },
+    {
+      "raw_text": "MULTI-PURP SOLN 12OZ",
+      "name": "multi-purpose contact lens solution, 12 oz",
+      "quantity": 1,
+      "unit_price": "10.99",
+      "amount": "10.99",
+      "verdict": "eligible",
+      "gold_source_ids": [
+        "elist:contact-lens-solution",
+        "p502:contact-lenses"
+      ],
+      "note": "Equipment and materials required for using contact lenses, such as saline solution and enzyme cleaner, are includible."
+    },
+    {
+      "raw_text": "MOUTHWASH MINT 1L",
+      "name": "mint mouthwash, 1 liter",
+      "quantity": 1,
+      "unit_price": "6.49",
+      "amount": "6.49",
+      "verdict": "not_eligible",
+      "gold_source_ids": [
+        "elist:toothbrush-toothpaste",
+        "p502:personal-use-items"
+      ],
+      "note": "Pub 502 names toothbrush and toothpaste as nondeductible personal expenses."
+    },
+    {
+      "raw_text": "HYD PEROXIDE 3% 32OZ",
+      "name": "hydrogen peroxide 3%, 32 oz",
+      "quantity": 1,
+      "unit_price": "1.99",
+      "amount": "1.99",
+      "verdict": "eligible",
+      "gold_source_ids": [
+        "elist:antiseptic",
+        "p969:distributions-from-an-fsa",
+        "cares:sec-3702",
+        "p502:bandages"
+      ],
+      "note": "Antiseptics for wound care are OTC medicines and medical supplies."
+    }
+  ],
+  "subtotal_printed": "25.76",
+  "tax": "0.45",
+  "total": "26.21",
+  "totals_mismatch": false,
+  "pii": [
+    {
+      "kind": "email",
+      "value": "shopper81@example.com"
+    }
+  ],
+  "seed": 20261028
+}

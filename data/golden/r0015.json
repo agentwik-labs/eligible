@@ -1,0 +1,133 @@
+{
+  "receipt_id": "r0015",
+  "merchant": "CORNER DRUG CO",
+  "merchant_type": "pharmacy",
+  "date": "2026-04-05",
+  "items": [
+    {
+      "raw_text": "USB-C CHARGER 20W",
+      "name": "USB-C charger 20 W",
+      "quantity": 1,
+      "unit_price": "19.99",
+      "amount": "19.99",
+      "verdict": "not_eligible",
+      "gold_source_ids": [
+        "elist:batteries-electronics",
+        "p502:personal-use-items",
+        "p502:hearing-aids"
+      ],
+      "note": "General electronics are personal items (hearing aid batteries are the exception)."
+    },
+    {
+      "raw_text": "AMPLIFIED PHONE 40DB",
+      "name": "amplified telephone, 40 dB",
+      "quantity": 1,
+      "unit_price": "69.99",
+      "amount": "69.99",
+      "verdict": "needs_prescription",
+      "gold_source_ids": [
+        "elist:tty-telephone",
+        "p502:telephone"
+      ],
+      "note": "Special telephone equipment that lets a person who is deaf, hard of hearing or speech disabled communicate is includible; an amplified phone sold to anyone needs documentation of that use."
+    },
+    {
+      "raw_text": "COUGH DROPS MENTH 30CT",
+      "name": "menthol cough drops, 30 count",
+      "quantity": 1,
+      "unit_price": "2.99",
+      "amount": "2.99",
+      "verdict": "eligible",
+      "gold_source_ids": [
+        "elist:cough-drops",
+        "p969:distributions-from-an-fsa",
+        "cares:sec-3702"
+      ],
+      "note": "Medicated cough drops and throat lozenges are OTC medicines, eligible after 2019."
+    },
+    {
+      "raw_text": "HBA MISC",
+      "name": "unidentified health and beauty item",
+      "quantity": 1,
+      "unit_price": "12.49",
+      "amount": "12.49",
+      "verdict": "needs_review",
+      "gold_source_ids": [
+        "elist:unidentified-hba",
+        "p969:distributions-from-an-fsa",
+        "p502:personal-use-items"
+      ],
+      "note": "The line names only a department (health and beauty), which mixes eligible medicine with ineligible personal care; the item can't be classified."
+    },
+    {
+      "raw_text": "GRAB BAR 24IN SS",
+      "name": "stainless steel grab bar, 24 in",
+      "quantity": 1,
+      "unit_price": "34.99",
+      "amount": "34.99",
+      "verdict": "needs_prescription",
+      "gold_source_ids": [
+        "elist:home-accessibility",
+        "p502:capital-expenses"
+      ],
+      "note": "Grab bars, railings and ramps are includible in full when installed to accommodate a disabled condition; the receipt can't show that, so plans require medical documentation."
+    },
+    {
+      "raw_text": "TRIPLE ANTIBIO OINT 1OZ",
+      "name": "triple antibiotic ointment, 1 oz",
+      "quantity": 2,
+      "unit_price": "5.99",
+      "amount": "11.98",
+      "verdict": "eligible",
+      "gold_source_ids": [
+        "elist:otc-antibiotic-ointment",
+        "p969:distributions-from-an-fsa",
+        "cares:sec-3702"
+      ],
+      "note": "Medicated skin ointments and creams are OTC medicines, eligible after 2019."
+    },
+    {
+      "raw_text": "SPF30 FACE LOTION 2OZ",
+      "name": "SPF 30 face lotion, 2 oz",
+      "quantity": 1,
+      "unit_price": "15.99",
+      "amount": "15.99",
+      "verdict": "dual_purpose",
+      "gold_source_ids": [
+        "elist:sunscreen",
+        "p502:what-are-medical-expenses",
+        "p502:personal-use-items"
+      ],
+      "note": "Not named in the sources; sunscreen prevents skin disease but is also an ordinary personal-care product. Eligible only when used primarily for a medical reason."
+    },
+    {
+      "raw_text": "NYQUIL LIQ 12OZ",
+      "name": "nighttime cold and flu liquid, 12 oz",
+      "quantity": 1,
+      "unit_price": "13.49",
+      "amount": "13.49",
+      "verdict": "eligible",
+      "gold_source_ids": [
+        "elist:otc-cold-flu",
+        "p969:distributions-from-an-fsa",
+        "cares:sec-3702"
+      ],
+      "note": "Cold, flu and cough medicines are OTC medicines, eligible without a prescription after 2019."
+    }
+  ],
+  "subtotal_printed": "161.92",
+  "tax": "3.39",
+  "total": "165.31",
+  "totals_mismatch": true,
+  "pii": [
+    {
+      "kind": "patient_name",
+      "value": "TESTY MCTESTFACE"
+    },
+    {
+      "kind": "phone",
+      "value": "(321) 555-0136"
+    }
+  ],
+  "seed": 20261028
+}

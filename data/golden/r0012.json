@@ -1,0 +1,105 @@
+{
+  "receipt_id": "r0012",
+  "merchant": "LAKESIDE FAMILY DENTAL",
+  "merchant_type": "dental",
+  "date": "2026-09-16",
+  "items": [
+    {
+      "raw_text": "D1110 PROPHY ADULT",
+      "name": "adult dental cleaning (prophylaxis)",
+      "quantity": 1,
+      "unit_price": "115.0",
+      "amount": "115.00",
+      "verdict": "eligible",
+      "gold_source_ids": [
+        "elist:dental-treatment",
+        "p502:dental-treatment"
+      ],
+      "note": "Prevention and alleviation of dental disease (cleanings, sealants, fluoride, X-rays, fillings, extractions) is includible."
+    },
+    {
+      "raw_text": "D1208 FLUORIDE VARNISH",
+      "name": "fluoride varnish treatment",
+      "quantity": 1,
+      "unit_price": "35.0",
+      "amount": "35.00",
+      "verdict": "eligible",
+      "gold_source_ids": [
+        "elist:dental-treatment",
+        "p502:dental-treatment"
+      ],
+      "note": "Prevention and alleviation of dental disease (cleanings, sealants, fluoride, X-rays, fillings, extractions) is includible."
+    },
+    {
+      "raw_text": "MISC CHARGE 99199",
+      "name": "unspecified provider charge",
+      "quantity": 1,
+      "unit_price": "40.0",
+      "amount": "40.00",
+      "verdict": "needs_review",
+      "gold_source_ids": [
+        "elist:unidentified-provider-charge",
+        "p502:what-are-medical-expenses"
+      ],
+      "note": "A provider charge with no service description could be medical care or an administrative fee."
+    },
+    {
+      "raw_text": "TOOTHPASTE FLUOR 4.8OZ",
+      "name": "fluoride toothpaste, 4.8 oz",
+      "quantity": 1,
+      "unit_price": "3.99",
+      "amount": "3.99",
+      "verdict": "not_eligible",
+      "gold_source_ids": [
+        "elist:toothbrush-toothpaste",
+        "p502:personal-use-items"
+      ],
+      "note": "Pub 502 names toothbrush and toothpaste as nondeductible personal expenses."
+    },
+    {
+      "raw_text": "D7140 EXTRACTION",
+      "name": "tooth extraction",
+      "quantity": 1,
+      "unit_price": "185.0",
+      "amount": "185.00",
+      "verdict": "eligible",
+      "gold_source_ids": [
+        "elist:dental-treatment",
+        "p502:dental-treatment"
+      ],
+      "note": "Prevention and alleviation of dental disease (cleanings, sealants, fluoride, X-rays, fillings, extractions) is includible."
+    },
+    {
+      "raw_text": "D2392 RESIN 2SURF POST",
+      "name": "composite filling, two surfaces, posterior",
+      "quantity": 1,
+      "unit_price": "210.0",
+      "amount": "210.00",
+      "verdict": "eligible",
+      "gold_source_ids": [
+        "elist:dental-treatment",
+        "p502:dental-treatment"
+      ],
+      "note": "Prevention and alleviation of dental disease (cleanings, sealants, fluoride, X-rays, fillings, extractions) is includible."
+    },
+    {
+      "raw_text": "NO SHOW FEE",
+      "name": "missed appointment fee",
+      "quantity": 1,
+      "unit_price": "50.0",
+      "amount": "50.00",
+      "verdict": "not_eligible",
+      "gold_source_ids": [
+        "elist:missed-appointment",
+        "p502:what-are-medical-expenses"
+      ],
+      "note": "A missed-appointment fee pays for no diagnosis or treatment, so it isn't medical care."
+    }
+  ],
+  "subtotal_printed": "638.99",
+  "tax": "0.00",
+  "total": "638.99",
+  "totals_mismatch": false,
+  "pii": [],
+  "seed": 20261028
+}

@@ -1,0 +1,88 @@
+{
+  "receipt_id": "r0013",
+  "merchant": "MEGAMART SUPERCENTER #2210",
+  "merchant_type": "big_box",
+  "date": "2026-09-03",
+  "items": [
+    {
+      "raw_text": "WHOLE MILK GAL",
+      "name": "whole milk, 1 gallon",
+      "quantity": 1,
+      "unit_price": "3.89",
+      "amount": "3.89",
+      "verdict": "not_eligible",
+      "gold_source_ids": [
+        "elist:grocery-food",
+        "p502:weight-loss-program",
+        "p502:what-are-medical-expenses"
+      ],
+      "note": "Food that is normally consumed to satisfy nutritional needs isn't medical care."
+    },
+    {
+      "raw_text": "NICOTINE GUM 4MG 100CT",
+      "name": "nicotine gum 4 mg, 100 count",
+      "quantity": 1,
+      "unit_price": "44.99",
+      "amount": "44.99",
+      "verdict": "eligible",
+      "gold_source_ids": [
+        "elist:otc-nicotine-replacement",
+        "p969:distributions-from-an-fsa",
+        "cares:sec-3702",
+        "p502:stop-smoking-programs"
+      ],
+      "note": "Pub 502 excludes non-prescribed stop-smoking drugs from the deduction, but for HSA/FSA reimbursement they are OTC medicines, eligible after 2019."
+    },
+    {
+      "raw_text": "LAUNDRY DET 92OZ",
+      "name": "laundry detergent, 92 oz",
+      "quantity": 1,
+      "unit_price": "12.99",
+      "amount": "12.99",
+      "verdict": "not_eligible",
+      "gold_source_ids": [
+        "elist:household-cleaning",
+        "p502:personal-use-items"
+      ],
+      "note": "Household items ordinarily used for family purposes aren't medical care."
+    },
+    {
+      "raw_text": "FLEA TICK DOG 3DOSE",
+      "name": "dog flea and tick treatment, 3 doses",
+      "quantity": 1,
+      "unit_price": "49.99",
+      "amount": "49.99",
+      "verdict": "not_eligible",
+      "gold_source_ids": [
+        "elist:veterinary",
+        "p502:veterinary-fees"
+      ],
+      "note": "Veterinary fees generally aren't includible (service animals are the exception)."
+    },
+    {
+      "raw_text": "ADAPALENE 0.1% GEL 15G",
+      "name": "adapalene 0.1% acne gel, 15 g",
+      "quantity": 1,
+      "unit_price": "13.99",
+      "amount": "13.99",
+      "verdict": "eligible",
+      "gold_source_ids": [
+        "elist:otc-acne-medicine",
+        "p969:distributions-from-an-fsa",
+        "cares:sec-3702"
+      ],
+      "note": "Acne treatments with an active drug ingredient are OTC medicines, eligible after 2019."
+    }
+  ],
+  "subtotal_printed": "125.85",
+  "tax": "4.68",
+  "total": "130.53",
+  "totals_mismatch": false,
+  "pii": [
+    {
+      "kind": "card_number",
+      "value": "6011111111111117"
+    }
+  ],
+  "seed": 20261028
+}

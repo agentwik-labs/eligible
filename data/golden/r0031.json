@@ -1,0 +1,172 @@
+{
+  "receipt_id": "r0031",
+  "merchant": "ORANGE GROVE MEDICAL GROUP",
+  "merchant_type": "medical_provider",
+  "date": "2026-05-12",
+  "items": [
+    {
+      "raw_text": "IVF MONITORING VISIT",
+      "name": "IVF cycle monitoring visit",
+      "quantity": 1,
+      "unit_price": "350.0",
+      "amount": "350.00",
+      "verdict": "eligible",
+      "gold_source_ids": [
+        "elist:fertility-treatment",
+        "p502:fertility-enhancement"
+      ],
+      "note": "Procedures to overcome an inability to have children, such as IVF and temporary storage of eggs or sperm, are includible."
+    },
+    {
+      "raw_text": "CHIRO ADJUSTMENT",
+      "name": "chiropractic adjustment",
+      "quantity": 1,
+      "unit_price": "65.0",
+      "amount": "65.00",
+      "verdict": "eligible",
+      "gold_source_ids": [
+        "elist:chiropractor",
+        "p502:chiropractor"
+      ],
+      "note": "Fees paid to a chiropractor for medical care are includible."
+    },
+    {
+      "raw_text": "COMPREHENSIVE EYE EXAM",
+      "name": "comprehensive eye examination",
+      "quantity": 1,
+      "unit_price": "95.0",
+      "amount": "95.00",
+      "verdict": "eligible",
+      "gold_source_ids": [
+        "elist:eye-exam",
+        "p502:eye-exam"
+      ],
+      "note": "Eye examinations are includible."
+    },
+    {
+      "raw_text": "HEALTH INST TREATMENT",
+      "name": "health institute treatment session",
+      "quantity": 1,
+      "unit_price": "180.0",
+      "amount": "180.00",
+      "verdict": "needs_prescription",
+      "gold_source_ids": [
+        "elist:health-institute",
+        "p502:health-institute"
+      ],
+      "note": "Treatment at a health institute is includible only if prescribed by a physician who states it is necessary to alleviate a disability or illness."
+    },
+    {
+      "raw_text": "MASSAGE 60MIN",
+      "name": "massage, 60 minutes",
+      "quantity": 1,
+      "unit_price": "95.0",
+      "amount": "95.00",
+      "verdict": "needs_prescription",
+      "gold_source_ids": [
+        "elist:massage-therapy",
+        "p502:therapy",
+        "p502:health-club-dues"
+      ],
+      "note": "Therapy received as medical treatment is includible; massage qualifies only with a physician's prescription or letter of medical necessity for a condition, not for general well-being."
+    },
+    {
+      "raw_text": "RECORDS COPY FEE",
+      "name": "medical records copy fee",
+      "quantity": 1,
+      "unit_price": "25.0",
+      "amount": "25.00",
+      "verdict": "not_eligible",
+      "gold_source_ids": [
+        "elist:medical-records-fee",
+        "p502:what-are-medical-expenses"
+      ],
+      "note": "Copying records is an administrative fee, not a payment for diagnosis or treatment."
+    },
+    {
+      "raw_text": "HOME HEALTH AIDE 8HR",
+      "name": "home health aide, 8 hours",
+      "quantity": 1,
+      "unit_price": "224.0",
+      "amount": "224.00",
+      "verdict": "needs_prescription",
+      "gold_source_ids": [
+        "elist:nursing-care",
+        "p502:nursing-services"
+      ],
+      "note": "Nursing services for a patient's condition are includible, but only the nursing part of an aide's pay; personal and household services aren't, so plans need a breakdown or care plan."
+    },
+    {
+      "raw_text": "WALKING CANE ADJ",
+      "name": "adjustable walking cane",
+      "quantity": 1,
+      "unit_price": "22.99",
+      "amount": "22.99",
+      "verdict": "dual_purpose",
+      "gold_source_ids": [
+        "elist:mobility-aids",
+        "p502:what-are-medical-expenses",
+        "p502:wheelchair"
+      ],
+      "note": "Canes and walkers aren't named in the sources; they are equipment for relieving a disability, which the general definition covers when that is their primary use."
+    },
+    {
+      "raw_text": "BOTOX COSMETIC 20U",
+      "name": "cosmetic botox, 20 units",
+      "quantity": 1,
+      "unit_price": "300.0",
+      "amount": "300.00",
+      "verdict": "not_eligible",
+      "gold_source_ids": [
+        "elist:cosmetic-procedure",
+        "p502:cosmetic-surgery"
+      ],
+      "note": "Cosmetic procedures directed at improving appearance aren't includible."
+    },
+    {
+      "raw_text": "NO SHOW FEE",
+      "name": "missed appointment fee",
+      "quantity": 1,
+      "unit_price": "50.0",
+      "amount": "50.00",
+      "verdict": "not_eligible",
+      "gold_source_ids": [
+        "elist:missed-appointment",
+        "p502:what-are-medical-expenses"
+      ],
+      "note": "A missed-appointment fee pays for no diagnosis or treatment, so it isn't medical care."
+    },
+    {
+      "raw_text": "CPAP NASAL MASK",
+      "name": "CPAP nasal mask",
+      "quantity": 1,
+      "unit_price": "89.0",
+      "amount": "89.00",
+      "verdict": "eligible",
+      "gold_source_ids": [
+        "elist:cpap-supplies",
+        "p502:what-are-medical-expenses"
+      ],
+      "note": "Equipment and supplies needed to treat a disease are includible medical expenses."
+    },
+    {
+      "raw_text": "ASSISTED LIVING DAILY",
+      "name": "assisted living, daily rate",
+      "quantity": 1,
+      "unit_price": "165.0",
+      "amount": "165.00",
+      "verdict": "not_eligible",
+      "gold_source_ids": [
+        "elist:long-term-care-fsa",
+        "p969:distributions-from-an-fsa"
+      ],
+      "note": "A health FSA can't reimburse long-term care."
+    }
+  ],
+  "subtotal_printed": "1660.99",
+  "tax": "0.00",
+  "total": "1660.99",
+  "totals_mismatch": false,
+  "pii": [],
+  "seed": 20261028
+}

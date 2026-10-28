@@ -1,0 +1,92 @@
+{
+  "receipt_id": "r0035",
+  "merchant": "MEGAMART SUPERCENTER #2210",
+  "merchant_type": "big_box",
+  "date": "2026-07-04",
+  "items": [
+    {
+      "raw_text": "ADAPALENE 0.1% GEL 15G",
+      "name": "adapalene 0.1% acne gel, 15 g",
+      "quantity": 1,
+      "unit_price": "13.99",
+      "amount": "13.99",
+      "verdict": "eligible",
+      "gold_source_ids": [
+        "elist:otc-acne-medicine",
+        "p969:distributions-from-an-fsa",
+        "cares:sec-3702"
+      ],
+      "note": "Acne treatments with an active drug ingredient are OTC medicines, eligible after 2019."
+    },
+    {
+      "raw_text": "COLD PACK REUSABLE",
+      "name": "reusable cold pack",
+      "quantity": 2,
+      "unit_price": "8.99",
+      "amount": "17.98",
+      "verdict": "dual_purpose",
+      "gold_source_ids": [
+        "elist:hot-cold-therapy",
+        "p502:what-are-medical-expenses",
+        "p502:personal-use-items"
+      ],
+      "note": "Sources don't name them; heat and cold packs are equipment for treating an injury but also have ordinary uses. Eligible only when used to treat a condition."
+    },
+    {
+      "raw_text": "LEVONORGESTREL 1.5MG 1CT",
+      "name": "levonorgestrel 1.5 mg emergency contraceptive, 1 count",
+      "quantity": 1,
+      "unit_price": "49.99",
+      "amount": "49.99",
+      "verdict": "eligible",
+      "gold_source_ids": [
+        "elist:otc-contraceptive",
+        "p969:distributions-from-an-fsa",
+        "cares:sec-3702"
+      ],
+      "note": "Non-prescription contraceptive pills are OTC medicines, eligible after 2019."
+    },
+    {
+      "raw_text": "TOOTHPASTE FLUOR 4.8OZ",
+      "name": "fluoride toothpaste, 4.8 oz",
+      "quantity": 2,
+      "unit_price": "3.99",
+      "amount": "7.98",
+      "verdict": "not_eligible",
+      "gold_source_ids": [
+        "elist:toothbrush-toothpaste",
+        "p502:personal-use-items"
+      ],
+      "note": "Pub 502 names toothbrush and toothpaste as nondeductible personal expenses."
+    },
+    {
+      "raw_text": "CHLD ACETAMIN SUSP 4OZ",
+      "name": "children's acetaminophen suspension, 4 oz",
+      "quantity": 1,
+      "unit_price": "8.49",
+      "amount": "8.49",
+      "verdict": "eligible",
+      "gold_source_ids": [
+        "elist:otc-children-medicine",
+        "p969:distributions-from-an-fsa",
+        "cares:sec-3702"
+      ],
+      "note": "Children's OTC medicines are OTC medicines, eligible after 2019."
+    }
+  ],
+  "subtotal_printed": "98.43",
+  "tax": "1.82",
+  "total": "100.25",
+  "totals_mismatch": false,
+  "pii": [
+    {
+      "kind": "card_number",
+      "value": "4111111111111111"
+    },
+    {
+      "kind": "email",
+      "value": "shopper25@example.com"
+    }
+  ],
+  "seed": 20261028
+}

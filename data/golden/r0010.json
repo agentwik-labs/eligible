@@ -1,0 +1,55 @@
+{
+  "receipt_id": "r0010",
+  "merchant": "WELLSPRING PHARMACY #0412",
+  "merchant_type": "pharmacy",
+  "date": "2026-09-11",
+  "items": [
+    {
+      "raw_text": "DIAPERS SZ3 84CT",
+      "name": "baby diapers size 3, 84 count",
+      "quantity": 1,
+      "unit_price": "27.99",
+      "amount": "27.99",
+      "verdict": "not_eligible",
+      "gold_source_ids": [
+        "elist:baby-diapers",
+        "p502:diaper-service"
+      ],
+      "note": "Diapers aren't includible unless needed to relieve the effects of a particular disease; ordinary baby diapers are not."
+    },
+    {
+      "raw_text": "ORANGE JUICE 52OZ",
+      "name": "orange juice, 52 oz",
+      "quantity": 1,
+      "unit_price": "4.79",
+      "amount": "4.79",
+      "verdict": "not_eligible",
+      "gold_source_ids": [
+        "elist:beverages",
+        "p502:weight-loss-program",
+        "p502:personal-use-items"
+      ],
+      "note": "Ordinary beverages aren't medical care."
+    },
+    {
+      "raw_text": "SPF30 FACE LOTION 2OZ",
+      "name": "SPF 30 face lotion, 2 oz",
+      "quantity": 1,
+      "unit_price": "15.99",
+      "amount": "15.99",
+      "verdict": "dual_purpose",
+      "gold_source_ids": [
+        "elist:sunscreen",
+        "p502:what-are-medical-expenses",
+        "p502:personal-use-items"
+      ],
+      "note": "Not named in the sources; sunscreen prevents skin disease but is also an ordinary personal-care product. Eligible only when used primarily for a medical reason."
+    }
+  ],
+  "subtotal_printed": "48.77",
+  "tax": "3.41",
+  "total": "52.18",
+  "totals_mismatch": false,
+  "pii": [],
+  "seed": 20261028
+}

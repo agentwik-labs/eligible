@@ -1,0 +1,94 @@
+{
+  "receipt_id": "r0053",
+  "merchant": "CLEARVIEW OPTICAL",
+  "merchant_type": "optical",
+  "date": "2026-05-19",
+  "items": [
+    {
+      "raw_text": "CONTACT LENS FITTING",
+      "name": "contact lens fitting",
+      "quantity": 1,
+      "unit_price": "60.0",
+      "amount": "60.00",
+      "verdict": "eligible",
+      "gold_source_ids": [
+        "elist:eye-exam",
+        "p502:eye-exam"
+      ],
+      "note": "Eye examinations are includible."
+    },
+    {
+      "raw_text": "SUNGLASSES POLARZD",
+      "name": "non-prescription polarized sunglasses",
+      "quantity": 1,
+      "unit_price": "24.99",
+      "amount": "24.99",
+      "verdict": "not_eligible",
+      "gold_source_ids": [
+        "elist:non-prescription-sunglasses",
+        "p502:personal-use-items"
+      ],
+      "note": "Non-prescription sunglasses are an item ordinarily used for personal purposes."
+    },
+    {
+      "raw_text": "SALINE SOLN 12OZ",
+      "name": "saline solution, 12 oz",
+      "quantity": 2,
+      "unit_price": "5.99",
+      "amount": "11.98",
+      "verdict": "eligible",
+      "gold_source_ids": [
+        "elist:contact-lens-solution",
+        "p502:contact-lenses"
+      ],
+      "note": "Equipment and materials required for using contact lenses, such as saline solution and enzyme cleaner, are includible."
+    },
+    {
+      "raw_text": "BLUE LIGHT GLASSES",
+      "name": "blue light filtering glasses, non-prescription",
+      "quantity": 1,
+      "unit_price": "29.99",
+      "amount": "29.99",
+      "verdict": "dual_purpose",
+      "gold_source_ids": [
+        "elist:blue-light-glasses",
+        "p502:eyeglasses",
+        "p502:personal-use-items"
+      ],
+      "note": "Not named in the sources; glasses without a prescription that don't correct vision are eligible only if needed for a medical reason."
+    },
+    {
+      "raw_text": "KETOTIFEN EYE DRP 5ML",
+      "name": "ketotifen allergy eye drops, 5 ml",
+      "quantity": 1,
+      "unit_price": "14.99",
+      "amount": "14.99",
+      "verdict": "eligible",
+      "gold_source_ids": [
+        "elist:otc-eye-drops",
+        "p969:distributions-from-an-fsa",
+        "cares:sec-3702"
+      ],
+      "note": "Medicated and lubricating eye drops are OTC medicines, eligible after 2019."
+    },
+    {
+      "raw_text": "MISC CHARGE 99199",
+      "name": "unspecified provider charge",
+      "quantity": 1,
+      "unit_price": "40.0",
+      "amount": "40.00",
+      "verdict": "needs_review",
+      "gold_source_ids": [
+        "elist:unidentified-provider-charge",
+        "p502:what-are-medical-expenses"
+      ],
+      "note": "A provider charge with no service description could be medical care or an administrative fee."
+    }
+  ],
+  "subtotal_printed": "181.95",
+  "tax": "6.65",
+  "total": "188.60",
+  "totals_mismatch": false,
+  "pii": [],
+  "seed": 20261028
+}

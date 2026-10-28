@@ -1,0 +1,80 @@
+{
+  "receipt_id": "r0016",
+  "merchant": "DIRECTCARE ONLINE STORE",
+  "merchant_type": "other",
+  "date": "2026-02-20",
+  "items": [
+    {
+      "raw_text": "CRUTCHES ALUM ADULT",
+      "name": "aluminum adult crutches",
+      "quantity": 1,
+      "unit_price": "39.99",
+      "amount": "39.99",
+      "verdict": "eligible",
+      "gold_source_ids": [
+        "elist:crutches",
+        "p502:crutches"
+      ],
+      "note": "Buying or renting crutches is includible."
+    },
+    {
+      "raw_text": "BEER IPA 6PK 12OZ",
+      "name": "IPA beer, 6 pack",
+      "quantity": 1,
+      "unit_price": "10.99",
+      "amount": "10.99",
+      "verdict": "not_eligible",
+      "gold_source_ids": [
+        "elist:tobacco-alcohol",
+        "p502:personal-use-items"
+      ],
+      "note": "Tobacco and alcohol are personal purchases with no medical purpose."
+    },
+    {
+      "raw_text": "BATH TOWEL WHT",
+      "name": "white bath towel",
+      "quantity": 1,
+      "unit_price": "9.99",
+      "amount": "9.99",
+      "verdict": "not_eligible",
+      "gold_source_ids": [
+        "elist:clothing-household",
+        "p502:personal-use-items"
+      ],
+      "note": "Clothing and household goods are ordinarily used for personal purposes."
+    },
+    {
+      "raw_text": "MASSAGE 60MIN",
+      "name": "massage, 60 minutes",
+      "quantity": 1,
+      "unit_price": "95.0",
+      "amount": "95.00",
+      "verdict": "needs_prescription",
+      "gold_source_ids": [
+        "elist:massage-therapy",
+        "p502:therapy",
+        "p502:health-club-dues"
+      ],
+      "note": "Therapy received as medical treatment is includible; massage qualifies only with a physician's prescription or letter of medical necessity for a condition, not for general well-being."
+    },
+    {
+      "raw_text": "WHEELCHAIR STD 18IN",
+      "name": "standard wheelchair, 18 in seat",
+      "quantity": 1,
+      "unit_price": "189.0",
+      "amount": "189.00",
+      "verdict": "eligible",
+      "gold_source_ids": [
+        "elist:wheelchair",
+        "p502:wheelchair"
+      ],
+      "note": "A wheelchair used for relief of sickness or disability is includible, as is its upkeep."
+    }
+  ],
+  "subtotal_printed": "344.97",
+  "tax": "1.47",
+  "total": "346.44",
+  "totals_mismatch": false,
+  "pii": [],
+  "seed": 20261028
+}

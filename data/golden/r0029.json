@@ -1,0 +1,104 @@
+{
+  "receipt_id": "r0029",
+  "merchant": "WELLSPRING PHARMACY #0412",
+  "merchant_type": "pharmacy",
+  "date": "2026-09-26",
+  "items": [
+    {
+      "raw_text": "BODY WASH 18OZ",
+      "name": "body wash, 18 oz",
+      "quantity": 1,
+      "unit_price": "6.99",
+      "amount": "6.99",
+      "verdict": "not_eligible",
+      "gold_source_ids": [
+        "elist:deodorant-soap",
+        "p502:personal-use-items"
+      ],
+      "note": "Ordinary hygiene products are personal-use items."
+    },
+    {
+      "raw_text": "HEMORRHOID OINT 1OZ",
+      "name": "hemorrhoid ointment, 1 oz",
+      "quantity": 1,
+      "unit_price": "9.49",
+      "amount": "9.49",
+      "verdict": "eligible",
+      "gold_source_ids": [
+        "elist:otc-hemorrhoid",
+        "p969:distributions-from-an-fsa",
+        "cares:sec-3702"
+      ],
+      "note": "Hemorrhoid treatments are OTC medicines, eligible after 2019."
+    },
+    {
+      "raw_text": "MILK STORAGE BTL 10PK",
+      "name": "breast milk storage bottles, 10 pack",
+      "quantity": 1,
+      "unit_price": "18.99",
+      "amount": "18.99",
+      "verdict": "not_eligible",
+      "gold_source_ids": [
+        "elist:breast-milk-storage-bottles",
+        "p502:breast-pumps-and-supplies"
+      ],
+      "note": "Pub 502 excludes excess bottles for food storage from breast pump supplies."
+    },
+    {
+      "raw_text": "MASCARA BLK WP",
+      "name": "waterproof black mascara",
+      "quantity": 1,
+      "unit_price": "9.99",
+      "amount": "9.99",
+      "verdict": "not_eligible",
+      "gold_source_ids": [
+        "elist:cosmetics",
+        "p502:personal-use-items",
+        "p502:cosmetic-surgery"
+      ],
+      "note": "Cosmetics improve appearance and don't treat illness; they are personal-use items."
+    },
+    {
+      "raw_text": "DICLOFENAC GEL 100G",
+      "name": "diclofenac pain relief gel, 100 g",
+      "quantity": 2,
+      "unit_price": "12.99",
+      "amount": "25.98",
+      "verdict": "eligible",
+      "gold_source_ids": [
+        "elist:otc-topical-pain",
+        "p969:distributions-from-an-fsa",
+        "cares:sec-3702"
+      ],
+      "note": "Medicated topical pain relievers are OTC medicines, eligible after 2019."
+    },
+    {
+      "raw_text": "ANNUAL MEMBERSHIP FEE",
+      "name": "annual store membership fee",
+      "quantity": 1,
+      "unit_price": "65.0",
+      "amount": "65.00",
+      "verdict": "not_eligible",
+      "gold_source_ids": [
+        "elist:membership-fee",
+        "p502:health-club-dues"
+      ],
+      "note": "Store or club membership fees aren't medical care."
+    }
+  ],
+  "subtotal_printed": "136.44",
+  "tax": "7.07",
+  "total": "143.51",
+  "totals_mismatch": false,
+  "pii": [
+    {
+      "kind": "patient_name",
+      "value": "PAT PLACEHOLDER"
+    },
+    {
+      "kind": "phone",
+      "value": "(321) 555-0116"
+    }
+  ],
+  "seed": 20261028
+}

@@ -1,0 +1,124 @@
+{
+  "receipt_id": "r0034",
+  "merchant": "BLUE HERON PHARMACY",
+  "merchant_type": "pharmacy",
+  "date": "2026-09-14",
+  "items": [
+    {
+      "raw_text": "WARM MIST VAPORIZER",
+      "name": "warm mist vaporizer",
+      "quantity": 1,
+      "unit_price": "34.99",
+      "amount": "34.99",
+      "verdict": "needs_prescription",
+      "gold_source_ids": [
+        "elist:humidifier",
+        "p502:personal-use-items",
+        "p502:what-are-medical-expenses"
+      ],
+      "note": "A household item is includible only if used primarily to alleviate an illness; plans require a letter of medical necessity to show that."
+    },
+    {
+      "raw_text": "EGGS LG DZ",
+      "name": "large eggs, dozen",
+      "quantity": 1,
+      "unit_price": "4.29",
+      "amount": "4.29",
+      "verdict": "not_eligible",
+      "gold_source_ids": [
+        "elist:grocery-food",
+        "p502:weight-loss-program",
+        "p502:what-are-medical-expenses"
+      ],
+      "note": "Food that is normally consumed to satisfy nutritional needs isn't medical care."
+    },
+    {
+      "raw_text": "ORTHOTIC INSOLES M",
+      "name": "orthotic arch support insoles, men's",
+      "quantity": 1,
+      "unit_price": "39.99",
+      "amount": "39.99",
+      "verdict": "dual_purpose",
+      "gold_source_ids": [
+        "elist:orthotic-inserts",
+        "p502:what-are-medical-expenses",
+        "p502:personal-use-items"
+      ],
+      "note": "Not named in the sources; orthotics are equipment for a foot condition but also sold for comfort. Eligible only when used to treat a condition."
+    },
+    {
+      "raw_text": "SHAMPOO 2IN1 25OZ",
+      "name": "2-in-1 shampoo, 25 oz",
+      "quantity": 1,
+      "unit_price": "6.99",
+      "amount": "6.99",
+      "verdict": "not_eligible",
+      "gold_source_ids": [
+        "elist:hair-care",
+        "p502:personal-use-items"
+      ],
+      "note": "Ordinary hair care is a personal-use item."
+    },
+    {
+      "raw_text": "KETOTIFEN EYE DRP 5ML",
+      "name": "ketotifen allergy eye drops, 5 ml",
+      "quantity": 1,
+      "unit_price": "14.99",
+      "amount": "14.99",
+      "verdict": "eligible",
+      "gold_source_ids": [
+        "elist:otc-eye-drops",
+        "p969:distributions-from-an-fsa",
+        "cares:sec-3702"
+      ],
+      "note": "Medicated and lubricating eye drops are OTC medicines, eligible after 2019."
+    },
+    {
+      "raw_text": "PRENATAL VIT 90CT",
+      "name": "prenatal vitamins, 90 count",
+      "quantity": 1,
+      "unit_price": "19.99",
+      "amount": "19.99",
+      "verdict": "dual_purpose",
+      "gold_source_ids": [
+        "elist:prenatal-vitamins",
+        "p502:nutritional-supplements"
+      ],
+      "note": "Supplements are includible only when recommended by a practitioner for a specific condition; prenatal vitamins are commonly recommended but the receipt can't show it."
+    },
+    {
+      "raw_text": "FLUTICASONE NSL SPR 120",
+      "name": "fluticasone nasal spray, 120 sprays",
+      "quantity": 1,
+      "unit_price": "17.99",
+      "amount": "17.99",
+      "verdict": "eligible",
+      "gold_source_ids": [
+        "elist:otc-nasal-spray",
+        "p969:distributions-from-an-fsa",
+        "cares:sec-3702"
+      ],
+      "note": "Medicated nasal sprays are OTC medicines, eligible without a prescription after 2019."
+    },
+    {
+      "raw_text": "MICONAZOLE 7DAY CRM",
+      "name": "miconazole 7-day vaginal cream",
+      "quantity": 1,
+      "unit_price": "12.49",
+      "amount": "12.49",
+      "verdict": "eligible",
+      "gold_source_ids": [
+        "elist:otc-antifungal",
+        "p969:distributions-from-an-fsa",
+        "cares:sec-3702"
+      ],
+      "note": "Antifungal treatments are OTC medicines, eligible after 2019."
+    }
+  ],
+  "subtotal_printed": "151.72",
+  "tax": "4.99",
+  "total": "156.71",
+  "totals_mismatch": false,
+  "pii": [],
+  "seed": 20261028
+}

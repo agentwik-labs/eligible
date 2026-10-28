@@ -1,0 +1,68 @@
+{
+  "receipt_id": "r0057",
+  "merchant": "BRIGHT EYES VISION CENTER",
+  "merchant_type": "optical",
+  "date": "2026-05-09",
+  "items": [
+    {
+      "raw_text": "BLUE LIGHT GLASSES",
+      "name": "blue light filtering glasses, non-prescription",
+      "quantity": 1,
+      "unit_price": "29.99",
+      "amount": "29.99",
+      "verdict": "dual_purpose",
+      "gold_source_ids": [
+        "elist:blue-light-glasses",
+        "p502:eyeglasses",
+        "p502:personal-use-items"
+      ],
+      "note": "Not named in the sources; glasses without a prescription that don't correct vision are eligible only if needed for a medical reason."
+    },
+    {
+      "raw_text": "READING GLASSES +2.00",
+      "name": "reading glasses +2.00",
+      "quantity": 1,
+      "unit_price": "14.99",
+      "amount": "14.99",
+      "verdict": "eligible",
+      "gold_source_ids": [
+        "elist:reading-glasses",
+        "p502:eyeglasses"
+      ],
+      "note": "Eyeglasses needed for medical reasons are includible; non-prescription reading glasses correct vision."
+    },
+    {
+      "raw_text": "LENS CLOTH MICROFBR",
+      "name": "microfiber lens cleaning cloth",
+      "quantity": 1,
+      "unit_price": "4.99",
+      "amount": "4.99",
+      "verdict": "not_eligible",
+      "gold_source_ids": [
+        "elist:eyeglass-accessories",
+        "p502:personal-use-items"
+      ],
+      "note": "Cases, chains and cleaning cloths are personal accessories, not equipment needed to use the lenses."
+    },
+    {
+      "raw_text": "KETOTIFEN EYE DRP 5ML",
+      "name": "ketotifen allergy eye drops, 5 ml",
+      "quantity": 1,
+      "unit_price": "14.99",
+      "amount": "14.99",
+      "verdict": "eligible",
+      "gold_source_ids": [
+        "elist:otc-eye-drops",
+        "p969:distributions-from-an-fsa",
+        "cares:sec-3702"
+      ],
+      "note": "Medicated and lubricating eye drops are OTC medicines, eligible after 2019."
+    }
+  ],
+  "subtotal_printed": "59.97",
+  "tax": "2.45",
+  "total": "62.42",
+  "totals_mismatch": true,
+  "pii": [],
+  "seed": 20261028
+}

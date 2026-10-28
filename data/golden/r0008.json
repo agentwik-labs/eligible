@@ -1,0 +1,109 @@
+{
+  "receipt_id": "r0008",
+  "merchant": "CORNER DRUG CO",
+  "merchant_type": "pharmacy",
+  "date": "2026-03-22",
+  "items": [
+    {
+      "raw_text": "RETINOL SERUM 1OZ",
+      "name": "retinol anti-aging serum, 1 oz",
+      "quantity": 1,
+      "unit_price": "24.99",
+      "amount": "24.99",
+      "verdict": "not_eligible",
+      "gold_source_ids": [
+        "elist:anti-aging",
+        "p502:cosmetic-surgery",
+        "p502:personal-use-items"
+      ],
+      "note": "Products directed at improving appearance aren't medical care."
+    },
+    {
+      "raw_text": "HBA ITEM 0414",
+      "name": "unidentified health and beauty item",
+      "quantity": 2,
+      "unit_price": "7.99",
+      "amount": "15.98",
+      "verdict": "needs_review",
+      "gold_source_ids": [
+        "elist:unidentified-hba",
+        "p969:distributions-from-an-fsa",
+        "p502:personal-use-items"
+      ],
+      "note": "The line names only a department (health and beauty), which mixes eligible medicine with ineligible personal care; the item can't be classified."
+    },
+    {
+      "raw_text": "PILL ORGANIZER 7DAY",
+      "name": "7-day pill organizer",
+      "quantity": 1,
+      "unit_price": "4.99",
+      "amount": "4.99",
+      "verdict": "not_eligible",
+      "gold_source_ids": [
+        "elist:pill-organizer",
+        "p502:personal-use-items"
+      ],
+      "note": "A pill box is an ordinary household item, not equipment used to diagnose or treat illness."
+    },
+    {
+      "raw_text": "PUMP FLANGE KIT 24MM",
+      "name": "breast pump flange kit, 24 mm",
+      "quantity": 1,
+      "unit_price": "19.99",
+      "amount": "19.99",
+      "verdict": "eligible",
+      "gold_source_ids": [
+        "elist:breast-pump",
+        "p502:breast-pumps-and-supplies"
+      ],
+      "note": "Breast pumps and supplies that assist lactation are includible."
+    },
+    {
+      "raw_text": "CHIPS SEA SALT 8OZ",
+      "name": "sea salt potato chips, 8 oz",
+      "quantity": 1,
+      "unit_price": "4.29",
+      "amount": "4.29",
+      "verdict": "not_eligible",
+      "gold_source_ids": [
+        "elist:grocery-food",
+        "p502:weight-loss-program",
+        "p502:what-are-medical-expenses"
+      ],
+      "note": "Food that is normally consumed to satisfy nutritional needs isn't medical care."
+    },
+    {
+      "raw_text": "NEBULIZER COMPRESSOR",
+      "name": "nebulizer compressor kit",
+      "quantity": 1,
+      "unit_price": "54.99",
+      "amount": "54.99",
+      "verdict": "eligible",
+      "gold_source_ids": [
+        "elist:nebulizer",
+        "p502:what-are-medical-expenses"
+      ],
+      "note": "Equipment needed to treat a disease is an includible medical expense."
+    },
+    {
+      "raw_text": "FIRST AID KIT 100PC",
+      "name": "first aid kit, 100 pieces",
+      "quantity": 2,
+      "unit_price": "19.99",
+      "amount": "39.98",
+      "verdict": "eligible",
+      "gold_source_ids": [
+        "elist:first-aid-kit",
+        "p502:bandages",
+        "p502:what-are-medical-expenses"
+      ],
+      "note": "A first aid kit is a set of medical supplies such as bandages."
+    }
+  ],
+  "subtotal_printed": "165.21",
+  "tax": "3.52",
+  "total": "168.73",
+  "totals_mismatch": false,
+  "pii": [],
+  "seed": 20261028
+}

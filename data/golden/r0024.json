@@ -1,0 +1,176 @@
+{
+  "receipt_id": "r0024",
+  "merchant": "DIRECTCARE ONLINE STORE",
+  "merchant_type": "other",
+  "date": "2026-04-11",
+  "items": [
+    {
+      "raw_text": "MED TAPE PAPER 1IN",
+      "name": "paper medical tape, 1 in",
+      "quantity": 1,
+      "unit_price": "3.79",
+      "amount": "3.79",
+      "verdict": "eligible",
+      "gold_source_ids": [
+        "elist:bandages",
+        "p502:bandages"
+      ],
+      "note": "Medical supplies such as bandages are includible."
+    },
+    {
+      "raw_text": "ASPIRIN LO DOSE 81MG 120",
+      "name": "low dose aspirin 81 mg, 120 count",
+      "quantity": 2,
+      "unit_price": "5.99",
+      "amount": "11.98",
+      "verdict": "eligible",
+      "gold_source_ids": [
+        "elist:otc-pain-reliever",
+        "p969:distributions-from-an-fsa",
+        "cares:sec-3702"
+      ],
+      "note": "OTC medicines are medical care for FSAs and HRAs whether or not prescribed; CARES Act §3702 removed the prescription-only limit for expenses after 2019."
+    },
+    {
+      "raw_text": "WELLNESS INST 2WK PROG",
+      "name": "health institute program, 2 weeks",
+      "quantity": 1,
+      "unit_price": "1200.0",
+      "amount": "1200.00",
+      "verdict": "needs_prescription",
+      "gold_source_ids": [
+        "elist:health-institute",
+        "p502:health-institute"
+      ],
+      "note": "Treatment at a health institute is includible only if prescribed by a physician who states it is necessary to alleviate a disability or illness."
+    },
+    {
+      "raw_text": "BREAD WHL WHT 20OZ",
+      "name": "whole wheat bread, 20 oz",
+      "quantity": 1,
+      "unit_price": "3.49",
+      "amount": "3.49",
+      "verdict": "not_eligible",
+      "gold_source_ids": [
+        "elist:grocery-food",
+        "p502:weight-loss-program",
+        "p502:what-are-medical-expenses"
+      ],
+      "note": "Food that is normally consumed to satisfy nutritional needs isn't medical care."
+    },
+    {
+      "raw_text": "YOGA MAT 6MM",
+      "name": "yoga mat, 6 mm",
+      "quantity": 1,
+      "unit_price": "24.99",
+      "amount": "24.99",
+      "verdict": "not_eligible",
+      "gold_source_ids": [
+        "elist:fitness-equipment",
+        "p502:what-are-medical-expenses",
+        "p502:personal-use-items"
+      ],
+      "note": "Items merely beneficial to general health are personal expenses, not medical care."
+    },
+    {
+      "raw_text": "LAVENDER OIL 0.5OZ",
+      "name": "lavender essential oil, 0.5 oz",
+      "quantity": 1,
+      "unit_price": "9.99",
+      "amount": "9.99",
+      "verdict": "not_eligible",
+      "gold_source_ids": [
+        "elist:essential-oils",
+        "p502:nutritional-supplements"
+      ],
+      "note": "'Natural medicines' taken for general health aren't medical care."
+    },
+    {
+      "raw_text": "TUB TRANSFER RAIL",
+      "name": "bathtub transfer rail",
+      "quantity": 1,
+      "unit_price": "44.99",
+      "amount": "44.99",
+      "verdict": "needs_prescription",
+      "gold_source_ids": [
+        "elist:home-accessibility",
+        "p502:capital-expenses"
+      ],
+      "note": "Grab bars, railings and ramps are includible in full when installed to accommodate a disabled condition; the receipt can't show that, so plans require medical documentation."
+    },
+    {
+      "raw_text": "PEDICURE DELUXE",
+      "name": "deluxe pedicure",
+      "quantity": 1,
+      "unit_price": "55.0",
+      "amount": "55.00",
+      "verdict": "not_eligible",
+      "gold_source_ids": [
+        "elist:spa-services",
+        "p502:health-club-dues",
+        "p502:cosmetic-surgery"
+      ],
+      "note": "Spa services relieve general discomfort and improve appearance; they aren't medical care."
+    },
+    {
+      "raw_text": "BAND AID FLX 30CT",
+      "name": "flexible fabric adhesive bandages, 30 count",
+      "quantity": 1,
+      "unit_price": "4.99",
+      "amount": "4.99",
+      "verdict": "eligible",
+      "gold_source_ids": [
+        "elist:bandages",
+        "p502:bandages"
+      ],
+      "note": "Medical supplies such as bandages are includible."
+    },
+    {
+      "raw_text": "SWIM LESSONS 4WK",
+      "name": "swimming lessons, 4 weeks",
+      "quantity": 1,
+      "unit_price": "120.0",
+      "amount": "120.00",
+      "verdict": "not_eligible",
+      "gold_source_ids": [
+        "elist:lessons",
+        "p502:dancing-lessons",
+        "p502:swimming-lessons"
+      ],
+      "note": "Dancing or swimming lessons for general health aren't includible, even if a doctor recommends them."
+    },
+    {
+      "raw_text": "HOME HEALTH AIDE 8HR",
+      "name": "home health aide, 8 hours",
+      "quantity": 1,
+      "unit_price": "224.0",
+      "amount": "224.00",
+      "verdict": "needs_prescription",
+      "gold_source_ids": [
+        "elist:nursing-care",
+        "p502:nursing-services"
+      ],
+      "note": "Nursing services for a patient's condition are includible, but only the nursing part of an aide's pay; personal and household services aren't, so plans need a breakdown or care plan."
+    },
+    {
+      "raw_text": "COLA 12PK CAN",
+      "name": "cola, 12 pack cans",
+      "quantity": 1,
+      "unit_price": "7.49",
+      "amount": "7.49",
+      "verdict": "not_eligible",
+      "gold_source_ids": [
+        "elist:beverages",
+        "p502:weight-loss-program",
+        "p502:personal-use-items"
+      ],
+      "note": "Ordinary beverages aren't medical care."
+    }
+  ],
+  "subtotal_printed": "1710.71",
+  "tax": "15.47",
+  "total": "1726.18",
+  "totals_mismatch": false,
+  "pii": [],
+  "seed": 20261028
+}

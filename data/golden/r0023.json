@@ -1,0 +1,124 @@
+{
+  "receipt_id": "r0023",
+  "merchant": "BRIGHTWAY STORES #118",
+  "merchant_type": "big_box",
+  "date": "2026-08-23",
+  "items": [
+    {
+      "raw_text": "DEPT 54 ITEM",
+      "name": "unidentified item, department 54",
+      "quantity": 1,
+      "unit_price": "14.99",
+      "amount": "14.99",
+      "verdict": "needs_review",
+      "gold_source_ids": [
+        "elist:unidentified-dept-code",
+        "p502:what-are-medical-expenses"
+      ],
+      "note": "The line shows only a store department code; no rule can be applied to an unknown item."
+    },
+    {
+      "raw_text": "IBUPRF 200MG 50CT",
+      "name": "ibuprofen 200 mg, 50 count",
+      "quantity": 1,
+      "unit_price": "8.99",
+      "amount": "8.99",
+      "verdict": "eligible",
+      "gold_source_ids": [
+        "elist:otc-pain-reliever",
+        "p969:distributions-from-an-fsa",
+        "cares:sec-3702"
+      ],
+      "note": "OTC medicines are medical care for FSAs and HRAs whether or not prescribed; CARES Act §3702 removed the prescription-only limit for expenses after 2019."
+    },
+    {
+      "raw_text": "BABY FOOD PUREE 4PK",
+      "name": "baby food puree, 4 pack",
+      "quantity": 1,
+      "unit_price": "5.49",
+      "amount": "5.49",
+      "verdict": "not_eligible",
+      "gold_source_ids": [
+        "elist:baby-formula",
+        "p502:weight-loss-program",
+        "p502:what-are-medical-expenses"
+      ],
+      "note": "Food that substitutes for normal nutrition isn't medical care."
+    },
+    {
+      "raw_text": "USB-C CHARGER 20W",
+      "name": "USB-C charger 20 W",
+      "quantity": 1,
+      "unit_price": "19.99",
+      "amount": "19.99",
+      "verdict": "not_eligible",
+      "gold_source_ids": [
+        "elist:batteries-electronics",
+        "p502:personal-use-items",
+        "p502:hearing-aids"
+      ],
+      "note": "General electronics are personal items (hearing aid batteries are the exception)."
+    },
+    {
+      "raw_text": "HBA ITEM 0414",
+      "name": "unidentified health and beauty item",
+      "quantity": 2,
+      "unit_price": "7.99",
+      "amount": "15.98",
+      "verdict": "needs_review",
+      "gold_source_ids": [
+        "elist:unidentified-hba",
+        "p969:distributions-from-an-fsa",
+        "p502:personal-use-items"
+      ],
+      "note": "The line names only a department (health and beauty), which mixes eligible medicine with ineligible personal care; the item can't be classified."
+    },
+    {
+      "raw_text": "CAT LITTER 20LB",
+      "name": "clumping cat litter, 20 lb",
+      "quantity": 1,
+      "unit_price": "12.99",
+      "amount": "12.99",
+      "verdict": "not_eligible",
+      "gold_source_ids": [
+        "elist:pet-food-supplies",
+        "p502:veterinary-fees",
+        "p502:personal-use-items"
+      ],
+      "note": "Pet food and supplies aren't medical care; only service-animal upkeep is includible."
+    },
+    {
+      "raw_text": "ATHLETIC SOCKS 6PR",
+      "name": "athletic socks, 6 pairs",
+      "quantity": 2,
+      "unit_price": "14.99",
+      "amount": "29.98",
+      "verdict": "not_eligible",
+      "gold_source_ids": [
+        "elist:clothing-household",
+        "p502:personal-use-items"
+      ],
+      "note": "Clothing and household goods are ordinarily used for personal purposes."
+    },
+    {
+      "raw_text": "MAGAZINE HEALTH MO",
+      "name": "health magazine, monthly issue",
+      "quantity": 1,
+      "unit_price": "6.99",
+      "amount": "6.99",
+      "verdict": "not_eligible",
+      "gold_source_ids": [
+        "elist:magazines-books",
+        "p502:braille-books-and-magazines",
+        "p502:personal-use-items"
+      ],
+      "note": "Regular printed books are personal items; only the extra cost of Braille editions is includible."
+    }
+  ],
+  "subtotal_printed": "115.40",
+  "tax": "7.45",
+  "total": "122.85",
+  "totals_mismatch": false,
+  "pii": [],
+  "seed": 20261028
+}

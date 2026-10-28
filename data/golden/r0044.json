@@ -1,0 +1,166 @@
+{
+  "receipt_id": "r0044",
+  "merchant": "CORNER DRUG CO",
+  "merchant_type": "pharmacy",
+  "date": "2026-05-28",
+  "items": [
+    {
+      "raw_text": "STOOL SOFTNR 100MG 60",
+      "name": "docusate stool softener 100 mg, 60 count",
+      "quantity": 1,
+      "unit_price": "6.29",
+      "amount": "6.29",
+      "verdict": "eligible",
+      "gold_source_ids": [
+        "elist:otc-digestive",
+        "p969:distributions-from-an-fsa",
+        "cares:sec-3702"
+      ],
+      "note": "Digestive medicines (antacids, acid reducers, anti-diarrheals, laxatives) are OTC medicines, eligible after 2019."
+    },
+    {
+      "raw_text": "HBA MISC",
+      "name": "unidentified health and beauty item",
+      "quantity": 1,
+      "unit_price": "12.49",
+      "amount": "12.49",
+      "verdict": "needs_review",
+      "gold_source_ids": [
+        "elist:unidentified-hba",
+        "p969:distributions-from-an-fsa",
+        "p502:personal-use-items"
+      ],
+      "note": "The line names only a department (health and beauty), which mixes eligible medicine with ineligible personal care; the item can't be classified."
+    },
+    {
+      "raw_text": "SLEEP AID DIPHEN 32CT",
+      "name": "diphenhydramine sleep aid, 32 count",
+      "quantity": 1,
+      "unit_price": "7.99",
+      "amount": "7.99",
+      "verdict": "eligible",
+      "gold_source_ids": [
+        "elist:otc-sleep-aid",
+        "p969:distributions-from-an-fsa",
+        "cares:sec-3702"
+      ],
+      "note": "Medicated sleep aids are OTC drugs, eligible without a prescription after 2019."
+    },
+    {
+      "raw_text": "WOUND WASH SALINE 7OZ",
+      "name": "saline wound wash, 7 oz",
+      "quantity": 2,
+      "unit_price": "7.49",
+      "amount": "14.98",
+      "verdict": "eligible",
+      "gold_source_ids": [
+        "elist:antiseptic",
+        "p969:distributions-from-an-fsa",
+        "cares:sec-3702",
+        "p502:bandages"
+      ],
+      "note": "Antiseptics for wound care are OTC medicines and medical supplies."
+    },
+    {
+      "raw_text": "RETINOL SERUM 1OZ",
+      "name": "retinol anti-aging serum, 1 oz",
+      "quantity": 1,
+      "unit_price": "24.99",
+      "amount": "24.99",
+      "verdict": "not_eligible",
+      "gold_source_ids": [
+        "elist:anti-aging",
+        "p502:cosmetic-surgery",
+        "p502:personal-use-items"
+      ],
+      "note": "Products directed at improving appearance aren't medical care."
+    },
+    {
+      "raw_text": "HEPA REPLACEMNT FLTR",
+      "name": "HEPA air purifier replacement filter",
+      "quantity": 1,
+      "unit_price": "39.99",
+      "amount": "39.99",
+      "verdict": "needs_prescription",
+      "gold_source_ids": [
+        "elist:air-purifier",
+        "p502:capital-expenses",
+        "p502:personal-use-items"
+      ],
+      "note": "Equipment whose main purpose is medical care is includible; for an ordinary household air purifier that purpose must be documented by a physician."
+    },
+    {
+      "raw_text": "DICLOFENAC GEL 100G",
+      "name": "diclofenac pain relief gel, 100 g",
+      "quantity": 1,
+      "unit_price": "12.99",
+      "amount": "12.99",
+      "verdict": "eligible",
+      "gold_source_ids": [
+        "elist:otc-topical-pain",
+        "p969:distributions-from-an-fsa",
+        "cares:sec-3702"
+      ],
+      "note": "Medicated topical pain relievers are OTC medicines, eligible after 2019."
+    },
+    {
+      "raw_text": "INFANT FORMULA 30OZ",
+      "name": "infant formula powder, 30 oz",
+      "quantity": 1,
+      "unit_price": "34.99",
+      "amount": "34.99",
+      "verdict": "not_eligible",
+      "gold_source_ids": [
+        "elist:baby-formula",
+        "p502:weight-loss-program",
+        "p502:what-are-medical-expenses"
+      ],
+      "note": "Food that substitutes for normal nutrition isn't medical care."
+    },
+    {
+      "raw_text": "PILL ORGANIZER 7DAY",
+      "name": "7-day pill organizer",
+      "quantity": 1,
+      "unit_price": "4.99",
+      "amount": "4.99",
+      "verdict": "not_eligible",
+      "gold_source_ids": [
+        "elist:pill-organizer",
+        "p502:personal-use-items"
+      ],
+      "note": "A pill box is an ordinary household item, not equipment used to diagnose or treat illness."
+    },
+    {
+      "raw_text": "FOREHEAD THERM IR",
+      "name": "infrared forehead thermometer",
+      "quantity": 1,
+      "unit_price": "34.99",
+      "amount": "34.99",
+      "verdict": "eligible",
+      "gold_source_ids": [
+        "elist:thermometer",
+        "p502:diagnostic-devices"
+      ],
+      "note": "A thermometer is a device used in diagnosing illness."
+    },
+    {
+      "raw_text": "PROBIOTIC 30CT",
+      "name": "probiotic capsules, 30 count",
+      "quantity": 1,
+      "unit_price": "24.99",
+      "amount": "24.99",
+      "verdict": "dual_purpose",
+      "gold_source_ids": [
+        "elist:vitamins-supplements",
+        "p502:nutritional-supplements"
+      ],
+      "note": "Vitamins and supplements aren't includible unless recommended by a medical practitioner as treatment for a specific diagnosed condition."
+    }
+  ],
+  "subtotal_printed": "219.68",
+  "tax": "7.17",
+  "total": "226.85",
+  "totals_mismatch": false,
+  "pii": [],
+  "seed": 20261028
+}

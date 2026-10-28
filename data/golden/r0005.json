@@ -1,0 +1,106 @@
+{
+  "receipt_id": "r0005",
+  "merchant": "CLEARVIEW OPTICAL",
+  "merchant_type": "optical",
+  "date": "2026-01-09",
+  "items": [
+    {
+      "raw_text": "READING GLASSES +2.00",
+      "name": "reading glasses +2.00",
+      "quantity": 1,
+      "unit_price": "14.99",
+      "amount": "14.99",
+      "verdict": "eligible",
+      "gold_source_ids": [
+        "elist:reading-glasses",
+        "p502:eyeglasses"
+      ],
+      "note": "Eyeglasses needed for medical reasons are includible; non-prescription reading glasses correct vision."
+    },
+    {
+      "raw_text": "LENS CLOTH MICROFBR",
+      "name": "microfiber lens cleaning cloth",
+      "quantity": 1,
+      "unit_price": "4.99",
+      "amount": "4.99",
+      "verdict": "not_eligible",
+      "gold_source_ids": [
+        "elist:eyeglass-accessories",
+        "p502:personal-use-items"
+      ],
+      "note": "Cases, chains and cleaning cloths are personal accessories, not equipment needed to use the lenses."
+    },
+    {
+      "raw_text": "SUNGLASSES POLARZD",
+      "name": "non-prescription polarized sunglasses",
+      "quantity": 1,
+      "unit_price": "24.99",
+      "amount": "24.99",
+      "verdict": "not_eligible",
+      "gold_source_ids": [
+        "elist:non-prescription-sunglasses",
+        "p502:personal-use-items"
+      ],
+      "note": "Non-prescription sunglasses are an item ordinarily used for personal purposes."
+    },
+    {
+      "raw_text": "EYEGLASS CASE HARD",
+      "name": "hard eyeglass case",
+      "quantity": 1,
+      "unit_price": "12.0",
+      "amount": "12.00",
+      "verdict": "not_eligible",
+      "gold_source_ids": [
+        "elist:eyeglass-accessories",
+        "p502:personal-use-items"
+      ],
+      "note": "Cases, chains and cleaning cloths are personal accessories, not equipment needed to use the lenses."
+    },
+    {
+      "raw_text": "FRAME TITAN 52-18",
+      "name": "eyeglass frame, titanium",
+      "quantity": 1,
+      "unit_price": "149.0",
+      "amount": "149.00",
+      "verdict": "eligible",
+      "gold_source_ids": [
+        "elist:eyeglasses-prescription",
+        "p502:eyeglasses"
+      ],
+      "note": "Eyeglasses needed for medical reasons are includible."
+    },
+    {
+      "raw_text": "KETOTIFEN EYE DRP 5ML",
+      "name": "ketotifen allergy eye drops, 5 ml",
+      "quantity": 2,
+      "unit_price": "14.99",
+      "amount": "29.98",
+      "verdict": "eligible",
+      "gold_source_ids": [
+        "elist:otc-eye-drops",
+        "p969:distributions-from-an-fsa",
+        "cares:sec-3702"
+      ],
+      "note": "Medicated and lubricating eye drops are OTC medicines, eligible after 2019."
+    },
+    {
+      "raw_text": "SALINE SOLN 12OZ",
+      "name": "saline solution, 12 oz",
+      "quantity": 1,
+      "unit_price": "5.99",
+      "amount": "5.99",
+      "verdict": "eligible",
+      "gold_source_ids": [
+        "elist:contact-lens-solution",
+        "p502:contact-lenses"
+      ],
+      "note": "Equipment and materials required for using contact lenses, such as saline solution and enzyme cleaner, are includible."
+    }
+  ],
+  "subtotal_printed": "241.94",
+  "tax": "2.94",
+  "total": "244.88",
+  "totals_mismatch": false,
+  "pii": [],
+  "seed": 20261028
+}

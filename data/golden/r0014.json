@@ -1,0 +1,180 @@
+{
+  "receipt_id": "r0014",
+  "merchant": "CORNER DRUG CO",
+  "merchant_type": "pharmacy",
+  "date": "2026-09-17",
+  "items": [
+    {
+      "raw_text": "FACE MASK 3PLY 50CT",
+      "name": "disposable 3-ply face masks, 50 count",
+      "quantity": 1,
+      "unit_price": "9.99",
+      "amount": "9.99",
+      "verdict": "dual_purpose",
+      "gold_source_ids": [
+        "elist:ppe-masks-sanitizer",
+        "p502:personal-protective-equipment"
+      ],
+      "note": "Masks, hand sanitizer and sanitizing wipes are includible when bought primarily to prevent the spread of COVID-19; ordinary cleaning use is not."
+    },
+    {
+      "raw_text": "ADAPALENE 0.1% GEL 15G",
+      "name": "adapalene 0.1% acne gel, 15 g",
+      "quantity": 1,
+      "unit_price": "13.99",
+      "amount": "13.99",
+      "verdict": "eligible",
+      "gold_source_ids": [
+        "elist:otc-acne-medicine",
+        "p969:distributions-from-an-fsa",
+        "cares:sec-3702"
+      ],
+      "note": "Acne treatments with an active drug ingredient are OTC medicines, eligible after 2019."
+    },
+    {
+      "raw_text": "WOUND WASH SALINE 7OZ",
+      "name": "saline wound wash, 7 oz",
+      "quantity": 1,
+      "unit_price": "7.49",
+      "amount": "7.49",
+      "verdict": "eligible",
+      "gold_source_ids": [
+        "elist:antiseptic",
+        "p969:distributions-from-an-fsa",
+        "cares:sec-3702",
+        "p502:bandages"
+      ],
+      "note": "Antiseptics for wound care are OTC medicines and medical supplies."
+    },
+    {
+      "raw_text": "GLUCOSE METER KIT",
+      "name": "blood glucose meter kit",
+      "quantity": 1,
+      "unit_price": "24.99",
+      "amount": "24.99",
+      "verdict": "eligible",
+      "gold_source_ids": [
+        "elist:glucose-monitoring",
+        "p502:diagnostic-devices"
+      ],
+      "note": "Diagnostic devices are includible; Pub 502's example is a blood sugar test kit."
+    },
+    {
+      "raw_text": "KETOTIFEN EYE DRP 5ML",
+      "name": "ketotifen allergy eye drops, 5 ml",
+      "quantity": 1,
+      "unit_price": "14.99",
+      "amount": "14.99",
+      "verdict": "eligible",
+      "gold_source_ids": [
+        "elist:otc-eye-drops",
+        "p969:distributions-from-an-fsa",
+        "cares:sec-3702"
+      ],
+      "note": "Medicated and lubricating eye drops are OTC medicines, eligible after 2019."
+    },
+    {
+      "raw_text": "ELEC TOOTHBRUSH RECHG",
+      "name": "rechargeable electric toothbrush",
+      "quantity": 1,
+      "unit_price": "49.99",
+      "amount": "49.99",
+      "verdict": "not_eligible",
+      "gold_source_ids": [
+        "elist:electric-toothbrush",
+        "p502:personal-use-items"
+      ],
+      "note": "A toothbrush is a personal expense; a powered one is still ordinarily used for personal purposes."
+    },
+    {
+      "raw_text": "CLOTRIMAZOLE CRM 1OZ",
+      "name": "clotrimazole antifungal cream, 1 oz",
+      "quantity": 1,
+      "unit_price": "6.79",
+      "amount": "6.79",
+      "verdict": "eligible",
+      "gold_source_ids": [
+        "elist:otc-antifungal",
+        "p969:distributions-from-an-fsa",
+        "cares:sec-3702"
+      ],
+      "note": "Antifungal treatments are OTC medicines, eligible after 2019."
+    },
+    {
+      "raw_text": "MASCARA BLK WP",
+      "name": "waterproof black mascara",
+      "quantity": 1,
+      "unit_price": "9.99",
+      "amount": "9.99",
+      "verdict": "not_eligible",
+      "gold_source_ids": [
+        "elist:cosmetics",
+        "p502:personal-use-items",
+        "p502:cosmetic-surgery"
+      ],
+      "note": "Cosmetics improve appearance and don't treat illness; they are personal-use items."
+    },
+    {
+      "raw_text": "KNEE BRACE ADJ",
+      "name": "adjustable knee brace",
+      "quantity": 1,
+      "unit_price": "24.99",
+      "amount": "24.99",
+      "verdict": "dual_purpose",
+      "gold_source_ids": [
+        "elist:braces-supports",
+        "p502:what-are-medical-expenses"
+      ],
+      "note": "Supports aren't named in the sources; they are medical equipment when used to treat an injury or condition, not when worn for general athletic use."
+    },
+    {
+      "raw_text": "HAIR COLOR DRK BRN",
+      "name": "dark brown hair color kit",
+      "quantity": 1,
+      "unit_price": "9.49",
+      "amount": "9.49",
+      "verdict": "not_eligible",
+      "gold_source_ids": [
+        "elist:hair-care",
+        "p502:personal-use-items"
+      ],
+      "note": "Ordinary hair care is a personal-use item."
+    },
+    {
+      "raw_text": "WHEY PROTEIN 2LB",
+      "name": "whey protein powder, 2 lb",
+      "quantity": 1,
+      "unit_price": "34.99",
+      "amount": "34.99",
+      "verdict": "not_eligible",
+      "gold_source_ids": [
+        "elist:protein-supplement",
+        "p502:nutritional-supplements"
+      ],
+      "note": "Nutritional supplements taken to maintain ordinary good health aren't medical care."
+    }
+  ],
+  "subtotal_printed": "207.69",
+  "tax": "9.76",
+  "total": "217.45",
+  "totals_mismatch": false,
+  "pii": [
+    {
+      "kind": "patient_name",
+      "value": "JANE Q SAMPLE"
+    },
+    {
+      "kind": "phone",
+      "value": "(321) 555-0152"
+    },
+    {
+      "kind": "card_number",
+      "value": "6011111111111117"
+    },
+    {
+      "kind": "email",
+      "value": "shopper17@example.com"
+    }
+  ],
+  "seed": 20261028
+}

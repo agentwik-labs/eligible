@@ -1,0 +1,27 @@
+             CORNER DRUG CO             
+         88 SAMPLE ST, RIVERTON         
+            TEL 407-555-0129            
+           09/17/2026  13:36            
+----------------------------------------
+PATIENT: JANE Q SAMPLE
+FACE MASK 3PLY 50CT               9.99 T
+ADAPALENE 0.1% GEL 15G           13.99  
+WOUND WASH SALINE 7OZ             7.49  
+GLUCOSE METER KIT                24.99  
+KETOTIFEN EYE DRP 5ML            14.99  
+ELEC TOOTHBRUSH RECHG            49.99 T
+CLOTRIMAZOLE CRM 1OZ              6.79  
+MASCARA BLK WP                    9.99 T
+KNEE BRACE ADJ                   24.99 T
+HAIR COLOR DRK BRN                9.49 T
+WHEY PROTEIN 2LB                 34.99 T
+----------------------------------------
+SUBTOTAL                        207.69
+TAX                               9.76
+TOTAL                           217.45
+CARD 6011111111111117
+RX PICKUP PH: (321) 555-0152
+E-RECEIPT SENT TO shopper17@example.com
+
+                ITEMS 11                
+         THANK YOU FOR SHOPPING         

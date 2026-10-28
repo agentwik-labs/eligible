@@ -1,0 +1,178 @@
+{
+  "receipt_id": "r0055",
+  "merchant": "CORNER DRUG CO",
+  "merchant_type": "pharmacy",
+  "date": "2026-04-28",
+  "items": [
+    {
+      "raw_text": "INSULIN SYRINGE 100CT",
+      "name": "insulin syringes, 100 count",
+      "quantity": 1,
+      "unit_price": "21.99",
+      "amount": "21.99",
+      "verdict": "eligible",
+      "gold_source_ids": [
+        "elist:syringes-diabetic-supplies",
+        "p502:what-are-medical-expenses",
+        "p502:diagnostic-devices"
+      ],
+      "note": "Supplies needed to treat a disease, such as insulin syringes and lancets, are includible medical supplies."
+    },
+    {
+      "raw_text": "FAMOTIDINE 20MG 50CT",
+      "name": "famotidine 20 mg, 50 count",
+      "quantity": 2,
+      "unit_price": "13.99",
+      "amount": "27.98",
+      "verdict": "eligible",
+      "gold_source_ids": [
+        "elist:otc-digestive",
+        "p969:distributions-from-an-fsa",
+        "cares:sec-3702"
+      ],
+      "note": "Digestive medicines (antacids, acid reducers, anti-diarrheals, laxatives) are OTC medicines, eligible after 2019."
+    },
+    {
+      "raw_text": "FISH OIL 1000MG 90CT",
+      "name": "fish oil 1000 mg, 90 count",
+      "quantity": 1,
+      "unit_price": "14.99",
+      "amount": "14.99",
+      "verdict": "dual_purpose",
+      "gold_source_ids": [
+        "elist:vitamins-supplements",
+        "p502:nutritional-supplements"
+      ],
+      "note": "Vitamins and supplements aren't includible unless recommended by a medical practitioner as treatment for a specific diagnosed condition."
+    },
+    {
+      "raw_text": "HYDROCORT 1% CRM 1OZ",
+      "name": "hydrocortisone 1% cream, 1 oz",
+      "quantity": 1,
+      "unit_price": "4.99",
+      "amount": "4.99",
+      "verdict": "eligible",
+      "gold_source_ids": [
+        "elist:otc-antibiotic-ointment",
+        "p969:distributions-from-an-fsa",
+        "cares:sec-3702"
+      ],
+      "note": "Medicated skin ointments and creams are OTC medicines, eligible after 2019."
+    },
+    {
+      "raw_text": "LENS CLOTH MICROFBR",
+      "name": "microfiber lens cleaning cloth",
+      "quantity": 1,
+      "unit_price": "4.99",
+      "amount": "4.99",
+      "verdict": "not_eligible",
+      "gold_source_ids": [
+        "elist:eyeglass-accessories",
+        "p502:personal-use-items"
+      ],
+      "note": "Cases, chains and cleaning cloths are personal accessories, not equipment needed to use the lenses."
+    },
+    {
+      "raw_text": "WALKING CANE ADJ",
+      "name": "adjustable walking cane",
+      "quantity": 1,
+      "unit_price": "22.99",
+      "amount": "22.99",
+      "verdict": "dual_purpose",
+      "gold_source_ids": [
+        "elist:mobility-aids",
+        "p502:what-are-medical-expenses",
+        "p502:wheelchair"
+      ],
+      "note": "Canes and walkers aren't named in the sources; they are equipment for relieving a disability, which the general definition covers when that is their primary use."
+    },
+    {
+      "raw_text": "HUMIDIFIER WICK FLTR",
+      "name": "humidifier wick filter",
+      "quantity": 2,
+      "unit_price": "9.99",
+      "amount": "19.98",
+      "verdict": "needs_prescription",
+      "gold_source_ids": [
+        "elist:humidifier",
+        "p502:personal-use-items",
+        "p502:what-are-medical-expenses"
+      ],
+      "note": "A household item is includible only if used primarily to alleviate an illness; plans require a letter of medical necessity to show that."
+    },
+    {
+      "raw_text": "HBA MISC",
+      "name": "unidentified health and beauty item",
+      "quantity": 2,
+      "unit_price": "12.49",
+      "amount": "24.98",
+      "verdict": "needs_review",
+      "gold_source_ids": [
+        "elist:unidentified-hba",
+        "p969:distributions-from-an-fsa",
+        "p502:personal-use-items"
+      ],
+      "note": "The line names only a department (health and beauty), which mixes eligible medicine with ineligible personal care; the item can't be classified."
+    },
+    {
+      "raw_text": "HBA ITEM 0414",
+      "name": "unidentified health and beauty item",
+      "quantity": 1,
+      "unit_price": "7.99",
+      "amount": "7.99",
+      "verdict": "needs_review",
+      "gold_source_ids": [
+        "elist:unidentified-hba",
+        "p969:distributions-from-an-fsa",
+        "p502:personal-use-items"
+      ],
+      "note": "The line names only a department (health and beauty), which mixes eligible medicine with ineligible personal care; the item can't be classified."
+    },
+    {
+      "raw_text": "MECLIZINE 25MG 8CT",
+      "name": "meclizine 25 mg, 8 count",
+      "quantity": 1,
+      "unit_price": "6.49",
+      "amount": "6.49",
+      "verdict": "eligible",
+      "gold_source_ids": [
+        "elist:otc-motion-sickness",
+        "p969:distributions-from-an-fsa",
+        "cares:sec-3702"
+      ],
+      "note": "Motion sickness medicines are OTC medicines, eligible after 2019."
+    },
+    {
+      "raw_text": "MILK STORAGE BTL 10PK",
+      "name": "breast milk storage bottles, 10 pack",
+      "quantity": 1,
+      "unit_price": "18.99",
+      "amount": "18.99",
+      "verdict": "not_eligible",
+      "gold_source_ids": [
+        "elist:breast-milk-storage-bottles",
+        "p502:breast-pumps-and-supplies"
+      ],
+      "note": "Pub 502 excludes excess bottles for food storage from breast pump supplies."
+    },
+    {
+      "raw_text": "CHOC BAR MILK 1.5OZ",
+      "name": "milk chocolate bar, 1.5 oz",
+      "quantity": 1,
+      "unit_price": "1.79",
+      "amount": "1.79",
+      "verdict": "not_eligible",
+      "gold_source_ids": [
+        "elist:candy",
+        "p502:personal-use-items"
+      ],
+      "note": "Candy is a personal item, not medical care."
+    }
+  ],
+  "subtotal_printed": "178.15",
+  "tax": "6.77",
+  "total": "184.92",
+  "totals_mismatch": false,
+  "pii": [],
+  "seed": 20261028
+}

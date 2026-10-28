@@ -1,0 +1,176 @@
+{
+  "receipt_id": "r0007",
+  "merchant": "BLUE HERON PHARMACY",
+  "merchant_type": "pharmacy",
+  "date": "2026-02-10",
+  "items": [
+    {
+      "raw_text": "MENTHOL PAIN RUB 3OZ",
+      "name": "menthol pain relief rub, 3 oz",
+      "quantity": 1,
+      "unit_price": "8.49",
+      "amount": "8.49",
+      "verdict": "eligible",
+      "gold_source_ids": [
+        "elist:otc-topical-pain",
+        "p969:distributions-from-an-fsa",
+        "cares:sec-3702"
+      ],
+      "note": "Medicated topical pain relievers are OTC medicines, eligible after 2019."
+    },
+    {
+      "raw_text": "HUMIDIFIER WICK FLTR",
+      "name": "humidifier wick filter",
+      "quantity": 1,
+      "unit_price": "9.99",
+      "amount": "9.99",
+      "verdict": "needs_prescription",
+      "gold_source_ids": [
+        "elist:humidifier",
+        "p502:personal-use-items",
+        "p502:what-are-medical-expenses"
+      ],
+      "note": "A household item is includible only if used primarily to alleviate an illness; plans require a letter of medical necessity to show that."
+    },
+    {
+      "raw_text": "HEARING AID BATT 312 24",
+      "name": "hearing aid batteries size 312, 24 count",
+      "quantity": 1,
+      "unit_price": "14.99",
+      "amount": "14.99",
+      "verdict": "eligible",
+      "gold_source_ids": [
+        "elist:hearing-aids",
+        "p502:hearing-aids"
+      ],
+      "note": "Hearing aids and the batteries, repairs and maintenance needed to run them are includible."
+    },
+    {
+      "raw_text": "BREAD WHL WHT 20OZ",
+      "name": "whole wheat bread, 20 oz",
+      "quantity": 2,
+      "unit_price": "3.49",
+      "amount": "6.98",
+      "verdict": "not_eligible",
+      "gold_source_ids": [
+        "elist:grocery-food",
+        "p502:weight-loss-program",
+        "p502:what-are-medical-expenses"
+      ],
+      "note": "Food that is normally consumed to satisfy nutritional needs isn't medical care."
+    },
+    {
+      "raw_text": "BEER IPA 6PK 12OZ",
+      "name": "IPA beer, 6 pack",
+      "quantity": 2,
+      "unit_price": "10.99",
+      "amount": "21.98",
+      "verdict": "not_eligible",
+      "gold_source_ids": [
+        "elist:tobacco-alcohol",
+        "p502:personal-use-items"
+      ],
+      "note": "Tobacco and alcohol are personal purchases with no medical purpose."
+    },
+    {
+      "raw_text": "ASPIRIN LO DOSE 81MG 120",
+      "name": "low dose aspirin 81 mg, 120 count",
+      "quantity": 1,
+      "unit_price": "5.99",
+      "amount": "5.99",
+      "verdict": "eligible",
+      "gold_source_ids": [
+        "elist:otc-pain-reliever",
+        "p969:distributions-from-an-fsa",
+        "cares:sec-3702"
+      ],
+      "note": "OTC medicines are medical care for FSAs and HRAs whether or not prescribed; CARES Act §3702 removed the prescription-only limit for expenses after 2019."
+    },
+    {
+      "raw_text": "WARM MIST VAPORIZER",
+      "name": "warm mist vaporizer",
+      "quantity": 1,
+      "unit_price": "34.99",
+      "amount": "34.99",
+      "verdict": "needs_prescription",
+      "gold_source_ids": [
+        "elist:humidifier",
+        "p502:personal-use-items",
+        "p502:what-are-medical-expenses"
+      ],
+      "note": "A household item is includible only if used primarily to alleviate an illness; plans require a letter of medical necessity to show that."
+    },
+    {
+      "raw_text": "DENTURE ADHESV 2.4OZ",
+      "name": "denture adhesive cream, 2.4 oz",
+      "quantity": 1,
+      "unit_price": "7.99",
+      "amount": "7.99",
+      "verdict": "eligible",
+      "gold_source_ids": [
+        "elist:dentures",
+        "p502:artificial-teeth",
+        "p502:dental-treatment"
+      ],
+      "note": "Artificial teeth and dentures are includible."
+    },
+    {
+      "raw_text": "MAXI PADS OVERNIGHT 28",
+      "name": "overnight maxi pads, 28 count",
+      "quantity": 2,
+      "unit_price": "8.49",
+      "amount": "16.98",
+      "verdict": "eligible",
+      "gold_source_ids": [
+        "elist:menstrual-care",
+        "cares:sec-3702",
+        "p969:distributions-from-an-hsa",
+        "p969:distributions-from-an-fsa"
+      ],
+      "note": "Menstrual care products (tampon, pad, liner, cup, sponge or similar) are treated as medical care for HSAs, FSAs and HRAs after 2019."
+    },
+    {
+      "raw_text": "LANCETS 30G 100CT",
+      "name": "lancets 30 gauge, 100 count",
+      "quantity": 1,
+      "unit_price": "8.99",
+      "amount": "8.99",
+      "verdict": "eligible",
+      "gold_source_ids": [
+        "elist:syringes-diabetic-supplies",
+        "p502:what-are-medical-expenses",
+        "p502:diagnostic-devices"
+      ],
+      "note": "Supplies needed to treat a disease, such as insulin syringes and lancets, are includible medical supplies."
+    },
+    {
+      "raw_text": "ANTACID CHW TAB 96CT",
+      "name": "antacid chewable tablets, 96 count",
+      "quantity": 1,
+      "unit_price": "6.99",
+      "amount": "6.99",
+      "verdict": "eligible",
+      "gold_source_ids": [
+        "elist:otc-digestive",
+        "p969:distributions-from-an-fsa",
+        "cares:sec-3702"
+      ],
+      "note": "Digestive medicines (antacids, acid reducers, anti-diarrheals, laxatives) are OTC medicines, eligible after 2019."
+    }
+  ],
+  "subtotal_printed": "134.37",
+  "tax": "2.03",
+  "total": "136.40",
+  "totals_mismatch": true,
+  "pii": [
+    {
+      "kind": "patient_name",
+      "value": "JANE Q SAMPLE"
+    },
+    {
+      "kind": "phone",
+      "value": "(321) 555-0186"
+    }
+  ],
+  "seed": 20261028
+}

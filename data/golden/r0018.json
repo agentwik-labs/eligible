@@ -1,0 +1,65 @@
+{
+  "receipt_id": "r0018",
+  "merchant": "CORNER DRUG CO",
+  "merchant_type": "pharmacy",
+  "date": "2026-05-27",
+  "items": [
+    {
+      "raw_text": "DOCOSANOL CRM 2G",
+      "name": "docosanol cold sore cream, 2 g",
+      "quantity": 1,
+      "unit_price": "21.99",
+      "amount": "21.99",
+      "verdict": "eligible",
+      "gold_source_ids": [
+        "elist:otc-cold-sore",
+        "p969:distributions-from-an-fsa",
+        "cares:sec-3702"
+      ],
+      "note": "Cold sore medicines are OTC medicines, eligible after 2019."
+    },
+    {
+      "raw_text": "IBUPRF 200MG 50CT",
+      "name": "ibuprofen 200 mg, 50 count",
+      "quantity": 1,
+      "unit_price": "8.99",
+      "amount": "8.99",
+      "verdict": "eligible",
+      "gold_source_ids": [
+        "elist:otc-pain-reliever",
+        "p969:distributions-from-an-fsa",
+        "cares:sec-3702"
+      ],
+      "note": "OTC medicines are medical care for FSAs and HRAs whether or not prescribed; CARES Act §3702 removed the prescription-only limit for expenses after 2019."
+    },
+    {
+      "raw_text": "SPRING WATER 24PK",
+      "name": "spring water, 24 pack",
+      "quantity": 1,
+      "unit_price": "4.99",
+      "amount": "4.99",
+      "verdict": "not_eligible",
+      "gold_source_ids": [
+        "elist:beverages",
+        "p502:weight-loss-program",
+        "p502:personal-use-items"
+      ],
+      "note": "Ordinary beverages aren't medical care."
+    }
+  ],
+  "subtotal_printed": "35.97",
+  "tax": "0.35",
+  "total": "36.32",
+  "totals_mismatch": false,
+  "pii": [
+    {
+      "kind": "patient_name",
+      "value": "JANE Q SAMPLE"
+    },
+    {
+      "kind": "phone",
+      "value": "(321) 555-0183"
+    }
+  ],
+  "seed": 20261028
+}

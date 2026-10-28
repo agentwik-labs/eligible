@@ -1,0 +1,172 @@
+{
+  "receipt_id": "r0006",
+  "merchant": "CORNER DRUG CO",
+  "merchant_type": "pharmacy",
+  "date": "2026-05-23",
+  "items": [
+    {
+      "raw_text": "BP MONITOR UPPER ARM",
+      "name": "upper arm blood pressure monitor",
+      "quantity": 1,
+      "unit_price": "49.99",
+      "amount": "49.99",
+      "verdict": "eligible",
+      "gold_source_ids": [
+        "elist:blood-pressure-monitor",
+        "p502:diagnostic-devices"
+      ],
+      "note": "Devices used in diagnosing and treating illness are includible."
+    },
+    {
+      "raw_text": "COMPRESSION SOCKS 15-20",
+      "name": "compression socks 15-20 mmHg",
+      "quantity": 1,
+      "unit_price": "19.99",
+      "amount": "19.99",
+      "verdict": "dual_purpose",
+      "gold_source_ids": [
+        "elist:compression-socks",
+        "p502:what-are-medical-expenses",
+        "p502:personal-use-items"
+      ],
+      "note": "Not named in the sources; compression garments treat circulatory conditions but are also worn for comfort or sport. Eligible only for a medical condition."
+    },
+    {
+      "raw_text": "ORANGE JUICE 52OZ",
+      "name": "orange juice, 52 oz",
+      "quantity": 1,
+      "unit_price": "4.79",
+      "amount": "4.79",
+      "verdict": "not_eligible",
+      "gold_source_ids": [
+        "elist:beverages",
+        "p502:weight-loss-program",
+        "p502:personal-use-items"
+      ],
+      "note": "Ordinary beverages aren't medical care."
+    },
+    {
+      "raw_text": "HEPA AIR PURIFIER",
+      "name": "HEPA air purifier",
+      "quantity": 1,
+      "unit_price": "129.99",
+      "amount": "129.99",
+      "verdict": "needs_prescription",
+      "gold_source_ids": [
+        "elist:air-purifier",
+        "p502:capital-expenses",
+        "p502:personal-use-items"
+      ],
+      "note": "Equipment whose main purpose is medical care is includible; for an ordinary household air purifier that purpose must be documented by a physician."
+    },
+    {
+      "raw_text": "MULTI-PURP SOLN 12OZ",
+      "name": "multi-purpose contact lens solution, 12 oz",
+      "quantity": 1,
+      "unit_price": "10.99",
+      "amount": "10.99",
+      "verdict": "eligible",
+      "gold_source_ids": [
+        "elist:contact-lens-solution",
+        "p502:contact-lenses"
+      ],
+      "note": "Equipment and materials required for using contact lenses, such as saline solution and enzyme cleaner, are includible."
+    },
+    {
+      "raw_text": "TOILET SAFETY RAIL",
+      "name": "toilet safety rail",
+      "quantity": 1,
+      "unit_price": "49.99",
+      "amount": "49.99",
+      "verdict": "needs_prescription",
+      "gold_source_ids": [
+        "elist:home-accessibility",
+        "p502:capital-expenses"
+      ],
+      "note": "Grab bars, railings and ramps are includible in full when installed to accommodate a disabled condition; the receipt can't show that, so plans require medical documentation."
+    },
+    {
+      "raw_text": "DIET FROZ ENTREE",
+      "name": "diet frozen entree",
+      "quantity": 1,
+      "unit_price": "3.49",
+      "amount": "3.49",
+      "verdict": "not_eligible",
+      "gold_source_ids": [
+        "elist:special-diet-food",
+        "p502:weight-loss-program"
+      ],
+      "note": "Diet food and beverages aren't includible because they substitute for what is normally eaten."
+    },
+    {
+      "raw_text": "GRAB BAR 24IN SS",
+      "name": "stainless steel grab bar, 24 in",
+      "quantity": 1,
+      "unit_price": "34.99",
+      "amount": "34.99",
+      "verdict": "needs_prescription",
+      "gold_source_ids": [
+        "elist:home-accessibility",
+        "p502:capital-expenses"
+      ],
+      "note": "Grab bars, railings and ramps are includible in full when installed to accommodate a disabled condition; the receipt can't show that, so plans require medical documentation."
+    },
+    {
+      "raw_text": "HEATING PAD XL",
+      "name": "electric heating pad, XL",
+      "quantity": 1,
+      "unit_price": "29.99",
+      "amount": "29.99",
+      "verdict": "dual_purpose",
+      "gold_source_ids": [
+        "elist:hot-cold-therapy",
+        "p502:what-are-medical-expenses",
+        "p502:personal-use-items"
+      ],
+      "note": "Sources don't name them; heat and cold packs are equipment for treating an injury but also have ordinary uses. Eligible only when used to treat a condition."
+    },
+    {
+      "raw_text": "GAUZE PADS 4X4 25CT",
+      "name": "gauze pads 4x4 in, 25 count",
+      "quantity": 2,
+      "unit_price": "6.49",
+      "amount": "12.98",
+      "verdict": "eligible",
+      "gold_source_ids": [
+        "elist:bandages",
+        "p502:bandages"
+      ],
+      "note": "Medical supplies such as bandages are includible."
+    },
+    {
+      "raw_text": "MAXI PADS OVERNIGHT 28",
+      "name": "overnight maxi pads, 28 count",
+      "quantity": 2,
+      "unit_price": "8.49",
+      "amount": "16.98",
+      "verdict": "eligible",
+      "gold_source_ids": [
+        "elist:menstrual-care",
+        "cares:sec-3702",
+        "p969:distributions-from-an-hsa",
+        "p969:distributions-from-an-fsa"
+      ],
+      "note": "Menstrual care products (tampon, pad, liner, cup, sponge or similar) are treated as medical care for HSAs, FSAs and HRAs after 2019."
+    }
+  ],
+  "subtotal_printed": "364.17",
+  "tax": "4.08",
+  "total": "368.25",
+  "totals_mismatch": false,
+  "pii": [
+    {
+      "kind": "patient_name",
+      "value": "JOHN EXAMPLE"
+    },
+    {
+      "kind": "phone",
+      "value": "(321) 555-0117"
+    }
+  ],
+  "seed": 20261028
+}

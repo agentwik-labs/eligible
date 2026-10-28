@@ -1,0 +1,82 @@
+{
+  "receipt_id": "r0032",
+  "merchant": "BRIGHTWAY STORES #118",
+  "merchant_type": "big_box",
+  "date": "2026-03-09",
+  "items": [
+    {
+      "raw_text": "BENZOYL PEROX 10% GEL",
+      "name": "benzoyl peroxide 10% acne gel",
+      "quantity": 1,
+      "unit_price": "8.99",
+      "amount": "8.99",
+      "verdict": "eligible",
+      "gold_source_ids": [
+        "elist:otc-acne-medicine",
+        "p969:distributions-from-an-fsa",
+        "cares:sec-3702"
+      ],
+      "note": "Acne treatments with an active drug ingredient are OTC medicines, eligible after 2019."
+    },
+    {
+      "raw_text": "MULTI-PURP SOLN 12OZ",
+      "name": "multi-purpose contact lens solution, 12 oz",
+      "quantity": 1,
+      "unit_price": "10.99",
+      "amount": "10.99",
+      "verdict": "eligible",
+      "gold_source_ids": [
+        "elist:contact-lens-solution",
+        "p502:contact-lenses"
+      ],
+      "note": "Equipment and materials required for using contact lenses, such as saline solution and enzyme cleaner, are includible."
+    },
+    {
+      "raw_text": "HBA ITEM 0414",
+      "name": "unidentified health and beauty item",
+      "quantity": 1,
+      "unit_price": "7.99",
+      "amount": "7.99",
+      "verdict": "needs_review",
+      "gold_source_ids": [
+        "elist:unidentified-hba",
+        "p969:distributions-from-an-fsa",
+        "p502:personal-use-items"
+      ],
+      "note": "The line names only a department (health and beauty), which mixes eligible medicine with ineligible personal care; the item can't be classified."
+    },
+    {
+      "raw_text": "ELASTIC BNDG 3IN",
+      "name": "elastic bandage wrap, 3 in",
+      "quantity": 1,
+      "unit_price": "7.99",
+      "amount": "7.99",
+      "verdict": "eligible",
+      "gold_source_ids": [
+        "elist:bandages",
+        "p502:bandages"
+      ],
+      "note": "Medical supplies such as bandages are includible."
+    },
+    {
+      "raw_text": "ORTHOTIC INSOLES M",
+      "name": "orthotic arch support insoles, men's",
+      "quantity": 1,
+      "unit_price": "39.99",
+      "amount": "39.99",
+      "verdict": "dual_purpose",
+      "gold_source_ids": [
+        "elist:orthotic-inserts",
+        "p502:what-are-medical-expenses",
+        "p502:personal-use-items"
+      ],
+      "note": "Not named in the sources; orthotics are equipment for a foot condition but also sold for comfort. Eligible only when used to treat a condition."
+    }
+  ],
+  "subtotal_printed": "75.95",
+  "tax": "3.36",
+  "total": "79.31",
+  "totals_mismatch": false,
+  "pii": [],
+  "seed": 20261028
+}

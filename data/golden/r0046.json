@@ -1,0 +1,94 @@
+{
+  "receipt_id": "r0046",
+  "merchant": "CORNER DRUG CO",
+  "merchant_type": "pharmacy",
+  "date": "2026-01-31",
+  "items": [
+    {
+      "raw_text": "HBA ITEM 0414",
+      "name": "unidentified health and beauty item",
+      "quantity": 1,
+      "unit_price": "7.99",
+      "amount": "7.99",
+      "verdict": "needs_review",
+      "gold_source_ids": [
+        "elist:unidentified-hba",
+        "p969:distributions-from-an-fsa",
+        "p502:personal-use-items"
+      ],
+      "note": "The line names only a department (health and beauty), which mixes eligible medicine with ineligible personal care; the item can't be classified."
+    },
+    {
+      "raw_text": "DIGITAL THERMOMETER",
+      "name": "digital thermometer",
+      "quantity": 1,
+      "unit_price": "9.99",
+      "amount": "9.99",
+      "verdict": "eligible",
+      "gold_source_ids": [
+        "elist:thermometer",
+        "p502:diagnostic-devices"
+      ],
+      "note": "A thermometer is a device used in diagnosing illness."
+    },
+    {
+      "raw_text": "KNEE BRACE ADJ",
+      "name": "adjustable knee brace",
+      "quantity": 1,
+      "unit_price": "24.99",
+      "amount": "24.99",
+      "verdict": "dual_purpose",
+      "gold_source_ids": [
+        "elist:braces-supports",
+        "p502:what-are-medical-expenses"
+      ],
+      "note": "Supports aren't named in the sources; they are medical equipment when used to treat an injury or condition, not when worn for general athletic use."
+    },
+    {
+      "raw_text": "COMPRESSION SOCKS 15-20",
+      "name": "compression socks 15-20 mmHg",
+      "quantity": 1,
+      "unit_price": "19.99",
+      "amount": "19.99",
+      "verdict": "dual_purpose",
+      "gold_source_ids": [
+        "elist:compression-socks",
+        "p502:what-are-medical-expenses",
+        "p502:personal-use-items"
+      ],
+      "note": "Not named in the sources; compression garments treat circulatory conditions but are also worn for comfort or sport. Eligible only for a medical condition."
+    },
+    {
+      "raw_text": "SUNGLASSES POLARZD",
+      "name": "non-prescription polarized sunglasses",
+      "quantity": 1,
+      "unit_price": "24.99",
+      "amount": "24.99",
+      "verdict": "not_eligible",
+      "gold_source_ids": [
+        "elist:non-prescription-sunglasses",
+        "p502:personal-use-items"
+      ],
+      "note": "Non-prescription sunglasses are an item ordinarily used for personal purposes."
+    },
+    {
+      "raw_text": "MELATONIN 5MG 90CT",
+      "name": "melatonin 5 mg, 90 count",
+      "quantity": 1,
+      "unit_price": "8.99",
+      "amount": "8.99",
+      "verdict": "dual_purpose",
+      "gold_source_ids": [
+        "elist:herbal-remedies",
+        "p502:nutritional-supplements"
+      ],
+      "note": "Herbal supplements and 'natural medicines' aren't includible unless recommended by a practitioner for a diagnosed condition."
+    }
+  ],
+  "subtotal_printed": "96.94",
+  "tax": "6.09",
+  "total": "103.03",
+  "totals_mismatch": false,
+  "pii": [],
+  "seed": 20261028
+}

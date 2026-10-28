@@ -1,0 +1,155 @@
+{
+  "receipt_id": "r0037",
+  "merchant": "GREEN BASKET GROCERS",
+  "merchant_type": "grocery",
+  "date": "2026-01-04",
+  "items": [
+    {
+      "raw_text": "ASPIRIN LO DOSE 81MG 120",
+      "name": "low dose aspirin 81 mg, 120 count",
+      "quantity": 1,
+      "unit_price": "5.99",
+      "amount": "5.99",
+      "verdict": "eligible",
+      "gold_source_ids": [
+        "elist:otc-pain-reliever",
+        "p969:distributions-from-an-fsa",
+        "cares:sec-3702"
+      ],
+      "note": "OTC medicines are medical care for FSAs and HRAs whether or not prescribed; CARES Act §3702 removed the prescription-only limit for expenses after 2019."
+    },
+    {
+      "raw_text": "INF IBUPRF DROPS 1OZ",
+      "name": "infant ibuprofen drops, 1 oz",
+      "quantity": 1,
+      "unit_price": "9.79",
+      "amount": "9.79",
+      "verdict": "eligible",
+      "gold_source_ids": [
+        "elist:otc-children-medicine",
+        "p969:distributions-from-an-fsa",
+        "cares:sec-3702"
+      ],
+      "note": "Children's OTC medicines are OTC medicines, eligible after 2019."
+    },
+    {
+      "raw_text": "SALINE SOLN 12OZ",
+      "name": "saline solution, 12 oz",
+      "quantity": 1,
+      "unit_price": "5.99",
+      "amount": "5.99",
+      "verdict": "eligible",
+      "gold_source_ids": [
+        "elist:contact-lens-solution",
+        "p502:contact-lenses"
+      ],
+      "note": "Equipment and materials required for using contact lenses, such as saline solution and enzyme cleaner, are includible."
+    },
+    {
+      "raw_text": "MULTIVIT ADULT 100CT",
+      "name": "adult multivitamin, 100 count",
+      "quantity": 2,
+      "unit_price": "12.99",
+      "amount": "25.98",
+      "verdict": "dual_purpose",
+      "gold_source_ids": [
+        "elist:vitamins-supplements",
+        "p502:nutritional-supplements"
+      ],
+      "note": "Vitamins and supplements aren't includible unless recommended by a medical practitioner as treatment for a specific diagnosed condition."
+    },
+    {
+      "raw_text": "DIAPERS SZ3 84CT",
+      "name": "baby diapers size 3, 84 count",
+      "quantity": 1,
+      "unit_price": "27.99",
+      "amount": "27.99",
+      "verdict": "not_eligible",
+      "gold_source_ids": [
+        "elist:baby-diapers",
+        "p502:diaper-service"
+      ],
+      "note": "Diapers aren't includible unless needed to relieve the effects of a particular disease; ordinary baby diapers are not."
+    },
+    {
+      "raw_text": "BLADDER PADS MOD 54",
+      "name": "bladder control pads, moderate, 54 count",
+      "quantity": 1,
+      "unit_price": "13.49",
+      "amount": "13.49",
+      "verdict": "dual_purpose",
+      "gold_source_ids": [
+        "elist:incontinence-supplies",
+        "p502:diaper-service"
+      ],
+      "note": "Diapers are excluded unless needed to relieve the effects of a particular disease; adult incontinence products qualify when used for a medical condition."
+    },
+    {
+      "raw_text": "CONDOMS LUBR 12CT",
+      "name": "lubricated condoms, 12 count",
+      "quantity": 1,
+      "unit_price": "11.99",
+      "amount": "11.99",
+      "verdict": "eligible",
+      "gold_source_ids": [
+        "elist:condoms",
+        "p502:condoms"
+      ],
+      "note": "Condoms are includible."
+    },
+    {
+      "raw_text": "PSE DECONGEST 12HR 10CT",
+      "name": "pseudoephedrine 12-hour decongestant, 10 count",
+      "quantity": 1,
+      "unit_price": "9.99",
+      "amount": "9.99",
+      "verdict": "eligible",
+      "gold_source_ids": [
+        "elist:otc-cold-flu",
+        "p969:distributions-from-an-fsa",
+        "cares:sec-3702"
+      ],
+      "note": "Cold, flu and cough medicines are OTC medicines, eligible without a prescription after 2019."
+    },
+    {
+      "raw_text": "MAXI PADS OVERNIGHT 28",
+      "name": "overnight maxi pads, 28 count",
+      "quantity": 1,
+      "unit_price": "8.49",
+      "amount": "8.49",
+      "verdict": "eligible",
+      "gold_source_ids": [
+        "elist:menstrual-care",
+        "cares:sec-3702",
+        "p969:distributions-from-an-hsa",
+        "p969:distributions-from-an-fsa"
+      ],
+      "note": "Menstrual care products (tampon, pad, liner, cup, sponge or similar) are treated as medical care for HSAs, FSAs and HRAs after 2019."
+    },
+    {
+      "raw_text": "LORATADINE 10MG 30CT",
+      "name": "loratadine 10 mg, 30 count",
+      "quantity": 1,
+      "unit_price": "12.99",
+      "amount": "12.99",
+      "verdict": "eligible",
+      "gold_source_ids": [
+        "elist:otc-allergy",
+        "p969:distributions-from-an-fsa",
+        "cares:sec-3702"
+      ],
+      "note": "Allergy medicines are OTC medicines, eligible without a prescription after 2019."
+    }
+  ],
+  "subtotal_printed": "132.69",
+  "tax": "4.72",
+  "total": "137.41",
+  "totals_mismatch": false,
+  "pii": [
+    {
+      "kind": "email",
+      "value": "shopper42@example.com"
+    }
+  ],
+  "seed": 20261028
+}

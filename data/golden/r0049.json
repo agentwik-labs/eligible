@@ -1,0 +1,100 @@
+{
+  "receipt_id": "r0049",
+  "merchant": "MEGAMART SUPERCENTER #2210",
+  "merchant_type": "big_box",
+  "date": "2026-09-14",
+  "items": [
+    {
+      "raw_text": "FLEA TICK DOG 3DOSE",
+      "name": "dog flea and tick treatment, 3 doses",
+      "quantity": 1,
+      "unit_price": "49.99",
+      "amount": "49.99",
+      "verdict": "not_eligible",
+      "gold_source_ids": [
+        "elist:veterinary",
+        "p502:veterinary-fees"
+      ],
+      "note": "Veterinary fees generally aren't includible (service animals are the exception)."
+    },
+    {
+      "raw_text": "ANKLE SUPPORT SLV M",
+      "name": "ankle support sleeve, medium",
+      "quantity": 2,
+      "unit_price": "14.99",
+      "amount": "29.98",
+      "verdict": "dual_purpose",
+      "gold_source_ids": [
+        "elist:braces-supports",
+        "p502:what-are-medical-expenses"
+      ],
+      "note": "Supports aren't named in the sources; they are medical equipment when used to treat an injury or condition, not when worn for general athletic use."
+    },
+    {
+      "raw_text": "DOXYLAMINE SLP 48CT",
+      "name": "doxylamine sleep aid, 48 count",
+      "quantity": 2,
+      "unit_price": "9.49",
+      "amount": "18.98",
+      "verdict": "eligible",
+      "gold_source_ids": [
+        "elist:otc-sleep-aid",
+        "p969:distributions-from-an-fsa",
+        "cares:sec-3702"
+      ],
+      "note": "Medicated sleep aids are OTC drugs, eligible without a prescription after 2019."
+    },
+    {
+      "raw_text": "WARM MIST VAPORIZER",
+      "name": "warm mist vaporizer",
+      "quantity": 1,
+      "unit_price": "34.99",
+      "amount": "34.99",
+      "verdict": "needs_prescription",
+      "gold_source_ids": [
+        "elist:humidifier",
+        "p502:personal-use-items",
+        "p502:what-are-medical-expenses"
+      ],
+      "note": "A household item is includible only if used primarily to alleviate an illness; plans require a letter of medical necessity to show that."
+    },
+    {
+      "raw_text": "CEREAL OAT 18OZ",
+      "name": "oat cereal, 18 oz",
+      "quantity": 1,
+      "unit_price": "4.99",
+      "amount": "4.99",
+      "verdict": "not_eligible",
+      "gold_source_ids": [
+        "elist:grocery-food",
+        "p502:weight-loss-program",
+        "p502:what-are-medical-expenses"
+      ],
+      "note": "Food that is normally consumed to satisfy nutritional needs isn't medical care."
+    },
+    {
+      "raw_text": "MULTI-PURP SOLN 12OZ",
+      "name": "multi-purpose contact lens solution, 12 oz",
+      "quantity": 1,
+      "unit_price": "10.99",
+      "amount": "10.99",
+      "verdict": "eligible",
+      "gold_source_ids": [
+        "elist:contact-lens-solution",
+        "p502:contact-lenses"
+      ],
+      "note": "Equipment and materials required for using contact lenses, such as saline solution and enzyme cleaner, are includible."
+    }
+  ],
+  "subtotal_printed": "149.92",
+  "tax": "5.95",
+  "total": "155.87",
+  "totals_mismatch": false,
+  "pii": [
+    {
+      "kind": "card_number",
+      "value": "378282246310005"
+    }
+  ],
+  "seed": 20261028
+}

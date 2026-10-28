@@ -1,0 +1,134 @@
+{
+  "receipt_id": "r0025",
+  "merchant": "WELLSPRING PHARMACY #0412",
+  "merchant_type": "pharmacy",
+  "date": "2026-09-26",
+  "items": [
+    {
+      "raw_text": "INSULIN SYRINGE 100CT",
+      "name": "insulin syringes, 100 count",
+      "quantity": 1,
+      "unit_price": "21.99",
+      "amount": "21.99",
+      "verdict": "eligible",
+      "gold_source_ids": [
+        "elist:syringes-diabetic-supplies",
+        "p502:what-are-medical-expenses",
+        "p502:diagnostic-devices"
+      ],
+      "note": "Supplies needed to treat a disease, such as insulin syringes and lancets, are includible medical supplies."
+    },
+    {
+      "raw_text": "RX 4421308 ALBUTEROL INH",
+      "name": "prescription: albuterol inhaler",
+      "quantity": 1,
+      "unit_price": "25.0",
+      "amount": "25.00",
+      "verdict": "eligible",
+      "gold_source_ids": [
+        "elist:prescription-drug",
+        "p502:medicines"
+      ],
+      "note": "Prescribed medicines and drugs are includible."
+    },
+    {
+      "raw_text": "BREAD WHL WHT 20OZ",
+      "name": "whole wheat bread, 20 oz",
+      "quantity": 1,
+      "unit_price": "3.49",
+      "amount": "3.49",
+      "verdict": "not_eligible",
+      "gold_source_ids": [
+        "elist:grocery-food",
+        "p502:weight-loss-program",
+        "p502:what-are-medical-expenses"
+      ],
+      "note": "Food that is normally consumed to satisfy nutritional needs isn't medical care."
+    },
+    {
+      "raw_text": "FACE WASH GENTLE 8OZ",
+      "name": "gentle face wash, 8 oz",
+      "quantity": 2,
+      "unit_price": "7.49",
+      "amount": "14.98",
+      "verdict": "not_eligible",
+      "gold_source_ids": [
+        "elist:skincare-lotion",
+        "p502:personal-use-items"
+      ],
+      "note": "Ordinary skin care is a personal-use item, not medical care."
+    },
+    {
+      "raw_text": "DEODORANT STICK 2.6OZ",
+      "name": "deodorant stick, 2.6 oz",
+      "quantity": 1,
+      "unit_price": "5.49",
+      "amount": "5.49",
+      "verdict": "not_eligible",
+      "gold_source_ids": [
+        "elist:deodorant-soap",
+        "p502:personal-use-items"
+      ],
+      "note": "Ordinary hygiene products are personal-use items."
+    },
+    {
+      "raw_text": "TOILET SAFETY RAIL",
+      "name": "toilet safety rail",
+      "quantity": 1,
+      "unit_price": "49.99",
+      "amount": "49.99",
+      "verdict": "needs_prescription",
+      "gold_source_ids": [
+        "elist:home-accessibility",
+        "p502:capital-expenses"
+      ],
+      "note": "Grab bars, railings and ramps are includible in full when installed to accommodate a disabled condition; the receipt can't show that, so plans require medical documentation."
+    },
+    {
+      "raw_text": "CAPTIONED PHONE",
+      "name": "captioned telephone",
+      "quantity": 1,
+      "unit_price": "89.99",
+      "amount": "89.99",
+      "verdict": "needs_prescription",
+      "gold_source_ids": [
+        "elist:tty-telephone",
+        "p502:telephone"
+      ],
+      "note": "Special telephone equipment that lets a person who is deaf, hard of hearing or speech disabled communicate is includible; an amplified phone sold to anyone needs documentation of that use."
+    },
+    {
+      "raw_text": "USB-C CHARGER 20W",
+      "name": "USB-C charger 20 W",
+      "quantity": 1,
+      "unit_price": "19.99",
+      "amount": "19.99",
+      "verdict": "not_eligible",
+      "gold_source_ids": [
+        "elist:batteries-electronics",
+        "p502:personal-use-items",
+        "p502:hearing-aids"
+      ],
+      "note": "General electronics are personal items (hearing aid batteries are the exception)."
+    },
+    {
+      "raw_text": "BEER IPA 6PK 12OZ",
+      "name": "IPA beer, 6 pack",
+      "quantity": 1,
+      "unit_price": "10.99",
+      "amount": "10.99",
+      "verdict": "not_eligible",
+      "gold_source_ids": [
+        "elist:tobacco-alcohol",
+        "p502:personal-use-items"
+      ],
+      "note": "Tobacco and alcohol are personal purchases with no medical purpose."
+    }
+  ],
+  "subtotal_printed": "241.91",
+  "tax": "3.85",
+  "total": "245.76",
+  "totals_mismatch": false,
+  "pii": [],
+  "seed": 20261028
+}

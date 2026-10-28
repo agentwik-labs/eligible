@@ -1,0 +1,120 @@
+{
+  "receipt_id": "r0056",
+  "merchant": "FRESHFIELD MARKET",
+  "merchant_type": "grocery",
+  "date": "2026-01-24",
+  "items": [
+    {
+      "raw_text": "PROBIOTIC 30CT",
+      "name": "probiotic capsules, 30 count",
+      "quantity": 1,
+      "unit_price": "24.99",
+      "amount": "24.99",
+      "verdict": "dual_purpose",
+      "gold_source_ids": [
+        "elist:vitamins-supplements",
+        "p502:nutritional-supplements"
+      ],
+      "note": "Vitamins and supplements aren't includible unless recommended by a medical practitioner as treatment for a specific diagnosed condition."
+    },
+    {
+      "raw_text": "GIFT CARD $25",
+      "name": "gift card, $25",
+      "quantity": 1,
+      "unit_price": "25.0",
+      "amount": "25.00",
+      "verdict": "not_eligible",
+      "gold_source_ids": [
+        "elist:greeting-cards-gifts",
+        "p502:personal-use-items"
+      ],
+      "note": "Cards and gifts are personal purchases, not medical care."
+    },
+    {
+      "raw_text": "COVID AG HOME TEST 2PK",
+      "name": "COVID-19 at-home antigen test, 2 pack",
+      "quantity": 1,
+      "unit_price": "19.99",
+      "amount": "19.99",
+      "verdict": "eligible",
+      "gold_source_ids": [
+        "elist:covid-test",
+        "p502:diagnostic-devices",
+        "p502:laboratory-fees"
+      ],
+      "note": "At-home diagnostic tests are devices used in diagnosing illness."
+    },
+    {
+      "raw_text": "TAMPONS REG 36CT",
+      "name": "tampons regular, 36 count",
+      "quantity": 1,
+      "unit_price": "9.99",
+      "amount": "9.99",
+      "verdict": "eligible",
+      "gold_source_ids": [
+        "elist:menstrual-care",
+        "cares:sec-3702",
+        "p969:distributions-from-an-hsa",
+        "p969:distributions-from-an-fsa"
+      ],
+      "note": "Menstrual care products (tampon, pad, liner, cup, sponge or similar) are treated as medical care for HSAs, FSAs and HRAs after 2019."
+    },
+    {
+      "raw_text": "HYDROCORT 1% CRM 1OZ",
+      "name": "hydrocortisone 1% cream, 1 oz",
+      "quantity": 1,
+      "unit_price": "4.99",
+      "amount": "4.99",
+      "verdict": "eligible",
+      "gold_source_ids": [
+        "elist:otc-antibiotic-ointment",
+        "p969:distributions-from-an-fsa",
+        "cares:sec-3702"
+      ],
+      "note": "Medicated skin ointments and creams are OTC medicines, eligible after 2019."
+    },
+    {
+      "raw_text": "ORANGE JUICE 52OZ",
+      "name": "orange juice, 52 oz",
+      "quantity": 1,
+      "unit_price": "4.79",
+      "amount": "4.79",
+      "verdict": "not_eligible",
+      "gold_source_ids": [
+        "elist:beverages",
+        "p502:weight-loss-program",
+        "p502:personal-use-items"
+      ],
+      "note": "Ordinary beverages aren't medical care."
+    },
+    {
+      "raw_text": "CETIRIZINE 10MG 45CT",
+      "name": "cetirizine 10 mg, 45 count",
+      "quantity": 1,
+      "unit_price": "16.49",
+      "amount": "16.49",
+      "verdict": "eligible",
+      "gold_source_ids": [
+        "elist:otc-allergy",
+        "p969:distributions-from-an-fsa",
+        "cares:sec-3702"
+      ],
+      "note": "Allergy medicines are OTC medicines, eligible without a prescription after 2019."
+    }
+  ],
+  "subtotal_printed": "106.24",
+  "tax": "3.83",
+  "total": "110.07",
+  "totals_mismatch": false,
+  "pii": [
+    {
+      "kind": "card_number",
+      "value": "4111111111111111"
+    },
+    {
+      "kind": "email",
+      "value": "shopper66@example.com"
+    }
+  ],
+  "seed": 20261028
+}

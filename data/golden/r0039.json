@@ -1,0 +1,116 @@
+{
+  "receipt_id": "r0039",
+  "merchant": "GREEN BASKET GROCERS",
+  "merchant_type": "grocery",
+  "date": "2026-04-09",
+  "items": [
+    {
+      "raw_text": "ANTACID CHW TAB 96CT",
+      "name": "antacid chewable tablets, 96 count",
+      "quantity": 1,
+      "unit_price": "6.99",
+      "amount": "6.99",
+      "verdict": "eligible",
+      "gold_source_ids": [
+        "elist:otc-digestive",
+        "p969:distributions-from-an-fsa",
+        "cares:sec-3702"
+      ],
+      "note": "Digestive medicines (antacids, acid reducers, anti-diarrheals, laxatives) are OTC medicines, eligible after 2019."
+    },
+    {
+      "raw_text": "GM 00812345",
+      "name": "unidentified general merchandise item",
+      "quantity": 1,
+      "unit_price": "19.99",
+      "amount": "19.99",
+      "verdict": "needs_review",
+      "gold_source_ids": [
+        "elist:unidentified-dept-code",
+        "p502:what-are-medical-expenses"
+      ],
+      "note": "The line shows only a store department code; no rule can be applied to an unknown item."
+    },
+    {
+      "raw_text": "TRIPLE ANTIBIO OINT 1OZ",
+      "name": "triple antibiotic ointment, 1 oz",
+      "quantity": 1,
+      "unit_price": "5.99",
+      "amount": "5.99",
+      "verdict": "eligible",
+      "gold_source_ids": [
+        "elist:otc-antibiotic-ointment",
+        "p969:distributions-from-an-fsa",
+        "cares:sec-3702"
+      ],
+      "note": "Medicated skin ointments and creams are OTC medicines, eligible after 2019."
+    },
+    {
+      "raw_text": "TOOTHPASTE FLUOR 4.8OZ",
+      "name": "fluoride toothpaste, 4.8 oz",
+      "quantity": 1,
+      "unit_price": "3.99",
+      "amount": "3.99",
+      "verdict": "not_eligible",
+      "gold_source_ids": [
+        "elist:toothbrush-toothpaste",
+        "p502:personal-use-items"
+      ],
+      "note": "Pub 502 names toothbrush and toothpaste as nondeductible personal expenses."
+    },
+    {
+      "raw_text": "WOUND WASH SALINE 7OZ",
+      "name": "saline wound wash, 7 oz",
+      "quantity": 1,
+      "unit_price": "7.49",
+      "amount": "7.49",
+      "verdict": "eligible",
+      "gold_source_ids": [
+        "elist:antiseptic",
+        "p969:distributions-from-an-fsa",
+        "cares:sec-3702",
+        "p502:bandages"
+      ],
+      "note": "Antiseptics for wound care are OTC medicines and medical supplies."
+    },
+    {
+      "raw_text": "FAMOTIDINE 20MG 50CT",
+      "name": "famotidine 20 mg, 50 count",
+      "quantity": 1,
+      "unit_price": "13.99",
+      "amount": "13.99",
+      "verdict": "eligible",
+      "gold_source_ids": [
+        "elist:otc-digestive",
+        "p969:distributions-from-an-fsa",
+        "cares:sec-3702"
+      ],
+      "note": "Digestive medicines (antacids, acid reducers, anti-diarrheals, laxatives) are OTC medicines, eligible after 2019."
+    },
+    {
+      "raw_text": "CETIRIZINE 10MG 45CT",
+      "name": "cetirizine 10 mg, 45 count",
+      "quantity": 1,
+      "unit_price": "16.49",
+      "amount": "16.49",
+      "verdict": "eligible",
+      "gold_source_ids": [
+        "elist:otc-allergy",
+        "p969:distributions-from-an-fsa",
+        "cares:sec-3702"
+      ],
+      "note": "Allergy medicines are OTC medicines, eligible without a prescription after 2019."
+    }
+  ],
+  "subtotal_printed": "74.93",
+  "tax": "1.68",
+  "total": "76.61",
+  "totals_mismatch": false,
+  "pii": [
+    {
+      "kind": "card_number",
+      "value": "4111111111111111"
+    }
+  ],
+  "seed": 20261028
+}

@@ -1,0 +1,133 @@
+{
+  "receipt_id": "r0036",
+  "merchant": "NORTHSIDE WELLNESS CENTER",
+  "merchant_type": "other",
+  "date": "2026-03-03",
+  "items": [
+    {
+      "raw_text": "MED TAPE PAPER 1IN",
+      "name": "paper medical tape, 1 in",
+      "quantity": 1,
+      "unit_price": "3.79",
+      "amount": "3.79",
+      "verdict": "eligible",
+      "gold_source_ids": [
+        "elist:bandages",
+        "p502:bandages"
+      ],
+      "note": "Medical supplies such as bandages are includible."
+    },
+    {
+      "raw_text": "BEER IPA 6PK 12OZ",
+      "name": "IPA beer, 6 pack",
+      "quantity": 2,
+      "unit_price": "10.99",
+      "amount": "21.98",
+      "verdict": "not_eligible",
+      "gold_source_ids": [
+        "elist:tobacco-alcohol",
+        "p502:personal-use-items"
+      ],
+      "note": "Tobacco and alcohol are personal purchases with no medical purpose."
+    },
+    {
+      "raw_text": "MODULAR RAMP 6FT",
+      "name": "modular wheelchair ramp, 6 ft",
+      "quantity": 1,
+      "unit_price": "449.0",
+      "amount": "449.00",
+      "verdict": "needs_prescription",
+      "gold_source_ids": [
+        "elist:home-accessibility",
+        "p502:capital-expenses"
+      ],
+      "note": "Grab bars, railings and ramps are includible in full when installed to accommodate a disabled condition; the receipt can't show that, so plans require medical documentation."
+    },
+    {
+      "raw_text": "BREAD WHL WHT 20OZ",
+      "name": "whole wheat bread, 20 oz",
+      "quantity": 1,
+      "unit_price": "3.49",
+      "amount": "3.49",
+      "verdict": "not_eligible",
+      "gold_source_ids": [
+        "elist:grocery-food",
+        "p502:weight-loss-program",
+        "p502:what-are-medical-expenses"
+      ],
+      "note": "Food that is normally consumed to satisfy nutritional needs isn't medical care."
+    },
+    {
+      "raw_text": "DEPT 54 ITEM",
+      "name": "unidentified item, department 54",
+      "quantity": 1,
+      "unit_price": "14.99",
+      "amount": "14.99",
+      "verdict": "needs_review",
+      "gold_source_ids": [
+        "elist:unidentified-dept-code",
+        "p502:what-are-medical-expenses"
+      ],
+      "note": "The line shows only a store department code; no rule can be applied to an unknown item."
+    },
+    {
+      "raw_text": "WIG MEDICAL GRADE",
+      "name": "medical grade wig",
+      "quantity": 1,
+      "unit_price": "280.0",
+      "amount": "280.00",
+      "verdict": "needs_prescription",
+      "gold_source_ids": [
+        "elist:wig",
+        "p502:wig"
+      ],
+      "note": "A wig is includible only when bought on a physician's advice for a patient who lost all of their hair from disease."
+    },
+    {
+      "raw_text": "GM 00812345",
+      "name": "unidentified general merchandise item",
+      "quantity": 1,
+      "unit_price": "19.99",
+      "amount": "19.99",
+      "verdict": "needs_review",
+      "gold_source_ids": [
+        "elist:unidentified-dept-code",
+        "p502:what-are-medical-expenses"
+      ],
+      "note": "The line shows only a store department code; no rule can be applied to an unknown item."
+    },
+    {
+      "raw_text": "BAND AID FLX 30CT",
+      "name": "flexible fabric adhesive bandages, 30 count",
+      "quantity": 1,
+      "unit_price": "4.99",
+      "amount": "4.99",
+      "verdict": "eligible",
+      "gold_source_ids": [
+        "elist:bandages",
+        "p502:bandages"
+      ],
+      "note": "Medical supplies such as bandages are includible."
+    },
+    {
+      "raw_text": "RAZOR 5BLD CART 4CT",
+      "name": "5-blade razor cartridges, 4 count",
+      "quantity": 1,
+      "unit_price": "21.99",
+      "amount": "21.99",
+      "verdict": "not_eligible",
+      "gold_source_ids": [
+        "elist:hair-removal",
+        "p502:electrolysis-or-hair-removal",
+        "p502:cosmetic-surgery"
+      ],
+      "note": "Hair removal (electrolysis) is cosmetic and isn't includible."
+    }
+  ],
+  "subtotal_printed": "820.22",
+  "tax": "5.77",
+  "total": "825.99",
+  "totals_mismatch": false,
+  "pii": [],
+  "seed": 20261028
+}

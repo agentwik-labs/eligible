@@ -1,0 +1,114 @@
+{
+  "receipt_id": "r0027",
+  "merchant": "WELLSPRING PHARMACY #0412",
+  "merchant_type": "pharmacy",
+  "date": "2026-05-09",
+  "items": [
+    {
+      "raw_text": "CAPTIONED PHONE",
+      "name": "captioned telephone",
+      "quantity": 1,
+      "unit_price": "89.99",
+      "amount": "89.99",
+      "verdict": "needs_prescription",
+      "gold_source_ids": [
+        "elist:tty-telephone",
+        "p502:telephone"
+      ],
+      "note": "Special telephone equipment that lets a person who is deaf, hard of hearing or speech disabled communicate is includible; an amplified phone sold to anyone needs documentation of that use."
+    },
+    {
+      "raw_text": "DISINFECT SPRAY 19OZ",
+      "name": "disinfectant spray, 19 oz",
+      "quantity": 1,
+      "unit_price": "6.49",
+      "amount": "6.49",
+      "verdict": "not_eligible",
+      "gold_source_ids": [
+        "elist:household-cleaning",
+        "p502:personal-use-items"
+      ],
+      "note": "Household items ordinarily used for family purposes aren't medical care."
+    },
+    {
+      "raw_text": "HUMIDIFIER WICK FLTR",
+      "name": "humidifier wick filter",
+      "quantity": 1,
+      "unit_price": "9.99",
+      "amount": "9.99",
+      "verdict": "needs_prescription",
+      "gold_source_ids": [
+        "elist:humidifier",
+        "p502:personal-use-items",
+        "p502:what-are-medical-expenses"
+      ],
+      "note": "A household item is includible only if used primarily to alleviate an illness; plans require a letter of medical necessity to show that."
+    },
+    {
+      "raw_text": "ADAPALENE 0.1% GEL 15G",
+      "name": "adapalene 0.1% acne gel, 15 g",
+      "quantity": 1,
+      "unit_price": "13.99",
+      "amount": "13.99",
+      "verdict": "eligible",
+      "gold_source_ids": [
+        "elist:otc-acne-medicine",
+        "p969:distributions-from-an-fsa",
+        "cares:sec-3702"
+      ],
+      "note": "Acne treatments with an active drug ingredient are OTC medicines, eligible after 2019."
+    },
+    {
+      "raw_text": "DENTURE ADHESV 2.4OZ",
+      "name": "denture adhesive cream, 2.4 oz",
+      "quantity": 1,
+      "unit_price": "7.99",
+      "amount": "7.99",
+      "verdict": "eligible",
+      "gold_source_ids": [
+        "elist:dentures",
+        "p502:artificial-teeth",
+        "p502:dental-treatment"
+      ],
+      "note": "Artificial teeth and dentures are includible."
+    },
+    {
+      "raw_text": "PSE DECONGEST 12HR 10CT",
+      "name": "pseudoephedrine 12-hour decongestant, 10 count",
+      "quantity": 1,
+      "unit_price": "9.99",
+      "amount": "9.99",
+      "verdict": "eligible",
+      "gold_source_ids": [
+        "elist:otc-cold-flu",
+        "p969:distributions-from-an-fsa",
+        "cares:sec-3702"
+      ],
+      "note": "Cold, flu and cough medicines are OTC medicines, eligible without a prescription after 2019."
+    },
+    {
+      "raw_text": "AMPLIFIED PHONE 40DB",
+      "name": "amplified telephone, 40 dB",
+      "quantity": 1,
+      "unit_price": "69.99",
+      "amount": "69.99",
+      "verdict": "needs_prescription",
+      "gold_source_ids": [
+        "elist:tty-telephone",
+        "p502:telephone"
+      ],
+      "note": "Special telephone equipment that lets a person who is deaf, hard of hearing or speech disabled communicate is includible; an amplified phone sold to anyone needs documentation of that use."
+    }
+  ],
+  "subtotal_printed": "208.43",
+  "tax": "0.45",
+  "total": "208.88",
+  "totals_mismatch": false,
+  "pii": [
+    {
+      "kind": "card_number",
+      "value": "378282246310005"
+    }
+  ],
+  "seed": 20261028
+}

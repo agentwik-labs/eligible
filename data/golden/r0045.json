@@ -1,0 +1,70 @@
+{
+  "receipt_id": "r0045",
+  "merchant": "BRIGHTWAY STORES #118",
+  "merchant_type": "big_box",
+  "date": "2026-06-27",
+  "items": [
+    {
+      "raw_text": "FIRST AID KIT 100PC",
+      "name": "first aid kit, 100 pieces",
+      "quantity": 1,
+      "unit_price": "19.99",
+      "amount": "19.99",
+      "verdict": "eligible",
+      "gold_source_ids": [
+        "elist:first-aid-kit",
+        "p502:bandages",
+        "p502:what-are-medical-expenses"
+      ],
+      "note": "A first aid kit is a set of medical supplies such as bandages."
+    },
+    {
+      "raw_text": "HYDROCORT 1% CRM 1OZ",
+      "name": "hydrocortisone 1% cream, 1 oz",
+      "quantity": 2,
+      "unit_price": "4.99",
+      "amount": "9.98",
+      "verdict": "eligible",
+      "gold_source_ids": [
+        "elist:otc-antibiotic-ointment",
+        "p969:distributions-from-an-fsa",
+        "cares:sec-3702"
+      ],
+      "note": "Medicated skin ointments and creams are OTC medicines, eligible after 2019."
+    },
+    {
+      "raw_text": "HEPA REPLACEMNT FLTR",
+      "name": "HEPA air purifier replacement filter",
+      "quantity": 1,
+      "unit_price": "39.99",
+      "amount": "39.99",
+      "verdict": "needs_prescription",
+      "gold_source_ids": [
+        "elist:air-purifier",
+        "p502:capital-expenses",
+        "p502:personal-use-items"
+      ],
+      "note": "Equipment whose main purpose is medical care is includible; for an ordinary household air purifier that purpose must be documented by a physician."
+    },
+    {
+      "raw_text": "HUMIDIFIER WICK FLTR",
+      "name": "humidifier wick filter",
+      "quantity": 1,
+      "unit_price": "9.99",
+      "amount": "9.99",
+      "verdict": "needs_prescription",
+      "gold_source_ids": [
+        "elist:humidifier",
+        "p502:personal-use-items",
+        "p502:what-are-medical-expenses"
+      ],
+      "note": "A household item is includible only if used primarily to alleviate an illness; plans require a letter of medical necessity to show that."
+    }
+  ],
+  "subtotal_printed": "79.95",
+  "tax": "0.00",
+  "total": "79.95",
+  "totals_mismatch": false,
+  "pii": [],
+  "seed": 20261028
+}

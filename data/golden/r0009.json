@@ -1,0 +1,87 @@
+{
+  "receipt_id": "r0009",
+  "merchant": "WELLSPRING PHARMACY #0412",
+  "merchant_type": "pharmacy",
+  "date": "2026-09-10",
+  "items": [
+    {
+      "raw_text": "WHITENING STRIPS 20CT",
+      "name": "teeth whitening strips, 20 count",
+      "quantity": 1,
+      "unit_price": "44.99",
+      "amount": "44.99",
+      "verdict": "not_eligible",
+      "gold_source_ids": [
+        "elist:teeth-whitening",
+        "p502:teeth-whitening"
+      ],
+      "note": "Amounts paid to whiten teeth aren't includible."
+    },
+    {
+      "raw_text": "CHLD ACETAMIN SUSP 4OZ",
+      "name": "children's acetaminophen suspension, 4 oz",
+      "quantity": 1,
+      "unit_price": "8.49",
+      "amount": "8.49",
+      "verdict": "eligible",
+      "gold_source_ids": [
+        "elist:otc-children-medicine",
+        "p969:distributions-from-an-fsa",
+        "cares:sec-3702"
+      ],
+      "note": "Children's OTC medicines are OTC medicines, eligible after 2019."
+    },
+    {
+      "raw_text": "FEXOFEN 180MG 30CT",
+      "name": "fexofenadine 180 mg, 30 count",
+      "quantity": 1,
+      "unit_price": "18.99",
+      "amount": "18.99",
+      "verdict": "eligible",
+      "gold_source_ids": [
+        "elist:otc-allergy",
+        "p969:distributions-from-an-fsa",
+        "cares:sec-3702"
+      ],
+      "note": "Allergy medicines are OTC medicines, eligible without a prescription after 2019."
+    },
+    {
+      "raw_text": "TUB TRANSFER RAIL",
+      "name": "bathtub transfer rail",
+      "quantity": 1,
+      "unit_price": "44.99",
+      "amount": "44.99",
+      "verdict": "needs_prescription",
+      "gold_source_ids": [
+        "elist:home-accessibility",
+        "p502:capital-expenses"
+      ],
+      "note": "Grab bars, railings and ramps are includible in full when installed to accommodate a disabled condition; the receipt can't show that, so plans require medical documentation."
+    },
+    {
+      "raw_text": "LUBR EYE DRP 0.5OZ",
+      "name": "lubricant eye drops, 0.5 oz",
+      "quantity": 1,
+      "unit_price": "9.99",
+      "amount": "9.99",
+      "verdict": "eligible",
+      "gold_source_ids": [
+        "elist:otc-eye-drops",
+        "p969:distributions-from-an-fsa",
+        "cares:sec-3702"
+      ],
+      "note": "Medicated and lubricating eye drops are OTC medicines, eligible after 2019."
+    }
+  ],
+  "subtotal_printed": "127.45",
+  "tax": "3.15",
+  "total": "130.60",
+  "totals_mismatch": false,
+  "pii": [
+    {
+      "kind": "card_number",
+      "value": "4111111111111111"
+    }
+  ],
+  "seed": 20261028
+}

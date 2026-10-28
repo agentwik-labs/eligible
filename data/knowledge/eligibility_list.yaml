@@ -1,0 +1,1381 @@
+# eligibility_list.yaml: hand-written from the IRS sources in data/knowledge/raw/ (see SOURCES.md).
+#
+# Question answered: can a health FSA or HSA pay for this item? (Not: is it deductible.)
+# Pub 502 is written for the itemized deduction, so where it disagrees with the HSA/FSA rules
+# (non-prescribed medicine), the HSA/FSA rule wins: Pub 969 and CARES Act §3702.
+#
+# verdicts:
+#   eligible            the cited source includes it with no condition
+#   not_eligible        the cited source excludes it
+#   dual_purpose        eligible only when bought primarily for a medical condition (ordinary
+#                       personal/household use is excluded); the receipt can't show which
+#   needs_prescription  the source requires a physician's prescription, advice or diagnosis,
+#                       so it is reimbursable only with a prescription or letter of medical necessity
+#   needs_review        the receipt line can't be identified, so no rule can be applied
+#
+# sources: section IDs from data/knowledge/sections.jsonl (checked by tests/test_knowledge.py).
+# products: [receipt text as printed, normalized name, typical price in USD, optional merchants]
+#   (per-product merchants override the entry's when one entry spans store types)
+
+# ---------------------------------------------------------------- OTC medicine (CARES Act)
+- id: otc-pain-reliever
+  names: [ibuprofen, acetaminophen, naproxen, aspirin, pain reliever]
+  verdict: eligible
+  rule: "OTC medicines are medical care for FSAs and HRAs whether or not prescribed; CARES Act §3702 removed the prescription-only limit for expenses after 2019."
+  sources: [p969:distributions-from-an-fsa, cares:sec-3702]
+  merchants: [pharmacy, big_box, grocery, other]
+  products:
+    - [IBUPRF 200MG 50CT, "ibuprofen 200 mg, 50 count", 8.99]
+    - [ACETAMIN ES 500MG 100CT, "acetaminophen extra strength 500 mg, 100 count", 10.49]
+    - [NAPROXEN SOD 220MG 24CT, "naproxen sodium 220 mg, 24 count", 7.29]
+    - [ASPIRIN LO DOSE 81MG 120, "low dose aspirin 81 mg, 120 count", 5.99]
+- id: otc-cold-flu
+  names: [cold medicine, flu medicine, cough syrup, decongestant]
+  verdict: eligible
+  rule: "Cold, flu and cough medicines are OTC medicines, eligible without a prescription after 2019."
+  sources: [p969:distributions-from-an-fsa, cares:sec-3702]
+  merchants: [pharmacy, big_box, grocery]
+  products:
+    - [DAYQUIL CPLT 24CT, "daytime cold and flu caplets, 24 count", 11.99]
+    - [NYQUIL LIQ 12OZ, "nighttime cold and flu liquid, 12 oz", 13.49]
+    - [DM COUGH SYRUP 4OZ, "dextromethorphan cough syrup, 4 oz", 8.79]
+    - [PSE DECONGEST 12HR 10CT, "pseudoephedrine 12-hour decongestant, 10 count", 9.99]
+- id: otc-allergy
+  names: [antihistamine, allergy medicine, loratadine, cetirizine, fexofenadine]
+  verdict: eligible
+  rule: "Allergy medicines are OTC medicines, eligible without a prescription after 2019."
+  sources: [p969:distributions-from-an-fsa, cares:sec-3702]
+  merchants: [pharmacy, big_box, grocery]
+  products:
+    - [LORATADINE 10MG 30CT, "loratadine 10 mg, 30 count", 12.99]
+    - [CETIRIZINE 10MG 45CT, "cetirizine 10 mg, 45 count", 16.49]
+    - [FEXOFEN 180MG 30CT, "fexofenadine 180 mg, 30 count", 18.99]
+- id: otc-nasal-spray
+  names: [nasal spray, fluticasone, saline nasal spray]
+  verdict: eligible
+  rule: "Medicated nasal sprays are OTC medicines, eligible without a prescription after 2019."
+  sources: [p969:distributions-from-an-fsa, cares:sec-3702]
+  merchants: [pharmacy, big_box]
+  products:
+    - [FLUTICASONE NSL SPR 120, "fluticasone nasal spray, 120 sprays", 17.99]
+    - [OXYMETAZ NASAL 0.5OZ, "oxymetazoline nasal spray, 0.5 oz", 6.49]
+- id: otc-digestive
+  names: [antacid, heartburn medicine, famotidine, omeprazole, anti-diarrheal, laxative]
+  verdict: eligible
+  rule: "Digestive medicines (antacids, acid reducers, anti-diarrheals, laxatives) are OTC medicines, eligible after 2019."
+  sources: [p969:distributions-from-an-fsa, cares:sec-3702]
+  merchants: [pharmacy, big_box, grocery]
+  products:
+    - [ANTACID CHW TAB 96CT, "antacid chewable tablets, 96 count", 6.99]
+    - [FAMOTIDINE 20MG 50CT, "famotidine 20 mg, 50 count", 13.99]
+    - [OMEPRAZOLE DR 20MG 42CT, "omeprazole delayed release 20 mg, 42 count", 21.99]
+    - [LOPERAMIDE 2MG 24CT, "loperamide 2 mg, 24 count", 7.49]
+    - [STOOL SOFTNR 100MG 60, "docusate stool softener 100 mg, 60 count", 6.29]
+- id: otc-sleep-aid
+  names: [sleep aid, diphenhydramine, doxylamine]
+  verdict: eligible
+  rule: "Medicated sleep aids are OTC drugs, eligible without a prescription after 2019."
+  sources: [p969:distributions-from-an-fsa, cares:sec-3702]
+  merchants: [pharmacy, big_box]
+  products:
+    - [SLEEP AID DIPHEN 32CT, "diphenhydramine sleep aid, 32 count", 7.99]
+    - [DOXYLAMINE SLP 48CT, "doxylamine sleep aid, 48 count", 9.49]
+- id: otc-topical-pain
+  names: [pain relief cream, lidocaine patch, menthol rub]
+  verdict: eligible
+  rule: "Medicated topical pain relievers are OTC medicines, eligible after 2019."
+  sources: [p969:distributions-from-an-fsa, cares:sec-3702]
+  merchants: [pharmacy, big_box]
+  products:
+    - [LIDOCAINE 4% PATCH 5CT, "lidocaine 4% patches, 5 count", 9.99]
+    - [MENTHOL PAIN RUB 3OZ, "menthol pain relief rub, 3 oz", 8.49]
+    - [DICLOFENAC GEL 100G, "diclofenac pain relief gel, 100 g", 12.99]
+- id: otc-antibiotic-ointment
+  names: [antibiotic ointment, triple antibiotic, hydrocortisone cream, anti-itch cream]
+  verdict: eligible
+  rule: "Medicated skin ointments and creams are OTC medicines, eligible after 2019."
+  sources: [p969:distributions-from-an-fsa, cares:sec-3702]
+  merchants: [pharmacy, big_box, grocery]
+  products:
+    - [TRIPLE ANTIBIO OINT 1OZ, "triple antibiotic ointment, 1 oz", 5.99]
+    - [HYDROCORT 1% CRM 1OZ, "hydrocortisone 1% cream, 1 oz", 4.99]
+- id: otc-antifungal
+  names: [antifungal cream, athlete's foot cream, clotrimazole, miconazole]
+  verdict: eligible
+  rule: "Antifungal treatments are OTC medicines, eligible after 2019."
+  sources: [p969:distributions-from-an-fsa, cares:sec-3702]
+  merchants: [pharmacy, big_box]
+  products:
+    - [CLOTRIMAZOLE CRM 1OZ, "clotrimazole antifungal cream, 1 oz", 6.79]
+    - [MICONAZOLE 7DAY CRM, "miconazole 7-day vaginal cream", 12.49]
+- id: otc-eye-drops
+  names: [eye drops, lubricant eye drops, allergy eye drops]
+  verdict: eligible
+  rule: "Medicated and lubricating eye drops are OTC medicines, eligible after 2019."
+  sources: [p969:distributions-from-an-fsa, cares:sec-3702]
+  merchants: [pharmacy, big_box, optical]
+  products:
+    - [LUBR EYE DRP 0.5OZ, "lubricant eye drops, 0.5 oz", 9.99]
+    - [KETOTIFEN EYE DRP 5ML, "ketotifen allergy eye drops, 5 ml", 14.99]
+- id: otc-ear-drops
+  names: [ear drops, earwax removal drops]
+  verdict: eligible
+  rule: "Earwax removal and ear pain drops are OTC medicines, eligible after 2019."
+  sources: [p969:distributions-from-an-fsa, cares:sec-3702]
+  merchants: [pharmacy]
+  products:
+    - [EARWAX RMVL DROPS 0.5OZ, "earwax removal drops, 0.5 oz", 7.99]
+- id: otc-acne-medicine
+  names: [acne treatment, benzoyl peroxide, salicylic acid acne]
+  verdict: eligible
+  rule: "Acne treatments with an active drug ingredient are OTC medicines, eligible after 2019."
+  sources: [p969:distributions-from-an-fsa, cares:sec-3702]
+  merchants: [pharmacy, big_box]
+  products:
+    - [BENZOYL PEROX 10% GEL, "benzoyl peroxide 10% acne gel", 8.99]
+    - [ADAPALENE 0.1% GEL 15G, "adapalene 0.1% acne gel, 15 g", 13.99]
+- id: otc-nicotine-replacement
+  names: [nicotine gum, nicotine patch, nicotine lozenge]
+  verdict: eligible
+  rule: "Pub 502 excludes non-prescribed stop-smoking drugs from the deduction, but for HSA/FSA reimbursement they are OTC medicines, eligible after 2019."
+  sources: [p969:distributions-from-an-fsa, cares:sec-3702, p502:stop-smoking-programs]
+  merchants: [pharmacy, big_box]
+  products:
+    - [NICOTINE GUM 4MG 100CT, "nicotine gum 4 mg, 100 count", 44.99]
+    - [NICOTINE PATCH 21MG 14, "nicotine patch 21 mg, 14 count", 39.99]
+- id: otc-motion-sickness
+  names: [motion sickness medicine, meclizine, dimenhydrinate]
+  verdict: eligible
+  rule: "Motion sickness medicines are OTC medicines, eligible after 2019."
+  sources: [p969:distributions-from-an-fsa, cares:sec-3702]
+  merchants: [pharmacy, big_box]
+  products:
+    - [MECLIZINE 25MG 8CT, "meclizine 25 mg, 8 count", 6.49]
+- id: otc-children-medicine
+  names: [children's fever reducer, infant pain reliever, children's allergy]
+  verdict: eligible
+  rule: "Children's OTC medicines are OTC medicines, eligible after 2019."
+  sources: [p969:distributions-from-an-fsa, cares:sec-3702]
+  merchants: [pharmacy, big_box, grocery]
+  products:
+    - [CHLD ACETAMIN SUSP 4OZ, "children's acetaminophen suspension, 4 oz", 8.49]
+    - [INF IBUPRF DROPS 1OZ, "infant ibuprofen drops, 1 oz", 9.79]
+- id: otc-lice-treatment
+  names: [lice treatment, permethrin lotion]
+  verdict: eligible
+  rule: "Lice treatments are OTC medicines, eligible after 2019."
+  sources: [p969:distributions-from-an-fsa, cares:sec-3702]
+  merchants: [pharmacy]
+  products:
+    - [LICE TRTMT KIT 2OZ, "lice treatment kit, 2 oz", 19.99]
+- id: otc-cold-sore
+  names: [cold sore treatment, docosanol]
+  verdict: eligible
+  rule: "Cold sore medicines are OTC medicines, eligible after 2019."
+  sources: [p969:distributions-from-an-fsa, cares:sec-3702]
+  merchants: [pharmacy]
+  products:
+    - [DOCOSANOL CRM 2G, "docosanol cold sore cream, 2 g", 21.99]
+- id: otc-hemorrhoid
+  names: [hemorrhoid cream, hemorrhoid treatment]
+  verdict: eligible
+  rule: "Hemorrhoid treatments are OTC medicines, eligible after 2019."
+  sources: [p969:distributions-from-an-fsa, cares:sec-3702]
+  merchants: [pharmacy, big_box]
+  products:
+    - [HEMORRHOID OINT 1OZ, "hemorrhoid ointment, 1 oz", 9.49]
+- id: otc-contraceptive
+  names: [emergency contraceptive, otc birth control pill, levonorgestrel]
+  verdict: eligible
+  rule: "Non-prescription contraceptive pills are OTC medicines, eligible after 2019."
+  sources: [p969:distributions-from-an-fsa, cares:sec-3702]
+  merchants: [pharmacy, big_box]
+  products:
+    - [LEVONORGESTREL 1.5MG 1CT, "levonorgestrel 1.5 mg emergency contraceptive, 1 count", 49.99]
+    - [NORGESTREL OTC 28CT, "norgestrel daily birth control pill, 28 count", 19.99]
+- id: otc-electrolyte-rehydration
+  names: [oral rehydration solution, electrolyte solution]
+  verdict: dual_purpose
+  rule: "Sources don't settle it: oral rehydration solutions treat dehydration, but electrolyte drinks are also ordinary beverages. Eligible only when used to treat illness."
+  sources: [p502:what-are-medical-expenses, p502:personal-use-items]
+  merchants: [pharmacy, grocery, big_box]
+  products:
+    - [ORAL REHYD SOL 1L, "oral rehydration solution, 1 liter", 6.99]
+- id: insulin
+  names: [insulin]
+  verdict: eligible
+  rule: "Insulin is includible even without a prescription."
+  sources: [p502:medicines]
+  merchants: [pharmacy]
+  products:
+    - [INSULIN REG HUM 10ML, "regular human insulin, 10 ml vial", 24.88]
+- id: prescription-drug
+  names: [prescription, rx]
+  verdict: eligible
+  rule: "Prescribed medicines and drugs are includible."
+  sources: [p502:medicines]
+  merchants: [pharmacy]
+  products:
+    - [RX 4419023 ATORVASTATIN, "prescription: atorvastatin", 12.00]
+    - [RX 4419877 AMOXICILLIN, "prescription: amoxicillin", 8.50]
+    - [RX 4420114 LISINOPRIL, "prescription: lisinopril", 4.00]
+    - [RX 4420560 SERTRALINE, "prescription: sertraline", 10.00]
+    - [RX 4421308 ALBUTEROL INH, "prescription: albuterol inhaler", 25.00]
+- id: prescription-birth-control
+  names: [birth control pills, oral contraceptive prescription]
+  verdict: eligible
+  rule: "Birth control pills prescribed by a doctor are includible."
+  sources: [p502:birth-control-pills]
+  merchants: [pharmacy]
+  products:
+    - [RX 4422051 NORETHINDRONE, "prescription: norethindrone birth control", 15.00]
+- id: imported-prescription
+  names: [imported prescription drug]
+  verdict: not_eligible
+  rule: "A prescribed drug ordered from another country generally isn't includible unless it was imported legally."
+  sources: [p502:medicines-and-drugs-from-other-countries]
+  merchants: [other]
+  products:
+    - [INTL PHARM SHIP RX ORDER, "prescription drug shipped from an international pharmacy", 89.00]
+- id: controlled-substance
+  names: [marijuana, cannabis, cbd dispensary]
+  verdict: not_eligible
+  rule: "Controlled substances that aren't legal under federal law aren't includible, even where state law allows them."
+  sources: [p502:controlled-substances]
+  merchants: [other]
+  products:
+    - [MED CANNABIS 3.5G, "medical cannabis flower, 3.5 g", 45.00]
+# ---------------------------------------------------------------- menstrual care (CARES Act)
+- id: menstrual-care
+  names: [tampons, pads, liners, menstrual cup, period underwear]
+  verdict: eligible
+  rule: "Menstrual care products (tampon, pad, liner, cup, sponge or similar) are treated as medical care for HSAs, FSAs and HRAs after 2019."
+  sources: [cares:sec-3702, p969:distributions-from-an-hsa, p969:distributions-from-an-fsa]
+  merchants: [pharmacy, big_box, grocery]
+  products:
+    - [TAMPONS REG 36CT, "tampons regular, 36 count", 9.99]
+    - [MAXI PADS OVERNIGHT 28, "overnight maxi pads, 28 count", 8.49]
+    - [PANTILINERS 60CT, "pantiliners, 60 count", 5.99]
+    - [MENSTRUAL CUP SZ 2, "menstrual cup, size 2", 29.99]
+# ---------------------------------------------------------------- first aid & medical supplies
+- id: bandages
+  names: [bandages, adhesive bandages, gauze, medical tape, elastic bandage]
+  verdict: eligible
+  rule: "Medical supplies such as bandages are includible."
+  sources: [p502:bandages]
+  merchants: [pharmacy, big_box, grocery, other]
+  products:
+    - [BAND AID FLX 30CT, "flexible fabric adhesive bandages, 30 count", 4.99]
+    - [GAUZE PADS 4X4 25CT, "gauze pads 4x4 in, 25 count", 6.49]
+    - [MED TAPE PAPER 1IN, "paper medical tape, 1 in", 3.79]
+    - [ELASTIC BNDG 3IN, "elastic bandage wrap, 3 in", 7.99]
+- id: first-aid-kit
+  names: [first aid kit]
+  verdict: eligible
+  rule: "A first aid kit is a set of medical supplies such as bandages."
+  sources: [p502:bandages, p502:what-are-medical-expenses]
+  merchants: [pharmacy, big_box]
+  products:
+    - [FIRST AID KIT 100PC, "first aid kit, 100 pieces", 19.99]
+- id: antiseptic
+  names: [antiseptic, hydrogen peroxide, isopropyl alcohol, wound wash]
+  verdict: eligible
+  rule: "Antiseptics for wound care are OTC medicines and medical supplies."
+  sources: [p969:distributions-from-an-fsa, cares:sec-3702, p502:bandages]
+  merchants: [pharmacy, big_box, grocery]
+  products:
+    - [HYD PEROXIDE 3% 32OZ, "hydrogen peroxide 3%, 32 oz", 1.99]
+    - [ISOPROPYL ALC 70% 16OZ, "isopropyl alcohol 70%, 16 oz", 2.49]
+    - [WOUND WASH SALINE 7OZ, "saline wound wash, 7 oz", 7.49]
+- id: burn-care
+  names: [burn gel, burn dressing]
+  verdict: eligible
+  rule: "Burn dressings and medicated burn gels are medical supplies and OTC medicines."
+  sources: [p502:bandages, p969:distributions-from-an-fsa]
+  merchants: [pharmacy]
+  products:
+    - [BURN RELIEF GEL 4OZ, "lidocaine burn relief gel, 4 oz", 6.99]
+- id: blister-care
+  names: [blister bandages, moleskin]
+  verdict: eligible
+  rule: "Blister bandages are medical supplies such as bandages."
+  sources: [p502:bandages]
+  merchants: [pharmacy, big_box]
+  products:
+    - [BLISTER CUSHION 6CT, "blister cushion bandages, 6 count", 7.49]
+- id: syringes-diabetic-supplies
+  names: [insulin syringes, pen needles, lancets]
+  verdict: eligible
+  rule: "Supplies needed to treat a disease, such as insulin syringes and lancets, are includible medical supplies."
+  sources: [p502:what-are-medical-expenses, p502:diagnostic-devices]
+  merchants: [pharmacy]
+  products:
+    - [INSULIN SYRINGE 100CT, "insulin syringes, 100 count", 21.99]
+    - [LANCETS 30G 100CT, "lancets 30 gauge, 100 count", 8.99]
+- id: glucose-monitoring
+  names: [blood glucose meter, glucose test strips]
+  verdict: eligible
+  rule: "Diagnostic devices are includible; Pub 502's example is a blood sugar test kit."
+  sources: [p502:diagnostic-devices]
+  merchants: [pharmacy, big_box]
+  products:
+    - [GLUCOSE METER KIT, "blood glucose meter kit", 24.99]
+    - [GLUCOSE STRIPS 50CT, "blood glucose test strips, 50 count", 29.99]
+- id: blood-pressure-monitor
+  names: [blood pressure monitor]
+  verdict: eligible
+  rule: "Devices used in diagnosing and treating illness are includible."
+  sources: [p502:diagnostic-devices]
+  merchants: [pharmacy, big_box]
+  products:
+    - [BP MONITOR UPPER ARM, "upper arm blood pressure monitor", 49.99]
+- id: thermometer
+  names: [thermometer, digital thermometer]
+  verdict: eligible
+  rule: "A thermometer is a device used in diagnosing illness."
+  sources: [p502:diagnostic-devices]
+  merchants: [pharmacy, big_box, grocery]
+  products:
+    - [DIGITAL THERMOMETER, "digital thermometer", 9.99]
+    - [FOREHEAD THERM IR, "infrared forehead thermometer", 34.99]
+- id: pulse-oximeter
+  names: [pulse oximeter]
+  verdict: eligible
+  rule: "A pulse oximeter is a device used in diagnosing and monitoring illness."
+  sources: [p502:diagnostic-devices]
+  merchants: [pharmacy, big_box]
+  products:
+    - [PULSE OXIMETER FNGR, "fingertip pulse oximeter", 29.99]
+- id: covid-test
+  names: [covid test, antigen test, at-home test]
+  verdict: eligible
+  rule: "At-home diagnostic tests are devices used in diagnosing illness."
+  sources: [p502:diagnostic-devices, p502:laboratory-fees]
+  merchants: [pharmacy, big_box, grocery]
+  products:
+    - [COVID AG HOME TEST 2PK, "COVID-19 at-home antigen test, 2 pack", 19.99]
+- id: pregnancy-test
+  names: [pregnancy test]
+  verdict: eligible
+  rule: "A pregnancy test kit is includible."
+  sources: [p502:pregnancy-test-kit]
+  merchants: [pharmacy, big_box, grocery]
+  products:
+    - [PREG TEST DIGITAL 2CT, "digital pregnancy test, 2 count", 15.99]
+- id: condoms
+  names: [condoms]
+  verdict: eligible
+  rule: "Condoms are includible."
+  sources: [p502:condoms]
+  merchants: [pharmacy, big_box, grocery]
+  products:
+    - [CONDOMS LUBR 12CT, "lubricated condoms, 12 count", 11.99]
+- id: ppe-masks-sanitizer
+  names: [face masks, hand sanitizer, sanitizing wipes]
+  verdict: dual_purpose
+  rule: "Masks, hand sanitizer and sanitizing wipes are includible when bought primarily to prevent the spread of COVID-19; ordinary cleaning use is not."
+  sources: [p502:personal-protective-equipment]
+  merchants: [pharmacy, big_box, grocery]
+  products:
+    - [FACE MASK 3PLY 50CT, "disposable 3-ply face masks, 50 count", 9.99]
+    - [HAND SANITIZER 8OZ, "hand sanitizer, 8 oz", 3.49]
+- id: hot-cold-therapy
+  names: [heating pad, cold pack, ice pack]
+  verdict: dual_purpose
+  rule: "Sources don't name them; heat and cold packs are equipment for treating an injury but also have ordinary uses. Eligible only when used to treat a condition."
+  sources: [p502:what-are-medical-expenses, p502:personal-use-items]
+  merchants: [pharmacy, big_box]
+  products:
+    - [HEATING PAD XL, "electric heating pad, XL", 29.99]
+    - [COLD PACK REUSABLE, "reusable cold pack", 8.99]
+- id: braces-supports
+  names: [knee brace, wrist brace, back brace, ankle support]
+  verdict: dual_purpose
+  rule: "Supports aren't named in the sources; they are medical equipment when used to treat an injury or condition, not when worn for general athletic use."
+  sources: [p502:what-are-medical-expenses]
+  merchants: [pharmacy, big_box]
+  products:
+    - [KNEE BRACE ADJ, "adjustable knee brace", 24.99]
+    - [WRIST SPLINT RT, "right wrist splint", 19.99]
+    - [ANKLE SUPPORT SLV M, "ankle support sleeve, medium", 14.99]
+- id: crutches
+  names: [crutches]
+  verdict: eligible
+  rule: "Buying or renting crutches is includible."
+  sources: [p502:crutches]
+  merchants: [pharmacy, medical_provider, other]
+  products:
+    - [CRUTCHES ALUM ADULT, "aluminum adult crutches", 39.99]
+- id: wheelchair
+  names: [wheelchair, wheelchair repair]
+  verdict: eligible
+  rule: "A wheelchair used for relief of sickness or disability is includible, as is its upkeep."
+  sources: [p502:wheelchair]
+  merchants: [medical_provider, other]
+  products:
+    - [WHEELCHAIR STD 18IN, "standard wheelchair, 18 in seat", 189.00]
+- id: mobility-aids
+  names: [cane, walker, rollator]
+  verdict: dual_purpose
+  rule: "Canes and walkers aren't named in the sources; they are equipment for relieving a disability, which the general definition covers when that is their primary use."
+  sources: [p502:what-are-medical-expenses, p502:wheelchair]
+  merchants: [pharmacy, medical_provider]
+  products:
+    - [WALKING CANE ADJ, "adjustable walking cane", 22.99]
+    - [ROLLATOR 4WHL SEAT, "four-wheel rollator with seat", 79.99]
+- id: oxygen
+  names: [oxygen, oxygen equipment]
+  verdict: eligible
+  rule: "Oxygen and oxygen equipment to relieve breathing problems caused by a medical condition are includible."
+  sources: [p502:oxygen]
+  merchants: [medical_provider]
+  products:
+    - [O2 CONCENTRATOR RENTAL, "oxygen concentrator rental, 1 month", 150.00]
+- id: hearing-aids
+  names: [hearing aid, hearing aid batteries]
+  verdict: eligible
+  rule: "Hearing aids and the batteries, repairs and maintenance needed to run them are includible."
+  sources: [p502:hearing-aids]
+  merchants: [pharmacy, medical_provider, big_box]
+  products:
+    - [HEARING AID BATT 312 24, "hearing aid batteries size 312, 24 count", 14.99]
+    - [OTC HEARING AID PAIR, "OTC hearing aids, pair", 299.00, [pharmacy, big_box]]
+- id: breast-pump
+  names: [breast pump, breast pump supplies, nursing pads]
+  verdict: eligible
+  rule: "Breast pumps and supplies that assist lactation are includible."
+  sources: [p502:breast-pumps-and-supplies]
+  merchants: [pharmacy, big_box]
+  products:
+    - [BREAST PUMP DBL ELEC, "double electric breast pump", 159.99]
+    - [PUMP FLANGE KIT 24MM, "breast pump flange kit, 24 mm", 19.99]
+- id: breast-milk-storage-bottles
+  names: [milk storage bottles, breast milk storage bags]
+  verdict: not_eligible
+  rule: "Pub 502 excludes excess bottles for food storage from breast pump supplies."
+  sources: [p502:breast-pumps-and-supplies]
+  merchants: [pharmacy, big_box]
+  products:
+    - [MILK STORAGE BTL 10PK, "breast milk storage bottles, 10 pack", 18.99]
+- id: incontinence-supplies
+  names: [adult incontinence briefs, bladder control pads]
+  verdict: dual_purpose
+  rule: "Diapers are excluded unless needed to relieve the effects of a particular disease; adult incontinence products qualify when used for a medical condition."
+  sources: [p502:diaper-service]
+  merchants: [pharmacy, big_box, grocery]
+  products:
+    - [ADULT BRIEFS MAX L 16, "adult incontinence briefs, large, 16 count", 17.99]
+    - [BLADDER PADS MOD 54, "bladder control pads, moderate, 54 count", 13.49]
+- id: baby-diapers
+  names: [diapers, baby wipes]
+  verdict: not_eligible
+  rule: "Diapers aren't includible unless needed to relieve the effects of a particular disease; ordinary baby diapers are not."
+  sources: [p502:diaper-service]
+  merchants: [pharmacy, big_box, grocery]
+  products:
+    - [DIAPERS SZ3 84CT, "baby diapers size 3, 84 count", 27.99]
+    - [BABY WIPES 216CT, "baby wipes, 216 count", 9.99]
+- id: compression-socks
+  names: [compression socks, compression stockings]
+  verdict: dual_purpose
+  rule: "Not named in the sources; compression garments treat circulatory conditions but are also worn for comfort or sport. Eligible only for a medical condition."
+  sources: [p502:what-are-medical-expenses, p502:personal-use-items]
+  merchants: [pharmacy, big_box]
+  products:
+    - [COMPRESSION SOCKS 15-20, "compression socks 15-20 mmHg", 19.99]
+- id: orthotic-inserts
+  names: [orthotic insoles, arch supports]
+  verdict: dual_purpose
+  rule: "Not named in the sources; orthotics are equipment for a foot condition but also sold for comfort. Eligible only when used to treat a condition."
+  sources: [p502:what-are-medical-expenses, p502:personal-use-items]
+  merchants: [pharmacy, big_box]
+  products:
+    - [ORTHOTIC INSOLES M, "orthotic arch support insoles, men's", 39.99]
+- id: humidifier
+  names: [humidifier, vaporizer]
+  verdict: needs_prescription
+  rule: "A household item is includible only if used primarily to alleviate an illness; plans require a letter of medical necessity to show that."
+  sources: [p502:personal-use-items, p502:what-are-medical-expenses]
+  merchants: [pharmacy, big_box]
+  products:
+    - [COOL MIST HUMIDIFIER, "cool mist humidifier", 39.99]
+    - [WARM MIST VAPORIZER, "warm mist vaporizer", 34.99]
+    - [HUMIDIFIER WICK FLTR, "humidifier wick filter", 9.99]
+- id: air-purifier
+  names: [air purifier, hepa air purifier]
+  verdict: needs_prescription
+  rule: "Equipment whose main purpose is medical care is includible; for an ordinary household air purifier that purpose must be documented by a physician."
+  sources: [p502:capital-expenses, p502:personal-use-items]
+  merchants: [big_box, pharmacy, other]
+  products:
+    - [HEPA AIR PURIFIER, "HEPA air purifier", 129.99]
+    - [HEPA REPLACEMNT FLTR, "HEPA air purifier replacement filter", 39.99]
+- id: cpap-supplies
+  names: [cpap mask, cpap filters, cpap tubing]
+  verdict: eligible
+  rule: "Equipment and supplies needed to treat a disease are includible medical expenses."
+  sources: [p502:what-are-medical-expenses]
+  merchants: [medical_provider, pharmacy]
+  products:
+    - [CPAP FILTERS 6PK, "CPAP machine filters, 6 pack", 14.99]
+    - [CPAP NASAL MASK, "CPAP nasal mask", 89.00]
+- id: nebulizer
+  names: [nebulizer, nebulizer kit]
+  verdict: eligible
+  rule: "Equipment needed to treat a disease is an includible medical expense."
+  sources: [p502:what-are-medical-expenses]
+  merchants: [pharmacy, medical_provider]
+  products:
+    - [NEBULIZER COMPRESSOR, "nebulizer compressor kit", 54.99]
+- id: tens-unit
+  names: [tens unit]
+  verdict: dual_purpose
+  rule: "Not named in the sources; a TENS unit is equipment for treating pain but also sold for general muscle relaxation. Eligible only for a condition."
+  sources: [p502:what-are-medical-expenses]
+  merchants: [pharmacy, big_box]
+  products:
+    - [TENS UNIT DUAL CH, "dual channel TENS unit", 39.99]
+- id: pill-organizer
+  names: [pill organizer, pill box]
+  verdict: not_eligible
+  rule: "A pill box is an ordinary household item, not equipment used to diagnose or treat illness."
+  sources: [p502:personal-use-items]
+  merchants: [pharmacy, big_box]
+  products:
+    - [PILL ORGANIZER 7DAY, "7-day pill organizer", 4.99]
+# ---------------------------------------------------------------- vision (optical)
+- id: eyeglasses-prescription
+  names: [prescription eyeglasses, eyeglass lenses, eyeglass frames]
+  verdict: eligible
+  rule: "Eyeglasses needed for medical reasons are includible."
+  sources: [p502:eyeglasses]
+  merchants: [optical, big_box]
+  products:
+    - [RX LENSES SV POLY, "prescription single vision lenses, polycarbonate", 129.00]
+    - [FRAME TITAN 52-18, "eyeglass frame, titanium", 149.00]
+    - [RX LENS AR COATING, "anti-reflective lens coating", 59.00]
+- id: reading-glasses
+  names: [reading glasses]
+  verdict: eligible
+  rule: "Eyeglasses needed for medical reasons are includible; non-prescription reading glasses correct vision."
+  sources: [p502:eyeglasses]
+  merchants: [pharmacy, big_box, optical]
+  products:
+    - [READING GLASSES +2.00, "reading glasses +2.00", 14.99]
+- id: contact-lenses
+  names: [contact lenses]
+  verdict: eligible
+  rule: "Contact lenses needed for medical reasons are includible."
+  sources: [p502:contact-lenses]
+  merchants: [optical, big_box]
+  products:
+    - [CONTACTS DAILY 90PK, "daily contact lenses, 90 pack", 74.99]
+    - [CONTACTS 2WK 6PK, "two-week contact lenses, 6 pack", 39.99]
+- id: contact-lens-solution
+  names: [contact lens solution, saline solution, enzyme cleaner]
+  verdict: eligible
+  rule: "Equipment and materials required for using contact lenses, such as saline solution and enzyme cleaner, are includible."
+  sources: [p502:contact-lenses]
+  merchants: [pharmacy, big_box, optical, grocery]
+  products:
+    - [MULTI-PURP SOLN 12OZ, "multi-purpose contact lens solution, 12 oz", 10.99]
+    - [SALINE SOLN 12OZ, "saline solution, 12 oz", 5.99]
+- id: eye-exam
+  names: [eye exam, vision exam]
+  verdict: eligible
+  rule: "Eye examinations are includible."
+  sources: [p502:eye-exam]
+  merchants: [optical, medical_provider]
+  products:
+    - [COMPREHENSIVE EYE EXAM, "comprehensive eye examination", 95.00]
+    - [CONTACT LENS FITTING, "contact lens fitting", 60.00]
+- id: eye-surgery
+  names: [lasik, laser eye surgery]
+  verdict: eligible
+  rule: "Eye surgery to treat defective vision, such as laser eye surgery, is includible."
+  sources: [p502:eye-surgery]
+  merchants: [medical_provider]
+  products:
+    - [LASIK BOTH EYES, "LASIK surgery, both eyes", 2400.00]
+- id: prescription-sunglasses
+  names: [prescription sunglasses]
+  verdict: eligible
+  rule: "Prescription sunglasses are eyeglasses needed for medical reasons."
+  sources: [p502:eyeglasses]
+  merchants: [optical]
+  products:
+    - [RX SUN LENSES POLARZ, "prescription polarized sunglass lenses", 189.00]
+- id: non-prescription-sunglasses
+  names: [sunglasses]
+  verdict: not_eligible
+  rule: "Non-prescription sunglasses are an item ordinarily used for personal purposes."
+  sources: [p502:personal-use-items]
+  merchants: [optical, big_box, pharmacy]
+  products:
+    - [SUNGLASSES POLARZD, "non-prescription polarized sunglasses", 24.99]
+- id: eyeglass-accessories
+  names: [eyeglass case, lens cleaning cloth, eyeglass chain]
+  verdict: not_eligible
+  rule: "Cases, chains and cleaning cloths are personal accessories, not equipment needed to use the lenses."
+  sources: [p502:personal-use-items]
+  merchants: [optical, pharmacy, big_box]
+  products:
+    - [EYEGLASS CASE HARD, "hard eyeglass case", 12.00]
+    - [LENS CLOTH MICROFBR, "microfiber lens cleaning cloth", 4.99]
+- id: blue-light-glasses
+  names: [blue light glasses]
+  verdict: dual_purpose
+  rule: "Not named in the sources; glasses without a prescription that don't correct vision are eligible only if needed for a medical reason."
+  sources: [p502:eyeglasses, p502:personal-use-items]
+  merchants: [optical, big_box]
+  products:
+    - [BLUE LIGHT GLASSES, "blue light filtering glasses, non-prescription", 29.99]
+# ---------------------------------------------------------------- dental
+- id: dental-treatment
+  names: [dental cleaning, filling, extraction, dental x-ray, crown, root canal]
+  verdict: eligible
+  rule: "Prevention and alleviation of dental disease (cleanings, sealants, fluoride, X-rays, fillings, extractions) is includible."
+  sources: [p502:dental-treatment]
+  merchants: [dental]
+  products:
+    - [D1110 PROPHY ADULT, "adult dental cleaning (prophylaxis)", 115.00]
+    - [D0274 BITEWINGS 4FILM, "dental x-rays, 4 bitewings", 68.00]
+    - [D2392 RESIN 2SURF POST, "composite filling, two surfaces, posterior", 210.00]
+    - [D7140 EXTRACTION, "tooth extraction", 185.00]
+    - [D1208 FLUORIDE VARNISH, "fluoride varnish treatment", 35.00]
+- id: orthodontics
+  names: [braces, orthodontic treatment, clear aligners]
+  verdict: eligible
+  rule: "Dental treatment, including braces, to alleviate dental disease is includible."
+  sources: [p502:dental-treatment]
+  merchants: [dental]
+  products:
+    - [ORTHO TX PMT 3 OF 24, "orthodontic treatment payment 3 of 24", 225.00]
+- id: dentures
+  names: [dentures, artificial teeth, denture adhesive]
+  verdict: eligible
+  rule: "Artificial teeth and dentures are includible."
+  sources: [p502:artificial-teeth, p502:dental-treatment]
+  merchants: [dental, pharmacy]
+  products:
+    - [D5110 COMPLETE DENTURE, "complete upper denture", 1450.00, [dental]]
+    - [DENTURE ADHESV 2.4OZ, "denture adhesive cream, 2.4 oz", 7.99, [pharmacy]]
+- id: teeth-whitening
+  names: [teeth whitening, whitening strips]
+  verdict: not_eligible
+  rule: "Amounts paid to whiten teeth aren't includible."
+  sources: [p502:teeth-whitening]
+  merchants: [dental, pharmacy, big_box]
+  products:
+    - [WHITENING STRIPS 20CT, "teeth whitening strips, 20 count", 44.99, [pharmacy, big_box]]
+    - [IN-OFFICE WHITENING, "in-office teeth whitening", 350.00, [dental]]
+- id: toothbrush-toothpaste
+  names: [toothbrush, toothpaste, floss, mouthwash]
+  verdict: not_eligible
+  rule: "Pub 502 names toothbrush and toothpaste as nondeductible personal expenses."
+  sources: [p502:personal-use-items]
+  merchants: [pharmacy, big_box, grocery, dental]
+  products:
+    - [TOOTHPASTE FLUOR 4.8OZ, "fluoride toothpaste, 4.8 oz", 3.99]
+    - [TOOTHBRUSH SOFT 2PK, "soft toothbrush, 2 pack", 4.49]
+    - [DENTAL FLOSS 50YD, "dental floss, 50 yd", 2.99]
+    - [MOUTHWASH MINT 1L, "mint mouthwash, 1 liter", 6.49]
+- id: electric-toothbrush
+  names: [electric toothbrush]
+  verdict: not_eligible
+  rule: "A toothbrush is a personal expense; a powered one is still ordinarily used for personal purposes."
+  sources: [p502:personal-use-items]
+  merchants: [pharmacy, big_box]
+  products:
+    - [ELEC TOOTHBRUSH RECHG, "rechargeable electric toothbrush", 49.99]
+- id: night-guard
+  names: [night guard, dental guard]
+  verdict: dual_purpose
+  rule: "Not named in the sources; a dental guard treats teeth grinding (eligible as dental treatment) but sports mouth guards are general use."
+  sources: [p502:dental-treatment, p502:personal-use-items]
+  merchants: [pharmacy, dental]
+  products:
+    - [DENTAL NIGHT GUARD, "dental night guard for teeth grinding", 24.99]
+# ---------------------------------------------------------------- medical services
+- id: doctor-visit
+  names: [office visit, copay, physician visit]
+  verdict: eligible
+  rule: "Payments for medical services by physicians and other medical practitioners are includible."
+  sources: [p502:what-are-medical-expenses, p502:physical-examination]
+  merchants: [medical_provider]
+  products:
+    - [OFFICE VISIT EST PT, "office visit, established patient", 145.00]
+    - [COPAY PRIMARY CARE, "primary care copay", 30.00]
+    - [ANNUAL PHYSICAL, "annual physical examination", 210.00]
+- id: urgent-care
+  names: [urgent care visit]
+  verdict: eligible
+  rule: "Payments for medical services by physicians are includible."
+  sources: [p502:what-are-medical-expenses]
+  merchants: [medical_provider]
+  products:
+    - [URGENT CARE VISIT, "urgent care visit", 175.00]
+- id: lab-fees
+  names: [lab fees, blood test, lab panel]
+  verdict: eligible
+  rule: "Laboratory fees that are part of medical care are includible."
+  sources: [p502:laboratory-fees]
+  merchants: [medical_provider]
+  products:
+    - [LAB CMP PANEL, "comprehensive metabolic panel lab test", 48.00]
+    - [LAB LIPID PANEL, "lipid panel lab test", 39.00]
+- id: x-ray
+  names: [x-ray, imaging]
+  verdict: eligible
+  rule: "X-rays for medical reasons are includible."
+  sources: [p502:x-ray]
+  merchants: [medical_provider]
+  products:
+    - [XRAY CHEST 2VIEW, "chest x-ray, 2 views", 120.00]
+- id: chiropractor
+  names: [chiropractor, chiropractic adjustment]
+  verdict: eligible
+  rule: "Fees paid to a chiropractor for medical care are includible."
+  sources: [p502:chiropractor]
+  merchants: [medical_provider]
+  products:
+    - [CHIRO ADJUSTMENT, "chiropractic adjustment", 65.00]
+- id: acupuncture
+  names: [acupuncture]
+  verdict: eligible
+  rule: "Acupuncture is includible."
+  sources: [p502:acupuncture]
+  merchants: [medical_provider]
+  products:
+    - [ACUPUNCTURE SESSION, "acupuncture session", 85.00]
+- id: physical-therapy
+  names: [physical therapy]
+  verdict: eligible
+  rule: "Therapy received as medical treatment is includible."
+  sources: [p502:therapy]
+  merchants: [medical_provider]
+  products:
+    - [PT EVAL 97161, "physical therapy evaluation", 150.00]
+    - [PT THER EX 97110 X2, "physical therapy exercise, 2 units", 90.00]
+- id: psychotherapy
+  names: [therapy session, counseling, psychologist, psychiatrist]
+  verdict: eligible
+  rule: "Payments to a psychologist or for psychiatric care are includible."
+  sources: [p502:psychologist, p502:psychiatric-care]
+  merchants: [medical_provider]
+  products:
+    - [PSYCHOTHERAPY 53MIN, "psychotherapy session, 53 minutes", 160.00]
+- id: ambulance
+  names: [ambulance]
+  verdict: eligible
+  rule: "Ambulance service is includible."
+  sources: [p502:ambulance]
+  merchants: [medical_provider]
+  products:
+    - [AMBULANCE BLS TRANSPORT, "basic life support ambulance transport", 650.00]
+- id: hospital-services
+  names: [hospital, inpatient care, emergency room]
+  verdict: eligible
+  rule: "Inpatient hospital care whose principal reason is medical care is includible."
+  sources: [p502:hospital-services]
+  merchants: [medical_provider]
+  products:
+    - [ER FACILITY FEE LVL3, "emergency room facility fee, level 3", 480.00]
+- id: fertility-treatment
+  names: [ivf, fertility treatment, egg storage]
+  verdict: eligible
+  rule: "Procedures to overcome an inability to have children, such as IVF and temporary storage of eggs or sperm, are includible."
+  sources: [p502:fertility-enhancement]
+  merchants: [medical_provider]
+  products:
+    - [IVF MONITORING VISIT, "IVF cycle monitoring visit", 350.00]
+    - [EMBRYO STORAGE ANNUAL, "embryo storage, annual fee", 600.00]
+- id: vasectomy-sterilization
+  names: [vasectomy, sterilization]
+  verdict: eligible
+  rule: "A legal sterilization, including a vasectomy, is includible."
+  sources: [p502:vasectomy, p502:sterilization]
+  merchants: [medical_provider]
+  products:
+    - [VASECTOMY OFFICE PROC, "vasectomy, office procedure", 900.00]
+- id: stop-smoking-program
+  names: [smoking cessation program]
+  verdict: eligible
+  rule: "A program to stop smoking is includible."
+  sources: [p502:stop-smoking-programs]
+  merchants: [medical_provider]
+  products:
+    - [SMOKING CESSATION PROG, "smoking cessation program fee", 120.00]
+- id: hearing-exam
+  names: [hearing test, audiology exam]
+  verdict: eligible
+  rule: "Diagnostic tests by a medical practitioner are includible."
+  sources: [p502:what-are-medical-expenses, p502:physical-examination]
+  merchants: [medical_provider]
+  products:
+    - [AUDIOLOGY EXAM COMP, "comprehensive audiology exam", 120.00]
+- id: massage-therapy
+  names: [massage, massage therapy]
+  verdict: needs_prescription
+  rule: "Therapy received as medical treatment is includible; massage qualifies only with a physician's prescription or letter of medical necessity for a condition, not for general well-being."
+  sources: [p502:therapy, p502:health-club-dues]
+  merchants: [medical_provider, other]
+  products:
+    - [MASSAGE 60MIN, "massage, 60 minutes", 95.00]
+- id: weight-loss-program
+  names: [weight loss program, weight reduction group]
+  verdict: needs_prescription
+  rule: "A weight-loss program is includible only as treatment for a specific disease diagnosed by a physician (such as obesity or hypertension)."
+  sources: [p502:weight-loss-program]
+  merchants: [other, medical_provider]
+  products:
+    - [WT LOSS PROG MONTHLY, "weight loss program, monthly fee", 49.00]
+- id: wig
+  names: [wig, hair prosthesis]
+  verdict: needs_prescription
+  rule: "A wig is includible only when bought on a physician's advice for a patient who lost all of their hair from disease."
+  sources: [p502:wig]
+  merchants: [other]
+  products:
+    - [WIG MEDICAL GRADE, "medical grade wig", 280.00]
+- id: health-institute
+  names: [health institute treatment, wellness institute program]
+  verdict: needs_prescription
+  rule: "Treatment at a health institute is includible only if prescribed by a physician who states it is necessary to alleviate a disability or illness."
+  sources: [p502:health-institute]
+  merchants: [other, medical_provider]
+  products:
+    - [WELLNESS INST 2WK PROG, "health institute program, 2 weeks", 1200.00]
+    - [HEALTH INST TREATMENT, "health institute treatment session", 180.00]
+- id: special-education-tutoring
+  names: [learning disability tutoring, special education]
+  verdict: needs_prescription
+  rule: "Tutoring by a specially trained teacher for a child's learning disability is includible when paid on a doctor's recommendation."
+  sources: [p502:special-education]
+  merchants: [other]
+  products:
+    - [LD TUTORING 4 SESS, "learning disability tutoring, 4 sessions", 320.00]
+- id: home-accessibility
+  names: [grab bars, handrails, wheelchair ramp, bathroom modification]
+  verdict: needs_prescription
+  rule: "Grab bars, railings and ramps are includible in full when installed to accommodate a disabled condition; the receipt can't show that, so plans require medical documentation."
+  sources: [p502:capital-expenses]
+  merchants: [big_box, pharmacy, other]
+  products:
+    - [GRAB BAR 24IN SS, "stainless steel grab bar, 24 in", 34.99]
+    - [MODULAR RAMP 6FT, "modular wheelchair ramp, 6 ft", 449.00, [big_box, other]]
+    - [TOILET SAFETY RAIL, "toilet safety rail", 49.99]
+    - [TUB TRANSFER RAIL, "bathtub transfer rail", 44.99]
+    - [HANDRAIL KIT 36IN, "stair handrail kit, 36 in", 59.99, [big_box, other]]
+- id: tty-telephone
+  names: [tty phone, amplified phone, captioned telephone]
+  verdict: needs_prescription
+  rule: "Special telephone equipment that lets a person who is deaf, hard of hearing or speech disabled communicate is includible; an amplified phone sold to anyone needs documentation of that use."
+  sources: [p502:telephone]
+  merchants: [big_box, pharmacy, other]
+  products:
+    - [AMPLIFIED PHONE 40DB, "amplified telephone, 40 dB", 69.99]
+    - [CAPTIONED PHONE, "captioned telephone", 89.99]
+- id: nursing-care
+  names: [home health aide, in-home nursing care]
+  verdict: needs_prescription
+  rule: "Nursing services for a patient's condition are includible, but only the nursing part of an aide's pay; personal and household services aren't, so plans need a breakdown or care plan."
+  sources: [p502:nursing-services]
+  merchants: [medical_provider, other]
+  products:
+    - [HOME HEALTH AIDE 8HR, "home health aide, 8 hours", 224.00]
+- id: special-diet-food
+  names: [diet food, meal replacement shakes]
+  verdict: not_eligible
+  rule: "Diet food and beverages aren't includible because they substitute for what is normally eaten."
+  sources: [p502:weight-loss-program]
+  merchants: [grocery, big_box, pharmacy]
+  products:
+    - [MEAL REPL SHAKE 12PK, "meal replacement shakes, 12 pack", 24.99]
+    - [DIET FROZ ENTREE, "diet frozen entree", 3.49]
+- id: vitamins-supplements
+  names: [vitamins, multivitamin, supplements, fish oil, probiotics]
+  verdict: dual_purpose
+  rule: "Vitamins and supplements aren't includible unless recommended by a medical practitioner as treatment for a specific diagnosed condition."
+  sources: [p502:nutritional-supplements]
+  merchants: [pharmacy, big_box, grocery]
+  products:
+    - [MULTIVIT ADULT 100CT, "adult multivitamin, 100 count", 12.99]
+    - [VIT D3 2000IU 120CT, "vitamin D3 2000 IU, 120 count", 9.99]
+    - [FISH OIL 1000MG 90CT, "fish oil 1000 mg, 90 count", 14.99]
+    - [PROBIOTIC 30CT, "probiotic capsules, 30 count", 24.99]
+- id: prenatal-vitamins
+  names: [prenatal vitamins]
+  verdict: dual_purpose
+  rule: "Supplements are includible only when recommended by a practitioner for a specific condition; prenatal vitamins are commonly recommended but the receipt can't show it."
+  sources: [p502:nutritional-supplements]
+  merchants: [pharmacy, big_box]
+  products:
+    - [PRENATAL VIT 90CT, "prenatal vitamins, 90 count", 19.99]
+- id: herbal-remedies
+  names: [herbal supplement, elderberry, melatonin]
+  verdict: dual_purpose
+  rule: "Herbal supplements and 'natural medicines' aren't includible unless recommended by a practitioner for a diagnosed condition."
+  sources: [p502:nutritional-supplements]
+  merchants: [pharmacy, big_box, grocery]
+  products:
+    - [ELDERBERRY GUMMY 60CT, "elderberry gummies, 60 count", 15.99]
+    - [MELATONIN 5MG 90CT, "melatonin 5 mg, 90 count", 8.99]
+- id: protein-supplement
+  names: [protein powder, protein bars]
+  verdict: not_eligible
+  rule: "Nutritional supplements taken to maintain ordinary good health aren't medical care."
+  sources: [p502:nutritional-supplements]
+  merchants: [grocery, big_box, pharmacy]
+  products:
+    - [WHEY PROTEIN 2LB, "whey protein powder, 2 lb", 34.99]
+    - [PROTEIN BAR 12PK, "protein bars, 12 pack", 19.99]
+# ---------------------------------------------------------------- sun & skin
+- id: sunscreen
+  names: [sunscreen, sunblock, spf]
+  verdict: dual_purpose
+  rule: "Not named in the sources; sunscreen prevents skin disease but is also an ordinary personal-care product. Eligible only when used primarily for a medical reason."
+  sources: [p502:what-are-medical-expenses, p502:personal-use-items]
+  merchants: [pharmacy, big_box, grocery]
+  products:
+    - [SUNSCREEN SPF50 8OZ, "sunscreen SPF 50, 8 oz", 11.99]
+    - [SPF30 FACE LOTION 2OZ, "SPF 30 face lotion, 2 oz", 15.99]
+- id: cosmetics
+  names: [makeup, cosmetics, foundation, lipstick, mascara]
+  verdict: not_eligible
+  rule: "Cosmetics improve appearance and don't treat illness; they are personal-use items."
+  sources: [p502:personal-use-items, p502:cosmetic-surgery]
+  merchants: [pharmacy, big_box, grocery]
+  products:
+    - [FOUNDATION LIQ MED, "liquid foundation, medium", 12.99]
+    - [MASCARA BLK WP, "waterproof black mascara", 9.99]
+    - [LIPSTICK RED, "red lipstick", 8.49]
+- id: skincare-lotion
+  names: [moisturizer, lotion, face wash, cleanser]
+  verdict: not_eligible
+  rule: "Ordinary skin care is a personal-use item, not medical care."
+  sources: [p502:personal-use-items]
+  merchants: [pharmacy, big_box, grocery]
+  products:
+    - [DAILY MOISTURIZER 16OZ, "daily moisturizing lotion, 16 oz", 8.99]
+    - [FACE WASH GENTLE 8OZ, "gentle face wash, 8 oz", 7.49]
+- id: anti-aging
+  names: [anti-aging cream, wrinkle cream, retinol serum]
+  verdict: not_eligible
+  rule: "Products directed at improving appearance aren't medical care."
+  sources: [p502:cosmetic-surgery, p502:personal-use-items]
+  merchants: [pharmacy, big_box]
+  products:
+    - [RETINOL SERUM 1OZ, "retinol anti-aging serum, 1 oz", 24.99]
+- id: hair-removal
+  names: [hair removal, waxing, electrolysis, razor]
+  verdict: not_eligible
+  rule: "Hair removal (electrolysis) is cosmetic and isn't includible."
+  sources: [p502:electrolysis-or-hair-removal, p502:cosmetic-surgery]
+  merchants: [pharmacy, big_box, other]
+  products:
+    - [WAX STRIPS LEGS 40CT, "leg wax strips, 40 count", 9.99]
+    - [RAZOR 5BLD CART 4CT, "5-blade razor cartridges, 4 count", 21.99]
+- id: hair-regrowth
+  names: [hair regrowth treatment, minoxidil]
+  verdict: not_eligible
+  rule: "Hair restoration is treated like a hair transplant: cosmetic and not includible."
+  sources: [p502:hair-transplant, p502:cosmetic-surgery]
+  merchants: [pharmacy, big_box]
+  products:
+    - [MINOXIDIL 5% FOAM 3MO, "minoxidil 5% foam, 3 month supply", 44.99]
+- id: cosmetic-procedure
+  names: [botox cosmetic, cosmetic surgery, liposuction, face lift]
+  verdict: not_eligible
+  rule: "Cosmetic procedures directed at improving appearance aren't includible."
+  sources: [p502:cosmetic-surgery]
+  merchants: [medical_provider]
+  products:
+    - [BOTOX COSMETIC 20U, "cosmetic botox, 20 units", 300.00]
+- id: hair-care
+  names: [shampoo, conditioner, hair dye]
+  verdict: not_eligible
+  rule: "Ordinary hair care is a personal-use item."
+  sources: [p502:personal-use-items]
+  merchants: [pharmacy, big_box, grocery]
+  products:
+    - [SHAMPOO 2IN1 25OZ, "2-in-1 shampoo, 25 oz", 6.99]
+    - [HAIR COLOR DRK BRN, "dark brown hair color kit", 9.49]
+- id: dandruff-shampoo
+  names: [medicated dandruff shampoo, ketoconazole shampoo]
+  verdict: eligible
+  rule: "Shampoos with an active drug ingredient for a scalp condition are OTC medicines, eligible after 2019."
+  sources: [p969:distributions-from-an-fsa, cares:sec-3702]
+  merchants: [pharmacy, big_box]
+  products:
+    - [KETOCONAZOLE 1% SHMP, "ketoconazole 1% anti-dandruff shampoo", 14.99]
+- id: deodorant-soap
+  names: [deodorant, body wash, bar soap]
+  verdict: not_eligible
+  rule: "Ordinary hygiene products are personal-use items."
+  sources: [p502:personal-use-items]
+  merchants: [pharmacy, big_box, grocery]
+  products:
+    - [DEODORANT STICK 2.6OZ, "deodorant stick, 2.6 oz", 5.49]
+    - [BODY WASH 18OZ, "body wash, 18 oz", 6.99]
+- id: lip-balm
+  names: [lip balm, chapstick]
+  verdict: not_eligible
+  rule: "Plain lip balm is a personal-care item, not medical care."
+  sources: [p502:personal-use-items]
+  merchants: [pharmacy, big_box, grocery]
+  products:
+    - [LIP BALM ORIG 2PK, "original lip balm, 2 pack", 3.49]
+# ---------------------------------------------------------------- baby & family (non-medical)
+- id: baby-formula
+  names: [infant formula, baby food]
+  verdict: not_eligible
+  rule: "Food that substitutes for normal nutrition isn't medical care."
+  sources: [p502:weight-loss-program, p502:what-are-medical-expenses]
+  merchants: [grocery, big_box, pharmacy]
+  products:
+    - [INFANT FORMULA 30OZ, "infant formula powder, 30 oz", 34.99]
+    - [BABY FOOD PUREE 4PK, "baby food puree, 4 pack", 5.49]
+- id: childcare
+  names: [babysitting, childcare, daycare]
+  verdict: not_eligible
+  rule: "Care of children isn't includible even if it lets the parent get medical treatment."
+  sources: [p502:baby-sitting-childcare-and-nursing-services-for-a-normal-healthy-baby]
+  merchants: [other]
+  products:
+    - [DAYCARE WEEKLY TUITION, "daycare weekly tuition", 275.00]
+- id: maternity-clothes
+  names: [maternity clothes]
+  verdict: not_eligible
+  rule: "Maternity clothes aren't includible."
+  sources: [p502:maternity-clothes]
+  merchants: [big_box, other]
+  products:
+    - [MATERNITY LEGGINGS M, "maternity leggings, medium", 24.99]
+- id: funeral
+  names: [funeral, burial]
+  verdict: not_eligible
+  rule: "Funeral expenses aren't includible."
+  sources: [p502:funeral-expenses]
+  merchants: [other]
+  products:
+    - [FUNERAL SVC DEPOSIT, "funeral service deposit", 1500.00]
+- id: veterinary
+  names: [vet visit, pet medication]
+  verdict: not_eligible
+  rule: "Veterinary fees generally aren't includible (service animals are the exception)."
+  sources: [p502:veterinary-fees]
+  merchants: [other, big_box]
+  products:
+    - [VET EXAM CANINE, "veterinary exam, dog", 75.00, [other]]
+    - [FLEA TICK DOG 3DOSE, "dog flea and tick treatment, 3 doses", 49.99]
+- id: service-animal-care
+  names: [guide dog, service animal care]
+  verdict: eligible
+  rule: "Costs of buying, training and maintaining a guide dog or other service animal, including food and veterinary care, are includible."
+  sources: [p502:guide-dog-or-other-service-animal]
+  merchants: [other]
+  products:
+    - [SVC DOG TRAINING FEE, "service dog training fee", 400.00]
+# ---------------------------------------------------------------- fitness & wellness
+- id: gym-membership
+  names: [gym membership, health club dues, fitness class]
+  verdict: not_eligible
+  rule: "Health club dues and amounts paid to improve general health aren't includible."
+  sources: [p502:health-club-dues]
+  merchants: [other]
+  products:
+    - [GYM MEMBERSHIP MONTHLY, "gym membership, monthly", 39.99]
+    - [YOGA CLASS 10 PACK, "yoga classes, 10 pack", 150.00]
+- id: lessons
+  names: [swimming lessons, dancing lessons]
+  verdict: not_eligible
+  rule: "Dancing or swimming lessons for general health aren't includible, even if a doctor recommends them."
+  sources: [p502:dancing-lessons, p502:swimming-lessons]
+  merchants: [other]
+  products:
+    - [SWIM LESSONS 4WK, "swimming lessons, 4 weeks", 120.00]
+- id: fitness-equipment
+  names: [fitness tracker, exercise equipment, yoga mat, dumbbells]
+  verdict: not_eligible
+  rule: "Items merely beneficial to general health are personal expenses, not medical care."
+  sources: [p502:what-are-medical-expenses, p502:personal-use-items]
+  merchants: [big_box, other]
+  products:
+    - [FITNESS TRACKER BAND, "fitness tracker band", 79.99]
+    - [YOGA MAT 6MM, "yoga mat, 6 mm", 24.99]
+    - [DUMBBELLS 10LB PR, "10 lb dumbbells, pair", 29.99]
+- id: spa-services
+  names: [spa, facial, manicure, pedicure]
+  verdict: not_eligible
+  rule: "Spa services relieve general discomfort and improve appearance; they aren't medical care."
+  sources: [p502:health-club-dues, p502:cosmetic-surgery]
+  merchants: [other]
+  products:
+    - [SPA FACIAL 50MIN, "spa facial, 50 minutes", 110.00]
+    - [PEDICURE DELUXE, "deluxe pedicure", 55.00]
+- id: massage-chair-gun
+  names: [massage gun, massage chair, foot massager]
+  verdict: not_eligible
+  rule: "Devices that relieve general physical discomfort not related to a medical condition aren't medical care."
+  sources: [p502:health-club-dues, p502:personal-use-items]
+  merchants: [big_box, other]
+  products:
+    - [MASSAGE GUN PERCUSS, "percussion massage gun", 99.99]
+- id: essential-oils
+  names: [essential oils, aromatherapy]
+  verdict: not_eligible
+  rule: "'Natural medicines' taken for general health aren't medical care."
+  sources: [p502:nutritional-supplements]
+  merchants: [pharmacy, big_box, other]
+  products:
+    - [LAVENDER OIL 0.5OZ, "lavender essential oil, 0.5 oz", 9.99]
+- id: cbd-products
+  names: [cbd oil, cbd gummies]
+  verdict: not_eligible
+  rule: "CBD products are herbal/'natural' supplements taken for general well-being, not medical care."
+  sources: [p502:nutritional-supplements]
+  merchants: [pharmacy, other]
+  products:
+    - [CBD GUMMIES 25MG 30CT, "CBD gummies 25 mg, 30 count", 39.99]
+# ---------------------------------------------------------------- grocery & household
+- id: grocery-food
+  names: [food, groceries, produce, snacks]
+  verdict: not_eligible
+  rule: "Food that is normally consumed to satisfy nutritional needs isn't medical care."
+  sources: [p502:weight-loss-program, p502:what-are-medical-expenses]
+  merchants: [grocery, big_box, pharmacy, other]
+  products:
+    - [BANANAS 2.3LB, "bananas, 2.3 lb", 1.38]
+    - [WHOLE MILK GAL, "whole milk, 1 gallon", 3.89]
+    - [BREAD WHL WHT 20OZ, "whole wheat bread, 20 oz", 3.49]
+    - [EGGS LG DZ, "large eggs, dozen", 4.29]
+    - [CHIPS SEA SALT 8OZ, "sea salt potato chips, 8 oz", 4.29]
+    - [CHKN BRST BNLS 2LB, "boneless chicken breast, 2 lb", 9.98]
+    - [CEREAL OAT 18OZ, "oat cereal, 18 oz", 4.99]
+- id: beverages
+  names: [soda, water, juice, coffee]
+  verdict: not_eligible
+  rule: "Ordinary beverages aren't medical care."
+  sources: [p502:weight-loss-program, p502:personal-use-items]
+  merchants: [grocery, big_box, pharmacy, other]
+  products:
+    - [SPRING WATER 24PK, "spring water, 24 pack", 4.99]
+    - [COLA 12PK CAN, "cola, 12 pack cans", 7.49]
+    - [ORANGE JUICE 52OZ, "orange juice, 52 oz", 4.79]
+    - [COFFEE GRND 12OZ, "ground coffee, 12 oz", 8.99]
+- id: candy
+  names: [candy, gum, chocolate]
+  verdict: not_eligible
+  rule: "Candy is a personal item, not medical care."
+  sources: [p502:personal-use-items]
+  merchants: [pharmacy, grocery, big_box, other]
+  products:
+    - [CHOC BAR MILK 1.5OZ, "milk chocolate bar, 1.5 oz", 1.79]
+    - [GUM SPEARMINT 15PC, "spearmint gum, 15 pieces", 1.49]
+- id: cough-drops
+  names: [cough drops, throat lozenges]
+  verdict: eligible
+  rule: "Medicated cough drops and throat lozenges are OTC medicines, eligible after 2019."
+  sources: [p969:distributions-from-an-fsa, cares:sec-3702]
+  merchants: [pharmacy, grocery, big_box]
+  products:
+    - [COUGH DROPS MENTH 30CT, "menthol cough drops, 30 count", 2.99]
+    - [SORE THROAT LOZ 18CT, "benzocaine sore throat lozenges, 18 count", 6.49]
+- id: household-cleaning
+  names: [cleaning supplies, detergent, disinfectant spray, paper towels]
+  verdict: not_eligible
+  rule: "Household items ordinarily used for family purposes aren't medical care."
+  sources: [p502:personal-use-items]
+  merchants: [grocery, big_box, pharmacy]
+  products:
+    - [LAUNDRY DET 92OZ, "laundry detergent, 92 oz", 12.99]
+    - [PAPER TOWELS 6RL, "paper towels, 6 rolls", 9.99]
+    - [DISINFECT SPRAY 19OZ, "disinfectant spray, 19 oz", 6.49]
+- id: paper-goods
+  names: [toilet paper, tissues, cotton balls]
+  verdict: not_eligible
+  rule: "Household and personal paper goods are personal-use items."
+  sources: [p502:personal-use-items]
+  merchants: [grocery, big_box, pharmacy]
+  products:
+    - [BATH TISSUE 12DBL RL, "toilet paper, 12 double rolls", 11.99]
+    - [FACIAL TISSUE 3BX, "facial tissues, 3 boxes", 5.99]
+- id: batteries-electronics
+  names: [aa batteries, phone charger, headphones]
+  verdict: not_eligible
+  rule: "General electronics are personal items (hearing aid batteries are the exception)."
+  sources: [p502:personal-use-items, p502:hearing-aids]
+  merchants: [big_box, pharmacy, other]
+  products:
+    - [AA BATTERIES 20PK, "AA batteries, 20 pack", 16.99]
+    - [USB-C CHARGER 20W, "USB-C charger 20 W", 19.99]
+- id: greeting-cards-gifts
+  names: [greeting card, gift card, gift wrap]
+  verdict: not_eligible
+  rule: "Cards and gifts are personal purchases, not medical care."
+  sources: [p502:personal-use-items]
+  merchants: [pharmacy, grocery, big_box]
+  products:
+    - [GREETING CARD BDAY, "birthday greeting card", 5.99]
+    - [GIFT CARD $25, "gift card, $25", 25.00]
+- id: tobacco-alcohol
+  names: [cigarettes, beer, wine]
+  verdict: not_eligible
+  rule: "Tobacco and alcohol are personal purchases with no medical purpose."
+  sources: [p502:personal-use-items]
+  merchants: [grocery, pharmacy, other]
+  products:
+    - [BEER IPA 6PK 12OZ, "IPA beer, 6 pack", 10.99]
+    - [WINE CAB SAUV 750ML, "cabernet sauvignon, 750 ml", 12.99]
+- id: pet-food-supplies
+  names: [pet food, cat litter]
+  verdict: not_eligible
+  rule: "Pet food and supplies aren't medical care; only service-animal upkeep is includible."
+  sources: [p502:veterinary-fees, p502:personal-use-items]
+  merchants: [grocery, big_box, other]
+  products:
+    - [DOG FOOD DRY 15LB, "dry dog food, 15 lb", 24.99]
+    - [CAT LITTER 20LB, "clumping cat litter, 20 lb", 12.99]
+- id: clothing-household
+  names: [clothing, socks, towels, bedding]
+  verdict: not_eligible
+  rule: "Clothing and household goods are ordinarily used for personal purposes."
+  sources: [p502:personal-use-items]
+  merchants: [big_box, other]
+  products:
+    - [ATHLETIC SOCKS 6PR, "athletic socks, 6 pairs", 14.99]
+    - [BATH TOWEL WHT, "white bath towel", 9.99]
+- id: magazines-books
+  names: [magazine, book]
+  verdict: not_eligible
+  rule: "Regular printed books are personal items; only the extra cost of Braille editions is includible."
+  sources: [p502:braille-books-and-magazines, p502:personal-use-items]
+  merchants: [pharmacy, grocery, big_box]
+  products:
+    - [MAGAZINE HEALTH MO, "health magazine, monthly issue", 6.99]
+- id: shipping-fees
+  names: [shipping, delivery fee, bag fee]
+  verdict: not_eligible
+  rule: "Delivery and bag fees aren't amounts paid for medical care."
+  sources: [p502:what-are-medical-expenses]
+  merchants: [other, grocery, pharmacy]
+  products:
+    - [SHIPPING STANDARD, "standard shipping fee", 5.99, [other]]
+    - [BAG FEE, "checkout bag fee", 0.10]
+- id: extended-warranty
+  names: [extended warranty, protection plan]
+  verdict: not_eligible
+  rule: "A product protection plan isn't an amount paid for medical care."
+  sources: [p502:what-are-medical-expenses]
+  merchants: [big_box]
+  products:
+    - [PROTECTION PLAN 2YR, "2-year product protection plan", 14.99]
+- id: insurance-premiums-fsa
+  names: [health insurance premium]
+  verdict: not_eligible
+  rule: "A health FSA can't reimburse health insurance premiums."
+  sources: [p969:distributions-from-an-fsa]
+  merchants: [other]
+  products:
+    - [HEALTH INS PREMIUM NOV, "health insurance premium, November", 412.00]
+- id: long-term-care-fsa
+  names: [long-term care]
+  verdict: not_eligible
+  rule: "A health FSA can't reimburse long-term care."
+  sources: [p969:distributions-from-an-fsa]
+  merchants: [medical_provider, other]
+  products:
+    - [ASSISTED LIVING DAILY, "assisted living, daily rate", 165.00]
+- id: membership-fee
+  names: [membership fee, rewards membership]
+  verdict: not_eligible
+  rule: "Store or club membership fees aren't medical care."
+  sources: [p502:health-club-dues]
+  merchants: [big_box, pharmacy]
+  products:
+    - [ANNUAL MEMBERSHIP FEE, "annual store membership fee", 65.00]
+- id: missed-appointment
+  names: [missed appointment fee, late cancellation fee]
+  verdict: not_eligible
+  rule: "A missed-appointment fee pays for no diagnosis or treatment, so it isn't medical care."
+  sources: [p502:what-are-medical-expenses]
+  merchants: [medical_provider, dental]
+  products:
+    - [NO SHOW FEE, "missed appointment fee", 50.00]
+- id: medical-records-fee
+  names: [medical records copy fee]
+  verdict: not_eligible
+  rule: "Copying records is an administrative fee, not a payment for diagnosis or treatment."
+  sources: [p502:what-are-medical-expenses]
+  merchants: [medical_provider]
+  products:
+    - [RECORDS COPY FEE, "medical records copy fee", 25.00]
+- id: concierge-fee
+  names: [concierge medicine fee, membership retainer]
+  verdict: needs_review
+  rule: "The sources don't address retainer fees for access to a doctor; whether any part pays for medical care depends on the agreement."
+  sources: [p502:what-are-medical-expenses]
+  merchants: [medical_provider]
+  products:
+    - [CONCIERGE ANNUAL FEE, "concierge practice annual fee", 1800.00]
+- id: ovulation-test
+  names: [ovulation test, fertility monitor]
+  verdict: dual_purpose
+  rule: "Not named in the sources; fertility testing is includible when used to overcome an inability to have children, but routine family planning use isn't clearly covered."
+  sources: [p502:fertility-enhancement, p502:diagnostic-devices]
+  merchants: [pharmacy, big_box]
+  products:
+    - [OVULATION TEST 20CT, "ovulation test strips, 20 count", 21.99]
+# ---------------------------------------------------------------- unreadable / unidentifiable lines
+- id: unidentified-hba
+  names: [hba item, health and beauty item]
+  verdict: needs_review
+  rule: "The line names only a department (health and beauty), which mixes eligible medicine with ineligible personal care; the item can't be classified."
+  sources: [p969:distributions-from-an-fsa, p502:personal-use-items]
+  merchants: [pharmacy, big_box, grocery]
+  products:
+    - [HBA ITEM 0414, "unidentified health and beauty item", 7.99]
+    - [HBA MISC, "unidentified health and beauty item", 12.49]
+- id: unidentified-pharmacy-misc
+  names: [pharmacy misc]
+  verdict: needs_review
+  rule: "A non-prescription 'pharmacy misc' line could be medicine or a personal item; the receipt doesn't say which."
+  sources: [p969:distributions-from-an-fsa, p502:medicines]
+  merchants: [pharmacy]
+  products:
+    - [PHARMACY MISC NONRX, "unidentified non-prescription pharmacy item", 9.99]
+- id: unidentified-dept-code
+  names: [department code item]
+  verdict: needs_review
+  rule: "The line shows only a store department code; no rule can be applied to an unknown item."
+  sources: [p502:what-are-medical-expenses]
+  merchants: [big_box, grocery, other]
+  products:
+    - [DEPT 54 ITEM, "unidentified item, department 54", 14.99]
+    - [GM 00812345, "unidentified general merchandise item", 19.99]
+- id: unidentified-kit
+  names: [health kit, care kit]
+  verdict: needs_review
+  rule: "A 'kit' with no contents listed may mix eligible supplies with ineligible items."
+  sources: [p502:bandages, p502:personal-use-items]
+  merchants: [pharmacy, big_box]
+  products:
+    - [WELLNESS KIT TRAVEL, "travel wellness kit, contents not listed", 16.99]
+- id: unidentified-provider-charge
+  names: [provider misc charge]
+  verdict: needs_review
+  rule: "A provider charge with no service description could be medical care or an administrative fee."
+  sources: [p502:what-are-medical-expenses]
+  merchants: [medical_provider, dental, optical]
+  products:
+    - [MISC CHARGE 99199, "unspecified provider charge", 40.00]
+- id: truncated-line
+  names: [truncated receipt line]
+  verdict: needs_review
+  rule: "The printed description is cut off, so the item can't be identified."
+  sources: [p502:what-are-medical-expenses]
+  merchants: [pharmacy, big_box, grocery]
+  products:
+    - [EXTRA STR 24C, "unidentified item, description cut off", 8.99]
+    - [MAX REL ROLL-ON, "unidentified item, description cut off", 9.49]

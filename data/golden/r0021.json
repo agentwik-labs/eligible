@@ -1,0 +1,139 @@
+{
+  "receipt_id": "r0021",
+  "merchant": "MEGAMART SUPERCENTER #2210",
+  "merchant_type": "big_box",
+  "date": "2026-09-17",
+  "items": [
+    {
+      "raw_text": "DOXYLAMINE SLP 48CT",
+      "name": "doxylamine sleep aid, 48 count",
+      "quantity": 2,
+      "unit_price": "9.49",
+      "amount": "18.98",
+      "verdict": "eligible",
+      "gold_source_ids": [
+        "elist:otc-sleep-aid",
+        "p969:distributions-from-an-fsa",
+        "cares:sec-3702"
+      ],
+      "note": "Medicated sleep aids are OTC drugs, eligible without a prescription after 2019."
+    },
+    {
+      "raw_text": "ANKLE SUPPORT SLV M",
+      "name": "ankle support sleeve, medium",
+      "quantity": 2,
+      "unit_price": "14.99",
+      "amount": "29.98",
+      "verdict": "dual_purpose",
+      "gold_source_ids": [
+        "elist:braces-supports",
+        "p502:what-are-medical-expenses"
+      ],
+      "note": "Supports aren't named in the sources; they are medical equipment when used to treat an injury or condition, not when worn for general athletic use."
+    },
+    {
+      "raw_text": "CLOTRIMAZOLE CRM 1OZ",
+      "name": "clotrimazole antifungal cream, 1 oz",
+      "quantity": 1,
+      "unit_price": "6.79",
+      "amount": "6.79",
+      "verdict": "eligible",
+      "gold_source_ids": [
+        "elist:otc-antifungal",
+        "p969:distributions-from-an-fsa",
+        "cares:sec-3702"
+      ],
+      "note": "Antifungal treatments are OTC medicines, eligible after 2019."
+    },
+    {
+      "raw_text": "HYDROCORT 1% CRM 1OZ",
+      "name": "hydrocortisone 1% cream, 1 oz",
+      "quantity": 1,
+      "unit_price": "4.99",
+      "amount": "4.99",
+      "verdict": "eligible",
+      "gold_source_ids": [
+        "elist:otc-antibiotic-ointment",
+        "p969:distributions-from-an-fsa",
+        "cares:sec-3702"
+      ],
+      "note": "Medicated skin ointments and creams are OTC medicines, eligible after 2019."
+    },
+    {
+      "raw_text": "MICONAZOLE 7DAY CRM",
+      "name": "miconazole 7-day vaginal cream",
+      "quantity": 1,
+      "unit_price": "12.49",
+      "amount": "12.49",
+      "verdict": "eligible",
+      "gold_source_ids": [
+        "elist:otc-antifungal",
+        "p969:distributions-from-an-fsa",
+        "cares:sec-3702"
+      ],
+      "note": "Antifungal treatments are OTC medicines, eligible after 2019."
+    },
+    {
+      "raw_text": "HAND SANITIZER 8OZ",
+      "name": "hand sanitizer, 8 oz",
+      "quantity": 2,
+      "unit_price": "3.49",
+      "amount": "6.98",
+      "verdict": "dual_purpose",
+      "gold_source_ids": [
+        "elist:ppe-masks-sanitizer",
+        "p502:personal-protective-equipment"
+      ],
+      "note": "Masks, hand sanitizer and sanitizing wipes are includible when bought primarily to prevent the spread of COVID-19; ordinary cleaning use is not."
+    },
+    {
+      "raw_text": "MENSTRUAL CUP SZ 2",
+      "name": "menstrual cup, size 2",
+      "quantity": 1,
+      "unit_price": "29.99",
+      "amount": "29.99",
+      "verdict": "eligible",
+      "gold_source_ids": [
+        "elist:menstrual-care",
+        "cares:sec-3702",
+        "p969:distributions-from-an-hsa",
+        "p969:distributions-from-an-fsa"
+      ],
+      "note": "Menstrual care products (tampon, pad, liner, cup, sponge or similar) are treated as medical care for HSAs, FSAs and HRAs after 2019."
+    },
+    {
+      "raw_text": "COVID AG HOME TEST 2PK",
+      "name": "COVID-19 at-home antigen test, 2 pack",
+      "quantity": 1,
+      "unit_price": "19.99",
+      "amount": "19.99",
+      "verdict": "eligible",
+      "gold_source_ids": [
+        "elist:covid-test",
+        "p502:diagnostic-devices",
+        "p502:laboratory-fees"
+      ],
+      "note": "At-home diagnostic tests are devices used in diagnosing illness."
+    },
+    {
+      "raw_text": "BREAD WHL WHT 20OZ",
+      "name": "whole wheat bread, 20 oz",
+      "quantity": 1,
+      "unit_price": "3.49",
+      "amount": "3.49",
+      "verdict": "not_eligible",
+      "gold_source_ids": [
+        "elist:grocery-food",
+        "p502:weight-loss-program",
+        "p502:what-are-medical-expenses"
+      ],
+      "note": "Food that is normally consumed to satisfy nutritional needs isn't medical care."
+    }
+  ],
+  "subtotal_printed": "133.68",
+  "tax": "2.83",
+  "total": "136.51",
+  "totals_mismatch": false,
+  "pii": [],
+  "seed": 20261028
+}

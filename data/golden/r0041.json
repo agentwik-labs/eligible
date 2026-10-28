@@ -1,0 +1,58 @@
+{
+  "receipt_id": "r0041",
+  "merchant": "ORANGE GROVE MEDICAL GROUP",
+  "merchant_type": "medical_provider",
+  "date": "2026-06-03",
+  "items": [
+    {
+      "raw_text": "BOTOX COSMETIC 20U",
+      "name": "cosmetic botox, 20 units",
+      "quantity": 1,
+      "unit_price": "300.0",
+      "amount": "300.00",
+      "verdict": "not_eligible",
+      "gold_source_ids": [
+        "elist:cosmetic-procedure",
+        "p502:cosmetic-surgery"
+      ],
+      "note": "Cosmetic procedures directed at improving appearance aren't includible."
+    },
+    {
+      "raw_text": "ASSISTED LIVING DAILY",
+      "name": "assisted living, daily rate",
+      "quantity": 1,
+      "unit_price": "165.0",
+      "amount": "165.00",
+      "verdict": "not_eligible",
+      "gold_source_ids": [
+        "elist:long-term-care-fsa",
+        "p969:distributions-from-an-fsa"
+      ],
+      "note": "A health FSA can't reimburse long-term care."
+    },
+    {
+      "raw_text": "NO SHOW FEE",
+      "name": "missed appointment fee",
+      "quantity": 1,
+      "unit_price": "50.0",
+      "amount": "50.00",
+      "verdict": "not_eligible",
+      "gold_source_ids": [
+        "elist:missed-appointment",
+        "p502:what-are-medical-expenses"
+      ],
+      "note": "A missed-appointment fee pays for no diagnosis or treatment, so it isn't medical care."
+    }
+  ],
+  "subtotal_printed": "515.00",
+  "tax": "0.00",
+  "total": "515.00",
+  "totals_mismatch": false,
+  "pii": [
+    {
+      "kind": "card_number",
+      "value": "4111111111111111"
+    }
+  ],
+  "seed": 20261028
+}

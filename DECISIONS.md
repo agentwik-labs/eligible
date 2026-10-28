@@ -24,11 +24,14 @@ The cached price table lists Haiku 5.5 input/output ($0.10 / $0.50) but not its 
 rate. `pricing.py` assumes the standard 0.1x ($0.01/MTok). Verify against the pricing page
 before the first full eval run.
 
-## 2026-10-28: Project lives in `fsa-checker/` for now
-It is built inside the owner's working repo until the owner approves creating its public repo
-(CLAUDE.md: stop and ask). `.github/workflows/ci.yml` is written for the project's own repo
-root, so CI runs once the folder becomes its own repo; until then the same commands are run
-locally.
+## 2026-10-28: Own public repo
+M0 was built in a subfolder of the owner's working repo. The owner then approved a public repo,
+so the folder was split out with its history to `agentwik-labs/eligible`.
+
+## 2026-10-28: Haiku for extraction is an M5 experiment, not a spec change
+The cost projection (docs/cost-model.md) misses the < $0.01 aim on Sonnet 5.5. The owner
+approved trying Haiku 5.5 for extraction in M5. It is kept only if item recall and verdict
+accuracy still meet their EVALS.md gates. Until then, the stack stays as specified.
 
 ## 2026-10-28: Later-milestone files are created with their milestone
 SPEC §7 lists `Dockerfile`, `docker-compose.yml`, `evals.yml` and modules like `decide.py`.

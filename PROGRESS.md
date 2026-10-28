@@ -15,13 +15,11 @@
 **Acceptance**
 - `uv run pytest`: 30 passed, 99% coverage on `src/eligible/`. ruff and mypy clean.
 - `/healthz` returns 200 (TestClient and a live uvicorn run).
-- CI: the workflow is written but has not run yet, because the project has no GitHub repo yet
-  (needs owner approval). The same commands pass locally.
+- CI: runs on GitHub Actions at github.com/agentwik-labs/eligible.
 
-**Open questions for the owner**
-1. Create the public repo (`agentwik-labs/eligible`?) so CI can run?
-2. The projection puts Sonnet 5.5 at about $0.036 per receipt against the < $0.01 aim. Okay to
-   test Haiku for extraction in M5? (This isn't a threshold change.)
+**Owner decisions (2026-10-28)**
+1. Public repo approved: `agentwik-labs/eligible`.
+2. Approved: M5 tries Haiku 5.5 for extraction, kept only if the gates still pass.
 
 **Next: M1** synthetic receipts plus golden labels (`data/generate.py`), `eligibility_list.yaml`
 (~150 items), and IRS sources downloaded with retrieval dates.

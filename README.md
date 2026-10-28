@@ -27,6 +27,7 @@ uv run pytest                      # unit tests, no network
 uv run uvicorn eligible.api:app --reload
 uv run python -m eligible.llm.report       # spend, cache savings and latency from the call ledger
 uv run python -m eligible.llm.projection   # projected cost per receipt by model
+uv run python -m eligible.demo             # offline demo: budget stop, cache savings, cache-bust flag
 uv run python -m data.generate             # regenerate the 60 synthetic receipts + labels
 uv run python -m eligible.knowledge.sources   # re-parse IRS sources into citable sections
 ```

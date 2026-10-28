@@ -1,0 +1,22 @@
+{
+  "request_key": "a152d1f5c01323c8de9be89bbc3fb26021c9d7c196fd312393f16cc9948a41b2",
+  "prompt_name": "smoke",
+  "prompt_version": "1",
+  "system_hash": "055d0d4dffd9",
+  "model": "claude-sonnet-5-5",
+  "text": "{\"name\": \"ibuprofen 200 mg, 50 count\", \"verdict\": \"eligible\"}",
+  "stop_reason": "end_turn",
+  "usage": {
+    "input_tokens": 31,
+    "output_tokens": 24,
+    "thinking_tokens": 0,
+    "cache_read_tokens": 0,
+    "cache_write_5m_tokens": 0,
+    "cache_write_1h_tokens": 0
+  },
+  "cost_usd": "0.000302",
+  "avoided_cost_usd": "0",
+  "latency_ms": 0.008333008736371994,
+  "source": "api",
+  "effort": "low"
+}

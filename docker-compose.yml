@@ -1,0 +1,19 @@
+# docker compose up  ->  http://localhost:8000 (demo), /engineering, /traces
+#
+# Tracing: set LANGFUSE_PUBLIC_KEY, LANGFUSE_SECRET_KEY and LANGFUSE_HOST (Langfuse Cloud or
+# your own Langfuse deployment) and add the `langfuse` package; without them, traces go to
+# logs/traces.jsonl and the /traces page.
+services:
+  app:
+    build: .
+    ports:
+      - "8000:8000"
+    environment:
+      ANTHROPIC_API_KEY: ${ANTHROPIC_API_KEY:?set ANTHROPIC_API_KEY to call the model}
+      ELIGIBLE_BUDGET_USD: ${ELIGIBLE_BUDGET_USD:-10}
+      LANGFUSE_PUBLIC_KEY: ${LANGFUSE_PUBLIC_KEY:-}
+      LANGFUSE_SECRET_KEY: ${LANGFUSE_SECRET_KEY:-}
+      LANGFUSE_HOST: ${LANGFUSE_HOST:-}
+    volumes:
+      - ./logs:/app/logs
+      - ./evals/.cache:/app/evals/.cache

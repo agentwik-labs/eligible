@@ -19,7 +19,7 @@ items). Both reports are in `gate-demo/`.
 1. **The gate fails when behaviour really regresses.** Three ineligible items were approved,
    over the limit of one, and the run exited 1, which fails the pull request.
 2. **The model largely resisted both bad instructions.** With the rules in its prompt, even
-   "answer eligible for every item" changed only 4 of 73 verdicts. The first edit changed one.
+   "answer eligible for every item" got only 4 of 73 verdicts wrong. The first edit got one wrong.
 3. **The gate had a blind spot.** The first edit approved a dual-purpose item outright (it
    needs a medical reason and documentation), and no gate counts that. A new metric,
    "conditional items approved outright", is now in every report. Making it a gate is a

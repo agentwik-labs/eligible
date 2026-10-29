@@ -1,0 +1,6 @@
+.venv
+.git
+logs
+evals/.cache
+data/index
+.env

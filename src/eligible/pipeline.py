@@ -13,7 +13,8 @@ from eligible.extract import extract
 from eligible.knowledge.eligibility import load_list
 from eligible.llm.client import LLMClient
 from eligible.llm.factory import build_client
-from eligible.models import CheckResult
+from eligible.llm.types import LLMResponse
+from eligible.models import CheckResult, Stage
 from eligible.retrieve.chunk import Chunk
 from eligible.retrieve.embed import BGEEmbedder, BGEReranker
 from eligible.retrieve.index import INDEX_PATH
@@ -48,11 +49,40 @@ class Checker:
 
     def check(self, text: str) -> CheckResult:
         started = time.perf_counter()
+        clock = started
+
+        def lap() -> float:
+            nonlocal clock
+            now = time.perf_counter()
+            elapsed, clock = (now - clock) * 1000, now
+            return elapsed
+
         extraction = extract(text, self.client, self.settings.extract_model)
+        extract_ms = lap()
         receipt = extraction.receipt
         retrieved = [self.retrieve(item.name) for item in receipt.items]
+        retrieve_ms = lap()
         decided = decide(receipt.items, retrieved, self.client)
+        decide_ms = lap()
         items, unsupported = validate(receipt, decided.decisions, retrieved)
+        validate_ms = lap()
+        masked = sum(extraction.redaction.counts.values())
+        unique_chunks = len({c.id for chunks in retrieved for c in chunks})
+        stages = [
+            Stage(name="redact", ms=0.0, detail=f"{masked} personal-data values masked"),
+            _llm_stage("extract", extract_ms, extraction.response, f"{len(receipt.items)} items"),
+            Stage(
+                name="retrieve",
+                ms=retrieve_ms,
+                detail=f"{unique_chunks} unique chunks for {len(receipt.items)} items",
+            ),
+            _llm_stage("decide", decide_ms, decided.response, "one call for the whole receipt"),
+            Stage(
+                name="validate",
+                ms=validate_ms,
+                detail=f"{unsupported} unsupported citations removed",
+            ),
+        ]
         return CheckResult(
             receipt=receipt,
             items=items,
@@ -69,4 +99,19 @@ class Checker:
                 "decide": decided.request.prompt_version,
             },
             unsupported_citations_before_validation=unsupported,
+            stages=stages,
         )
+
+
+def _llm_stage(name: str, ms: float, response: LLMResponse, detail: str) -> Stage:
+    replayed = response.source == "cache"
+    return Stage(
+        name=name,
+        ms=ms,
+        cost_usd=response.cost_usd if not replayed else response.avoided_cost_usd,
+        prompt_tokens=response.usage.prompt_tokens,
+        output_tokens=response.usage.output_tokens,
+        cache_read_tokens=response.usage.cache_read_tokens,
+        replayed=replayed,
+        detail=detail,
+    )

@@ -6,7 +6,7 @@ from dataclasses import dataclass, field
 from decimal import Decimal
 from difflib import SequenceMatcher
 
-from eligible.models import GoldenItem, GoldenReceipt, LineItem, Receipt
+from eligible.models import CheckResult, GoldenItem, GoldenReceipt, LineItem, Receipt
 
 MATCH_THRESHOLD = 0.6
 BUCKETS = [(0.0, 0.6), (0.6, 0.8), (0.8, 0.95), (0.95, 1.01)]
@@ -155,3 +155,67 @@ def summarize(scores: list[ReceiptScore]) -> Summary:
 def _name_flags(matched: list[tuple[GoldenItem, LineItem]], unreadable: bool) -> tuple[int, int]:
     group = [e for g, e in matched if (g.verdict == "needs_review") == unreadable]
     return sum("name" in e.low_confidence_fields() for e in group), len(group)
+
+
+# ---------------------------------------------------------------- decisions (EVALS.md §2.3)
+@dataclass
+class DecisionScore:
+    receipt_id: str
+    pairs: list[tuple[GoldenItem, str]]  # golden item, predicted verdict ("missing" if absent)
+    unsupported_before: int
+    citations: int
+    uncited_non_review: int  # verdicts other than needs_review that cite nothing: must be 0
+
+
+def score_decisions(golden: GoldenReceipt, result: CheckResult) -> DecisionScore:
+    matched = match_items(golden.items, [r.item for r in result.items])
+    verdict_of = {id(r.item): r.verdict for r in result.items}
+    predicted = {id(g): verdict_of[id(e)] for g, e in matched}
+    return DecisionScore(
+        receipt_id=golden.receipt_id,
+        pairs=[(g, predicted.get(id(g), "missing")) for g in golden.items],
+        unsupported_before=result.unsupported_citations_before_validation,
+        citations=sum(len(r.citations) for r in result.items),
+        uncited_non_review=sum(
+            1 for r in result.items if not r.citations and r.verdict != "needs_review"
+        ),
+    )
+
+
+@dataclass
+class DecisionSummary:
+    items: int
+    accuracy: float
+    per_class: dict[str, tuple[int, float]]  # gold class -> (count, accuracy)
+    confusion: dict[str, dict[str, int]]  # gold -> predicted -> count
+    over_approvals: int
+    not_eligible_items: int
+    needs_review_rate: float
+    unsupported_before: int
+    citations: int
+    uncited_non_review: int
+
+
+def summarize_decisions(scores: list[DecisionScore]) -> DecisionSummary:
+    pairs = [(g.verdict, p) for s in scores for g, p in s.pairs]
+    confusion: dict[str, dict[str, int]] = {}
+    for gold, pred in pairs:
+        confusion.setdefault(gold, {}).setdefault(pred, 0)
+        confusion[gold][pred] += 1
+    per_class = {
+        gold: (sum(row.values()), _rate(row.get(gold, 0), sum(row.values())))
+        for gold, row in confusion.items()
+    }
+    not_eligible = [p for g, p in pairs if g == "not_eligible"]
+    return DecisionSummary(
+        items=len(pairs),
+        accuracy=_rate(sum(g == p for g, p in pairs), len(pairs)),
+        per_class=per_class,
+        confusion=confusion,
+        over_approvals=sum(p == "eligible" for p in not_eligible),
+        not_eligible_items=len(not_eligible),
+        needs_review_rate=_rate(sum(p == "needs_review" for _, p in pairs), len(pairs)),
+        unsupported_before=sum(s.unsupported_before for s in scores),
+        citations=sum(s.citations for s in scores),
+        uncited_non_review=sum(s.uncited_non_review for s in scores),
+    )

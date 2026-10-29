@@ -102,6 +102,17 @@ class ItemResult(BaseModel):
     flags: list[str] = []  # why validation changed or questioned the verdict
 
 
+class Stage(BaseModel):
+    name: str
+    ms: float
+    cost_usd: Decimal = Decimal(0)
+    prompt_tokens: int = 0
+    output_tokens: int = 0
+    cache_read_tokens: int = 0
+    replayed: bool = False  # served from the response cache, so it cost nothing this time
+    detail: str = ""
+
+
 class CheckResult(BaseModel):
     receipt: Receipt
     items: list[ItemResult]
@@ -113,3 +124,4 @@ class CheckResult(BaseModel):
     latency_ms: float
     prompt_versions: dict[str, str]
     unsupported_citations_before_validation: int = 0
+    stages: list[Stage] = []

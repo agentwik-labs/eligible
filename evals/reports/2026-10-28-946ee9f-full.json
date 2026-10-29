@@ -1,0 +1,187 @@
+{
+  "suite": "full",
+  "date": "2026-10-28",
+  "sha": "946ee9f",
+  "models": {
+    "extract": "claude-haiku-5-5",
+    "decide": "claude-sonnet-5-5"
+  },
+  "effort": "low",
+  "backend": "claude_code",
+  "prompts": {
+    "extract": "1",
+    "decide": "2"
+  },
+  "gates": [
+    {
+      "metric": "Unsupported citations after validation",
+      "result": "0",
+      "gate": "0",
+      "pass": true
+    },
+    {
+      "metric": "Over-approval rate",
+      "result": "0.0%",
+      "gate": "\u2264 3%",
+      "pass": true
+    },
+    {
+      "metric": "Verdict accuracy",
+      "result": "98.2%",
+      "gate": "\u2265 90%",
+      "pass": true
+    },
+    {
+      "metric": "Item recall (extraction)",
+      "result": "100.0%",
+      "gate": "\u2265 95%",
+      "pass": true
+    },
+    {
+      "metric": "Redaction leaks",
+      "result": "0",
+      "gate": "0",
+      "pass": true
+    }
+  ],
+  "extraction": {
+    "receipts": 60,
+    "item_recall": 1.0,
+    "item_precision": 1.0,
+    "amount_exact": 1.0,
+    "quantity_exact": 1.0,
+    "merchant_acc": 1.0,
+    "merchant_type_acc": 0.9833333333333333,
+    "date_acc": 1.0,
+    "total_acc": 1.0,
+    "mismatch_recall": 1.0,
+    "mismatch_false_alarms": 0,
+    "pii_leaks": 0,
+    "flagged_fields": 22,
+    "unreadable_flagged": [
+      20,
+      23
+    ],
+    "readable_flagged": [
+      2,
+      418
+    ],
+    "calibration": [
+      [
+        "0.00-0.60",
+        0,
+        0.0
+      ],
+      [
+        "0.60-0.80",
+        0,
+        0.0
+      ],
+      [
+        "0.80-0.95",
+        5,
+        1.0
+      ],
+      [
+        "0.95-1.00",
+        436,
+        1.0
+      ]
+    ]
+  },
+  "decisions": {
+    "items": 441,
+    "accuracy": 0.981859410430839,
+    "per_class": {
+      "eligible": [
+        202,
+        0.9801980198019802
+      ],
+      "not_eligible": [
+        130,
+        0.9769230769230769
+      ],
+      "dual_purpose": [
+        41,
+        1.0
+      ],
+      "needs_review": [
+        23,
+        1.0
+      ],
+      "needs_prescription": [
+        45,
+        0.9777777777777777
+      ]
+    },
+    "confusion": {
+      "eligible": {
+        "eligible": 198,
+        "needs_review": 4
+      },
+      "not_eligible": {
+        "not_eligible": 127,
+        "needs_review": 3
+      },
+      "dual_purpose": {
+        "dual_purpose": 41
+      },
+      "needs_review": {
+        "needs_review": 23
+      },
+      "needs_prescription": {
+        "needs_prescription": 44,
+        "needs_review": 1
+      }
+    },
+    "over_approvals": 0,
+    "not_eligible_items": 130,
+    "needs_review_rate": 0.07029478458049887,
+    "unsupported_before": 5,
+    "citations": 1093,
+    "uncited_non_review": 0
+  },
+  "cost": {
+    "spend_this_run": "1.30999800",
+    "replayed_calls": 0,
+    "calls": 120,
+    "cost_per_receipt": "0.02183330",
+    "cost_per_stage": {
+      "redact": "0",
+      "extract": "0.0009528533333333333333333333333",
+      "retrieve": "0",
+      "decide": "0.02088044666666666666666666667",
+      "validate": "0"
+    },
+    "prompt_cache_read_share": 0.8289213058470332,
+    "saved_by_prompt_cache": "1.12446800",
+    "mean_prompt_tokens": 9529.191666666668,
+    "mean_output_tokens": 1187.2,
+    "latency_mean_ms": 13250.522898683752,
+    "latency_p95_ms": 17716.204416996334,
+    "by_prompt": [
+      {
+        "prompt": "decide@2",
+        "model": "claude-sonnet-5-5",
+        "calls": 60,
+        "cost_usd": "1.2528268",
+        "mean_cost_usd": "0.02088044666666666666666666667",
+        "mean_prompt_tokens": 16420.716666666667,
+        "mean_output_tokens": 661.2666666666667,
+        "prompt_cache_read_share": 0.823912476414448,
+        "system_variants": 1
+      },
+      {
+        "prompt": "extract@1",
+        "model": "claude-haiku-5-5",
+        "calls": 60,
+        "cost_usd": "0.05717120",
+        "mean_cost_usd": "0.0009528533333333333333333333333",
+        "mean_prompt_tokens": 2637.6666666666665,
+        "mean_output_tokens": 1713.1333333333334,
+        "prompt_cache_read_share": 0.8601036269430051,
+        "system_variants": 1
+      }
+    ]
+  }
+}

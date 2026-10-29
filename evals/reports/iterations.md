@@ -10,7 +10,8 @@ Failure analysis that drove these changes: `failures-2026-10-28.md`.
 | 1 | Resolve citation IDs written without the chunk suffix | `aaaf405` | 93.9% | 11.1% | 0 / 130 | 15 | 15.5% | $0.0353 | $0.0500 |
 | 2 | Eligibility list as a cached knowledge preamble (decide v2) | `09dd063` | 97.5% | 7.5% | 0 / 130 | 10 | 66.6% | $0.0338 | $0.0484 |
 | 3 | Trim IRS chunks to the sentences about the items | `45300dd` | 97.5% | 7.5% | 0 / 130 | 4 | 79.7% | $0.0226 | $0.0373 |
-| 4 | Haiku 5.5 reads receipts, Sonnet 5.5 still decides | `45300dd` + env | 97.7% | 7.5% | 0 / 130 | 6 | 75.1% | $0.0234 | **$0.0245** |
+| 4 | Haiku 5.5 reads receipts, Sonnet 5.5 still decides | `45300dd` + env | 97.7% | 7.5% | 0 / 130 | 6 | 75.1% | $0.0234 | $0.0245 |
+| final | Same configuration, clean uncached run (`latest.md`) | `946ee9f` | 98.2% | 7.0% | 0 / 130 | 5 | 82.9% | $0.0209 | **$0.0218** |
 
 Labels: 5.2% of items are `needs_review`.
 
@@ -39,3 +40,9 @@ Iteration 4 ran at the same commit as iteration 3 with `ELIGIBLE_EXTRACT_MODEL` 
 so it overwrote iteration 3's report file; iteration 3's numbers above come from that run's
 log. The laptop slept during iteration 4, so its latency isn't reported here. The final
 report (`latest.md`) is a clean uncached run of the shipped configuration.
+
+**Run-to-run variation.** The shipped configuration scored 97.7% in iteration 4 and 98.2% in
+the final run, with no code change in between. The model can't be pinned to temperature 0
+on the current API (DECISIONS.md), so differences under about a point between single runs
+aren't evidence of improvement. The four iterations above each moved accuracy or cost by far
+more than that.

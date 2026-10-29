@@ -13,11 +13,25 @@ gates, and cost tracked down to the token.
 Every number below is copied by `scripts/readme_results.py` from a committed eval report.
 
 <!-- RESULTS:START -->
+From [`evals/reports/latest.md`](evals/reports/latest.md): 2026-10-28, git `946ee9f`, 60 synthetic receipts / 441 line items, extract `claude-haiku-5-5`, decide `claude-sonnet-5-5`.
+
+| Metric | Result | Gate or target |
+|---|---|---|
+| Verdict accuracy | **98.2%** | ≥ 90% |
+| Ineligible items approved | **0 of 130** | ≤ 3% |
+| Invented citations that reached a user | **0 (5 caught by validation)** | 0 |
+| Personal-data leaks to the model | **0** | 0 |
+| Line items read (recall) | **100.0%** | ≥ 95% |
+| Verdicts changed by prompt injection | **0 of 46** | 0 |
+| Retrieval recall@5 | **93.8%** | ≥ 90% |
+| Cost per receipt (API list prices) | **$0.0218** | < $0.01 aim |
+| Latency per receipt, p95 | **17.7 s** | n/a |
 <!-- RESULTS:END -->
 
 The cost aim of < $0.01 per receipt is **missed**, and the miss is reported, not hidden.
-M5 cut cost by half without losing accuracy (below); the remaining cost is mostly the decision
-call's IRS text.
+M5 cut cost by 56% while raising accuracy (below); what remains is mostly the decision call.
+Latency runs through the Claude Code CLI, which starts a process per call; the API backend
+should be much faster, but that hasn't been measured yet.
 
 ## What this project demonstrates
 
@@ -43,6 +57,7 @@ cost $0.050 a receipt. Four measured changes, each committed and re-run on all 4
 | 2. Put all 154 rules in a cached knowledge preamble | 97.5% | 7.5% | $0.0484 |
 | 3. Trim IRS chunks to the sentences that matter | 97.5% | 7.5% | $0.0373 |
 | 4. Haiku reads receipts, Sonnet decides | 97.7% | 7.5% | $0.0245 |
+| Final clean run of the shipped configuration | **98.2%** | **7.0%** | **$0.0218** |
 
 Labels were never edited to raise a score. Details and the failure analysis that drove each
 change: [`evals/reports/iterations.md`](evals/reports/iterations.md).
@@ -66,7 +81,7 @@ covered, while Publication 969 (FSAs) says they *are*. Keyword and vector search
 the governing rule (recall@5 53%). Following each list rule's own IRS citations fixed it
 (94%). The full story is on the `/engineering` page:
 
-![The engineering page: eval gates, cost projected against measured, and the retrieval ablation](docs/img/engineering.png)
+![The engineering page: the two contradicting IRS passages and the retrieval ablation, where citation expansion takes recall@5 from 53% to 94%](docs/img/engineering.png)
 
 ## Run it
 
@@ -95,10 +110,10 @@ commands: `python -m data.generate` (synthetic receipts), `python -m eligible.kn
 | Pre-flight token and cost budget | done | `tests/test_budget.py` |
 | Cost kill-switch, no fallback to a cheaper model | done | `tests/test_eval_run.py` |
 | Strict typed outputs (schema-valid ≠ correct) | done | `tests/test_extract.py`, `tests/test_client.py` |
-| Uncertain lines routed to human review | done | full eval: 23 unreadable lines |
+| Uncertain lines routed to human review | done | full eval: every unreadable line ends in review |
 | Personal-data redaction before any model call | done | `tests/test_redact.py`, 0 leaks in evals |
 | No made-up citations | done | full eval gate: 0 reached a user |
-| Prompt-injection resistance | done | adversarial suite gate |
+| Prompt-injection resistance | done | adversarial suite: 0 of 46 verdicts changed |
 | Eval CI gate on pull requests | planned (M7) | |
 | Tracing per step | planned (M7) | |
 | Tool calling / MCP server | planned (M6) | |

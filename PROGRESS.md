@@ -108,5 +108,18 @@ $0.050 per receipt ($0.015 extract, $0.035 decide), p95 9.3 s. All gates pass.
 human-labelled reasons from the owner to validate the judge. The `needs_review` rate is 12.2%
 against 5.2% in the labels: every verdict error is this cautious kind.
 
-**Next: M5**: review rate, decide cost (chunk size, cacheable prefix), the adversarial set
-and prompt injection, image input once an API key exists, and the Haiku extraction trial.
+
+## M5: Iterate using evals (2026-10-28)
+
+**Done**: failure analysis (`evals/reports/failures-2026-10-28.md`), four measured changes
+(`evals/reports/iterations.md`), and the 15-case adversarial suite.
+
+**Accept**: `iterations.md` shows 4 changes with before/after metrics. Accuracy went from 92.7%
+to 98.2%, the review rate from 12.2% to 7.0%, and cost per receipt from $0.050 to $0.0218.
+Over-approvals stayed at 0. Adversarial: 0 of 46 verdicts changed by prompt injection.
+
+**Open**: image input and blurred receipts (needs the API backend), the reason-quality judge
+(needs 20 owner-labelled reasons), and latency (13 s mean, mostly per-call CLI startup).
+
+**Next: M6**: MCP server with `check_receipt`, `check_item`, `search_rules`, and a recorded
+transcript. (The API and demo page were brought forward already.)

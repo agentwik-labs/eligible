@@ -93,7 +93,7 @@ details .body { padding: 0 16px 16px 122px; white-space: pre-wrap; font-size: 14
 :root { --s1: #2a78d6; --s2: #eb6834; --s3: #1baf7a; --s4: #eda100; --grid: var(--rule-2); }
 @media (prefers-color-scheme: dark) { :root { --s1: #3987e5; --s2: #d95926; --s3: #199e70; --s4: #c98500; } }
 .chart { position: relative; display: grid; gap: 8px; }
-.chart svg { width: 100%; height: auto; display: block; overflow: visible; }
+.chart svg { width: 100%; max-width: 720px; height: auto; display: block; overflow: visible; }
 .chart text { fill: var(--ink-2); font: 11px var(--f-mono); }
 .chart .lbl { fill: var(--ink); font: 600 11.5px var(--f-mono); }
 .chart .hit { fill: transparent; cursor: crosshair; }
@@ -198,7 +198,7 @@ details .body { padding: 0 16px 16px 122px; white-space: pre-wrap; font-size: 14
       <div class="q v-eligible"><blockquote>“Expenses incurred for over-the-counter medicine (whether or not prescribed) and menstrual care products are considered medical care and are considered a covered expense.”</blockquote><span>Pub 969 · health FSAs, the rule that applies</span></div>
     </div>
     <div class="panel"><h3>Ablation: recall@5 by configuration (target 90%)</h3><div class="chart" id="c-ablation"></div><div class="scroll"><table id="ablation"></table></div>
-      <p style="font-size:14px">The IRS text never says "ibuprofen" or "DayQuil". It says "over-the-counter medicine", so neither keyword nor vector search links a product to that rule. The eligibility list does: each entry names products and cites the governing sections. <b>Citation expansion</b> follows those citations after ranking. The cross-encoder reranker lowered recall and added about 1.6 s per item, so it's off by default.</p></div>
+      <p style="font-size:14px">The IRS text never says "ibuprofen" or "DayQuil". It says "over-the-counter medicine", so neither keyword nor vector search links a product to that rule. The eligibility list does: each entry names products and cites the governing sections. <b>Citation expansion</b> follows those citations after ranking. Adding the cross-encoder reranker on top gains 1.9 points of recall for about 1.6 s per item, so the shipped configuration (green) leaves it off.</p></div>
   </section>
 
   <section>
@@ -349,7 +349,7 @@ function render(data) {
   const ev = data.eval;
   if (!ev) { $("prov").textContent = "No full eval report committed yet."; return; }
   const d = ev.decisions, x = ev.extraction, c = ev.cost;
-  $("prov").innerHTML = `From <code>evals/reports/latest.json</code> · ${esc(ev.date)} · git <code>${esc(ev.sha)}</code> · ${esc(ev.models.decide)} at effort <code>${esc(ev.effort)}</code> · prompts extract@${esc(ev.prompts.extract)} decide@${esc(ev.prompts.decide)}`;
+  $("prov").innerHTML = `From <code>evals/reports/latest.json</code> · ${esc(ev.date)} · git <code>${esc(ev.sha)}</code> · extract ${esc(ev.models.extract)}, decide ${esc(ev.models.decide)} at effort <code>${esc(ev.effort)}</code> · prompts extract@${esc(ev.prompts.extract)} decide@${esc(ev.prompts.decide)}`;
   const gate = (m) => ev.gates.find(g => g.metric.startsWith(m));
   const tiles = [
     [pct(d.accuracy), "verdicts match the labels", gate("Verdict accuracy")],
@@ -399,8 +399,9 @@ function render(data) {
     const [head, ...body] = data.ablation;
     const recallIdx = head.indexOf("Recall@5");
     const best = Math.max(...body.map(r => parseFloat(r[recallIdx])));
-    hBars($("c-ablation"), body.map(r => [r[0].replace("Hybrid", "Hyb.").replace("citation expansion", "expansion").replace("exact match", "exact"), parseFloat(r[recallIdx]) / 100, parseFloat(r[recallIdx]) === best ? "var(--v-eligible)" : "var(--s1)"]), v => (v * 100).toFixed(1) + "%", { labelW: 210, max: 1, target: 0.9, valueName: "Recall@5" });
-    $("ablation").innerHTML = `<tr>${head.map((h, i) => `<th class="${i ? "n" : ""}">${esc(h)}</th>`).join("")}</tr>` + body.map(r => `<tr class="${parseFloat(r[recallIdx]) === best ? "best" : ""}">${r.map((cell, i) => `<td class="${i ? "n" : ""}">${esc(cell)}</td>`).join("")}</tr>`).join("");
+    const SHIPPED = "Hybrid + exact match + citation expansion";
+    hBars($("c-ablation"), body.map(r => [(r[0] === SHIPPED ? "Shipped: " : "") + r[0].replace("Hybrid", "Hyb.").replace("citation expansion", "expansion").replace("exact match", "exact"), parseFloat(r[recallIdx]) / 100, r[0] === SHIPPED ? "var(--v-eligible)" : "var(--s1)"]), v => (v * 100).toFixed(1) + "%", { labelW: 230, max: 1, target: 0.9, valueName: "Recall@5" });
+    $("ablation").innerHTML = `<tr>${head.map((h, i) => `<th class="${i ? "n" : ""}">${esc(h)}</th>`).join("")}</tr>` + body.map(r => `<tr class="${r[0] === SHIPPED ? "best" : ""}">${r.map((cell, i) => `<td class="${i ? "n" : ""}">${esc(cell)}</td>`).join("")}</tr>`).join("");
   }
 
   $("concerns").innerHTML = data.concerns.map(r => {

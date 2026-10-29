@@ -1,5 +1,5 @@
 {
-  "generated": "2026-10-29T00:39:37+00:00",
+  "generated": "2026-10-29T03:07:44+00:00",
   "commits": [
     {
       "sha": "f4ddceb",
@@ -99,12 +99,75 @@
       "py_added": 0,
       "py_removed": 0,
       "tests": 74
+    },
+    {
+      "sha": "7db36f8",
+      "time": "2026-10-28T20:40:46-04:00",
+      "subject": "Engineering page focuses on the system; M5 failure analysis",
+      "milestone": "M5",
+      "py_added": 62,
+      "py_removed": 1,
+      "tests": 74
+    },
+    {
+      "sha": "aaaf405",
+      "time": "2026-10-28T20:41:20-04:00",
+      "subject": "M5 iteration 1: resolve citation IDs written without the chunk suffix",
+      "milestone": "M5",
+      "py_added": 72,
+      "py_removed": 2,
+      "tests": 77
+    },
+    {
+      "sha": "09dd063",
+      "time": "2026-10-28T20:42:07-04:00",
+      "subject": "M5 iteration 2: the eligibility list as a cached knowledge preamble",
+      "milestone": "M5",
+      "py_added": 55,
+      "py_removed": 7,
+      "tests": 77
+    },
+    {
+      "sha": "45300dd",
+      "time": "2026-10-28T20:44:10-04:00",
+      "subject": "M5 iteration 3: trim each IRS chunk to the sentences about the receipt's items",
+      "milestone": "M5",
+      "py_added": 40,
+      "py_removed": 2,
+      "tests": 78
+    },
+    {
+      "sha": "1a22a2c",
+      "time": "2026-10-28T22:55:17-04:00",
+      "subject": "M5 iteration 4: Haiku reads receipts by default; adversarial suite",
+      "milestone": "M5",
+      "py_added": 182,
+      "py_removed": 9,
+      "tests": 78
+    },
+    {
+      "sha": "df8aecd",
+      "time": "2026-10-28T23:00:32-04:00",
+      "subject": "Fix the eval runner's report step; test the runner end to end",
+      "milestone": null,
+      "py_added": 181,
+      "py_removed": 2,
+      "tests": 79
+    },
+    {
+      "sha": "946ee9f",
+      "time": "2026-10-28T23:01:59-04:00",
+      "subject": "Eval reports: token mix from every answer, replayed or not",
+      "milestone": null,
+      "py_added": 9,
+      "py_removed": 4,
+      "tests": 79
     }
   ],
   "product_spend": {
     "note": "Every distinct model call the product made, read from the response cache. API-equivalent cost; reruns of unchanged cases were served from the cache at $0.",
-    "calls": 120,
-    "cost_usd": "2.9972066",
+    "calls": 383,
+    "cost_usd": "8.14830381",
     "by_prompt": [
       {
         "prompt": "decide@1 \u00b7 claude-sonnet-5-5",
@@ -113,6 +176,22 @@
         "output_tokens": 43070,
         "cache_read": 74694,
         "cost": "2.1190508"
+      },
+      {
+        "prompt": "decide@2 \u00b7 claude-sonnet-5-5",
+        "calls": 188,
+        "prompt_tokens": 3238810,
+        "output_tokens": 129932,
+        "cache_read": 2418607,
+        "cost": "5.0630974"
+      },
+      {
+        "prompt": "extract@1 \u00b7 claude-haiku-5-5",
+        "calls": 75,
+        "prompt_tokens": 217382,
+        "output_tokens": 138860,
+        "cache_read": 131001,
+        "cost": "0.08799981"
       },
       {
         "prompt": "extract@1 \u00b7 claude-sonnet-5-5",
@@ -130,7 +209,15 @@
       },
       {
         "hour": "2026-10-29T00:00Z",
-        "cost_usd": "2.1190508"
+        "cost_usd": "5.8197027"
+      },
+      {
+        "hour": "2026-10-29T01:00Z",
+        "cost_usd": "0.0006509"
+      },
+      {
+        "hour": "2026-10-29T02:00Z",
+        "cost_usd": "1.44979441"
       }
     ]
   },

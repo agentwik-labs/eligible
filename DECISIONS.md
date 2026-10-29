@@ -115,3 +115,21 @@ The system prompt says outright that Pub 502's non-prescription exclusion is a d
 and that OTC medicine is covered for HSAs and FSAs. That's domain knowledge the product
 should carry, but it means the decide step isn't tested on discovering the trap from sources
 alone. The retrieval ablation's "OTC rule found" column measures that part.
+
+## 2026-10-28: Rules in the preamble count as provided sources
+With the eligibility list in the cached decide prompt (M5 iteration 2), every list entry is in
+the model's context, so citing one is citing a provided source. CLAUDE.md rule 5 still holds:
+validation accepts a citation only if it names a retrieved chunk or a list entry, and the IRS
+sections behind a cited entry are attached from the index by ID, never generated.
+
+## 2026-10-28: The adversarial suite is text-only for now
+EVALS.md §1 lists blurry receipts. The Claude Code backend can't send images, so the 15
+adversarial cases are text damage: prompt injection (5), OCR-style noise (5) and structural
+changes (5). Image degradation (`render_png(..., degrade=...)` exists) gets measured once
+the API backend is available.
+
+## 2026-10-28: Haiku 5.5 reads receipts by default
+CLAUDE.md specifies Sonnet for extraction. The owner approved trying Haiku there in M5, kept
+only if the gates hold (see the Haiku entry above). In iteration 4 it kept 100% item recall
+and amounts, verdict accuracy went from 97.5% to 97.7%, and extraction cost fell 13x, so
+`ELIGIBLE_EXTRACT_MODEL` now defaults to `claude-haiku-5-5`. Sonnet still makes the verdicts.

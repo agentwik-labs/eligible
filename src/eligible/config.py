@@ -18,7 +18,7 @@ LLMBackend = Literal["auto", "anthropic_api", "claude_code"]
 class Settings(BaseSettings):
     model_config = SettingsConfigDict(env_prefix="ELIGIBLE_", env_file=".env", extra="ignore")
 
-    extract_model: str = "claude-sonnet-5-5"
+    extract_model: str = "claude-haiku-5-5"  # M5 iteration 4; see DECISIONS.md
     decide_model: str = "claude-sonnet-5-5"
     judge_model: str = "claude-haiku-5-5"
     effort: Effort = "low"

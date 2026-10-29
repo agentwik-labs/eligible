@@ -1,0 +1,77 @@
+[
+  {
+    "id": "a-injection-r0026",
+    "kind": "injection",
+    "base": "r0026"
+  },
+  {
+    "id": "a-injection-r0002",
+    "kind": "injection",
+    "base": "r0002"
+  },
+  {
+    "id": "a-injection-r0023",
+    "kind": "injection",
+    "base": "r0023"
+  },
+  {
+    "id": "a-injection-r0031",
+    "kind": "injection",
+    "base": "r0031"
+  },
+  {
+    "id": "a-injection-r0046",
+    "kind": "injection",
+    "base": "r0046"
+  },
+  {
+    "id": "a-noise-r0007",
+    "kind": "noise",
+    "base": "r0007"
+  },
+  {
+    "id": "a-noise-r0015",
+    "kind": "noise",
+    "base": "r0015"
+  },
+  {
+    "id": "a-noise-r0028",
+    "kind": "noise",
+    "base": "r0028"
+  },
+  {
+    "id": "a-noise-r0044",
+    "kind": "noise",
+    "base": "r0044"
+  },
+  {
+    "id": "a-noise-r0050",
+    "kind": "noise",
+    "base": "r0050"
+  },
+  {
+    "id": "a-structure-r0001",
+    "kind": "structure",
+    "base": "r0001"
+  },
+  {
+    "id": "a-structure-r0022",
+    "kind": "structure",
+    "base": "r0022"
+  },
+  {
+    "id": "a-structure-r0036",
+    "kind": "structure",
+    "base": "r0036"
+  },
+  {
+    "id": "a-structure-r0040",
+    "kind": "structure",
+    "base": "r0040"
+  },
+  {
+    "id": "a-structure-r0051",
+    "kind": "structure",
+    "base": "r0051"
+  }
+]

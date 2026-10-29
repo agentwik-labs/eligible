@@ -51,3 +51,16 @@ def test_supported_verdict_survives_and_low_confidence_goes_to_review() -> None:
     low, _ = validate_item(item(conf=0.3), d, RETRIEVED)
     assert low.verdict == "needs_review"
     assert "low_confidence" in low.flags
+
+
+def test_trim_keeps_the_sentences_about_the_item_in_order() -> None:
+    from eligible.decide import trim
+
+    text = (
+        "Intro about plans. You can include bandages as medical supplies. "
+        "Unrelated sentence about tax forms. Crutches are also included. Final note."
+    )
+    out = trim(text, {"bandages", "supplies"})
+    assert out.startswith("Intro about plans. You can include bandages")
+    assert "Unrelated" in out or "Crutches" in out  # three sentences kept, original order
+    assert len(out.split()) <= 91

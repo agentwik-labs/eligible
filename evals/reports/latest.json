@@ -1,7 +1,7 @@
 {
   "suite": "full",
   "date": "2026-10-28",
-  "sha": "aaaf405",
+  "sha": "09dd063",
   "models": {
     "extract": "claude-sonnet-5-5",
     "decide": "claude-sonnet-5-5"
@@ -10,7 +10,7 @@
   "backend": "claude_code",
   "prompts": {
     "extract": "1",
-    "decide": "1"
+    "decide": "2"
   },
   "gates": [
     {
@@ -27,7 +27,7 @@
     },
     {
       "metric": "Verdict accuracy",
-      "result": "93.9%",
+      "result": "97.5%",
       "gate": "\u2265 90%",
       "pass": true
     },
@@ -91,15 +91,15 @@
   },
   "decisions": {
     "items": 441,
-    "accuracy": 0.9387755102040817,
+    "accuracy": 0.9750566893424036,
     "per_class": {
       "eligible": [
         202,
-        0.9455445544554455
+        0.9702970297029703
       ],
       "not_eligible": [
         130,
-        0.9076923076923077
+        0.9692307692307692
       ],
       "dual_purpose": [
         41,
@@ -111,18 +111,18 @@
       ],
       "needs_prescription": [
         45,
-        0.9111111111111111
+        0.9777777777777777
       ]
     },
     "confusion": {
       "eligible": {
-        "eligible": 191,
-        "needs_review": 11
+        "eligible": 196,
+        "needs_review": 5,
+        "needs_prescription": 1
       },
       "not_eligible": {
-        "not_eligible": 118,
-        "needs_review": 11,
-        "needs_prescription": 1
+        "not_eligible": 126,
+        "needs_review": 4
       },
       "dual_purpose": {
         "dual_purpose": 41
@@ -131,35 +131,47 @@
         "needs_review": 23
       },
       "needs_prescription": {
-        "needs_prescription": 41,
-        "needs_review": 4
+        "needs_prescription": 44,
+        "needs_review": 1
       }
     },
     "over_approvals": 0,
     "not_eligible_items": 130,
-    "needs_review_rate": 0.1111111111111111,
-    "unsupported_before": 15,
-    "citations": 902,
+    "needs_review_rate": 0.07482993197278912,
+    "unsupported_before": 10,
+    "citations": 1095,
     "uncited_non_review": 0
   },
   "cost": {
-    "spend_this_run": "0",
-    "replayed_calls": 120,
+    "spend_this_run": "2.0268380",
+    "replayed_calls": 60,
     "calls": 120,
-    "cost_per_receipt": "0.04995344333333333333333333333",
+    "cost_per_receipt": "0.04841656333333333333333333333",
     "cost_per_stage": {
       "redact": "0",
       "extract": "0.01463593",
       "retrieve": "0",
-      "decide": "0.03531751333333333333333333333",
+      "decide": "0.03378063333333333333333333333",
       "validate": "0"
     },
-    "prompt_cache_read_share": 0.0,
-    "saved_by_prompt_cache": "0",
-    "mean_prompt_tokens": 0.0,
-    "mean_output_tokens": 0.0,
-    "latency_mean_ms": 543.5769666995233,
-    "latency_p95_ms": 3649.154541984899,
-    "by_prompt": []
+    "prompt_cache_read_share": 0.6662090524306379,
+    "saved_by_prompt_cache": "0.5872680",
+    "mean_prompt_tokens": 18404.633333333335,
+    "mean_output_tokens": 675.9166666666666,
+    "latency_mean_ms": 6049.5760778493905,
+    "latency_p95_ms": 8542.867291980656,
+    "by_prompt": [
+      {
+        "prompt": "decide@2",
+        "model": "claude-sonnet-5-5",
+        "calls": 60,
+        "cost_usd": "2.0268380",
+        "mean_cost_usd": "0.03378063333333333333333333333",
+        "mean_prompt_tokens": 18404.633333333335,
+        "mean_output_tokens": 675.9166666666666,
+        "prompt_cache_read_share": 0.6662090524306379,
+        "system_variants": 1
+      }
+    ]
   }
 }

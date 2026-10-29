@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import json
+import re
 from functools import cache
 from typing import Any
 
@@ -52,6 +53,27 @@ class DecideResult(BaseModel):
     response: LLMResponse
 
 
+SENTENCES_PER_CHUNK = 3
+WORDS_PER_CHUNK = 90
+STOP = {"the", "and", "for", "you", "can", "your", "that", "this", "with", "are", "pay", "count"}
+
+
+def trim(text: str, focus: set[str]) -> str:
+    """The sentences of a chunk that share the most words with the items citing it.
+
+    Rules live in the cached preamble; the IRS chunk only has to carry the governing
+    sentence, so sending the whole ~225-word chunk is mostly uncached waste.
+    """
+    sentences = re.split(r"(?<=[.;:])\s+", text)
+    scored = sorted(
+        range(len(sentences)),
+        key=lambda i: -len(focus & set(re.findall(r"[a-z]{3,}", sentences[i].lower()))),
+    )
+    keep = sorted(scored[:SENTENCES_PER_CHUNK])
+    words = " ".join(sentences[i] for i in keep).split()
+    return " ".join(words[:WORDS_PER_CHUNK]) + (" …" if len(words) > WORDS_PER_CHUNK else "")
+
+
 @cache
 def knowledge_preamble() -> str:
     """The eligibility list as static text: part of the cached system prompt (SPEC §2.5)."""
@@ -64,20 +86,23 @@ def knowledge_preamble() -> str:
 
 
 def render_input(items: list[LineItem], retrieved: list[list[Chunk]]) -> str:
-    """Each chunk is printed once, however many items retrieved it (saves input tokens)."""
+    """Each chunk is printed once, trimmed to the sentences that matter for these items."""
     sources: dict[str, Chunk] = {}
+    focus: dict[str, set[str]] = {}
     lines = ["<receipt>"]
     for i, (item, chunks) in enumerate(zip(items, retrieved, strict=True)):
+        words = set(re.findall(r"[a-z]{3,}", f"{item.name} {item.raw_text}".lower())) - STOP
         for c in chunks:
             if c.doc != "elist":  # list entries are already in the system prompt
                 sources.setdefault(c.id, c)
+                focus.setdefault(c.id, set()).update(words)
         lines.append(
             f'{i}. "{item.raw_text}" read as "{item.name}"; sources: '
             + ", ".join(c.id for c in chunks)
         )
     lines += ["</receipt>", "<sources>"]
     for c in sources.values():
-        lines.append(f"[{c.id}] {' > '.join(c.heading_path)}\n{c.text}\n")
+        lines.append(f"[{c.id}] {' > '.join(c.heading_path)}\n{trim(c.text, focus[c.id])}\n")
     lines.append("</sources>")
     return "\n".join(lines)
 

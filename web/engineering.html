@@ -142,15 +142,15 @@ details .body { padding: 0 16px 16px 122px; white-space: pre-wrap; font-size: 14
 
 
   <section>
-    <div class="sec-head"><span class="eyebrow">01 · How it was built</span><h2>AI-paired engineering, measured like the product</h2>
-      <p>Eligible was built with Claude Code as the pair-programmer, from spec to working demo in one sitting. The same cost discipline applies to the build as to the product: every token is counted, priced and charted. These numbers come from git history, the product's response cache and the build session's usage log (aggregates only).</p></div>
+    <div class="sec-head"><span class="eyebrow">01 · Engineering record</span><h2>Built eval-first: every change measured</h2>
+      <p>Each milestone ended with tests and an eval run, and every model call is priced and logged. These numbers come from git history and the product's response cache, which holds one file per distinct model call.</p></div>
     <div class="tiles" id="buildtiles"></div>
     <div class="two">
-      <div class="panel"><h3>Claude Code spend per hour, by token class</h3><div class="chart" id="c-session"></div></div>
+      <div class="panel"><h3>Tokens per model call, by type</h3><div class="chart" id="c-tokens"></div><p style="font-size:13px;color:var(--ink-2)">Decide reads ~5 IRS chunks per item, so its prompt is long and mostly uncached. That makes it the target for M5's cost work.</p></div>
       <div class="panel"><h3>Tests at each commit</h3><div class="chart" id="c-tests"></div></div>
     </div>
     <div class="two">
-      <div class="panel"><h3>What the pair-programmer did: tool calls</h3><div class="chart" id="c-tools"></div></div>
+      <div class="panel"><h3>Cost per receipt, by pipeline stage</h3><div class="chart" id="c-stages"></div></div>
       <div class="panel"><h3>The product's own model spend, every distinct call</h3><div class="chart" id="c-product"></div><p style="font-size:13px;color:var(--ink-2)" id="productnote"></p></div>
     </div>
     <h3 style="font-size:19px">Caught by evals and tests, then fixed</h3>
@@ -305,38 +305,32 @@ function lineSteps(host, pts, labels) {
   dataTable(host, ["Commit", "Tests", "Milestone"], pts.map(p => [p.sha + " " + p.subject.slice(0, 40), p.y, p.label || ""]));
 }
 
-function renderBuild(dev) {
+function renderBuild(dev, ev) {
   if (!dev) return;
-  const s = dev.build_session, p = dev.product_spend, cm = dev.commits;
+  const p = dev.product_spend, cm = dev.commits;
   const t0 = new Date(cm[0].time), t1 = new Date(cm[cm.length - 1].time);
-  const hours = ((t1 - t0) / 36e5).toFixed(1);
   const tests = cm[cm.length - 1].tests;
-  const uncached = s ? (s.tokens.cache_read + s.tokens.cache_write + s.tokens.input) * 4 / 1e6 + s.tokens.output * 20 / 1e6 : 0;
+  const replayed = ev ? `${ev.cost.replayed_calls} of ${ev.cost.calls}` : "";
   const tiles = [
-    [`${hours} h`, "first commit to last", null],
-    [String(cm.length), "commits", null],
-    [String(tests), "unit tests at the last commit", null],
+    [`${((t1 - t0) / 36e5).toFixed(1)} h`, "first commit to working demo"],
+    [String(cm.length), "commits"],
+    [String(tests), "test functions, no network needed"],
+    [usd(p.cost_usd, 2), `total model spend across every eval, ${p.calls} distinct calls`],
+    [replayed, "calls in the last full eval replayed from cache at $0"],
   ];
-  if (s) tiles.push(
-    [usd(s.cost_usd, 2), `Claude Code, API-equivalent (${s.model_turns} model turns)`, null],
-    [pct(s.cache_read_share), `of its prompt tokens were cache reads (uncached: ${usd(uncached, 0)})`, null],
-  );
-  tiles.push([usd(p.cost_usd, 2), `product model spend, ${p.calls} distinct calls`, null]);
-  $("buildtiles").innerHTML = tiles.map(([v, l]) => `<div class="tile"><span class="v">${esc(v)}</span><span class="l">${esc(l)}</span></div>`).join("");
-
-  if (s) {
-    const hrs = s.by_hour.map(h => new Date(h.hour).toLocaleTimeString([], { hour: "numeric" }));
-    const val = k => s.by_hour.map(h => Number(h[k] || 0));
-    stackedBars($("c-session"), hrs, [
-      { name: "Cache reads", color: "var(--s1)", values: val("cache_read") },
-      { name: "Cache writes", color: "var(--s2)", values: val("cache_write") },
-      { name: "Output", color: "var(--s3)", values: val("output") },
-      { name: "Uncached input", color: "var(--s4)", values: val("input") },
-    ], v => "$" + v.toFixed(2));
-    const tools = Object.entries(s.tool_calls);
-    hBars($("c-tools"), tools.map(([k, v]) => [k, v]), v => String(v), { labelW: 110, valueName: "Calls" });
-  } else {
-    $("c-session").innerHTML = `<p class="fine">No session log was included when docs/devlog.json was generated.</p>`;
+  $("buildtiles").innerHTML = tiles.filter(([v]) => v).map(([v, l]) => `<div class="tile"><span class="v">${esc(v)}</span><span class="l">${esc(l)}</span></div>`).join("");
+  {
+    const rows = p.by_prompt;
+    const per = (r, k) => Number(r[k]) / r.calls;
+    stackedBars($("c-tokens"), rows.map(r => r.prompt.split("@")[0]), [
+      { name: "Prompt, from cache", color: "var(--s1)", values: rows.map(r => per(r, "cache_read")) },
+      { name: "Prompt, uncached", color: "var(--s2)", values: rows.map(r => per(r, "prompt_tokens") - per(r, "cache_read")) },
+      { name: "Output", color: "var(--s3)", values: rows.map(r => per(r, "output_tokens")) },
+    ], v => Math.round(v).toLocaleString());
+  }
+  if (ev) {
+    const st = Object.entries(ev.cost.cost_per_stage).filter(([, v]) => Number(v) > 0);
+    hBars($("c-stages"), st.map(([k, v]) => [k, Number(v)]), v => usd(v, 4), { labelW: 90, valueName: "USD per receipt" });
   }
   lineSteps($("c-tests"), cm.map(c => ({ y: c.tests, sha: c.sha, subject: c.subject, label: c.milestone })), [new Date(cm[0].time).toLocaleTimeString([], { hour: "numeric", minute: "2-digit" }), new Date(cm[cm.length - 1].time).toLocaleTimeString([], { hour: "numeric", minute: "2-digit" })]);
   hBars($("c-product"), p.by_prompt.map(r => [r.prompt.split(" · ")[0], Number(r.cost)]), v => usd(v, 2), {
@@ -351,7 +345,7 @@ function renderBuild(dev) {
 fetch("/v1/engineering").then(r => r.json()).then(render).catch(err => { $("prov").textContent = "Couldn't load the eval report: " + err.message; });
 
 function render(data) {
-  renderBuild(data.devlog);
+  renderBuild(data.devlog, data.eval);
   const ev = data.eval;
   if (!ev) { $("prov").textContent = "No full eval report committed yet."; return; }
   const d = ev.decisions, x = ev.extraction, c = ev.cost;

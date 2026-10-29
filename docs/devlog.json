@@ -1,5 +1,5 @@
 {
-  "generated": "2026-10-29T00:32:39+00:00",
+  "generated": "2026-10-29T00:39:37+00:00",
   "commits": [
     {
       "sha": "f4ddceb",
@@ -90,6 +90,15 @@
       "py_added": 344,
       "py_removed": 0,
       "tests": 74
+    },
+    {
+      "sha": "70b5497",
+      "time": "2026-10-28T20:32:40-04:00",
+      "subject": "Refresh the dev log",
+      "milestone": null,
+      "py_added": 0,
+      "py_removed": 0,
+      "tests": 74
     }
   ],
   "product_spend": {
@@ -125,61 +134,7 @@
       }
     ]
   },
-  "build_session": {
-    "note": "Claude Code building this repo: per-hour API-equivalent cost by token class, priced with llm/pricing.py. Aggregates only.",
-    "model_turns": 191,
-    "models": {
-      "claude-opus-5-5": 191
-    },
-    "tokens": {
-      "input": 382,
-      "output": 321572,
-      "cache_read": 61627527,
-      "cache_write": 930415
-    },
-    "cache_read_share": 0.985121132720883,
-    "cost_usd": "26.2017934",
-    "tool_calls": {
-      "Bash": 162,
-      "Write": 27,
-      "Read": 12,
-      "Skill": 6,
-      "Edit": 2,
-      "Artifact": 2,
-      "SendMessage": 2,
-      "ToolSearch": 1
-    },
-    "by_hour": [
-      {
-        "hour": "2026-10-28T20:00Z",
-        "cache_read": "6.0133658",
-        "cache_write": "2.981128",
-        "output": "4.00962",
-        "input": "0.001000"
-      },
-      {
-        "hour": "2026-10-28T22:00Z",
-        "cache_read": "0.0057778",
-        "cache_write": "3.00788",
-        "output": "0.00698",
-        "input": "0.000008"
-      },
-      {
-        "hour": "2026-10-28T23:00Z",
-        "cache_read": "0.4081502",
-        "cache_write": "0.082448",
-        "output": "0.20320",
-        "input": "0.000040"
-      },
-      {
-        "hour": "2026-10-29T00:00Z",
-        "cache_read": "5.8982116",
-        "cache_write": "1.371864",
-        "output": "2.21164",
-        "input": "0.000480"
-      }
-    ]
-  },
+  "build_session": null,
   "caught": [
     {
       "what": "Retrieval couldn't link products to the law",

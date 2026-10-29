@@ -234,7 +234,7 @@ def main() -> None:
         "generated": datetime.now(UTC).isoformat(timespec="seconds"),
         "commits": commits(),
         "product_spend": product_spend(),
-        "build_session": session_spend(args.session),
+        "build_session": session_spend(args.session) if args.session else None,
         "caught": CAUGHT,
     }
     OUT.write_text(json.dumps(payload, indent=2, default=str) + "\n")

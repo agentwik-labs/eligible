@@ -14,12 +14,12 @@ from eligible.knowledge.eligibility import load_list
 from eligible.llm.client import LLMClient
 from eligible.llm.factory import build_client
 from eligible.llm.types import LLMResponse
-from eligible.models import CheckResult, Citation, ItemResult, Stage
+from eligible.models import CheckResult, Citation, FieldConfidence, ItemResult, LineItem, Stage
 from eligible.retrieve.chunk import Chunk, chunk_entry
 from eligible.retrieve.embed import BGEEmbedder, BGEReranker
 from eligible.retrieve.index import INDEX_PATH
 from eligible.retrieve.search import Retriever
-from eligible.validate import quote, totals_mismatch, validate
+from eligible.validate import quote, totals_mismatch, validate, validate_items
 
 
 class Checker:
@@ -73,6 +73,22 @@ class Checker:
         return self.retriever.search(
             query, k=self.settings.retrieval_k, mode=self.settings.retrieval_mode
         )
+
+    def check_item(self, name: str) -> tuple[ItemResult, LLMResponse]:
+        """One item by name, no receipt: retrieve, decide, validate (for the MCP tool)."""
+        sure = FieldConfidence(name=1.0, quantity=1.0, unit_price=1.0, amount=1.0)
+        item = LineItem(
+            raw_text=name,
+            name=name,
+            quantity=1,
+            unit_price=None,
+            amount=Decimal(0),
+            confidence=sure,
+        )
+        retrieved = [self.retrieve(name)]
+        decided = decide([item], retrieved, self.client)
+        items, _ = validate_items([item], decided.decisions, [retrieved[0] + self.list_chunks])
+        return self.attach_rule_sources(items[0]), decided.response
 
     def check(self, text: str) -> CheckResult:
         started = time.perf_counter()

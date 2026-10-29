@@ -76,13 +76,19 @@ def totals_mismatch(receipt: Receipt) -> bool:
     return abs(sum((i.amount for i in receipt.items), Decimal(0)) - receipt.subtotal) > TOLERANCE
 
 
-def validate(
-    receipt: Receipt, decisions: list[Decision], retrieved: list[list[Chunk]]
+def validate_items(
+    items: list[LineItem], decisions: list[Decision], retrieved: list[list[Chunk]]
 ) -> tuple[list[ItemResult], int]:
     by_index = {d.index: d for d in decisions}
     results, unsupported = [], 0
-    for i, (item, chunks) in enumerate(zip(receipt.items, retrieved, strict=True)):
+    for i, (item, chunks) in enumerate(zip(items, retrieved, strict=True)):
         result, bad = validate_item(item, by_index.get(i), chunks)
         results.append(result)
         unsupported += bad
     return results, unsupported
+
+
+def validate(
+    receipt: Receipt, decisions: list[Decision], retrieved: list[list[Chunk]]
+) -> tuple[list[ItemResult], int]:
+    return validate_items(receipt.items, decisions, retrieved)

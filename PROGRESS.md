@@ -121,5 +121,14 @@ Over-approvals stayed at 0. Adversarial: 0 of 46 verdicts changed by prompt inje
 **Open**: image input and blurred receipts (needs the API backend), the reason-quality judge
 (needs 20 owner-labelled reasons), and latency (13 s mean, mostly per-call CLI startup).
 
-**Next: M6**: MCP server with `check_receipt`, `check_item`, `search_rules`, and a recorded
-transcript. (The API and demo page were brought forward already.)
+
+## M6: API, demo page, MCP (2026-10-29)
+
+**Done**: `/v1/check`, `/v1/sources/{id}` and the demo page (built after M4), and the MCP
+server (`python -m eligible.mcp_server`) with `check_receipt`, `check_item` and
+`search_rules`. Each tool call is logged with its latency and model cost.
+
+**Accept**: a sample receipt can be checked in the browser, with clickable citations. The MCP
+tools work from Claude Code: `docs/mcp-demo.md` is a recorded session in which Claude called
+`check_item` twice in parallel and answered the SPEC question. Measured: client $0.0255 and
+13.0 s; tool calls $0.059 (writing the rules preamble to cache) and $0.0086 (reading it).

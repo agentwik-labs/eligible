@@ -34,7 +34,10 @@ class BGEEmbedder:
     def _model(self) -> SentenceTransformer:
         from sentence_transformers import SentenceTransformer
 
-        return SentenceTransformer(EMBED_MODEL, device="cpu")
+        try:  # use the downloaded copy without asking the Hub; download only the first time
+            return SentenceTransformer(EMBED_MODEL, device="cpu", local_files_only=True)
+        except OSError:
+            return SentenceTransformer(EMBED_MODEL, device="cpu")
 
     def embed_documents(self, texts: list[str]) -> list[list[float]]:
         vectors = self._model.encode(texts, normalize_embeddings=True, batch_size=32)
@@ -49,7 +52,10 @@ class BGEReranker:
     def _model(self) -> CrossEncoder:
         from sentence_transformers import CrossEncoder
 
-        model: CrossEncoder = CrossEncoder(RERANK_MODEL, device="cpu")
+        try:
+            model: CrossEncoder = CrossEncoder(RERANK_MODEL, device="cpu", local_files_only=True)
+        except OSError:
+            model = CrossEncoder(RERANK_MODEL, device="cpu")
         return model
 
     def scores(self, query: str, texts: list[str]) -> list[float]:

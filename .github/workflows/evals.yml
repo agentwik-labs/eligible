@@ -1,0 +1,47 @@
+name: evals
+
+# The eval gate (PLAN M7): every pull request runs the smoke suite through the real pipeline
+# and fails if any EVALS.md gate fails. It needs the ANTHROPIC_API_KEY repository secret and
+# skips with a notice without it. Budget: the smoke suite's worst case is printed first and
+# stays well under $0.50 (EVALS.md §1).
+
+on:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    env:
+      ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+      ELIGIBLE_LLM_BACKEND: anthropic_api
+      HF_HOME: ~/.cache/huggingface
+    steps:
+      - name: Skip without an API key
+        if: env.ANTHROPIC_API_KEY == ''
+        run: echo "::notice::ANTHROPIC_API_KEY isn't set, so the eval gate was skipped."
+      - uses: actions/checkout@v4
+        if: env.ANTHROPIC_API_KEY != ''
+      - uses: astral-sh/setup-uv@v6
+        if: env.ANTHROPIC_API_KEY != ''
+        with:
+          python-version: "3.12"
+          enable-cache: true
+      - name: Cache the local embedding model
+        if: env.ANTHROPIC_API_KEY != ''
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/huggingface
+          key: hf-bge-small-en-v1.5
+      - name: Build the knowledge index
+        if: env.ANTHROPIC_API_KEY != ''
+        run: uv sync --locked && uv run python -m eligible.retrieve.ingest
+      - name: Smoke eval (fails the check if a gate fails)
+        if: env.ANTHROPIC_API_KEY != ''
+        run: uv run python -m evals.run --suite smoke --no-cache
+      - name: Keep the report
+        if: always() && env.ANTHROPIC_API_KEY != ''
+        uses: actions/upload-artifact@v4
+        with:
+          name: smoke-eval-report
+          path: evals/reports/*-smoke.*

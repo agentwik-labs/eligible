@@ -1,5 +1,5 @@
 {
-  "generated": "2026-10-29T00:30:10+00:00",
+  "generated": "2026-10-29T00:32:39+00:00",
   "commits": [
     {
       "sha": "f4ddceb",
@@ -81,6 +81,15 @@
       "py_added": 344,
       "py_removed": 105,
       "tests": 74
+    },
+    {
+      "sha": "2987b1c",
+      "time": "2026-10-28T20:32:38-04:00",
+      "subject": "Redesigned demo page and an engineering page built from committed reports",
+      "milestone": null,
+      "py_added": 344,
+      "py_removed": 0,
+      "tests": 74
     }
   ],
   "product_spend": {
@@ -118,22 +127,22 @@
   },
   "build_session": {
     "note": "Claude Code building this repo: per-hour API-equivalent cost by token class, priced with llm/pricing.py. Aggregates only.",
-    "model_turns": 185,
+    "model_turns": 191,
     "models": {
-      "claude-opus-5-5": 185
+      "claude-opus-5-5": 191
     },
     "tokens": {
-      "input": 370,
-      "output": 304751,
-      "cache_read": 58192352,
-      "cache_write": 905920
+      "input": 382,
+      "output": 321572,
+      "cache_read": 61627527,
+      "cache_write": 930415
     },
-    "cache_read_share": 0.9846647914515532,
-    "cost_usd": "24.9823304",
+    "cache_read_share": 0.985121132720883,
+    "cost_usd": "26.2017934",
     "tool_calls": {
-      "Bash": 157,
-      "Write": 26,
-      "Read": 10,
+      "Bash": 162,
+      "Write": 27,
+      "Read": 12,
       "Skill": 6,
       "Edit": 2,
       "Artifact": 2,
@@ -164,10 +173,10 @@
       },
       {
         "hour": "2026-10-29T00:00Z",
-        "cache_read": "5.2111766",
-        "cache_write": "1.175904",
-        "output": "1.87522",
-        "input": "0.000432"
+        "cache_read": "5.8982116",
+        "cache_write": "1.371864",
+        "output": "2.21164",
+        "input": "0.000480"
       }
     ]
   },

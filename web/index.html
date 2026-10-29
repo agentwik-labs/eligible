@@ -3,200 +3,307 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Eligible</title>
+<title>Eligible: FSA/HSA receipt checker</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=IBM+Plex+Sans+Condensed:wght@500;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans+Condensed:wght@500;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="/static/eligible.css">
 <style>
-/* Layout: receipt in on the left, the checked answer on the right; summary strip on top of the answer. */
-:root {
-  --paper: #fbfbf8; --ground: #eef0ef; --ink: #17202a; --ink-2: #4c5864; --rule: #c9cfd3;
-  --accent: #1d4f73; --accent-soft: #dce8f1;
-  --v-eligible: #1f7a4d; --v-not: #b23a2e; --v-dual: #a86a00; --v-rx: #5b4bb0; --v-review: #66707a;
-  --v-eligible-bg: #e1f1e8; --v-not-bg: #f7e3e0; --v-dual-bg: #f7ecd6; --v-rx-bg: #e9e6f7; --v-review-bg: #e8eaec;
-  --f-display: "IBM Plex Sans Condensed", "Arial Narrow", system-ui, sans-serif;
-  --f-body: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
-  --f-mono: "IBM Plex Mono", ui-monospace, Menlo, monospace;
+/* Layout: the receipt strip on the left is the input and, after a check, the marked-up
+   evidence; the answer column on the right reads top-down from total to line items. */
+.page { max-width: 1280px; margin: 0 auto; padding: 22px max(16px, 3vw) 64px; display: grid; gap: 18px; }
+.lede { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 6px 24px; }
+.lede h1 { font-size: clamp(26px, 3.2vw, 36px); font-weight: 700; letter-spacing: -.012em; }
+.lede p { margin: 0; color: var(--ink-2); max-width: 60ch; }
+.bench { display: grid; grid-template-columns: minmax(0, 410px) minmax(0, 1fr); gap: 22px; align-items: start; }
+
+/* receipt column */
+.receipt-col { display: grid; gap: 12px; position: sticky; top: 64px; }
+.samples { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 6px; }
+.sample { border: 1px solid var(--rule); background: var(--paper); color: var(--ink); padding: 6px 10px; cursor: pointer; display: grid; text-align: left; gap: 1px; }
+.sample b { font: 600 13px var(--f-body); }
+.sample span { font: 11px var(--f-mono); color: var(--ink-3); }
+.sample:hover, .sample[aria-pressed="true"] { border-color: var(--accent); }
+.sample[aria-pressed="true"] { background: var(--accent-soft); }
+.more { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; font-size: 13px; color: var(--ink-2); }
+.more select, .more label.file { font: 13px var(--f-body); color: var(--ink); background: var(--paper); border: 1px solid var(--rule); padding: 5px 8px; cursor: pointer; }
+.more input[type=file] { position: absolute; width: 1px; height: 1px; opacity: 0; }
+.strip { background: var(--paper); box-shadow: var(--shadow); position: relative; padding: 22px 18px 28px; }
+.strip::after { content: ""; position: absolute; left: 0; right: 0; bottom: -8px; height: 8px;
+  background: linear-gradient(-45deg, transparent 6px, var(--paper) 0) 0 0 / 12px 8px repeat-x, linear-gradient(45deg, transparent 6px, var(--paper) 0) 0 0 / 12px 8px repeat-x; }
+.strip textarea { width: 100%; min-height: 470px; border: 0; resize: vertical; background: transparent; color: var(--ink); font: 12.5px/1.65 var(--f-mono); padding: 0; }
+.strip textarea:focus { outline: none; }
+.marked { margin: 0; font: 12.5px/1.65 var(--f-mono); white-space: pre; overflow-x: auto; }
+.marked .ln { display: block; padding: 0 4px; margin: 0 -4px; }
+.marked .ln.hit { background-image: linear-gradient(var(--vh), var(--vh)); background-repeat: no-repeat; background-size: 0% 100%; animation: swipe .5s ease-out forwards; animation-delay: var(--d, 0s); cursor: pointer; }
+.marked .ln.hit.focus { outline: 1px solid var(--v); }
+@keyframes swipe { to { background-size: 100% 100%; } }
+@media (prefers-reduced-motion: reduce) { .marked .ln.hit { background-size: 100% 100%; } }
+.strip-tools { display: flex; justify-content: space-between; align-items: center; gap: 10px; }
+.linkish { background: none; border: 0; padding: 0; color: var(--accent); cursor: pointer; font: 13px var(--f-body); }
+.go { width: 100%; font: 600 16px var(--f-body); padding: 13px 18px; border: 0; background: var(--accent); color: var(--accent-ink); cursor: pointer; }
+.go[disabled] { opacity: .65; cursor: progress; }
+.fine { font-size: 12.5px; color: var(--ink-3); }
+
+/* answer column */
+.answer { display: grid; gap: 14px; min-width: 0; }
+.card { background: var(--paper); border: 1px solid var(--rule); }
+.empty { padding: 26px; display: grid; gap: 16px; }
+.empty h2 { font-size: 22px; }
+.flow { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 0; border: 1px solid var(--rule-2); }
+.flow div { padding: 12px; border-right: 1px solid var(--rule-2); display: grid; gap: 4px; align-content: start; }
+.flow div:last-child { border-right: 0; }
+.flow b { font: 600 13px var(--f-body); }
+.flow span { font-size: 12.5px; color: var(--ink-2); }
+.flow .k { font: 600 11px var(--f-mono); color: var(--ink-3); }
+.flow div.on { background: var(--accent-soft); }
+.flow div.on .k::after { content: " · working"; color: var(--accent); }
+.flow div.done .k::after { content: " · done"; color: var(--v-eligible); }
+
+.total { padding: 20px 22px; display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 14px 24px; align-items: end; }
+.total .big { font: 700 clamp(40px, 5vw, 56px)/1 var(--f-display); letter-spacing: -.02em; }
+.total .of { color: var(--ink-2); font-size: 14px; margin-top: 6px; }
+.facts { display: grid; gap: 6px; justify-items: end; text-align: right; font-size: 13.5px; }
+.facts .warn { color: var(--v-not); font-weight: 600; }
+.bar { grid-column: 1 / -1; display: flex; height: 12px; background: var(--rule-2); overflow: hidden; }
+.bar span { background: var(--v); }
+.legend { grid-column: 1 / -1; display: flex; flex-wrap: wrap; gap: 4px 16px; font-size: 12.5px; color: var(--ink-2); }
+.legend i { display: inline-block; width: 9px; height: 9px; background: var(--v); margin-right: 6px; }
+
+.pipe { padding: 14px 18px; display: grid; gap: 10px; }
+.pipe-head { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; flex-wrap: wrap; }
+.stages { display: grid; gap: 6px; }
+.stage { display: grid; grid-template-columns: 136px minmax(0, 1fr) 70px 78px; gap: 10px; align-items: center; font-size: 13px; }
+.stage .n { font: 600 12px var(--f-mono); }
+.stage .t { height: 8px; background: var(--rule-2); position: relative; }
+.stage .t i { position: absolute; inset: 0 auto 0 0; background: var(--accent); }
+.stage .d { grid-column: 2 / -1; font-size: 12px; color: var(--ink-3); margin-top: -4px; }
+.stage .ms, .stage .c { font: 12px var(--f-mono); text-align: right; color: var(--ink-2); }
+.tag { font: 600 10.5px var(--f-mono); color: var(--accent); border: 1px solid var(--accent); padding: 1px 4px; margin-left: 6px; }
+
+.items { display: grid; gap: 8px; }
+.item { background: var(--paper); border: 1px solid var(--rule); border-left: 4px solid var(--v); padding: 13px 16px; display: grid; gap: 6px; }
+.item.focus { box-shadow: 0 0 0 2px var(--v); }
+.ihead { display: flex; gap: 8px 14px; justify-content: space-between; align-items: baseline; flex-wrap: wrap; }
+.iname { font-weight: 600; font-size: 15.5px; }
+.iright { display: flex; gap: 10px; align-items: center; }
+.amt { font: 600 14px var(--f-mono); }
+.raw { font: 12px var(--f-mono); color: var(--ink-3); }
+.reason { margin: 0; max-width: 72ch; }
+.flags { font: 12px var(--f-mono); color: var(--v-not); }
+.cites { display: flex; flex-wrap: wrap; gap: 6px; }
+.cite { background: none; border: 1px solid var(--rule); color: var(--accent); font: 12px var(--f-mono); padding: 3px 8px; cursor: pointer; }
+.cite:hover { border-color: var(--accent); }
+.cite.law { border-style: solid; }
+.cite.list { color: var(--ink-2); }
+.meta { font: 12px var(--f-mono); color: var(--ink-3); display: flex; flex-wrap: wrap; gap: 4px 16px; }
+.error { padding: 18px 20px; color: var(--v-not); font-weight: 600; }
+
+/* source drawer */
+.drawer { position: fixed; top: 0; right: 0; bottom: 0; width: min(520px, 100vw); background: var(--paper); border-left: 1px solid var(--rule); box-shadow: -20px 0 40px -20px rgba(0,0,0,.25); z-index: 30; transform: translateX(105%); transition: transform .22s ease; display: grid; grid-template-rows: auto minmax(0, 1fr); padding-bottom: env(safe-area-inset-bottom, 0px); }
+.drawer.open { transform: none; }
+.drawer header { padding: 18px 20px 12px; border-bottom: 1px solid var(--rule-2); display: grid; gap: 6px; }
+.drawer .path { font: 12px var(--f-mono); color: var(--ink-2); }
+.drawer h2 { font-size: 21px; }
+.drawer .close { position: absolute; top: 14px; right: 16px; background: none; border: 1px solid var(--rule); color: var(--ink); padding: 4px 9px; cursor: pointer; }
+.drawer .body { overflow-y: auto; padding: 16px 20px 28px; font-size: 14.5px; line-height: 1.65; white-space: pre-wrap; }
+.drawer mark { background: var(--v-dual-hl); color: inherit; }
+
+@media (max-width: 920px) {
+  .bench { grid-template-columns: minmax(0, 1fr); }
+  .receipt-col { position: static; }
+  .strip textarea { min-height: 260px; }
+  .flow { grid-template-columns: minmax(0, 1fr); }
+  .flow div { border-right: 0; border-bottom: 1px solid var(--rule-2); }
+  .total { grid-template-columns: minmax(0, 1fr); }
+  .facts { justify-items: start; text-align: left; }
 }
-@media (prefers-color-scheme: dark) {
-  :root {
-    --paper: #1d2328; --ground: #12171b; --ink: #e6eaed; --ink-2: #9aa6b0; --rule: #34404a;
-    --accent: #7fb6dd; --accent-soft: #1c3346;
-    --v-eligible: #5fcb93; --v-not: #f08a7e; --v-dual: #e5b04e; --v-rx: #a99cf0; --v-review: #a3adb6;
-    --v-eligible-bg: #173527; --v-not-bg: #3d1f1b; --v-dual-bg: #3a2c12; --v-rx-bg: #29254a; --v-review-bg: #2a3036;
-    color-scheme: dark;
-  }
-}
-* { box-sizing: border-box; }
-body { margin: 0; background: var(--ground); color: var(--ink); font: 15px/1.55 var(--f-body); }
-.wrap { max-width: 1240px; margin: 0 auto; padding: 24px max(16px, 3vw) 48px; display: grid; gap: 20px; }
-header { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 8px 20px; }
-h1 { font: 700 34px/1.1 var(--f-display); margin: 0; letter-spacing: -0.01em; }
-h1 small { font: 500 15px var(--f-body); color: var(--ink-2); margin-left: 10px; letter-spacing: 0; }
-.eyebrow { font: 600 12px/1 var(--f-mono); letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-2); }
-.grid { display: grid; grid-template-columns: minmax(0, 380px) minmax(0, 1fr); gap: 20px; align-items: start; }
-.panel { background: var(--paper); border: 1px solid var(--rule); padding: 16px; display: grid; gap: 12px; min-width: 0; }
-label { font: 600 12px var(--f-mono); letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-2); }
-textarea { width: 100%; min-height: 480px; resize: vertical; font: 12.5px/1.6 var(--f-mono); color: var(--ink); background: var(--paper); border: 1px solid var(--rule); padding: 12px; }
-textarea:focus, select:focus, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
-.row { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
-select, input[type=file] { font: 13px var(--f-body); color: var(--ink); background: var(--paper); border: 1px solid var(--rule); padding: 6px 8px; max-width: 100%; }
-button.primary { font: 600 15px var(--f-body); padding: 10px 18px; border: 0; background: var(--accent); color: var(--paper); cursor: pointer; }
-button.primary[disabled] { opacity: .6; cursor: progress; }
-.hint { font-size: 13px; color: var(--ink-2); }
-
-.summary { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); border: 1px solid var(--rule); background: var(--paper); }
-.stat { padding: 12px 14px; border-right: 1px solid var(--rule); display: grid; gap: 2px; }
-.stat:last-child { border-right: 0; }
-.stat .k { font: 600 11px var(--f-mono); letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-2); }
-.stat .v { font: 600 20px var(--f-display); font-variant-numeric: tabular-nums; }
-.stat .v.warn { color: var(--v-not); }
-.meta { font: 12px var(--f-mono); color: var(--ink-2); display: flex; flex-wrap: wrap; gap: 4px 16px; }
-
-.items { display: grid; gap: 10px; }
-.item { background: var(--paper); border: 1px solid var(--rule); border-left: 4px solid var(--v); padding: 12px 14px; display: grid; gap: 6px; }
-.itop { display: flex; flex-wrap: wrap; gap: 6px 12px; align-items: baseline; justify-content: space-between; }
-.iname { font-weight: 600; }
-.iraw { font: 12.5px var(--f-mono); color: var(--ink-2); }
-.amt { font: 600 14px var(--f-mono); font-variant-numeric: tabular-nums; }
-.reason { margin: 0; font-size: 14px; }
-.pill { font: 600 11px/1 var(--f-mono); letter-spacing: 0.04em; text-transform: uppercase; padding: 5px 7px; color: var(--v); background: var(--vb); }
-.flag { font: 11px var(--f-mono); color: var(--v-not); }
-.chips { display: flex; flex-wrap: wrap; gap: 6px; }
-.chip { font: 12px var(--f-mono); padding: 3px 7px; border: 1px solid var(--rule); background: none; color: var(--accent); cursor: pointer; }
-.chip:hover { border-color: var(--accent); }
-.v-eligible { --v: var(--v-eligible); --vb: var(--v-eligible-bg); }
-.v-not_eligible { --v: var(--v-not); --vb: var(--v-not-bg); }
-.v-dual_purpose { --v: var(--v-dual); --vb: var(--v-dual-bg); }
-.v-needs_prescription { --v: var(--v-rx); --vb: var(--v-rx-bg); }
-.v-needs_review { --v: var(--v-review); --vb: var(--v-review-bg); }
-
-.source { border: 1px solid var(--accent); background: var(--paper); padding: 14px; display: grid; gap: 8px; }
-.source .path { font: 12px var(--f-mono); color: var(--ink-2); }
-.source .body { font-size: 13.5px; white-space: pre-wrap; max-height: 300px; overflow-y: auto; }
-.source button { justify-self: start; font: 12px var(--f-mono); background: none; border: 0; color: var(--accent); cursor: pointer; padding: 0; }
-.empty { color: var(--ink-2); padding: 24px; border: 1px dashed var(--rule); text-align: left; }
-.steps { font: 13px var(--f-mono); color: var(--ink-2); display: grid; gap: 4px; }
-.steps .on { color: var(--ink); }
-.error { color: var(--v-not); font-weight: 600; }
-footer { font-size: 12.5px; color: var(--ink-2); }
-@media (max-width: 860px) { .grid { grid-template-columns: minmax(0, 1fr); } textarea { min-height: 260px; } }
 </style>
 </head>
 <body>
-<div class="wrap">
-  <header>
-    <h1>Eligible <small>Can an FSA or HSA pay for this receipt?</small></h1>
-    <span class="eyebrow" id="health">checking server…</span>
-  </header>
+<div class="topbar"><div class="in">
+  <a class="brand" href="/"><b>Eligible</b><span>FSA/HSA receipt checker</span></a>
+  <nav class="nav" aria-label="Main"><a href="/" aria-current="page">Check a receipt</a><a href="/engineering">How it's built</a><a href="https://github.com/agentwik-labs/eligible" target="_blank" rel="noopener">Source</a></nav>
+  <span class="status" id="status">connecting…</span>
+</div></div>
 
-  <div class="grid">
-    <form class="panel" id="form">
-      <label for="receipt">Receipt text</label>
-      <div class="row">
-        <select id="sample" aria-label="Load a synthetic sample receipt"><option value="">Load a sample receipt…</option></select>
-        <input type="file" id="file" accept=".txt,text/plain" aria-label="Upload a receipt text file">
-      </div>
-      <textarea id="receipt" spellcheck="false" placeholder="Paste receipt text here"></textarea>
-      <div class="row">
-        <button class="primary" id="go" type="submit">Check receipt</button>
-        <span class="hint">Samples are synthetic: fake stores, people and card numbers.</span>
-      </div>
-    </form>
-
-    <section class="panel" aria-live="polite">
-      <div id="out"><p class="empty">Load a sample or paste a receipt, then check it. Each item gets a verdict, a plain-English reason and the IRS text it rests on.</p></div>
-    </section>
+<main class="page">
+  <div class="lede">
+    <h1>Which lines can your FSA or HSA pay for?</h1>
+    <p>Each item gets a verdict, a plain-English reason, and the IRS text it rests on. Personal data is masked before any model sees the receipt.</p>
   </div>
 
-  <footer>Informational only, not medical, tax or legal advice: your plan administrator makes the real decision. Sources: IRS Publications 502 and 969 and CARES Act §3702.</footer>
-</div>
+  <div class="bench">
+    <section class="receipt-col" aria-label="Receipt">
+      <div class="samples" id="samples"></div>
+      <div class="more">
+        <select id="all" aria-label="All 60 sample receipts"><option value="">All 60 samples…</option></select>
+        <label class="file" for="file">Upload .txt</label><input type="file" id="file" accept=".txt,text/plain">
+        <span>Samples are synthetic.</span>
+      </div>
+      <div class="strip">
+        <textarea id="text" spellcheck="false" aria-label="Receipt text" placeholder="Paste a receipt's text here"></textarea>
+        <pre class="marked" id="marked" hidden></pre>
+      </div>
+      <div class="strip-tools">
+        <button class="linkish" id="edit" type="button" hidden>Edit receipt</button>
+        <span class="fine" id="hint">Tip: hover a highlighted line to find its verdict.</span>
+      </div>
+      <button class="go" id="go" type="button">Check receipt</button>
+    </section>
+
+    <section class="answer" id="answer" aria-live="polite"></section>
+  </div>
+</main>
+
+<aside class="drawer" id="drawer" aria-label="Source text" aria-hidden="true">
+  <header><span class="eyebrow" id="d-id"></span><h2 id="d-title"></h2><span class="path" id="d-path"></span>
+    <button class="close" id="d-close" type="button">Close</button></header>
+  <div class="body" id="d-body"></div>
+</aside>
 
 <script>
-const LABEL = { eligible: "Eligible", not_eligible: "Not eligible", dual_purpose: "Dual purpose", needs_prescription: "Needs Rx / LMN", needs_review: "Needs review" };
-const FLAG = { unsupported_citation: "model cited a source it wasn't given (removed)", no_supporting_source: "no supporting source", low_confidence: "receipt line hard to read", missing_decision: "no decision returned" };
-const STEPS = ["Masking personal data", "Reading line items", "Finding IRS rules for each item", "Deciding with citations", "Checking citations and totals"];
+const LABEL = { eligible: "Eligible", not_eligible: "Not eligible", dual_purpose: "Dual purpose", needs_prescription: "Needs Rx or letter", needs_review: "Needs review" };
+const ORDER = ["eligible", "dual_purpose", "needs_prescription", "needs_review", "not_eligible"];
+const FLAG = { unsupported_citation: "The model cited a source it wasn't given; that citation was removed.", no_supporting_source: "No retrieved source supports a verdict, so it needs review.", low_confidence: "The line was hard to read, so it needs review.", missing_decision: "No decision came back for this line." };
+const STAGES = [
+  ["redact", "Mask personal data", "Cards, phones, emails, patient names"],
+  ["extract", "Read line items", "One structured call, per-field confidence"],
+  ["retrieve", "Find the rules", "BM25 + vectors over IRS text, then the sections each rule cites"],
+  ["decide", "Decide with citations", "One call for the whole receipt"],
+  ["validate", "Check the answer", "Citations must be retrieved; totals must add up"],
+];
+const SAMPLES = [
+  ["r0026", "Pharmacy run", "all five verdicts"], ["r0007", "Totals off", "subtotal doesn't add up"],
+  ["r0023", "Big box", "unreadable lines"], ["r0001", "Optical", "lenses and frames"],
+  ["r0028", "Dentist", "treatment vs whitening"], ["r0031", "Doctor's office", "services and fees"],
+];
 const $ = (id) => document.getElementById(id);
-const esc = (s) => String(s ?? "").replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
-const money = (x) => "$" + Number(x).toFixed(2);
+const esc = (s) => String(s ?? "").replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+const money = (x) => "$" + Number(x).toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+let result = null, timer = null;
 
-fetch("/healthz").then(r => r.json()).then(h => { $("health").textContent = `${h.models.extract} · ${h.llm_mode} mode · v${h.version}`; })
-  .catch(() => { $("health").textContent = "server not reachable"; });
-fetch("/v1/samples").then(r => r.json()).then(ids => {
-  $("sample").insertAdjacentHTML("beforeend", ids.map(id => `<option value="${id}">${id}</option>`).join(""));
-});
-$("sample").addEventListener("change", async (e) => {
-  if (!e.target.value) return;
-  const s = await (await fetch(`/v1/samples/${e.target.value}`)).json();
-  $("receipt").value = s.text;
-});
-$("file").addEventListener("change", async (e) => {
-  const f = e.target.files[0];
-  if (f) $("receipt").value = await f.text();
-});
+fetch("/healthz").then(r => r.json()).then(h => { $("status").textContent = `${h.models.extract} · ${h.llm_mode}`; }).catch(() => { $("status").textContent = "server offline"; });
+$("samples").innerHTML = SAMPLES.map(([id, name, note]) => `<button class="sample" type="button" data-id="${id}" aria-pressed="false"><b>${name}</b><span>${id} · ${note}</span></button>`).join("");
+fetch("/v1/samples").then(r => r.json()).then(ids => $("all").insertAdjacentHTML("beforeend", ids.map(i => `<option>${i}</option>`).join("")));
 
-let timer = null;
-function showSteps() {
-  let i = 0;
-  const render = () => { $("out").innerHTML = `<div class="steps">${STEPS.map((s, j) => `<span class="${j <= i ? "on" : ""}">${j < i ? "✓" : j === i ? "…" : "·"} ${s}</span>`).join("")}</div>`; };
-  render();
-  timer = setInterval(() => { i = Math.min(i + 1, STEPS.length - 1); render(); }, 3500);
+async function loadSample(id) {
+  const s = await (await fetch(`/v1/samples/${id}`)).json();
+  setEditing(true); $("text").value = s.text;
+  document.querySelectorAll(".sample").forEach(b => b.setAttribute("aria-pressed", b.dataset.id === id));
+}
+$("samples").addEventListener("click", e => { const b = e.target.closest(".sample"); if (b) loadSample(b.dataset.id); });
+$("all").addEventListener("change", e => e.target.value && loadSample(e.target.value));
+$("file").addEventListener("change", async e => { const f = e.target.files[0]; if (f) { setEditing(true); $("text").value = await f.text(); } });
+$("edit").addEventListener("click", () => setEditing(true));
+
+function setEditing(on) {
+  $("text").hidden = !on; $("marked").hidden = on; $("edit").hidden = on;
 }
 
-$("form").addEventListener("submit", async (e) => {
-  e.preventDefault();
-  const text = $("receipt").value;
-  if (!text.trim()) { $("out").innerHTML = `<p class="error">Paste or load a receipt first.</p>`; return; }
+function emptyState(active = -1) {
+  $("answer").innerHTML = `<div class="card empty">
+    <span class="eyebrow">${active < 0 ? "Pick a sample or paste a receipt" : "Checking"}</span>
+    <h2>${active < 0 ? "Five steps between a receipt and a verdict you can check" : "Working through the receipt…"}</h2>
+    <div class="flow">${STAGES.map(([k, t, d], i) => `<div class="${i < active ? "done" : i === active ? "on" : ""}"><span class="k">${String(i + 1).padStart(2, "0")} ${k}</span><b>${t}</b><span>${d}</span></div>`).join("")}</div>
+    ${active < 0 ? `<p class="fine">Verdicts cite IRS Publication 502, Publication 969 and CARES Act §3702. A citation the system didn't retrieve is thrown out in code, not trusted.</p>` : ""}
+  </div>`;
+}
+emptyState();
+
+$("go").addEventListener("click", async () => {
+  const text = $("text").hidden ? (result?.__text ?? "") : $("text").value;
+  if (!text.trim()) { $("answer").innerHTML = `<div class="card error">Pick a sample or paste a receipt first.</div>`; return; }
   $("go").disabled = true; $("go").textContent = "Checking…";
-  showSteps();
+  let step = 0; emptyState(step);
+  timer = setInterval(() => { step = Math.min(step + 1, STAGES.length - 1); emptyState(step); }, 2600);
   try {
     const r = await fetch("/v1/check", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ text }) });
     const body = await r.json();
     if (!r.ok) throw new Error(body.detail || r.statusText);
-    render(body);
+    body.__text = text; result = body; render(body, text);
   } catch (err) {
-    $("out").innerHTML = `<p class="error">The check failed: ${esc(err.message)}</p>`;
-  } finally {
-    clearInterval(timer);
-    $("go").disabled = false; $("go").textContent = "Check receipt";
-  }
+    $("answer").innerHTML = `<div class="card error">The check didn't finish: ${esc(err.message)}</div>`;
+  } finally { clearInterval(timer); $("go").disabled = false; $("go").textContent = "Check again"; }
 });
 
-function render(res) {
-  const rcpt = res.receipt;
-  const stats = [
-    ["Eligible subtotal", money(res.eligible_subtotal), ""],
-    ["Needs review", res.needs_review_count, res.needs_review_count ? "" : ""],
-    ["Totals", res.totals_mismatch ? "Don't add up" : "Add up", res.totals_mismatch ? "warn" : ""],
-    ["Cost", "$" + Number(res.cost_usd).toFixed(4), ""],
-    ["Time", (res.latency_ms / 1000).toFixed(1) + " s", ""],
-  ];
-  $("out").innerHTML = `
-    <div class="summary">${stats.map(([k, v, c]) => `<div class="stat"><span class="k">${k}</span><span class="v ${c}">${esc(v)}</span></div>`).join("")}</div>
-    <div class="meta"><span>${esc(rcpt.merchant || "Unknown merchant")} · ${esc(rcpt.merchant_type)} · ${esc(rcpt.date || "no date")}</span>
-      <span>prompts ${Object.entries(res.prompt_versions).map(([k, v]) => `${k}@${v}`).join(" ")}</span><span>trace ${esc(res.trace_id.slice(0, 12))}</span></div>
-    <div id="src" hidden></div>
-    <div class="items">${res.items.map(it => `
-      <article class="item v-${it.verdict}">
-        <div class="itop"><span class="iname">${esc(it.item.name)}</span><span class="row"><span class="amt">${money(it.item.amount)}</span><span class="pill">${LABEL[it.verdict]}</span></span></div>
-        <span class="iraw">${esc(it.item.raw_text)}${it.item.quantity > 1 ? ` · ${it.item.quantity}×` : ""}</span>
+function render(res, text) {
+  const items = res.items;
+  // receipt markup: highlight each line that produced an item
+  const lines = text.replace(/\n$/, "").split("\n");
+  const owner = {};
+  items.forEach((it, i) => { const key = it.item.raw_text.slice(0, 26); const li = lines.findIndex((l, j) => !(j in owner) && l.startsWith(key)); if (li >= 0) owner[li] = i; });
+  let n = 0;
+  $("marked").innerHTML = lines.map((l, li) => li in owner
+    ? `<span class="ln hit v-${items[owner[li]].verdict}" data-i="${owner[li]}" style="--d:${(n++ * 0.07).toFixed(2)}s">${esc(l) || " "}</span>`
+    : `<span class="ln">${esc(l) || " "}</span>`).join("");
+  setEditing(false);
+
+  const total = items.reduce((s, it) => s + Number(it.item.amount), 0);
+  const byVerdict = Object.fromEntries(ORDER.map(v => [v, items.filter(it => it.verdict === v).reduce((s, it) => s + Number(it.item.amount), 0)]));
+  const counts = Object.fromEntries(ORDER.map(v => [v, items.filter(it => it.verdict === v).length]));
+  const maxMs = Math.max(...res.stages.map(s => s.ms), 1);
+  const llmCost = res.stages.reduce((s, st) => s + Number(st.cost_usd), 0);
+  const replayed = res.stages.some(s => s.replayed);
+
+  $("answer").innerHTML = `
+    <div class="card total">
+      <div><span class="eyebrow">Your FSA or HSA can pay</span><div class="big num">${money(res.eligible_subtotal)}</div>
+        <div class="of">of ${money(total)} in line items, before tax${counts.dual_purpose + counts.needs_prescription ? `, plus ${money(byVerdict.dual_purpose + byVerdict.needs_prescription)} with conditions` : ""}</div></div>
+      <div class="facts">
+        <span>${esc(res.receipt.merchant || "Unknown merchant")} · ${esc(res.receipt.date || "no date")}</span>
+        <span class="${res.totals_mismatch ? "warn" : ""}">${res.totals_mismatch ? "Line items don't add up to the subtotal" : "Line items add up to the subtotal"}</span>
+        <span>${res.needs_review_count ? `${res.needs_review_count} line${res.needs_review_count > 1 ? "s need" : " needs"} a human look` : "Nothing needs review"}</span>
+      </div>
+      <div class="bar" role="img" aria-label="Dollar share by verdict">${ORDER.filter(v => byVerdict[v] > 0).map(v => `<span class="v-${v}" style="width:${(byVerdict[v] / total * 100).toFixed(2)}%"></span>`).join("")}</div>
+      <div class="legend">${ORDER.filter(v => counts[v]).map(v => `<span class="v-${v}"><i></i>${LABEL[v]} · ${counts[v]} · ${money(byVerdict[v])}</span>`).join("")}</div>
+    </div>
+
+    <div class="card pipe">
+      <div class="pipe-head"><span class="eyebrow">How this answer was made</span>
+        <span class="meta"><span>${(res.latency_ms / 1000).toFixed(1)} s total</span><span>${replayed ? "API-equivalent cost " : ""}$${llmCost.toFixed(4)}</span><span>prompts ${Object.entries(res.prompt_versions).map(([k, v]) => `${k}@${v}`).join(" ")}</span><span>trace ${esc(res.trace_id.slice(0, 10))}</span></span></div>
+      <div class="stages">${res.stages.map(s => `
+        <div class="stage"><span class="n">${s.name}${s.replayed ? `<span class="tag" title="Served from the response cache: no model call this time">cached</span>` : ""}</span>
+          <span class="t"><i style="width:${Math.max(s.ms / maxMs * 100, 1).toFixed(1)}%"></i></span>
+          <span class="ms">${s.ms >= 1000 ? (s.ms / 1000).toFixed(1) + " s" : Math.round(s.ms) + " ms"}</span>
+          <span class="c">${Number(s.cost_usd) ? "$" + Number(s.cost_usd).toFixed(4) : "no model"}</span>
+          <span class="d">${esc(s.detail)}${s.prompt_tokens ? ` · ${s.prompt_tokens.toLocaleString()} in (${Math.round(s.cache_read_tokens / s.prompt_tokens * 100)}% from cache) / ${s.output_tokens.toLocaleString()} out` : ""}</span></div>`).join("")}</div>
+    </div>
+
+    <div class="items">${items.map((it, i) => `
+      <article class="item v-${it.verdict}" data-i="${i}">
+        <div class="ihead"><span class="iname">${esc(it.item.name)}</span><span class="iright"><span class="amt num">${money(it.item.amount)}</span><span class="pill">${LABEL[it.verdict]}</span></span></div>
+        <span class="raw">${esc(it.item.raw_text)}${it.item.quantity > 1 ? ` · ${it.item.quantity} × ${money(it.item.unit_price)}` : ""}</span>
         <p class="reason">${esc(it.reason)}</p>
-        ${it.flags.length ? `<span class="flag">${it.flags.map(f => FLAG[f] || f).join(" · ")}</span>` : ""}
-        <div class="chips">${it.citations.map(c => `<button type="button" class="chip" data-id="${esc(c.chunk_id)}" title="${esc(c.title)}">${esc(c.source_id)}</button>`).join("")}</div>
+        ${it.flags.length ? `<span class="flags">${it.flags.map(f => FLAG[f] || f).join(" ")}</span>` : ""}
+        ${it.citations.length ? `<div class="cites">${it.citations.map(c => `<button class="cite ${c.source_id.startsWith("elist:") ? "list" : "law"}" type="button" data-chunk="${esc(c.chunk_id)}" title="${esc(c.title)}">${esc(c.source_id.startsWith("elist:") ? "Rule: " + c.source_id.slice(6) : c.title.split(" > ").slice(-1)[0])}</button>`).join("")}</div>` : ""}
       </article>`).join("")}</div>`;
 }
 
-$("out").addEventListener("click", async (e) => {
-  const chip = e.target.closest(".chip");
-  if (chip) {
-    const c = await (await fetch(`/v1/sources/${encodeURIComponent(chip.dataset.id)}`)).json();
-    const box = $("src");
-    box.className = "source";
-    box.innerHTML = `<span class="eyebrow">${esc(c.id)}</span><span class="path">${c.heading_path.map(esc).join(" › ")}</span><div class="body">${esc(c.text)}</div><button type="button" id="closesrc">Close source</button>`;
-    box.hidden = false;
-    box.scrollIntoView({ behavior: "smooth", block: "nearest" });
-  }
-  if (e.target.id === "closesrc") $("src").hidden = true;
+// link receipt lines and item cards
+function focusItem(i, on) {
+  document.querySelectorAll(`[data-i="${i}"]`).forEach(n => n.classList.toggle("focus", on));
+}
+for (const id of ["marked", "answer"]) {
+  $(id).addEventListener("mouseover", e => { const n = e.target.closest("[data-i]"); if (n) focusItem(n.dataset.i, true); });
+  $(id).addEventListener("mouseout", e => { const n = e.target.closest("[data-i]"); if (n) focusItem(n.dataset.i, false); });
+}
+$("marked").addEventListener("click", e => { const n = e.target.closest("[data-i]"); if (n) document.querySelector(`.item[data-i="${n.dataset.i}"]`)?.scrollIntoView({ behavior: "smooth", block: "center" }); });
+
+// source drawer
+$("answer").addEventListener("click", async e => {
+  const b = e.target.closest(".cite"); if (!b) return;
+  const c = await (await fetch(`/v1/sources/${encodeURIComponent(b.dataset.chunk)}`)).json();
+  const title = c.heading_path[c.heading_path.length - 1];
+  $("d-id").textContent = c.source_id; $("d-title").textContent = title;
+  $("d-path").textContent = c.heading_path.join(" › ");
+  $("d-body").innerHTML = esc(c.text).replace(/(over-the-counter medicine[^.]*\.|menstrual care product[^.]*\.)/gi, "<mark>$1</mark>");
+  $("drawer").classList.add("open"); $("drawer").setAttribute("aria-hidden", "false"); $("d-close").focus();
 });
+function closeDrawer() { $("drawer").classList.remove("open"); $("drawer").setAttribute("aria-hidden", "true"); }
+$("d-close").addEventListener("click", closeDrawer);
+document.addEventListener("keydown", e => { if (e.key === "Escape") closeDrawer(); });
+
+loadSample("r0026");
 </script>
 </body>
 </html>

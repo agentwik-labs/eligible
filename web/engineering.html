@@ -1,0 +1,421 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>How Eligible is built</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans+Condensed:wght@500;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="/static/eligible.css">
+<style>
+/* Layout: a long technical memo. Section numbers mirror the pipeline order; every figure
+   names the report it came from. */
+.page { max-width: 1120px; margin: 0 auto; padding: 28px max(16px, 3vw) 80px; display: grid; gap: 56px; }
+.hero { display: grid; gap: 18px; padding-top: 12px; }
+.hero h1 { font-size: clamp(34px, 5vw, 58px); font-weight: 700; letter-spacing: -.02em; max-width: 18ch; }
+.hero p { margin: 0; font-size: 18px; color: var(--ink-2); max-width: 64ch; }
+.provenance { font: 12.5px var(--f-mono); color: var(--ink-3); }
+.provenance code { color: var(--ink-2); }
+.tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); border: 1px solid var(--rule); background: var(--paper); }
+.tile { padding: 16px 18px; border-right: 1px solid var(--rule-2); border-bottom: 1px solid var(--rule-2); display: grid; gap: 4px; align-content: start; }
+.tile .v { font: 700 34px/1 var(--f-display); letter-spacing: -.01em; font-variant-numeric: tabular-nums; }
+.tile .l { font-size: 13px; color: var(--ink-2); }
+.tile .g { font: 11.5px var(--f-mono); color: var(--v-eligible); }
+.tile .g.miss { color: var(--v-not); }
+
+section { display: grid; gap: 18px; }
+.sec-head { display: grid; gap: 8px; border-top: 2px solid var(--ink); padding-top: 14px; }
+.sec-head h2 { font-size: clamp(24px, 3vw, 32px); font-weight: 700; }
+.sec-head p { margin: 0; color: var(--ink-2); max-width: 70ch; font-size: 16px; }
+.two { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 18px; }
+.panel { background: var(--paper); border: 1px solid var(--rule); padding: 18px 20px; display: grid; gap: 12px; align-content: start; min-width: 0; }
+.panel h3 { font-size: 17px; font-weight: 700; }
+.panel p, .panel li { margin: 0; font-size: 14.5px; }
+.panel ul { margin: 0; padding-left: 18px; display: grid; gap: 6px; }
+.scroll { overflow-x: auto; }
+table { border-collapse: collapse; width: 100%; font-size: 13.5px; }
+th, td { text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--rule-2); vertical-align: top; }
+th { font: 600 11.5px var(--f-mono); letter-spacing: .05em; text-transform: uppercase; color: var(--ink-2); white-space: nowrap; }
+td.n, th.n { text-align: right; font-variant-numeric: tabular-nums; font-family: var(--f-mono); }
+tr.best td { background: var(--v-eligible-bg); }
+tr.best td:first-child { box-shadow: inset 3px 0 var(--v-eligible); }
+
+/* pipeline */
+.pipeline { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); border: 1px solid var(--rule); background: var(--paper); }
+.st { padding: 16px; border-right: 1px solid var(--rule-2); display: grid; gap: 8px; align-content: start; position: relative; }
+.st:last-child { border-right: 0; }
+.st .k { font: 600 11.5px var(--f-mono); color: var(--ink-3); }
+.st h3 { font-size: 17px; }
+.st p { margin: 0; font-size: 13.5px; color: var(--ink-2); }
+.st .cost { font: 600 13px var(--f-mono); color: var(--accent); }
+.st .why { font-size: 13px; border-top: 1px dashed var(--rule); padding-top: 8px; color: var(--ink); }
+
+/* bars */
+.bars { display: grid; gap: 10px; }
+.brow { display: grid; grid-template-columns: 150px minmax(0, 1fr) 70px; gap: 10px; align-items: center; font-size: 13.5px; }
+.btrack { height: 22px; display: flex; background: var(--rule-2); }
+.btrack span { height: 100%; }
+.btrack .ex { background: color-mix(in srgb, var(--accent) 55%, var(--paper)); }
+.btrack .de { background: var(--accent); }
+.bkey { display: flex; gap: 16px; font-size: 12.5px; color: var(--ink-2); flex-wrap: wrap; }
+.bkey i { display: inline-block; width: 10px; height: 10px; margin-right: 6px; vertical-align: -1px; }
+
+/* confusion */
+.cm td.cell { text-align: center; font: 600 13px var(--f-mono); }
+.cm th.r { text-transform: none; font: 600 12.5px var(--f-body); color: var(--ink); }
+
+/* trap */
+.trap { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 14px; }
+.q { padding: 14px 16px; border-left: 4px solid var(--v); background: var(--paper); display: grid; gap: 8px; }
+.q blockquote { margin: 0; font-size: 15.5px; }
+.q span { font: 12px var(--f-mono); color: var(--ink-2); }
+
+/* status rows */
+.concerns { display: grid; gap: 0; border: 1px solid var(--rule); background: var(--paper); }
+.concern { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 12px; padding: 11px 16px; border-bottom: 1px solid var(--rule-2); align-items: center; }
+.concern:last-child { border-bottom: 0; }
+.st-done { --v: var(--v-eligible); --vb: var(--v-eligible-bg); }
+.st-planned { --v: var(--v-review); --vb: var(--v-review-bg); }
+.st-partial { --v: var(--v-dual); --vb: var(--v-dual-bg); }
+
+details { background: var(--paper); border: 1px solid var(--rule); border-top: 0; }
+details:first-of-type { border-top: 1px solid var(--rule); }
+summary { cursor: pointer; padding: 12px 16px; display: grid; grid-template-columns: 96px minmax(0, 1fr); gap: 10px; list-style: none; }
+summary::-webkit-details-marker { display: none; }
+summary .d { font: 12px var(--f-mono); color: var(--ink-3); padding-top: 2px; }
+summary b { font-weight: 600; }
+details[open] summary b { color: var(--accent); }
+details .body { padding: 0 16px 16px 122px; white-space: pre-wrap; font-size: 14px; color: var(--ink-2); max-width: 90ch; }
+.foot { font-size: 13px; color: var(--ink-3); border-top: 1px solid var(--rule); padding-top: 16px; }
+
+
+/* charts: validated categorical slots 1-4 (dataviz reference palette), stepped per mode */
+:root { --s1: #2a78d6; --s2: #eb6834; --s3: #1baf7a; --s4: #eda100; --grid: var(--rule-2); }
+@media (prefers-color-scheme: dark) { :root { --s1: #3987e5; --s2: #d95926; --s3: #199e70; --s4: #c98500; } }
+.chart { position: relative; display: grid; gap: 8px; }
+.chart svg { width: 100%; height: auto; display: block; overflow: visible; }
+.chart text { fill: var(--ink-2); font: 11px var(--f-mono); }
+.chart .lbl { fill: var(--ink); font: 600 11.5px var(--f-mono); }
+.chart .hit { fill: transparent; cursor: crosshair; }
+.chart .gridline { stroke: var(--grid); stroke-width: 1; }
+.chart .axis { stroke: var(--rule); stroke-width: 1; }
+.tip { position: absolute; pointer-events: none; background: var(--ink); color: var(--paper); font: 12px/1.45 var(--f-mono); padding: 7px 9px; white-space: nowrap; transform: translate(-50%, calc(-100% - 10px)); z-index: 5; }
+.tip[hidden] { display: none; }
+.legend2 { display: flex; flex-wrap: wrap; gap: 4px 16px; font-size: 12.5px; color: var(--ink-2); }
+.legend2 i { display: inline-block; width: 10px; height: 10px; border-radius: 2px; margin-right: 6px; vertical-align: -1px; }
+.datatable summary { padding: 4px 0; display: inline; font: 12px var(--f-mono); color: var(--accent); grid-template-columns: none; }
+.datatable { background: none; border: 0 !important; }
+.datatable table { margin-top: 8px; font-size: 12.5px; }
+.caught { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 12px; }
+.catch { background: var(--paper); border: 1px solid var(--rule); padding: 14px 16px; display: grid; gap: 8px; align-content: start; }
+.catch h3 { font-size: 16px; }
+.catch .by { font: 11.5px var(--f-mono); color: var(--ink-3); text-transform: uppercase; letter-spacing: .05em; }
+.ba { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 4px 10px; font-size: 13.5px; }
+.ba b { font: 600 11px var(--f-mono); text-transform: uppercase; color: var(--ink-3); padding-top: 3px; }
+.ba .after { color: var(--v-eligible); }
+.catch code { font: 11.5px var(--f-mono); color: var(--ink-2); }
+
+@media (max-width: 860px) {
+  .two, .trap { grid-template-columns: minmax(0, 1fr); }
+  .pipeline { grid-template-columns: minmax(0, 1fr); }
+  .st { border-right: 0; border-bottom: 1px solid var(--rule-2); }
+  .brow { grid-template-columns: 110px minmax(0, 1fr) 60px; }
+  details .body { padding-left: 16px; }
+  summary { grid-template-columns: minmax(0, 1fr); gap: 2px; }
+}
+</style>
+</head>
+<body>
+<div class="topbar"><div class="in">
+  <a class="brand" href="/"><b>Eligible</b><span>FSA/HSA receipt checker</span></a>
+  <nav class="nav" aria-label="Main"><a href="/">Check a receipt</a><a href="/engineering" aria-current="page">How it's built</a><a href="https://github.com/agentwik-labs/eligible" target="_blank" rel="noopener">Source</a></nav>
+</div></div>
+
+<main class="page" id="page">
+  <header class="hero">
+    <span class="eyebrow">Engineering notes</span>
+    <h1>A receipt checker that shows its work, and what it costs</h1>
+    <p>Eligible reads a receipt, decides which lines an FSA or HSA can pay for, and cites the IRS text behind each answer. This page covers how it's built, how it's measured and what it costs per receipt. Every figure is read from a committed eval report.</p>
+    <span class="provenance" id="prov">Loading the latest eval report…</span>
+    <div class="tiles" id="tiles"></div>
+  </header>
+
+
+  <section>
+    <div class="sec-head"><span class="eyebrow">01 · How it was built</span><h2>AI-paired engineering, measured like the product</h2>
+      <p>Eligible was built with Claude Code as the pair-programmer, from spec to working demo in one sitting. The same cost discipline applies to the build as to the product: every token is counted, priced and charted. These numbers come from git history, the product's response cache and the build session's usage log (aggregates only).</p></div>
+    <div class="tiles" id="buildtiles"></div>
+    <div class="two">
+      <div class="panel"><h3>Claude Code spend per hour, by token class</h3><div class="chart" id="c-session"></div></div>
+      <div class="panel"><h3>Tests at each commit</h3><div class="chart" id="c-tests"></div></div>
+    </div>
+    <div class="two">
+      <div class="panel"><h3>What the pair-programmer did: tool calls</h3><div class="chart" id="c-tools"></div></div>
+      <div class="panel"><h3>The product's own model spend, every distinct call</h3><div class="chart" id="c-product"></div><p style="font-size:13px;color:var(--ink-2)" id="productnote"></p></div>
+    </div>
+    <h3 style="font-size:19px">Caught by evals and tests, then fixed</h3>
+    <div class="caught" id="caught"></div>
+  </section>
+  <section>
+    <div class="sec-head"><span class="eyebrow">02 · Pipeline</span><h2>Five steps, two model calls</h2>
+      <p>Only two steps call a model. The rest is plain code, which is where the guarantees live: personal data never reaches a model, and a citation the system didn't retrieve never reaches a user.</p></div>
+    <div class="pipeline" id="pipeline"></div>
+  </section>
+
+  <section>
+    <div class="sec-head"><span class="eyebrow">03 · Cost</span><h2>Projected before the first prompt, then measured</h2>
+      <p>The cost model was written before any prompt existed. Measurement then showed where the projection was wrong, and that's what decides the next optimizations.</p></div>
+    <div class="two">
+      <div class="panel"><h3>Cost per receipt on Sonnet 5.5</h3><div class="bars" id="costbars"></div>
+        <div class="bkey"><span><i class="ex" style="background:color-mix(in srgb, var(--accent) 55%, var(--paper))"></i>Extract</span><span><i style="background:var(--accent)"></i>Decide</span></div>
+        <p class="fine" style="font-size:12.5px;color:var(--ink-3)" id="costnote"></p></div>
+      <div class="panel"><h3>What's built to control it</h3><ul>
+        <li><b>Exact cost per call.</b> A Decimal price table covers cache writes (1.25× or 2×), cache reads and long-context tiers. An unknown model raises an error instead of costing $0.</li>
+        <li><b>Spend ceiling before each call.</b> A worst-case estimate stops a run before the call that could cross the budget, and it never falls back to a cheaper model.</li>
+        <li><b>Free reruns.</b> Answers are cached by model, prompt version and input hash, so unchanged eval cases cost $0. Truncated or refused answers are never cached.</li>
+        <li><b>Sources sent once per receipt.</b> A chunk that several items share appears once in the decide prompt.</li>
+        <li><b>Ledger and report.</b> Spend, savings from both caches, thinking tokens and p95 latency per prompt version, plus a flag when a "static" prompt prefix drifts.</li>
+      </ul></div>
+    </div>
+    <div class="panel"><h3>What measurement found</h3><ul id="costfindings"></ul></div>
+  </section>
+
+  <section>
+    <div class="sec-head"><span class="eyebrow">04 · Evals</span><h2>Gates, not vibes</h2>
+      <p>60 synthetic receipts with 441 hand-labeled line items. Each label points at a hand-written rule that cites IRS text. A 10-receipt smoke suite is meant to gate every change; the full suite produced the numbers here.</p></div>
+    <div class="two">
+      <div class="panel"><h3>Gates (EVALS.md §3)</h3><div class="scroll"><table id="gates"></table></div></div>
+      <div class="panel"><h3>Where the errors are</h3><div class="scroll"><table class="cm" id="cm"></table></div>
+        <p style="font-size:13px;color:var(--ink-2)" id="cmnote"></p></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head"><span class="eyebrow">05 · Retrieval</span><h2>The search that failed, and the fix the eval pointed to</h2>
+      <p>The IRS sources contradict each other about the same aspirin. The two passages below are what retrieval has to tell apart.</p></div>
+    <div class="trap">
+      <div class="q v-not_eligible"><blockquote>“Except for insulin, you can’t include in medical expenses amounts you pay for a drug that isn’t prescribed.”</blockquote><span>Pub 502 · the tax deduction</span></div>
+      <div class="q v-eligible"><blockquote>“Expenses incurred for over-the-counter medicine (whether or not prescribed) and menstrual care products are considered medical care and are considered a covered expense.”</blockquote><span>Pub 969 · health FSAs, the rule that applies</span></div>
+    </div>
+    <div class="panel"><h3>Ablation: recall@5 by configuration (target 90%)</h3><div class="chart" id="c-ablation"></div><div class="scroll"><table id="ablation"></table></div>
+      <p style="font-size:14px">The IRS text never says "ibuprofen" or "DayQuil". It says "over-the-counter medicine", so neither keyword nor vector search links a product to that rule. The eligibility list does: each entry names products and cites the governing sections. <b>Citation expansion</b> follows those citations after ranking. The cross-encoder reranker lowered recall and added about 1.6 s per item, so it's off by default.</p></div>
+  </section>
+
+  <section>
+    <div class="sec-head"><span class="eyebrow">06 · Production concerns</span><h2>What's done, with proof, and what's next</h2>
+      <p>A row says done only if code exists and a test or eval proves it. Details are in <a href="https://github.com/agentwik-labs/eligible/blob/main/docs/production-concerns.md">docs/production-concerns.md</a>.</p></div>
+    <div class="concerns" id="concerns"></div>
+  </section>
+
+  <section>
+    <div class="sec-head"><span class="eyebrow">07 · Decision log</span><h2>Every place the plan changed, and why</h2>
+      <p>Read straight from DECISIONS.md. These are the calls a reviewer would ask about.</p></div>
+    <div id="decisions"></div>
+  </section>
+
+  <p class="foot">Built in public at <a href="https://github.com/agentwik-labs/eligible">github.com/agentwik-labs/eligible</a>. Synthetic data only. Informational, not tax advice.</p>
+</main>
+
+<script>
+const $ = (id) => document.getElementById(id);
+const esc = (s) => String(s ?? "").replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+const pct = (x) => (x * 100).toFixed(1) + "%";
+const usd = (x, d = 4) => "$" + Number(x).toFixed(d);
+const VERDICTS = ["eligible", "not_eligible", "dual_purpose", "needs_prescription", "needs_review"];
+const LABEL = { eligible: "Eligible", not_eligible: "Not eligible", dual_purpose: "Dual purpose", needs_prescription: "Needs Rx", needs_review: "Needs review", missing: "Missing" };
+
+
+// ---------- charts (plain SVG, hover tooltips, data tables) ----------
+const NS = "http://www.w3.org/2000/svg";
+function svgEl(tag, attrs, parent) { const e = document.createElementNS(NS, tag); for (const k in attrs) e.setAttribute(k, attrs[k]); if (parent) parent.appendChild(e); return e; }
+function tipFor(host) { let tip = host.querySelector(".tip"); if (!tip) { tip = document.createElement("div"); tip.className = "tip"; tip.hidden = true; host.appendChild(tip); } return tip; }
+function showTip(host, evt, html) { const tip = tipFor(host); const r = host.getBoundingClientRect(); tip.innerHTML = html; tip.style.left = (evt.clientX - r.left) + "px"; tip.style.top = (evt.clientY - r.top) + "px"; tip.hidden = false; }
+function hideTip(host) { tipFor(host).hidden = true; }
+function dataTable(host, head, rows) {
+  const d = document.createElement("details"); d.className = "datatable";
+  d.innerHTML = `<summary>Show data</summary><div class="scroll"><table><tr>${head.map((h, i) => `<th class="${i ? "n" : ""}">${esc(h)}</th>`).join("")}</tr>${rows.map(r => `<tr>${r.map((c, i) => `<td class="${i ? "n" : ""}">${esc(c)}</td>`).join("")}</tr>`).join("")}</table></div>`;
+  host.appendChild(d);
+}
+function niceMax(v) { const p = Math.pow(10, Math.floor(Math.log10(v || 1))); for (const m of [1, 2, 2.5, 5, 10]) if (m * p >= v) return m * p; return 10 * p; }
+
+// vertical stacked bars: categories along x, series stacked
+function stackedBars(host, cats, series, fmt) {
+  const W = 520, H = 220, L = 52, R = 8, T = 10, B = 28;
+  const totals = cats.map((_, i) => series.reduce((s, se) => s + se.values[i], 0));
+  const max = niceMax(Math.max(...totals));
+  const svg = svgEl("svg", { viewBox: `0 0 ${W} ${H}`, role: "img", "aria-label": "Stacked bar chart" }, host);
+  for (let k = 0; k <= 4; k++) { const y = T + (H - T - B) * (1 - k / 4); svgEl("line", { x1: L, x2: W - R, y1: y, y2: y, class: "gridline" }, svg); svgEl("text", { x: L - 6, y: y + 4, "text-anchor": "end" }, svg).textContent = fmt(max * k / 4); }
+  const bw = Math.min(56, (W - L - R) / cats.length * 0.6), step = (W - L - R) / cats.length;
+  cats.forEach((c, i) => {
+    const x = L + step * i + (step - bw) / 2; let y0 = H - B;
+    series.forEach((se, si) => {
+      const h = se.values[i] / max * (H - T - B); if (h <= 0) return;
+      const top = si === series.length - 1 || series.slice(si + 1).every(s2 => !s2.values[i]);
+      svgEl("rect", { x, y: y0 - h, width: bw, height: Math.max(h - 2, 0.5), fill: se.color, rx: top ? 3 : 0 }, svg);
+      y0 -= h;
+    });
+    svgEl("text", { x: x + bw / 2, y: H - B + 16, "text-anchor": "middle" }, svg).textContent = c;
+    const hit = svgEl("rect", { x: L + step * i, y: T, width: step, height: H - T - B, class: "hit" }, svg);
+    hit.addEventListener("mousemove", e => showTip(host, e, `<b>${esc(c)}</b> · ${fmt(totals[i])}<br>${series.map(se => `${se.name}: ${fmt(se.values[i])}`).join("<br>")}`));
+    hit.addEventListener("mouseleave", () => hideTip(host));
+  });
+  const lg = document.createElement("div"); lg.className = "legend2"; lg.innerHTML = series.map(se => `<span><i style="background:${se.color}"></i>${esc(se.name)}</span>`).join(""); host.appendChild(lg);
+  dataTable(host, ["", ...series.map(s => s.name), "Total"], cats.map((c, i) => [c, ...series.map(s => fmt(s.values[i])), fmt(totals[i])]));
+}
+
+// horizontal bars, one series; optional target line
+function hBars(host, rows, fmt, opts = {}) {
+  const W = 520, rowH = 26, L = opts.labelW || 150, R = 70, T = 6, H = T + rows.length * rowH + (opts.target ? 18 : 6);
+  const max = opts.max || niceMax(Math.max(...rows.map(r => r[1])));
+  const svg = svgEl("svg", { viewBox: `0 0 ${W} ${H}`, role: "img", "aria-label": "Bar chart" }, host);
+  rows.forEach(([name, v, color], i) => {
+    const y = T + i * rowH, w = Math.max(v / max * (W - L - R), 1);
+    svgEl("text", { x: L - 8, y: y + 15, "text-anchor": "end" }, svg).textContent = name.length > 24 ? name.slice(0, 23) + "…" : name;
+    svgEl("rect", { x: L, y: y + 4, width: w, height: rowH - 10, rx: 3, fill: color || "var(--s1)" }, svg);
+    svgEl("text", { x: L + w + 6, y: y + 15, class: "lbl" }, svg).textContent = fmt(v);
+    const hit = svgEl("rect", { x: 0, y, width: W, height: rowH, class: "hit" }, svg);
+    hit.addEventListener("mousemove", e => showTip(host, e, `<b>${esc(name)}</b><br>${fmt(v)}${opts.extra ? "<br>" + opts.extra(i) : ""}`));
+    hit.addEventListener("mouseleave", () => hideTip(host));
+  });
+  if (opts.target) {
+    const x = L + opts.target / max * (W - L - R);
+    svgEl("line", { x1: x, x2: x, y1: T, y2: H - 14, stroke: "var(--v-not)", "stroke-width": 2, "stroke-dasharray": "4 3" }, svg);
+    svgEl("text", { x, y: H - 2, "text-anchor": "middle" }, svg).textContent = "target " + fmt(opts.target);
+  }
+  dataTable(host, ["", opts.valueName || "Value"], rows.map(r => [r[0], fmt(r[1])]));
+}
+
+// line with point markers over commits
+function lineSteps(host, pts, labels) {
+  const W = 520, H = 220, L = 40, R = 14, T = 16, B = 30;
+  const max = niceMax(Math.max(...pts.map(p => p.y)));
+  const svg = svgEl("svg", { viewBox: `0 0 ${W} ${H}`, role: "img", "aria-label": "Tests over commits" }, host);
+  for (let k = 0; k <= 4; k++) { const y = T + (H - T - B) * (1 - k / 4); svgEl("line", { x1: L, x2: W - R, y1: y, y2: y, class: "gridline" }, svg); svgEl("text", { x: L - 6, y: y + 4, "text-anchor": "end" }, svg).textContent = Math.round(max * k / 4); }
+  const X = i => L + (W - L - R) * (pts.length === 1 ? 0.5 : i / (pts.length - 1)), Y = v => T + (H - T - B) * (1 - v / max);
+  svgEl("path", { d: pts.map((p, i) => `${i ? "L" : "M"}${X(i)},${Y(p.y)}`).join(""), fill: "none", stroke: "var(--s1)", "stroke-width": 2 }, svg);
+  pts.forEach((p, i) => {
+    svgEl("circle", { cx: X(i), cy: Y(p.y), r: 4.5, fill: "var(--s1)", stroke: "var(--paper)", "stroke-width": 2 }, svg);
+    if (p.label) svgEl("text", { x: X(i), y: Y(p.y) - 10, "text-anchor": "middle", class: "lbl" }, svg).textContent = p.label;
+    const hit = svgEl("rect", { x: X(i) - (W - L - R) / pts.length / 2, y: T, width: (W - L - R) / pts.length, height: H - T - B, class: "hit" }, svg);
+    hit.addEventListener("mousemove", e => showTip(host, e, `<b>${esc(p.sha)}</b> · ${p.y} tests<br>${esc(p.subject.slice(0, 48))}`));
+    hit.addEventListener("mouseleave", () => hideTip(host));
+  });
+  svgEl("text", { x: L, y: H - 8 }, svg).textContent = labels[0];
+  svgEl("text", { x: W - R, y: H - 8, "text-anchor": "end" }, svg).textContent = labels[1];
+  dataTable(host, ["Commit", "Tests", "Milestone"], pts.map(p => [p.sha + " " + p.subject.slice(0, 40), p.y, p.label || ""]));
+}
+
+function renderBuild(dev) {
+  if (!dev) return;
+  const s = dev.build_session, p = dev.product_spend, cm = dev.commits;
+  const t0 = new Date(cm[0].time), t1 = new Date(cm[cm.length - 1].time);
+  const hours = ((t1 - t0) / 36e5).toFixed(1);
+  const tests = cm[cm.length - 1].tests;
+  const uncached = s ? (s.tokens.cache_read + s.tokens.cache_write + s.tokens.input) * 4 / 1e6 + s.tokens.output * 20 / 1e6 : 0;
+  const tiles = [
+    [`${hours} h`, "first commit to last", null],
+    [String(cm.length), "commits", null],
+    [String(tests), "unit tests at the last commit", null],
+  ];
+  if (s) tiles.push(
+    [usd(s.cost_usd, 2), `Claude Code, API-equivalent (${s.model_turns} model turns)`, null],
+    [pct(s.cache_read_share), `of its prompt tokens were cache reads (uncached: ${usd(uncached, 0)})`, null],
+  );
+  tiles.push([usd(p.cost_usd, 2), `product model spend, ${p.calls} distinct calls`, null]);
+  $("buildtiles").innerHTML = tiles.map(([v, l]) => `<div class="tile"><span class="v">${esc(v)}</span><span class="l">${esc(l)}</span></div>`).join("");
+
+  if (s) {
+    const hrs = s.by_hour.map(h => new Date(h.hour).toLocaleTimeString([], { hour: "numeric" }));
+    const val = k => s.by_hour.map(h => Number(h[k] || 0));
+    stackedBars($("c-session"), hrs, [
+      { name: "Cache reads", color: "var(--s1)", values: val("cache_read") },
+      { name: "Cache writes", color: "var(--s2)", values: val("cache_write") },
+      { name: "Output", color: "var(--s3)", values: val("output") },
+      { name: "Uncached input", color: "var(--s4)", values: val("input") },
+    ], v => "$" + v.toFixed(2));
+    const tools = Object.entries(s.tool_calls);
+    hBars($("c-tools"), tools.map(([k, v]) => [k, v]), v => String(v), { labelW: 110, valueName: "Calls" });
+  } else {
+    $("c-session").innerHTML = `<p class="fine">No session log was included when docs/devlog.json was generated.</p>`;
+  }
+  lineSteps($("c-tests"), cm.map(c => ({ y: c.tests, sha: c.sha, subject: c.subject, label: c.milestone })), [new Date(cm[0].time).toLocaleTimeString([], { hour: "numeric", minute: "2-digit" }), new Date(cm[cm.length - 1].time).toLocaleTimeString([], { hour: "numeric", minute: "2-digit" })]);
+  hBars($("c-product"), p.by_prompt.map(r => [r.prompt.split(" · ")[0], Number(r.cost)]), v => usd(v, 2), {
+    labelW: 90, valueName: "Cost (USD)",
+    extra: i => { const r = p.by_prompt[i]; return `${r.calls} calls · ${Math.round(r.prompt_tokens / r.calls).toLocaleString()} in / ${Math.round(r.output_tokens / r.calls).toLocaleString()} out per call`; },
+  });
+  $("productnote").textContent = p.note;
+  $("caught").innerHTML = dev.caught.map(c => `<article class="catch"><span class="by">Caught by ${esc(c.caught_by)}</span><h3>${esc(c.what)}</h3>
+    <div class="ba"><b>Before</b><span>${esc(c.before)}</span><b>After</b><span class="after">${esc(c.after)}</span><b>Fix</b><span>${esc(c.fix)}</span></div><code>${esc(c.evidence)}</code></article>`).join("");
+}
+
+fetch("/v1/engineering").then(r => r.json()).then(render).catch(err => { $("prov").textContent = "Couldn't load the eval report: " + err.message; });
+
+function render(data) {
+  renderBuild(data.devlog);
+  const ev = data.eval;
+  if (!ev) { $("prov").textContent = "No full eval report committed yet."; return; }
+  const d = ev.decisions, x = ev.extraction, c = ev.cost;
+  $("prov").innerHTML = `From <code>evals/reports/latest.json</code> · ${esc(ev.date)} · git <code>${esc(ev.sha)}</code> · ${esc(ev.models.decide)} at effort <code>${esc(ev.effort)}</code> · prompts extract@${esc(ev.prompts.extract)} decide@${esc(ev.prompts.decide)}`;
+  const gate = (m) => ev.gates.find(g => g.metric.startsWith(m));
+  const tiles = [
+    [pct(d.accuracy), "verdicts match the labels", gate("Verdict accuracy")],
+    [`${d.over_approvals}/${d.not_eligible_items}`, "ineligible items approved", gate("Over-approval")],
+    [String(d.uncited_non_review), `unsupported citations reached a user (${d.unsupported_before} caught)`, gate("Unsupported")],
+    [String(x.pii_leaks), "personal-data leaks to the model", gate("Redaction")],
+    [usd(c.cost_per_receipt, 3), "per receipt, API-equivalent", null],
+    [(c.latency_p95_ms / 1000).toFixed(1) + " s", "p95 per receipt", null],
+  ];
+  $("tiles").innerHTML = tiles.map(([v, l, g]) => `<div class="tile"><span class="v">${esc(v)}</span><span class="l">${esc(l)}</span>${g ? `<span class="g ${g.pass ? "" : "miss"}">${g.pass ? "passes" : "misses"} gate ${esc(g.gate)}</span>` : `<span class="g" style="color:var(--ink-3)">reported, no gate</span>`}</div>`).join("");
+
+  const stage = c.cost_per_stage;
+  const STEPS = [
+    ["redact", "Mask personal data", "Luhn-checked card numbers, phones, emails and labelled names are replaced before any model call.", null, "0 leaks in the full eval"],
+    ["extract", "Read line items", "One strict structured-output call returns typed items with a confidence for every field.", stage.extract, "Low confidence flagged 23 of 23 unreadable lines"],
+    ["retrieve", "Find the rules", `BM25 and vectors over ${data.knowledge.sections} IRS sections and ${data.knowledge.entries} rules, fused, then citation expansion. Runs locally.`, null, "No hosted vector DB: SQLite FTS5 + sqlite-vec"],
+    ["decide", "Decide with citations", "One call per receipt, with each source sent once and every verdict citing chunk IDs.", stage.decide, `${d.citations} citations, ${d.unsupported_before} invented`],
+    ["validate", "Check the answer", "Plain code removes citations that weren't retrieved and routes uncertain lines to review.", null, "0 unsupported citations got through"],
+  ];
+  $("pipeline").innerHTML = STEPS.map(([k, t, p, cost, why], i) => `<div class="st"><span class="k">${String(i + 1).padStart(2, "0")} · ${k}</span><h3>${t}</h3><p>${esc(p)}</p><span class="cost">${cost ? usd(cost) + " / receipt" : "no model call"}</span><span class="why">${esc(why)}</span></div>`).join("");
+
+  const sonnet = data.projection.find(p => p.model === "claude-sonnet-5-5");
+  const rows = [["Projected", sonnet.extract, sonnet.decide], ["Measured", Number(stage.extract || 0), Number(stage.decide || 0)]];
+  const max = Math.max(...rows.map(r => r[1] + r[2])) * 1.05;
+  $("costbars").innerHTML = rows.map(([l, e, dd]) => `<div class="brow"><span>${l}</span><span class="btrack"><span class="ex" style="width:${e / max * 100}%"></span><span class="de" style="width:${dd / max * 100}%"></span></span><span class="num mono" style="text-align:right">${usd(e + dd, 3)}</span></div>`).join("")
+    + `<div class="brow"><span>Target</span><span class="btrack" style="background:none;border-left:2px dashed var(--v-not);width:${0.01 / max * 100}%"></span><span class="num mono" style="text-align:right">&lt; $0.010</span></div>`;
+  $("costnote").textContent = `Measured cost is API-equivalent (${ev.backend} backend). The < $0.01 aim from EVALS.md is missed by ${(Number(c.cost_per_receipt) / 0.01).toFixed(1)}×, and the miss is reported, not hidden.`;
+  const ratio = Number(stage.decide) / sonnet.decide;
+  $("costfindings").innerHTML = [
+    `<b>Decide costs ${ratio.toFixed(1)}× the projection.</b> Retrieved IRS text is long: ${Math.round(c.mean_prompt_tokens).toLocaleString()} prompt tokens per call on average. Shorter chunks (the matching sentence, not the whole section) are the biggest lever.`,
+    `<b>Only ${pct(Number(c.prompt_cache_read_share))} of prompt tokens come from the cache.</b> The decide system prompt is likely shorter than the minimum length Claude will cache, so caching it does nothing yet. Moving the stable rule text into the prefix would make it cacheable.`,
+    `<b>Output is ${Math.round(c.mean_output_tokens)} tokens per call on average.</b> Per-field confidence on every extracted item is most of the extraction output. Confidence only on amount and name would cut it.`,
+    `<b>Reruns are free.</b> This run replayed ${c.replayed_calls} of ${c.calls} calls from the response cache.`,
+  ].map(s => `<li>${s}</li>`).join("");
+
+  $("gates").innerHTML = `<tr><th>Metric</th><th class="n">Result</th><th class="n">Gate</th><th>Pass</th></tr>` + ev.gates.map(g => `<tr><td>${esc(g.metric)}</td><td class="n">${esc(g.result)}</td><td class="n">${esc(g.gate)}</td><td><span class="pill ${g.pass ? "v-eligible" : "v-not_eligible"}">${g.pass ? "pass" : "fail"}</span></td></tr>`).join("");
+
+  const preds = [...VERDICTS];
+  const cmMax = Math.max(...VERDICTS.flatMap(gv => preds.map(p => d.confusion[gv]?.[p] || 0)));
+  $("cm").innerHTML = `<tr><th>Golden ↓ · predicted →</th>${preds.map(p => `<th class="n">${LABEL[p]}</th>`).join("")}</tr>` +
+    VERDICTS.map(gv => `<tr><th class="r">${LABEL[gv]}</th>${preds.map(p => { const n = d.confusion[gv]?.[p] || 0; const diag = gv === p; const a = n ? 0.12 + 0.6 * n / cmMax : 0; return `<td class="cell" style="background:${n ? (diag ? `color-mix(in srgb, var(--v-eligible) ${Math.round(a * 100)}%, transparent)` : `color-mix(in srgb, var(--v-not) ${Math.round(Math.max(a, .25) * 100)}%, transparent)`) : "transparent"}">${n || "·"}</td>`; }).join("")}</tr>`).join("");
+  const toReview = VERDICTS.filter(v => v !== "needs_review").reduce((s, v) => s + (d.confusion[v]?.needs_review || 0), 0);
+  const wrong = d.items - Math.round(d.accuracy * d.items);
+  $("cmnote").innerHTML = `${toReview} of ${wrong} errors are the cautious kind: a correct verdict sent to human review instead of decided. Review rate is ${pct(d.needs_review_rate)} against 5.2% in the labels, which is M5's first target. Not one ineligible item was approved.`;
+
+  if (data.ablation.length) {
+    const [head, ...body] = data.ablation;
+    const recallIdx = head.indexOf("Recall@5");
+    const best = Math.max(...body.map(r => parseFloat(r[recallIdx])));
+    hBars($("c-ablation"), body.map(r => [r[0].replace("Hybrid", "Hyb.").replace("citation expansion", "expansion").replace("exact match", "exact"), parseFloat(r[recallIdx]) / 100, parseFloat(r[recallIdx]) === best ? "var(--v-eligible)" : "var(--s1)"]), v => (v * 100).toFixed(1) + "%", { labelW: 210, max: 1, target: 0.9, valueName: "Recall@5" });
+    $("ablation").innerHTML = `<tr>${head.map((h, i) => `<th class="${i ? "n" : ""}">${esc(h)}</th>`).join("")}</tr>` + body.map(r => `<tr class="${parseFloat(r[recallIdx]) === best ? "best" : ""}">${r.map((cell, i) => `<td class="${i ? "n" : ""}">${esc(cell)}</td>`).join("")}</tr>`).join("");
+  }
+
+  $("concerns").innerHTML = data.concerns.map(r => {
+    const s = r.status.startsWith("done") ? "done" : r.status.startsWith("planned") ? "planned" : "partial";
+    return `<div class="concern"><span>${esc(r.concern)}</span><span class="pill st-${s}">${esc(r.status)}</span></div>`;
+  }).join("");
+
+  $("decisions").innerHTML = data.decisions.slice().reverse().map(e => `<details><summary><span class="d">${esc(e.date)}</span><b>${esc(e.title)}</b></summary><div class="body">${esc(e.body)}</div></details>`).join("");
+}
+</script>
+</body>
+</html>

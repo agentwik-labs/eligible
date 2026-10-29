@@ -58,9 +58,9 @@ How the concerns AI-engineer roles screen for map to code. Details and proof are
 | Pre-flight token/cost budget | done | `llm/budget.py`, `MeteredClient` | `tests/test_budget.py` |
 | Cost kill-switch, no fallback to a cheaper model | done | `llm/budget.py`, `llm/ledger.py`, `llm/report.py` | `tests/test_eval_run.py` |
 | Strict typed outputs (schema-valid ≠ correct) | done | `extract/`, `models.py` | `tests/test_extract.py`, `tests/test_client.py` |
-| Uncertainty: low-confidence fields flagged | done (routing to `needs_review`: M4) | `models.py` | M2 eval: 23 of 23 unreadable lines flagged |
+| Uncertainty routed to human review | done | `models.py`, `validate.py` | Full eval: 23 of 23 unreadable lines → `needs_review` |
 | Personal-data redaction before any LLM call | done | `redact.py` | `tests/test_redact.py`, 0 leaks in eval |
-| No made-up citations | planned (M4) | | |
+| No made-up citations | done | `validate.py`, citation expansion in `retrieve/search.py` | Full eval: 28 invented citations removed, 0 reached a user |
 | Prompt-injection resistance | planned (M5) | | |
 | Eval CI gate on PRs | planned (M7) | | |
 | Tracing per step | planned (M7) | | |

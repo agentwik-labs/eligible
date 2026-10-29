@@ -4,10 +4,12 @@ from __future__ import annotations
 
 from functools import cache
 from pathlib import Path
+from typing import Any
 
 from fastapi import FastAPI, HTTPException, Request
 from fastapi.concurrency import run_in_threadpool
 from fastapi.responses import FileResponse
+from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel, ValidationError
 from starlette.datastructures import UploadFile
 
@@ -16,12 +18,14 @@ from eligible.config import get_settings
 from eligible.models import CheckResult
 from eligible.pipeline import Checker
 from eligible.retrieve.chunk import Chunk
+from eligible.showcase import engineering
 
 ROOT = Path(__file__).resolve().parents[2]
 WEB = ROOT / "web"
 SAMPLES = ROOT / "data" / "receipts"
 
 app = FastAPI(title="Eligible", version=__version__)
+app.mount("/static", StaticFiles(directory=WEB), name="static")
 
 
 class Health(BaseModel):
@@ -100,6 +104,17 @@ def sample(sample_id: str) -> Sample:
     return Sample(id=sample_id, text=path.read_text())
 
 
+@app.get("/v1/engineering")
+def engineering_data() -> dict[str, Any]:
+    """Numbers for the engineering page, all read from committed reports."""
+    return engineering()
+
+
 @app.get("/", include_in_schema=False)
 def index() -> FileResponse:
     return FileResponse(WEB / "index.html")
+
+
+@app.get("/engineering", include_in_schema=False)
+def engineering_page() -> FileResponse:
+    return FileResponse(WEB / "engineering.html")

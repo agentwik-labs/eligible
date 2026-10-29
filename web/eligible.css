@@ -1,0 +1,68 @@
+/* Eligible: shared look for the app and the engineering page.
+   World: thermal receipts, IRS publication sections, an auditor's highlighter. */
+:root {
+  --paper: #fcfcf9;
+  --ground: #eceeed;
+  --ink: #141c24;
+  --ink-2: #4a5662;
+  --ink-3: #7a858f;
+  --rule: #cdd3d7;
+  --rule-2: #e2e6e8;
+  --accent: #174a6e;
+  --accent-ink: #fcfcf9;
+  --accent-soft: #d9e6f0;
+  --v-eligible: #1c7348; --v-eligible-hl: rgba(46, 179, 108, .26); --v-eligible-bg: #def0e6;
+  --v-not: #ab3427; --v-not-hl: rgba(222, 84, 64, .22); --v-not-bg: #f6e1dd;
+  --v-dual: #9a6200; --v-dual-hl: rgba(240, 172, 32, .32); --v-dual-bg: #f6ead2;
+  --v-rx: #5643a8; --v-rx-hl: rgba(124, 104, 230, .24); --v-rx-bg: #e8e4f7;
+  --v-review: #5f6973; --v-review-hl: rgba(120, 132, 144, .26); --v-review-bg: #e6e9eb;
+  --f-display: "IBM Plex Sans Condensed", "Arial Narrow", system-ui, sans-serif;
+  --f-body: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --f-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+  --shadow: 0 1px 0 rgba(20, 28, 36, .04), 0 8px 24px -12px rgba(20, 28, 36, .18);
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --paper: #1b2127; --ground: #11161a; --ink: #e7ebee; --ink-2: #9ba7b1; --ink-3: #6f7b85;
+    --rule: #333e48; --rule-2: #252e36; --accent: #84b9de; --accent-ink: #11161a; --accent-soft: #1a3146;
+    --v-eligible: #63cf97; --v-eligible-hl: rgba(70, 200, 130, .22); --v-eligible-bg: #163426;
+    --v-not: #f2907f; --v-not-hl: rgba(240, 110, 90, .2); --v-not-bg: #3b1e1a;
+    --v-dual: #e8b552; --v-dual-hl: rgba(232, 181, 82, .22); --v-dual-bg: #382b12;
+    --v-rx: #aea2f2; --v-rx-hl: rgba(160, 145, 245, .22); --v-rx-bg: #28244a;
+    --v-review: #a6b0b9; --v-review-hl: rgba(166, 176, 185, .18); --v-review-bg: #283037;
+    --shadow: 0 8px 24px -12px rgba(0, 0, 0, .6);
+    color-scheme: dark;
+  }
+}
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body { margin: 0; background: var(--ground); color: var(--ink); font: 15px/1.55 var(--f-body); }
+a { color: var(--accent); }
+button { font: inherit; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.num { font-variant-numeric: tabular-nums; }
+.mono { font-family: var(--f-mono); }
+.eyebrow { font: 600 11.5px/1.2 var(--f-mono); letter-spacing: .08em; text-transform: uppercase; color: var(--ink-2); }
+h1, h2, h3 { font-family: var(--f-display); text-wrap: balance; margin: 0; line-height: 1.12; }
+
+/* top bar */
+.topbar { position: sticky; top: 0; z-index: 20; background: color-mix(in srgb, var(--ground) 88%, transparent); backdrop-filter: blur(8px); border-bottom: 1px solid var(--rule); }
+.topbar .in { max-width: 1280px; margin: 0 auto; padding: 10px max(16px, 3vw); display: flex; align-items: center; gap: 22px; flex-wrap: wrap; }
+.brand { display: flex; align-items: baseline; gap: 8px; text-decoration: none; color: var(--ink); }
+.brand b { font: 700 22px/1 var(--f-display); letter-spacing: -.01em; }
+.brand span { font: 12px var(--f-mono); color: var(--ink-3); }
+.nav { display: flex; gap: 4px; }
+.nav a { text-decoration: none; color: var(--ink-2); font-weight: 500; padding: 6px 10px; }
+.nav a[aria-current="page"] { color: var(--ink); box-shadow: inset 0 -2px var(--accent); }
+.nav a:hover { color: var(--ink); }
+.status { margin-left: auto; font: 12px var(--f-mono); color: var(--ink-3); }
+
+/* verdict colours */
+.v-eligible { --v: var(--v-eligible); --vh: var(--v-eligible-hl); --vb: var(--v-eligible-bg); }
+.v-not_eligible { --v: var(--v-not); --vh: var(--v-not-hl); --vb: var(--v-not-bg); }
+.v-dual_purpose { --v: var(--v-dual); --vh: var(--v-dual-hl); --vb: var(--v-dual-bg); }
+.v-needs_prescription { --v: var(--v-rx); --vh: var(--v-rx-hl); --vb: var(--v-rx-bg); }
+.v-needs_review, .v-missing { --v: var(--v-review); --vh: var(--v-review-hl); --vb: var(--v-review-bg); }
+.pill { display: inline-block; font: 600 11px/1 var(--f-mono); letter-spacing: .05em; text-transform: uppercase; padding: 5px 7px; color: var(--v); background: var(--vb); white-space: nowrap; }
+
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { transition: none !important; animation: none !important; } }

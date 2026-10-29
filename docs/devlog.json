@@ -1,0 +1,224 @@
+{
+  "generated": "2026-10-29T00:30:10+00:00",
+  "commits": [
+    {
+      "sha": "f4ddceb",
+      "time": "2026-10-28T16:07:52-04:00",
+      "subject": "Eligible M0: skeleton and metered LLM client",
+      "milestone": "M0",
+      "py_added": 1146,
+      "py_removed": 0,
+      "tests": 29
+    },
+    {
+      "sha": "4349adb",
+      "time": "2026-10-28T16:12:54-04:00",
+      "subject": "Record owner decisions: public repo, Haiku extraction experiment",
+      "milestone": null,
+      "py_added": 0,
+      "py_removed": 0,
+      "tests": 29
+    },
+    {
+      "sha": "f4356ee",
+      "time": "2026-10-28T16:31:55-04:00",
+      "subject": "Eligible M1: synthetic receipts, golden labels and IRS knowledge sources",
+      "milestone": "M1",
+      "py_added": 920,
+      "py_removed": 0,
+      "tests": 43
+    },
+    {
+      "sha": "b4529ca",
+      "time": "2026-10-28T16:40:34-04:00",
+      "subject": "Add offline demo of the metered LLM layer",
+      "milestone": null,
+      "py_added": 134,
+      "py_removed": 0,
+      "tests": 44
+    },
+    {
+      "sha": "81e07cc",
+      "time": "2026-10-28T16:55:46-04:00",
+      "subject": "Eligible M2: redaction, structured extraction and the first eval",
+      "milestone": "M2",
+      "py_added": 1155,
+      "py_removed": 4,
+      "tests": 62
+    },
+    {
+      "sha": "19f683f",
+      "time": "2026-10-28T16:55:53-04:00",
+      "subject": "Add M2 eval reports (smoke and full) for 81e07cc",
+      "milestone": "M2",
+      "py_added": 0,
+      "py_removed": 0,
+      "tests": 62
+    },
+    {
+      "sha": "8d2e936",
+      "time": "2026-10-28T20:19:27-04:00",
+      "subject": "M3 retrieval, M4 decide and validate, and the demo page",
+      "milestone": "M3",
+      "py_added": 1061,
+      "py_removed": 4,
+      "tests": 74
+    },
+    {
+      "sha": "70429e6",
+      "time": "2026-10-28T20:20:02-04:00",
+      "subject": "Fix receipt file upload in /v1/check",
+      "milestone": null,
+      "py_added": 2,
+      "py_removed": 1,
+      "tests": 74
+    },
+    {
+      "sha": "38aceee",
+      "time": "2026-10-28T20:22:25-04:00",
+      "subject": "Score decisions in the eval runner and time every pipeline stage",
+      "milestone": null,
+      "py_added": 344,
+      "py_removed": 105,
+      "tests": 74
+    }
+  ],
+  "product_spend": {
+    "note": "Every distinct model call the product made, read from the response cache. API-equivalent cost; reruns of unchanged cases were served from the cache at $0.",
+    "calls": 120,
+    "cost_usd": "2.9972066",
+    "by_prompt": [
+      {
+        "prompt": "decide@1 \u00b7 claude-sonnet-5-5",
+        "calls": 60,
+        "prompt_tokens": 493107,
+        "output_tokens": 43070,
+        "cache_read": 74694,
+        "cost": "2.1190508"
+      },
+      {
+        "prompt": "extract@1 \u00b7 claude-sonnet-5-5",
+        "calls": 60,
+        "prompt_tokens": 156990,
+        "output_tokens": 63845,
+        "cache_read": 102109,
+        "cost": "0.8781558"
+      }
+    ],
+    "by_hour": [
+      {
+        "hour": "2026-10-28T20:00Z",
+        "cost_usd": "0.8781558"
+      },
+      {
+        "hour": "2026-10-29T00:00Z",
+        "cost_usd": "2.1190508"
+      }
+    ]
+  },
+  "build_session": {
+    "note": "Claude Code building this repo: per-hour API-equivalent cost by token class, priced with llm/pricing.py. Aggregates only.",
+    "model_turns": 185,
+    "models": {
+      "claude-opus-5-5": 185
+    },
+    "tokens": {
+      "input": 370,
+      "output": 304751,
+      "cache_read": 58192352,
+      "cache_write": 905920
+    },
+    "cache_read_share": 0.9846647914515532,
+    "cost_usd": "24.9823304",
+    "tool_calls": {
+      "Bash": 157,
+      "Write": 26,
+      "Read": 10,
+      "Skill": 6,
+      "Edit": 2,
+      "Artifact": 2,
+      "SendMessage": 2,
+      "ToolSearch": 1
+    },
+    "by_hour": [
+      {
+        "hour": "2026-10-28T20:00Z",
+        "cache_read": "6.0133658",
+        "cache_write": "2.981128",
+        "output": "4.00962",
+        "input": "0.001000"
+      },
+      {
+        "hour": "2026-10-28T22:00Z",
+        "cache_read": "0.0057778",
+        "cache_write": "3.00788",
+        "output": "0.00698",
+        "input": "0.000008"
+      },
+      {
+        "hour": "2026-10-28T23:00Z",
+        "cache_read": "0.4081502",
+        "cache_write": "0.082448",
+        "output": "0.20320",
+        "input": "0.000040"
+      },
+      {
+        "hour": "2026-10-29T00:00Z",
+        "cache_read": "5.2111766",
+        "cache_write": "1.175904",
+        "output": "1.87522",
+        "input": "0.000432"
+      }
+    ]
+  },
+  "caught": [
+    {
+      "what": "Retrieval couldn't link products to the law",
+      "caught_by": "retrieval ablation (eval)",
+      "before": "recall@5 52.8%, OTC rule found 0%",
+      "after": "recall@5 93.8%, OTC rule found 97.8%",
+      "fix": "citation expansion from list entries to the IRS sections they cite",
+      "evidence": "evals/reports/retrieval-ablation.md"
+    },
+    {
+      "what": "The model invented citations",
+      "caught_by": "decision eval",
+      "before": "28 of 945 citations weren't among the retrieved sources",
+      "after": "0 reached a user",
+      "fix": "deterministic validation removes them and routes unsupported verdicts to review",
+      "evidence": "evals/reports/latest.md"
+    },
+    {
+      "what": "A budget overrun wouldn't stop an eval run",
+      "caught_by": "checking the production-concerns claims against code",
+      "before": "per-receipt error handler swallowed BudgetExceededError",
+      "after": "the run halts; tests/test_eval_run.py proves it",
+      "fix": "re-raise the budget error, never fall back to a cheaper model",
+      "evidence": "tests/test_eval_run.py"
+    },
+    {
+      "what": "Receipt file upload was broken",
+      "caught_by": "API tests",
+      "before": "every multipart upload rejected",
+      "after": "uploads work",
+      "fix": "add python-multipart; check Starlette's UploadFile type",
+      "evidence": "tests/test_api.py"
+    },
+    {
+      "what": "The decide prompt was too short to cache",
+      "caught_by": "cost report (prompt-cache read share)",
+      "before": "15.5% of prompt tokens from cache; decide 1.5x its projection",
+      "after": "open: M5 lever",
+      "fix": "planned: move stable rule text into the cached prefix, shorten chunks",
+      "evidence": "evals/reports/latest.md"
+    },
+    {
+      "what": "Synthetic data was skewed and repetitive",
+      "caught_by": "distribution test and the 20-receipt audit",
+      "before": "needs_prescription 4% vs 10% target; one grab bar on 5 of 20 receipts",
+      "after": "every class within 1 point; no product more than 7 times in 441 items",
+      "fix": "verdict quota across all item slots; more products per rule",
+      "evidence": "data/golden/AUDIT.md"
+    }
+  ]
+}

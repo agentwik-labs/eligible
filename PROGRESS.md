@@ -82,4 +82,31 @@
 - Cost is already near the projection's $0.0125 for extraction, so the decide step decides
   whether the < $0.01/receipt aim is reachable.
 
-**Next: M3** ingestion, BM25 plus vectors, fusion, reranking, and the retrieval ablation.
+
+## M3: Retrieval (2026-10-28)
+
+**Done**: section-aware chunking (446 chunks), SQLite FTS5 BM25 plus sqlite-vec vectors
+(`bge-small`, local), reciprocal rank fusion, optional `bge-reranker-base` rerank, exact-match
+boost, and citation expansion. Ablation in `evals/reports/retrieval-ablation.md`.
+
+**Accept**: hybrid plus rerank alone **missed** the target (recall@5 49.2%), and the report
+keeps that row. The cause is that product names never appear in IRS prose. With citation
+expansion: recall@5 93.8% (hybrid, 11 ms) and 95.7% (with rerank, 1.6 s), meeting the 90%
+target. The reranker stays off by default (DECISIONS.md).
+
+## M4: Decide and validate (2026-10-28)
+
+**Done**: one decision call per receipt with sources sent once, deterministic validation
+(citations must be retrieved, low confidence goes to review, totals checked), and the
+pipeline, API and demo page (a thin M6 slice, brought forward at the owner's request).
+
+**Results** (`evals/reports/latest.md`, 60 receipts, 441 items): verdict accuracy 92.7%,
+0 of 130 over-approvals, 28 invented citations removed and 0 through validation, 0 leaks,
+$0.050 per receipt ($0.015 extract, $0.035 decide), p95 9.3 s. All gates pass.
+
+**Open**: the LLM-as-judge for reason quality (EVALS.md §2.4) isn't built yet; it needs 20
+human-labelled reasons from the owner to validate the judge. The `needs_review` rate is 12.2%
+against 5.2% in the labels: every verdict error is this cautious kind.
+
+**Next: M5**: review rate, decide cost (chunk size, cacheable prefix), the adversarial set
+and prompt injection, image input once an API key exists, and the Haiku extraction trial.

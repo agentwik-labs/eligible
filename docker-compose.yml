@@ -9,7 +9,10 @@ services:
     ports:
       - "8000:8000"
     environment:
-      ANTHROPIC_API_KEY: ${ANTHROPIC_API_KEY:?set ANTHROPIC_API_KEY to call the model}
+      # Without a key the app still serves every page and replays any receipt whose answers
+      # are in evals/.cache (the 60 samples, once the evals have run); new receipts need it.
+      ANTHROPIC_API_KEY: ${ANTHROPIC_API_KEY:-}
+      ELIGIBLE_LLM_BACKEND: anthropic_api
       ELIGIBLE_BUDGET_USD: ${ELIGIBLE_BUDGET_USD:-10}
       LANGFUSE_PUBLIC_KEY: ${LANGFUSE_PUBLIC_KEY:-}
       LANGFUSE_SECRET_KEY: ${LANGFUSE_SECRET_KEY:-}

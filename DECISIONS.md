@@ -133,3 +133,13 @@ CLAUDE.md specifies Sonnet for extraction. The owner approved trying Haiku there
 only if the gates hold (see the Haiku entry above). In iteration 4 it kept 100% item recall
 and amounts, verdict accuracy went from 97.5% to 97.7%, and extraction cost fell 13x, so
 `ELIGIBLE_EXTRACT_MODEL` now defaults to `claude-haiku-5-5`. Sonnet still makes the verdicts.
+
+## 2026-10-29: Docker on Colima, CPU-only PyTorch in the image
+Docker was installed as Colima (MIT-licensed, a Linux VM on macOS virtualization) with the
+Docker CLI and Compose plugin, all in `~/.local`, with no admin rights or Docker Desktop.
+The first image was 20.4 GB because Linux PyTorch wheels pull in the CUDA stack; retrieval
+only runs small models on CPU, so Linux installs now use PyTorch's CPU-only index
+(`[tool.uv.sources]`). With the uv download cache and local tool caches kept out of the
+image, it's 2.45 GB and rebuilds in about 2.5 minutes. `ANTHROPIC_API_KEY` is optional for
+the container: without it, every page works and receipts already in the response cache
+replay; a new receipt gets a 503 that says why.

@@ -109,5 +109,5 @@ model's output can't argue with.
 The data is synthetic and the human spot-check of 20 receipts is pending. Image input and
 blurred receipts need the API backend. The reason-quality judge scores 4.2 to 4.7 out of 5
 and passed 20 of 20 synthetic controls, but EVALS.md requires 20 human labels before its
-scores are trusted. Docker files exist but weren't run on this machine. The project hasn't
-been deployed.
+scores are trusted. The project runs with `docker compose up` (the image went from 20.4 GB to
+2.45 GB once Linux installs used CPU-only PyTorch) but hasn't been deployed.

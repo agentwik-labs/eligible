@@ -93,7 +93,7 @@ the governing rule (recall@5 53%). Following each list rule's own IRS citations 
 uv sync
 uv run python -m eligible.retrieve.ingest      # build the search index (local models)
 uv run uvicorn eligible.api:app                # demo on http://localhost:8000; /engineering, /traces
-docker compose up                              # same app in a container (needs ANTHROPIC_API_KEY)
+docker compose up                              # same app on :8000 (2.45 GB image; key optional, see below)
 uv run pytest                                  # unit tests, no network
 uv run python -m evals.run --suite smoke       # 10 receipts through the whole pipeline
 uv run python -m evals.run --suite full        # all 60; writes evals/reports/latest.md
@@ -142,7 +142,8 @@ and how the evals caught it is [docs/writeup.md](docs/writeup.md); every change 
 - **The reason-quality judge is unvalidated.** It passed 20 of 20 synthetic controls, but
   EVALS.md requires 20 human labels ([`data/judge_labels.json`](data/judge_labels.json)).
 - **Slow.** 13 s mean per receipt through the Claude Code CLI; extraction is 55% of it.
-- **Docker untested here,** and the project isn't deployed yet.
+- **Not deployed yet.** `docker compose up` is verified locally; without an API key the
+  container replays the sample receipts and says so for new ones.
 
 ## Docs
 

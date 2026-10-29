@@ -84,3 +84,12 @@ def test_auto_backend_picks_api_only_when_a_key_is_set(monkeypatch: pytest.Monke
     monkeypatch.setenv("ANTHROPIC_API_KEY", "sk-test")
     assert backend_name(Settings()) == "anthropic_api"
     assert backend_name(Settings(llm_backend="claude_code")) == "claude_code"
+
+
+def test_api_backend_without_a_key_explains_itself(monkeypatch: pytest.MonkeyPatch) -> None:
+    from eligible.llm.factory import ModelUnavailableError, build_backend
+
+    monkeypatch.delenv("ANTHROPIC_API_KEY", raising=False)
+    client = build_backend(Settings(llm_backend="anthropic_api"))
+    with pytest.raises(ModelUnavailableError, match="replay"):
+        client.complete(make_request())

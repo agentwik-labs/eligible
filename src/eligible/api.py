@@ -17,6 +17,7 @@ from starlette.datastructures import UploadFile
 
 from eligible import __version__
 from eligible.config import get_settings
+from eligible.llm.factory import ModelUnavailableError
 from eligible.models import CheckResult
 from eligible.pipeline import Checker
 from eligible.retrieve.chunk import Chunk
@@ -93,7 +94,10 @@ async def check(request: Request) -> CheckResult:
             raise HTTPException(422, 'send JSON like {"text": "..."}') from e
     if not text.strip():
         raise HTTPException(422, "the receipt is empty")
-    return await run_in_threadpool(checker().check, text)
+    try:
+        return await run_in_threadpool(checker().check, text)
+    except ModelUnavailableError as e:
+        raise HTTPException(503, str(e)) from e
 
 
 @app.get("/v1/sources/{chunk_id}")

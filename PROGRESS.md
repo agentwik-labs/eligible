@@ -152,7 +152,9 @@ architecture diagram, quickstart and MCP config, `docs/writeup.md` (1,079 words)
 **Accept**: a fresh clone reached a working check in about a minute on this machine
 (index 40 s, server 4 s, first check 10 s) following the README, with uv's package cache warm.
 On a new machine the first install downloads about 1 GB, so timing depends on bandwidth.
-`docker compose up` is written but not run: Docker isn't installed on this machine.
+`docker compose up` verified (Colima): image 2.45 GB, rebuild and start in about 2.5 minutes,
+every page serves, cached receipts check inside the container, and a new receipt without a
+key gets a clear 503.
 
 **Open for the owner**: deploy (which host?), the 20 human audit checks and 20 judge labels,
 the API key (for image input and the CI gate), and whether to make conditional approvals a gate.

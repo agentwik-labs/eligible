@@ -16,6 +16,7 @@ dependencies = [
     "pyyaml>=6.0.3",
     "sentence-transformers>=6.2.0",
     "sqlite-vec>=0.1.9",
+    "torch>=2.15",
     "uvicorn>=0.32",
 ]
 
@@ -64,3 +65,13 @@ ignore_missing_imports = true
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 addopts = "-q --cov=eligible --cov-report=term-missing:skip-covered"
+
+# Linux (the Docker image) gets CPU-only PyTorch: retrieval runs small local models on CPU,
+# and the default Linux wheels pull in the CUDA stack (the image was 20 GB with it).
+[tool.uv.sources]
+torch = [{ index = "pytorch-cpu", marker = "sys_platform == 'linux'" }]
+
+[[tool.uv.index]]
+name = "pytorch-cpu"
+url = "https://download.pytorch.org/whl/cpu"
+explicit = true

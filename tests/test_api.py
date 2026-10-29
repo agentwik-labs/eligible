@@ -61,3 +61,16 @@ def test_samples_and_page(client: TestClient) -> None:
     page = client.get("/")
     assert page.status_code == 200
     assert "Check receipt" in page.text
+
+
+def test_no_model_available_is_a_clear_503(monkeypatch: pytest.MonkeyPatch) -> None:
+    from eligible.llm.factory import ModelUnavailableError
+
+    class NoModel:
+        def check(self, text: str) -> None:
+            raise ModelUnavailableError("No ANTHROPIC_API_KEY is set")
+
+    monkeypatch.setattr(api, "checker", lambda: NoModel())
+    response = TestClient(api.app).post("/v1/check", json={"text": "RECEIPT"})
+    assert response.status_code == 503
+    assert "ANTHROPIC_API_KEY" in response.json()["detail"]

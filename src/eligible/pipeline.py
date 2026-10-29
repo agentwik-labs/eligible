@@ -14,12 +14,12 @@ from eligible.knowledge.eligibility import load_list
 from eligible.llm.client import LLMClient
 from eligible.llm.factory import build_client
 from eligible.llm.types import LLMResponse
-from eligible.models import CheckResult, Stage
-from eligible.retrieve.chunk import Chunk
+from eligible.models import CheckResult, Citation, ItemResult, Stage
+from eligible.retrieve.chunk import Chunk, chunk_entry
 from eligible.retrieve.embed import BGEEmbedder, BGEReranker
 from eligible.retrieve.index import INDEX_PATH
 from eligible.retrieve.search import Retriever
-from eligible.validate import totals_mismatch, validate
+from eligible.validate import quote, totals_mismatch, validate
 
 
 class Checker:
@@ -41,6 +41,33 @@ class Checker:
     def retriever(self) -> Retriever:
         reranker = BGEReranker() if self.settings.retrieval_mode == "rerank" else None
         return self._retriever or Retriever(INDEX_PATH, BGEEmbedder(), reranker, load_list())
+
+    @cached_property
+    def list_chunks(self) -> list[Chunk]:
+        return [chunk_entry(e) for e in load_list()]
+
+    def attach_rule_sources(self, result: ItemResult) -> ItemResult:
+        """Cite the IRS sections behind each cited list entry, looked up in the index."""
+        rules = {e.source_id: e for e in load_list()}
+        have = {c.source_id for c in result.citations}
+        extra = []
+        for citation in result.citations:
+            entry = rules.get(citation.source_id)
+            for source in entry.sources if entry else []:
+                chunk = self.retriever.best_chunk_of(source, entry.rule) if entry else None
+                if chunk is not None and chunk.source_id not in have:
+                    have.add(chunk.source_id)
+                    extra.append(
+                        Citation(
+                            chunk_id=chunk.id,
+                            source_id=chunk.source_id,
+                            title=" > ".join(chunk.heading_path),
+                            quote=quote(chunk),
+                        )
+                    )
+        return (
+            result.model_copy(update={"citations": result.citations + extra}) if extra else result
+        )
 
     def retrieve(self, query: str) -> list[Chunk]:
         return self.retriever.search(
@@ -64,7 +91,10 @@ class Checker:
         retrieve_ms = lap()
         decided = decide(receipt.items, retrieved, self.client)
         decide_ms = lap()
-        items, unsupported = validate(receipt, decided.decisions, retrieved)
+        # The whole eligibility list is in the decide prompt, so any entry is a provided source.
+        available = [chunks + self.list_chunks for chunks in retrieved]
+        items, unsupported = validate(receipt, decided.decisions, available)
+        items = [self.attach_rule_sources(r) for r in items]
         validate_ms = lap()
         masked = sum(extraction.redaction.counts.values())
         unique_chunks = len({c.id for chunks in retrieved for c in chunks})

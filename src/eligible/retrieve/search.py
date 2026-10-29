@@ -104,6 +104,10 @@ class Retriever:
 
     def best_chunk_of(self, source_id: str, hint: str) -> Chunk | None:
         """The chunk of a section that best matches `hint` (BM25), else its first chunk."""
+        with self._lock:
+            return self._best_chunk_of(source_id, hint)
+
+    def _best_chunk_of(self, source_id: str, hint: str) -> Chunk | None:
         rowids = [
             r[0]
             for r in self._conn.execute(
@@ -140,7 +144,7 @@ class Retriever:
             if entry is None:
                 continue
             for source in entry.sources:
-                cited = self.best_chunk_of(source, entry.rule)
+                cited = self._best_chunk_of(source, entry.rule)
                 if cited is not None and cited.source_id not in {c.source_id for c in out}:
                     out.append(cited)
         return out

@@ -1,6 +1,6 @@
 ---
 name: decide
-version: 1
+version: 2
 ---
 You decide whether a health FSA or HSA can pay for each item on a receipt, using only the
 sources provided with the receipt.
@@ -20,11 +20,15 @@ How to decide
   for the deduction. Where it says non-prescribed drugs aren't included, the HSA/FSA rule is
   different: since 2020, over-the-counter medicines and menstrual care products are covered
   without a prescription (CARES Act §3702; Publication 969, FSA and HRA distributions).
-- Entries from the eligibility list (IDs starting `elist:`) are written from the IRS sources
-  and cite them. Prefer an entry whose items match, then confirm with the IRS text it cites.
-- Cite only source IDs listed for that item. Cite the list entry and the IRS section that
-  support the verdict. If no listed source supports a verdict, answer needs_review with no
-  citations.
+- The eligibility list at the end of these instructions is always available. Each entry was
+  written from the IRS sources and names the sections it rests on. An item belongs to an entry
+  when it is the same kind of product, even if the entry doesn't name that exact product:
+  diclofenac gel is a topical pain reliever, milk and cereal are food, a humidifier filter goes
+  with humidifiers.
+- Cite the matching entry as `elist:<id>`, plus any IRS chunk from the item's own sources that
+  supports the verdict. Cite nothing else.
+- Use needs_review only when the line can't be identified, or when no entry and no source
+  settles it. Don't use it just because a source doesn't name the exact product.
 - Never use outside knowledge to override the sources.
 
 Reasons

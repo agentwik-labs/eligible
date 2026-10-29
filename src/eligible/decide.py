@@ -3,11 +3,13 @@
 from __future__ import annotations
 
 import json
+from functools import cache
 from typing import Any
 
 from pydantic import BaseModel
 
 from eligible.config import get_settings
+from eligible.knowledge.eligibility import load_list
 from eligible.llm.client import LLMClient
 from eligible.llm.types import LLMRequest, LLMResponse, Message
 from eligible.models import VERDICTS, LineItem, Verdict
@@ -50,13 +52,25 @@ class DecideResult(BaseModel):
     response: LLMResponse
 
 
+@cache
+def knowledge_preamble() -> str:
+    """The eligibility list as static text: part of the cached system prompt (SPEC §2.5)."""
+    lines = ["## Eligibility list", "", "id | items | verdict | rule | IRS sources"]
+    for e in load_list():
+        lines.append(
+            f"elist:{e.id} | {', '.join(e.names)} | {e.verdict} | {e.rule} | {', '.join(e.sources)}"
+        )
+    return "\n".join(lines)
+
+
 def render_input(items: list[LineItem], retrieved: list[list[Chunk]]) -> str:
     """Each chunk is printed once, however many items retrieved it (saves input tokens)."""
     sources: dict[str, Chunk] = {}
     lines = ["<receipt>"]
     for i, (item, chunks) in enumerate(zip(items, retrieved, strict=True)):
         for c in chunks:
-            sources.setdefault(c.id, c)
+            if c.doc != "elist":  # list entries are already in the system prompt
+                sources.setdefault(c.id, c)
         lines.append(
             f'{i}. "{item.raw_text}" read as "{item.name}"; sources: '
             + ", ".join(c.id for c in chunks)
@@ -75,7 +89,7 @@ def build_request(items: list[LineItem], retrieved: list[list[Chunk]]) -> LLMReq
         model=settings.decide_model,
         prompt_name=prompt.name,
         prompt_version=prompt.version,
-        system=prompt.text,
+        system=f"{prompt.text}\n\n{knowledge_preamble()}",
         messages=[Message(role="user", content=render_input(items, retrieved))],
         max_tokens=4096,
         effort=settings.effort,

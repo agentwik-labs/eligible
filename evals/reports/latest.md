@@ -3,13 +3,13 @@
 | | |
 |---|---|
 | Date | 2026-10-28 |
-| Git SHA | `45300dd` |
+| Git SHA | `df8aecd` |
 | Models | extract `claude-haiku-5-5`, decide `claude-sonnet-5-5` (effort `low`) |
 | Backend | `claude_code` |
 | Retrieval | `hybrid`, top 5, citation expansion on |
 | Prompt versions | extract `1`, decide `2` |
 | Cases | 60 receipts, 441 items |
-| Spend this run | $1.3586 (7 of 120 calls replayed from cache) |
+| Spend this run | $0.0000 (120 of 120 calls replayed from cache) |
 
 ## Gates (EVALS.md §3)
 
@@ -76,9 +76,9 @@ Personal-data values from the golden labels found in text sent to the model: **0
 | Cost per receipt (uncached run) | $0.0245 |
 | … of which `extract` | $0.0011 |
 | … of which `decide` | $0.0234 |
-| Mean prompt / output tokens per call | 9465 / 1262 |
-| Prompt tokens read from prompt cache | 75.1% |
-| Latency per receipt, mean / p95 | 14.8 s / 25.5 s |
+| Mean prompt / output tokens per call | 0 / 0 |
+| Prompt tokens read from prompt cache | 0.0% |
+| Latency per receipt | n/a: every answer was replayed from cache |
 
 Cost is priced from `llm/pricing.py` at API list prices. On the `claude_code` backend
 the calls run on a Claude subscription, so this is the API-equivalent cost.
@@ -87,13 +87,13 @@ the calls run on a Claude subscription, so this is the API-equivalent cost.
 
 | Receipt | Item | Expected | Actual | Trace |
 |---|---|---|---|---|
-| r0001 | `CONTACT LENS FITTING` | eligible | needs_review | `1d7b355e469d` |
-| r0020 | `EGGS LG DZ` | not_eligible | needs_review | `51f154afdef1` |
-| r0027 | `ADAPALENE 0.1% GEL 15G` | eligible | needs_review | `62fe3f1e84ff` |
-| r0031 | `HEALTH INST TREATMENT` | needs_prescription | needs_review | `4bcaa5f8efb6` |
-| r0031 | `ASSISTED LIVING DAILY` | not_eligible | needs_review | `4bcaa5f8efb6` |
-| r0041 | `ASSISTED LIVING DAILY` | not_eligible | needs_review | `e56ee78e0eaa` |
-| r0051 | `SVC DOG TRAINING FEE` | eligible | needs_review | `cf76e13ca528` |
-| r0053 | `CONTACT LENS FITTING` | eligible | needs_review | `e5a79af02bc1` |
-| r0054 | `SVC DOG TRAINING FEE` | eligible | needs_review | `bf5df009a180` |
-| r0058 | `CONTACT LENS FITTING` | eligible | needs_review | `1cdd62595954` |
+| r0001 | `CONTACT LENS FITTING` | eligible | needs_review | `f0a668e58aed` |
+| r0020 | `EGGS LG DZ` | not_eligible | needs_review | `e1340e2ffea5` |
+| r0027 | `ADAPALENE 0.1% GEL 15G` | eligible | needs_review | `23a0bc705d9e` |
+| r0031 | `HEALTH INST TREATMENT` | needs_prescription | needs_review | `a8f5e1422e97` |
+| r0031 | `ASSISTED LIVING DAILY` | not_eligible | needs_review | `a8f5e1422e97` |
+| r0041 | `ASSISTED LIVING DAILY` | not_eligible | needs_review | `14a8b4668ff6` |
+| r0051 | `SVC DOG TRAINING FEE` | eligible | needs_review | `1605a523080e` |
+| r0053 | `CONTACT LENS FITTING` | eligible | needs_review | `00172a463b94` |
+| r0054 | `SVC DOG TRAINING FEE` | eligible | needs_review | `a351508a4c33` |
+| r0058 | `CONTACT LENS FITTING` | eligible | needs_review | `e1cc81dabefb` |

@@ -183,7 +183,12 @@ def gate_results(
 
 
 def cost_summary(settings: Settings, runs: list[Run]) -> dict[str, object]:
-    calls = summarize_calls(Ledger(settings.ledger_path).read())
+    responses = Ledger(settings.ledger_path).read()
+    calls = summarize_calls(responses)
+    # Token mix comes from every answer, replayed or not: a replayed answer keeps the usage
+    # of the call that produced it.
+    usage = [r.usage for r in responses]
+    prompt_tokens = sum(u.prompt_tokens for u in usage)
     results = [r.result for r in runs if r.result is not None]
     n = max(len(results), 1)
     per_stage: dict[str, Decimal] = {}
@@ -201,10 +206,10 @@ def cost_summary(settings: Settings, runs: list[Run]) -> dict[str, object]:
         "calls": calls.calls,
         "cost_per_receipt": first_run,
         "cost_per_stage": {k: v / n for k, v in per_stage.items()},
-        "prompt_cache_read_share": calls.prompt_cache_read_share,
+        "prompt_cache_read_share": sum(u.cache_read_tokens for u in usage) / max(prompt_tokens, 1),
         "saved_by_prompt_cache": calls.saved_by_prompt_cache_usd,
-        "mean_prompt_tokens": calls.prompt_tokens / max(calls.api_calls, 1),
-        "mean_output_tokens": calls.output_tokens / max(calls.api_calls, 1),
+        "mean_prompt_tokens": prompt_tokens / max(len(usage), 1),
+        "mean_output_tokens": sum(u.output_tokens for u in usage) / max(len(usage), 1),
         "latency_mean_ms": sum(latencies) / len(latencies) if latencies else None,
         "latency_p95_ms": p95(latencies) if latencies else None,
         "by_prompt": [p.model_dump(mode="json") for p in calls.by_prompt],

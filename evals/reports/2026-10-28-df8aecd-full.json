@@ -1,0 +1,164 @@
+{
+  "suite": "full",
+  "date": "2026-10-28",
+  "sha": "df8aecd",
+  "models": {
+    "extract": "claude-haiku-5-5",
+    "decide": "claude-sonnet-5-5"
+  },
+  "effort": "low",
+  "backend": "claude_code",
+  "prompts": {
+    "extract": "1",
+    "decide": "2"
+  },
+  "gates": [
+    {
+      "metric": "Unsupported citations after validation",
+      "result": "0",
+      "gate": "0",
+      "pass": true
+    },
+    {
+      "metric": "Over-approval rate",
+      "result": "0.0%",
+      "gate": "\u2264 3%",
+      "pass": true
+    },
+    {
+      "metric": "Verdict accuracy",
+      "result": "97.7%",
+      "gate": "\u2265 90%",
+      "pass": true
+    },
+    {
+      "metric": "Item recall (extraction)",
+      "result": "100.0%",
+      "gate": "\u2265 95%",
+      "pass": true
+    },
+    {
+      "metric": "Redaction leaks",
+      "result": "0",
+      "gate": "0",
+      "pass": true
+    }
+  ],
+  "extraction": {
+    "receipts": 60,
+    "item_recall": 1.0,
+    "item_precision": 1.0,
+    "amount_exact": 1.0,
+    "quantity_exact": 1.0,
+    "merchant_acc": 1.0,
+    "merchant_type_acc": 0.9666666666666667,
+    "date_acc": 1.0,
+    "total_acc": 1.0,
+    "mismatch_recall": 1.0,
+    "mismatch_false_alarms": 0,
+    "pii_leaks": 0,
+    "flagged_fields": 24,
+    "unreadable_flagged": [
+      22,
+      23
+    ],
+    "readable_flagged": [
+      2,
+      418
+    ],
+    "calibration": [
+      [
+        "0.00-0.60",
+        0,
+        0.0
+      ],
+      [
+        "0.60-0.80",
+        0,
+        0.0
+      ],
+      [
+        "0.80-0.95",
+        15,
+        1.0
+      ],
+      [
+        "0.95-1.00",
+        426,
+        1.0
+      ]
+    ]
+  },
+  "decisions": {
+    "items": 441,
+    "accuracy": 0.9773242630385488,
+    "per_class": {
+      "eligible": [
+        202,
+        0.9702970297029703
+      ],
+      "not_eligible": [
+        130,
+        0.9769230769230769
+      ],
+      "dual_purpose": [
+        41,
+        1.0
+      ],
+      "needs_review": [
+        23,
+        1.0
+      ],
+      "needs_prescription": [
+        45,
+        0.9777777777777777
+      ]
+    },
+    "confusion": {
+      "eligible": {
+        "eligible": 196,
+        "needs_review": 6
+      },
+      "not_eligible": {
+        "not_eligible": 127,
+        "needs_review": 3
+      },
+      "dual_purpose": {
+        "dual_purpose": 41
+      },
+      "needs_review": {
+        "needs_review": 23
+      },
+      "needs_prescription": {
+        "needs_prescription": 44,
+        "needs_review": 1
+      }
+    },
+    "over_approvals": 0,
+    "not_eligible_items": 130,
+    "needs_review_rate": 0.07482993197278912,
+    "unsupported_before": 6,
+    "citations": 1093,
+    "uncited_non_review": 0
+  },
+  "cost": {
+    "spend_this_run": "0",
+    "replayed_calls": 120,
+    "calls": 120,
+    "cost_per_receipt": "0.02452699183333333333333333333",
+    "cost_per_stage": {
+      "redact": "0",
+      "extract": "0.001133271833333333333333333333",
+      "retrieve": "0",
+      "decide": "0.02339372",
+      "validate": "0"
+    },
+    "prompt_cache_read_share": 0.0,
+    "saved_by_prompt_cache": "0",
+    "mean_prompt_tokens": 0.0,
+    "mean_output_tokens": 0.0,
+    "latency_mean_ms": null,
+    "latency_p95_ms": null,
+    "by_prompt": []
+  }
+}

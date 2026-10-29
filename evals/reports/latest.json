@@ -1,7 +1,7 @@
 {
   "suite": "full",
   "date": "2026-10-28",
-  "sha": "45300dd",
+  "sha": "df8aecd",
   "models": {
     "extract": "claude-haiku-5-5",
     "decide": "claude-sonnet-5-5"
@@ -142,8 +142,8 @@
     "uncited_non_review": 0
   },
   "cost": {
-    "spend_this_run": "1.35859531",
-    "replayed_calls": 7,
+    "spend_this_run": "0",
+    "replayed_calls": 120,
     "calls": 120,
     "cost_per_receipt": "0.02452699183333333333333333333",
     "cost_per_stage": {
@@ -153,35 +153,12 @@
       "decide": "0.02339372",
       "validate": "0"
     },
-    "prompt_cache_read_share": 0.751153508488981,
-    "saved_by_prompt_cache": "0.86885489",
-    "mean_prompt_tokens": 9465.159292035398,
-    "mean_output_tokens": 1261.6814159292035,
-    "latency_mean_ms": 14809.937779818332,
-    "latency_p95_ms": 25494.9745000049,
-    "by_prompt": [
-      {
-        "prompt": "decide@2",
-        "model": "claude-sonnet-5-5",
-        "calls": 53,
-        "cost_usd": "1.2905990",
-        "mean_cost_usd": "0.02435092452830188679245283019",
-        "mean_prompt_tokens": 16841.716981132075,
-        "mean_output_tokens": 701.5849056603773,
-        "prompt_cache_read_share": 0.7817010993590713,
-        "system_variants": 1
-      },
-      {
-        "prompt": "extract@1",
-        "model": "claude-haiku-5-5",
-        "calls": 60,
-        "cost_usd": "0.06799631",
-        "mean_cost_usd": "0.001133271833333333333333333333",
-        "mean_prompt_tokens": 2949.2,
-        "mean_output_tokens": 1756.4333333333334,
-        "prompt_cache_read_share": 0.5970602197206022,
-        "system_variants": 1
-      }
-    ]
+    "prompt_cache_read_share": 0.0,
+    "saved_by_prompt_cache": "0",
+    "mean_prompt_tokens": 0.0,
+    "mean_output_tokens": 0.0,
+    "latency_mean_ms": null,
+    "latency_p95_ms": null,
+    "by_prompt": []
   }
 }

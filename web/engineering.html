@@ -201,14 +201,28 @@ details .body { padding: 0 16px 16px 122px; white-space: pre-wrap; font-size: 14
       <p style="font-size:14px">The IRS text never says "ibuprofen" or "DayQuil". It says "over-the-counter medicine", so neither keyword nor vector search links a product to that rule. The eligibility list does: each entry names products and cites the governing sections. <b>Citation expansion</b> follows those citations after ranking. Adding the cross-encoder reranker on top gains 1.9 points of recall for about 1.6 s per item, so the shipped configuration (green) leaves it off.</p></div>
   </section>
 
+
   <section>
-    <div class="sec-head"><span class="eyebrow">06 · Production concerns</span><h2>What's done, with proof, and what's next</h2>
+    <div class="sec-head"><span class="eyebrow">06 · Holding up in production</span><h2>Attacked, graded, wired into tools, gated in CI, traced</h2>
+      <p>The same discipline applied past accuracy: adversarial receipts, an independent grader for the reasons, MCP tools used by a real client, a CI gate shown failing on a broken prompt, and per-request traces.</p></div>
+    <div class="two">
+      <div class="panel"><h3>Adversarial receipts</h3><div id="adv"></div><div class="chart" id="c-adv"></div></div>
+      <div class="panel"><h3>Reason quality, graded by Haiku</h3><div class="chart" id="c-judge"></div><p style="font-size:13.5px" id="judgenote"></p></div>
+    </div>
+    <div class="two">
+      <div class="panel"><h3>MCP tools, used by Claude</h3><p style="font-size:14px" id="mcpq"></p><div class="scroll"><table id="mcp"></table></div><p style="font-size:13px;color:var(--ink-2)" id="mcpnote"></p></div>
+      <div class="panel"><h3>The CI gate, shown failing</h3><div class="scroll"><table id="gate"></table></div><p style="font-size:13px;color:var(--ink-2)">A prompt telling the model to approve everything failed the gate. A softer "be generous" prompt passed: the model mostly ignored it, but it approved a dual-purpose item outright, which no gate counted. That's now a reported metric.</p></div>
+    </div>
+    <div class="panel"><h3>Traces from the running app</h3><div class="tiles" id="trtiles"></div><p style="font-size:13.5px">Every request's spans, with a waterfall per request, are on the <a href="/traces">Traces</a> page.</p></div>
+  </section>
+  <section>
+    <div class="sec-head"><span class="eyebrow">07 · Production concerns</span><h2>What's done, with proof, and what's next</h2>
       <p>A row says done only if code exists and a test or eval proves it. Details are in <a href="https://github.com/agentwik-labs/eligible/blob/main/docs/production-concerns.md">docs/production-concerns.md</a>.</p></div>
     <div class="concerns" id="concerns"></div>
   </section>
 
   <section>
-    <div class="sec-head"><span class="eyebrow">07 · Decision log</span><h2>Every place the plan changed, and why</h2>
+    <div class="sec-head"><span class="eyebrow">08 · Decision log</span><h2>Every place the plan changed, and why</h2>
       <p>Read straight from DECISIONS.md. These are the calls a reviewer would ask about.</p></div>
     <div id="decisions"></div>
   </section>
@@ -342,10 +356,40 @@ function renderBuild(dev, ev) {
     <div class="ba"><b>Before</b><span>${esc(c.before)}</span><b>After</b><span class="after">${esc(c.after)}</span><b>Fix</b><span>${esc(c.fix)}</span></div><code>${esc(c.evidence)}</code></article>`).join("");
 }
 
+
+function renderHardening(data) {
+  const adv = data.adversarial;
+  if (adv) {
+    $("adv").innerHTML = `<table>${adv.gates.map(g => `<tr><td>${esc(g.metric)}</td><td class="n">${esc(g.result)}</td><td><span class="pill ${g.pass ? "v-eligible" : "v-not_eligible"}">${g.pass ? "pass" : "fail"}</span></td></tr>`).join("")}</table>`;
+    const kinds = (data.adversarial_kinds || []).slice(1);
+    if (kinds.length) hBars($("c-adv"), kinds.map(k => [k[0], parseFloat(k[2]) / 100]), v => (v * 100).toFixed(1) + "%", { labelW: 90, max: 1, valueName: "Verdict accuracy" });
+  }
+  const j = data.judge;
+  if (j) {
+    hBars($("c-judge"), ["faithful", "correct", "clear"].map(f => [f, j.mean[f]]), v => v.toFixed(2) + " / 5", { labelW: 80, max: 5, valueName: "Mean score" });
+    $("judgenote").innerHTML = `${j.reasons_graded} reasons graded. The judge picked the real reason over a mismatched one in <b>${j.controls.judge_preferred_real_reason} of ${j.controls.pairs}</b> synthetic controls. Human labels: <b>${j.human_labels} of 20</b>${j.validated_against_humans ? ", agreement meets the 80% bar." : ", so these scores are reported as unvalidated until the owner labels 20 reasons."}`;
+  }
+  const m = data.mcp;
+  if (m) {
+    $("mcpq").innerHTML = `“${esc(m.question)}”: Claude (${esc(m.client.model)}) called the tools ${m.tool_calls.length} times in ${(m.client.duration_ms / 1000).toFixed(1)} s for ${usd(m.client.cost_usd)} of its own tokens.`;
+    $("mcp").innerHTML = `<tr><th>Tool</th><th class="n">Latency</th><th class="n">Model cost inside</th><th>Result</th></tr>` + m.tool_calls.map(c => `<tr><td class="mono">${esc(c.tool)}</td><td class="n">${(c.ms / 1000).toFixed(1)} s</td><td class="n">${usd(c.cost_usd)}</td><td>${esc(c.detail)}</td></tr>`).join("");
+    $("mcpnote").textContent = "The first call writes the 7,700-token rule preamble to the prompt cache; the second reads it, which is why it costs a seventh as much.";
+  }
+  if (data.gate_demo?.length) {
+    $("gate").innerHTML = `<tr><th>Prompt edit</th><th class="n">Acc.</th><th class="n">Over (≤1)</th><th class="n">Cond.</th><th>Gate</th></tr>` + data.gate_demo.map(r => `<tr><td>${r.passed ? "“Be generous”" : "“Approve everything”"}<br><span class="mono" style="font-size:11.5px;color:var(--ink-3)">${esc(r.sha)}</span></td><td class="n">${pct(r.accuracy)}</td><td class="n">${r.over_approvals}</td><td class="n">${r.conditional_approvals}</td><td><span class="pill ${r.passed ? "v-eligible" : "v-not_eligible"}">${r.passed ? "passed" : "failed"}</span></td></tr>`).join("");
+  }
+  const tr = data.traces;
+  $("trtiles").innerHTML = tr && tr.live ? [
+    [String(tr.requests), "requests traced"], [(tr.p50_ms / 1000).toFixed(1) + " s", "median latency"],
+    [(tr.p95_ms / 1000).toFixed(1) + " s", "p95 latency"], [usd(tr.mean_cost), "mean cost when a model ran"],
+  ].map(([v, l]) => `<div class="tile"><span class="v">${esc(v)}</span><span class="l">${esc(l)}</span></div>`).join("") : `<div class="tile"><span class="l">No traced requests on this server yet.</span></div>`;
+}
+
 fetch("/v1/engineering").then(r => r.json()).then(render).catch(err => { $("prov").textContent = "Couldn't load the eval report: " + err.message; });
 
 function render(data) {
   renderBuild(data.devlog, data.eval);
+  renderHardening(data);
   const ev = data.eval;
   if (!ev) { $("prov").textContent = "No full eval report committed yet."; return; }
   const d = ev.decisions, x = ev.extraction, c = ev.cost;

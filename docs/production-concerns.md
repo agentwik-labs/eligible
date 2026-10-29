@@ -73,18 +73,29 @@ validation that the model's output can't talk its way past.
 - Code: `data/adversarial.py`, `injection_changes` in `evals/run.py`, `prompts/*.md`
 - Proof: `evals/reports/adversarial.md` (gate "Injection-changed verdicts": 0)
 
-## 8. Eval CI gate: planned (M7)
-The smoke suite runs on every PR and fails the build if a gate in EVALS.md §3 fails. Today the
-gates are checked by `python -m evals.run` (non-zero exit on failure); wiring it into GitHub
-Actions is M7.
+## 8. Eval CI gate: done
+`.github/workflows/evals.yml` runs the smoke suite through the whole pipeline on every pull
+request and fails the check if any EVALS.md gate fails. It needs the `ANTHROPIC_API_KEY`
+secret and skips with a notice without one. Demonstrated on a branch: a prompt telling the
+model to approve everything failed the gate (3 over-approvals against a limit of 1); a softer
+"be generous" prompt passed, which exposed a blind spot now covered by a reported metric.
+- Code: `.github/workflows/evals.yml`, `evals/run.py`
+- Proof: `evals/reports/gate-demo.md`
 
-## 9. Tracing: planned (M7)
-One trace per request with spans for redact, extract, retrieve, decide and validate, each
-with tokens, cost and latency (Langfuse, optional). Today the call ledger records tokens, cost
-and latency per LLM call.
+## 9. Tracing: done
+One trace per request with spans for redact, extract, retrieve (per item), decide and
+validate, each with start offset, latency, model, tokens and cost. Written to
+`logs/traces.jsonl` and shown on the `/traces` page; sent to Langfuse as well when
+`LANGFUSE_*` is set (exporter checked against the langfuse 5.x SDK, not against a live server).
+- Code: `src/eligible/tracing.py`, `web/traces.html`
+- Proof: `tests/test_tracing.py`
 
-## 10. Tool calling / MCP: planned (M6)
-An MCP server exposing `check_receipt`, `check_item` and `search_rules`.
+## 10. Tool calling / MCP: done
+An MCP server exposes `check_receipt`, `check_item` and `search_rules`; each call is logged
+with latency and model cost. A recorded Claude Code session answers "Can I use my FSA for
+sunscreen and a massage?" with two parallel `check_item` calls.
+- Code: `src/eligible/mcp_server.py`
+- Proof: `docs/mcp-demo.md`, `tests/test_mcp.py`
 
 ---
 

@@ -132,3 +132,27 @@ server (`python -m eligible.mcp_server`) with `check_receipt`, `check_item` and
 tools work from Claude Code: `docs/mcp-demo.md` is a recorded session in which Claude called
 `check_item` twice in parallel and answered the SPEC question. Measured: client $0.0255 and
 13.0 s; tool calls $0.059 (writing the rules preamble to cache) and $0.0086 (reading it).
+
+## M7: Observability and CI gate (2026-10-29)
+
+**Done**: tracing (one trace per request; spans for redact, extract, retrieve per item, decide
+and validate, with time, model, tokens and cost) to `logs/traces.jsonl` and the `/traces`
+page, plus Langfuse when configured; `.github/workflows/evals.yml`; and the LLM-as-judge.
+
+**Accept**: a deliberately broken prompt failed the eval gate on a branch (3 over-approvals,
+exit 1); see `evals/reports/gate-demo.md`. The demo also found a blind spot (conditional
+items approved outright), which is now a reported metric. Making it a gate needs the owner.
+
+## M8: Packaging and story (2026-10-29)
+
+**Done**: Dockerfile and docker-compose, README results generated from the reports,
+architecture diagram, quickstart and MCP config, `docs/writeup.md` (1,079 words) and
+`docs/demo-script.md`.
+
+**Accept**: a fresh clone reached a working check in about a minute on this machine
+(index 40 s, server 4 s, first check 10 s) following the README, with uv's package cache warm.
+On a new machine the first install downloads about 1 GB, so timing depends on bandwidth.
+`docker compose up` is written but not run: Docker isn't installed on this machine.
+
+**Open for the owner**: deploy (which host?), the 20 human audit checks and 20 judge labels,
+the API key (for image input and the CI gate), and whether to make conditional approvals a gate.

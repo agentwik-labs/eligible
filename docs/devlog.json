@@ -1,5 +1,5 @@
 {
-  "generated": "2026-10-29T03:07:44+00:00",
+  "generated": "2026-10-29T05:38:21+00:00",
   "commits": [
     {
       "sha": "f4ddceb",
@@ -162,12 +162,75 @@
       "py_added": 9,
       "py_removed": 4,
       "tests": 79
+    },
+    {
+      "sha": "ccec28f",
+      "time": "2026-10-28T23:07:47-04:00",
+      "subject": "M5 done: final eval, adversarial suite results, and a README for readers",
+      "milestone": "M5",
+      "py_added": 0,
+      "py_removed": 0,
+      "tests": 79
+    },
+    {
+      "sha": "39baca4",
+      "time": "2026-10-29T01:14:01-04:00",
+      "subject": "M6: MCP server with check_receipt, check_item and search_rules",
+      "milestone": "M6",
+      "py_added": 328,
+      "py_removed": 7,
+      "tests": 82
+    },
+    {
+      "sha": "d2248b0",
+      "time": "2026-10-29T01:18:48-04:00",
+      "subject": "M4 remainder: LLM-as-judge for reason quality",
+      "milestone": "M4",
+      "py_added": 223,
+      "py_removed": 0,
+      "tests": 82
+    },
+    {
+      "sha": "2f8b287",
+      "time": "2026-10-29T01:23:12-04:00",
+      "subject": "M7: tracing with a span per pipeline step, and a traces page",
+      "milestone": "M7",
+      "py_added": 289,
+      "py_removed": 33,
+      "tests": 85
+    },
+    {
+      "sha": "54e9736",
+      "time": "2026-10-29T01:23:30-04:00",
+      "subject": "M7: eval gate workflow on pull requests",
+      "milestone": "M7",
+      "py_added": 0,
+      "py_removed": 0,
+      "tests": 85
+    },
+    {
+      "sha": "c8ae380",
+      "time": "2026-10-29T01:26:12-04:00",
+      "subject": "M7: eval gate demo with a broken prompt, and a conditional-approval metric",
+      "milestone": "M7",
+      "py_added": 8,
+      "py_removed": 0,
+      "tests": 85
+    },
+    {
+      "sha": "8ba3b35",
+      "time": "2026-10-29T01:26:44-04:00",
+      "subject": "M8: Dockerfile and docker-compose (app on :8000, optional Langfuse via env)",
+      "milestone": "M8",
+      "py_added": 0,
+      "py_removed": 0,
+      "tests": 85
     }
   ],
   "product_spend": {
     "note": "Every distinct model call the product made, read from the response cache. API-equivalent cost; reruns of unchanged cases were served from the cache at $0.",
-    "calls": 383,
-    "cost_usd": "8.14830381",
+    "calls": 459,
+    "cost_usd": "8.44227281",
     "by_prompt": [
       {
         "prompt": "decide@1 \u00b7 claude-sonnet-5-5",
@@ -179,19 +242,19 @@
       },
       {
         "prompt": "decide@2 \u00b7 claude-sonnet-5-5",
-        "calls": 188,
-        "prompt_tokens": 3238810,
-        "output_tokens": 129932,
-        "cache_read": 2418607,
-        "cost": "5.0630974"
+        "calls": 196,
+        "prompt_tokens": 3366623,
+        "output_tokens": 134300,
+        "cache_read": 2510258,
+        "cost": "5.2697236"
       },
       {
         "prompt": "extract@1 \u00b7 claude-haiku-5-5",
-        "calls": 75,
-        "prompt_tokens": 217382,
-        "output_tokens": 138860,
-        "cache_read": 131001,
-        "cost": "0.08799981"
+        "calls": 81,
+        "prompt_tokens": 233207,
+        "output_tokens": 148383,
+        "cache_read": 139451,
+        "cost": "0.09431961"
       },
       {
         "prompt": "extract@1 \u00b7 claude-sonnet-5-5",
@@ -200,6 +263,14 @@
         "output_tokens": 63845,
         "cache_read": 102109,
         "cost": "0.8781558"
+      },
+      {
+        "prompt": "judge@1 \u00b7 claude-haiku-5-5",
+        "calls": 62,
+        "prompt_tokens": 247909,
+        "output_tokens": 82082,
+        "cache_read": 50460,
+        "cost": "0.0810230"
       }
     ],
     "by_hour": [
@@ -218,6 +289,10 @@
       {
         "hour": "2026-10-29T02:00Z",
         "cost_usd": "1.44979441"
+      },
+      {
+        "hour": "2026-10-29T05:00Z",
+        "cost_usd": "0.2939690"
       }
     ]
   },

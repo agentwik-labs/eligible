@@ -16,6 +16,22 @@ def quote(chunk: Chunk, limit: int = 280) -> str:
     return text if len(text) <= limit else text[: limit - 1].rsplit(" ", 1)[0] + "…"
 
 
+def canonical(citation_id: str, retrieved: list[Chunk]) -> str | None:
+    """The retrieved chunk a citation refers to, or None if it wasn't retrieved for this item.
+
+    Models sometimes drop the chunk suffix ("elist:bandages" for "elist:bandages#0"). That
+    still names a source retrieved for this item, so it resolves to that source's first chunk.
+    A source that wasn't retrieved for the item never resolves.
+    """
+    for chunk in retrieved:
+        if chunk.id == citation_id:
+            return chunk.id
+    for chunk in retrieved:
+        if chunk.source_id == citation_id:
+            return chunk.id
+    return None
+
+
 def validate_item(
     item: LineItem, decision: Decision | None, retrieved: list[Chunk]
 ) -> tuple[ItemResult, int]:
@@ -29,8 +45,9 @@ def validate_item(
             flags=["missing_decision"],
         ), 0
     by_id = {c.id: c for c in retrieved}
-    unsupported = [cid for cid in decision.citation_ids if cid not in by_id]
-    cited = [by_id[cid] for cid in decision.citation_ids if cid in by_id]
+    resolved = [canonical(cid, retrieved) for cid in decision.citation_ids]
+    unsupported = [cid for cid, r in zip(decision.citation_ids, resolved, strict=True) if r is None]
+    cited = list({r: by_id[r] for r in resolved if r is not None}.values())
     citations = [
         Citation(
             chunk_id=c.id, source_id=c.source_id, title=" > ".join(c.heading_path), quote=quote(c)

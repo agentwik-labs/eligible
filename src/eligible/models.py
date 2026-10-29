@@ -84,3 +84,32 @@ class Receipt(BaseModel):
     tax: Decimal | None
     total: Decimal | None
     read_quality: Literal["good", "partial", "poor"]
+
+
+# Decision output (SPEC §2.5-2.6, §3).
+class Citation(BaseModel):
+    chunk_id: str
+    source_id: str
+    title: str  # heading path, e.g. "Pub 969 > Flexible Spending Arrangements > Distributions"
+    quote: str
+
+
+class ItemResult(BaseModel):
+    item: LineItem
+    verdict: Verdict
+    reason: str
+    citations: list[Citation]
+    flags: list[str] = []  # why validation changed or questioned the verdict
+
+
+class CheckResult(BaseModel):
+    receipt: Receipt
+    items: list[ItemResult]
+    eligible_subtotal: Decimal
+    totals_mismatch: bool
+    needs_review_count: int
+    trace_id: str
+    cost_usd: Decimal
+    latency_ms: float
+    prompt_versions: dict[str, str]
+    unsupported_citations_before_validation: int = 0

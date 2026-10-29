@@ -91,3 +91,27 @@ M2 numbers should be read that way.
 ## 2026-10-28: Smoke suite composition
 `evals/suites/smoke.json` holds 10 receipts chosen in code to cover every verdict, a totals
 mismatch, a card number and a patient name. It has 73 items. CI runs it.
+
+## 2026-10-28: Citation expansion in retrieval
+The first ablation missed recall@5 badly (about 50%), and the HSA/FSA rule for OTC items was
+almost never retrieved (0-2%). The cause: receipt words ("ibuprofen") never appear in IRS
+prose ("over-the-counter medicine"), so neither BM25 nor vectors connect them. The list
+entries do, because each one names products and cites the governing sections. After ranking,
+the retriever now inserts the sections a retrieved list entry cites, choosing each section's
+chunk that best matches the entry's rule. The ablation keeps every earlier configuration so
+the before and after are both on record.
+
+## 2026-10-28: Retrieval runs hybrid without the reranker by default
+In the ablation the cross-encoder lowered recall@5 (52.8% to 49.2%) and adds ~1.6 s per
+item on CPU, about 13 s per receipt. `ELIGIBLE_RETRIEVAL_MODE=rerank` turns it back on.
+
+## 2026-10-28: A thin UI slice before M5
+The owner asked to see a working version. The demo page, `/v1/check`, `/v1/sources/{id}`
+and sample endpoints (part of M6) were built right after the M4 pipeline, ahead of M5
+tuning. M6's MCP server and the recorded transcript still come after M5.
+
+## 2026-10-28: The decide prompt states the HSA/FSA rule for OTC medicine
+The system prompt says outright that Pub 502's non-prescription exclusion is a deduction rule
+and that OTC medicine is covered for HSAs and FSAs. That's domain knowledge the product
+should carry, but it means the decide step isn't tested on discovering the trap from sources
+alone. The retrieval ablation's "OTC rule found" column measures that part.

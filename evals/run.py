@@ -22,7 +22,7 @@ from pathlib import Path
 
 from eligible.config import Settings, get_settings
 from eligible.extract import Extraction, build_request, extract
-from eligible.llm.budget import estimate_max_cost_usd
+from eligible.llm.budget import BudgetExceededError, estimate_max_cost_usd
 from eligible.llm.factory import backend_name, build_client
 from eligible.llm.ledger import Ledger, p95
 from eligible.llm.ledger import summarize as summarize_calls
@@ -253,6 +253,8 @@ def main(argv: list[str] | None = None) -> int:
     def run_one(case: Case) -> tuple[Case, Extraction | None, str | None]:
         try:
             return case, extract(case.text, client, settings.extract_model), None
+        except BudgetExceededError:
+            raise  # the spend ceiling stops the whole run; never fall back to a cheaper model
         except Exception as e:  # one bad receipt shouldn't sink the run; it's reported
             return case, None, f"{type(e).__name__}: {str(e)[:120]}"
 

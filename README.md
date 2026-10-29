@@ -49,6 +49,26 @@ Every LLM call goes through one metered client (`src/eligible/llm/`):
 [docs/cost-model.md](docs/cost-model.md) has the cost projection made before the first prompt,
 and what it changed about the plan.
 
+## Production concerns
+How the concerns AI-engineer roles screen for map to code. Details and proof are in
+[docs/production-concerns.md](docs/production-concerns.md).
+
+| Concern | Status | Where | Proof |
+|---|---|---|---|
+| Pre-flight token/cost budget | done | `llm/budget.py`, `MeteredClient` | `tests/test_budget.py` |
+| Cost kill-switch, no fallback to a cheaper model | done | `llm/budget.py`, `llm/ledger.py`, `llm/report.py` | `tests/test_eval_run.py` |
+| Strict typed outputs (schema-valid ≠ correct) | done | `extract/`, `models.py` | `tests/test_extract.py`, `tests/test_client.py` |
+| Uncertainty: low-confidence fields flagged | done (routing to `needs_review`: M4) | `models.py` | M2 eval: 23 of 23 unreadable lines flagged |
+| Personal-data redaction before any LLM call | done | `redact.py` | `tests/test_redact.py`, 0 leaks in eval |
+| No made-up citations | planned (M4) | | |
+| Prompt-injection resistance | planned (M5) | | |
+| Eval CI gate on PRs | planned (M7) | | |
+| Tracing per step | planned (M7) | | |
+| Tool calling / MCP | planned (M6) | | |
+
+Not covered here: multi-step agent trajectories with a human approval gate. That's the planned
+follow-up project (prior-authorization agent).
+
 ## Docs (read in this order)
 1. [CLAUDE.md](CLAUDE.md): rules for the AI agent building this
 2. [SPEC.md](SPEC.md): what the system does, its schemas, API and architecture

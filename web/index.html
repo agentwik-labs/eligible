@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Eligible</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=IBM+Plex+Sans+Condensed:wght@500;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<style>
+/* Layout: receipt in on the left, the checked answer on the right; summary strip on top of the answer. */
+:root {
+  --paper: #fbfbf8; --ground: #eef0ef; --ink: #17202a; --ink-2: #4c5864; --rule: #c9cfd3;
+  --accent: #1d4f73; --accent-soft: #dce8f1;
+  --v-eligible: #1f7a4d; --v-not: #b23a2e; --v-dual: #a86a00; --v-rx: #5b4bb0; --v-review: #66707a;
+  --v-eligible-bg: #e1f1e8; --v-not-bg: #f7e3e0; --v-dual-bg: #f7ecd6; --v-rx-bg: #e9e6f7; --v-review-bg: #e8eaec;
+  --f-display: "IBM Plex Sans Condensed", "Arial Narrow", system-ui, sans-serif;
+  --f-body: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --f-mono: "IBM Plex Mono", ui-monospace, Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --paper: #1d2328; --ground: #12171b; --ink: #e6eaed; --ink-2: #9aa6b0; --rule: #34404a;
+    --accent: #7fb6dd; --accent-soft: #1c3346;
+    --v-eligible: #5fcb93; --v-not: #f08a7e; --v-dual: #e5b04e; --v-rx: #a99cf0; --v-review: #a3adb6;
+    --v-eligible-bg: #173527; --v-not-bg: #3d1f1b; --v-dual-bg: #3a2c12; --v-rx-bg: #29254a; --v-review-bg: #2a3036;
+    color-scheme: dark;
+  }
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--ground); color: var(--ink); font: 15px/1.55 var(--f-body); }
+.wrap { max-width: 1240px; margin: 0 auto; padding: 24px max(16px, 3vw) 48px; display: grid; gap: 20px; }
+header { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 8px 20px; }
+h1 { font: 700 34px/1.1 var(--f-display); margin: 0; letter-spacing: -0.01em; }
+h1 small { font: 500 15px var(--f-body); color: var(--ink-2); margin-left: 10px; letter-spacing: 0; }
+.eyebrow { font: 600 12px/1 var(--f-mono); letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-2); }
+.grid { display: grid; grid-template-columns: minmax(0, 380px) minmax(0, 1fr); gap: 20px; align-items: start; }
+.panel { background: var(--paper); border: 1px solid var(--rule); padding: 16px; display: grid; gap: 12px; min-width: 0; }
+label { font: 600 12px var(--f-mono); letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-2); }
+textarea { width: 100%; min-height: 480px; resize: vertical; font: 12.5px/1.6 var(--f-mono); color: var(--ink); background: var(--paper); border: 1px solid var(--rule); padding: 12px; }
+textarea:focus, select:focus, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+.row { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+select, input[type=file] { font: 13px var(--f-body); color: var(--ink); background: var(--paper); border: 1px solid var(--rule); padding: 6px 8px; max-width: 100%; }
+button.primary { font: 600 15px var(--f-body); padding: 10px 18px; border: 0; background: var(--accent); color: var(--paper); cursor: pointer; }
+button.primary[disabled] { opacity: .6; cursor: progress; }
+.hint { font-size: 13px; color: var(--ink-2); }
+
+.summary { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); border: 1px solid var(--rule); background: var(--paper); }
+.stat { padding: 12px 14px; border-right: 1px solid var(--rule); display: grid; gap: 2px; }
+.stat:last-child { border-right: 0; }
+.stat .k { font: 600 11px var(--f-mono); letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-2); }
+.stat .v { font: 600 20px var(--f-display); font-variant-numeric: tabular-nums; }
+.stat .v.warn { color: var(--v-not); }
+.meta { font: 12px var(--f-mono); color: var(--ink-2); display: flex; flex-wrap: wrap; gap: 4px 16px; }
+
+.items { display: grid; gap: 10px; }
+.item { background: var(--paper); border: 1px solid var(--rule); border-left: 4px solid var(--v); padding: 12px 14px; display: grid; gap: 6px; }
+.itop { display: flex; flex-wrap: wrap; gap: 6px 12px; align-items: baseline; justify-content: space-between; }
+.iname { font-weight: 600; }
+.iraw { font: 12.5px var(--f-mono); color: var(--ink-2); }
+.amt { font: 600 14px var(--f-mono); font-variant-numeric: tabular-nums; }
+.reason { margin: 0; font-size: 14px; }
+.pill { font: 600 11px/1 var(--f-mono); letter-spacing: 0.04em; text-transform: uppercase; padding: 5px 7px; color: var(--v); background: var(--vb); }
+.flag { font: 11px var(--f-mono); color: var(--v-not); }
+.chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.chip { font: 12px var(--f-mono); padding: 3px 7px; border: 1px solid var(--rule); background: none; color: var(--accent); cursor: pointer; }
+.chip:hover { border-color: var(--accent); }
+.v-eligible { --v: var(--v-eligible); --vb: var(--v-eligible-bg); }
+.v-not_eligible { --v: var(--v-not); --vb: var(--v-not-bg); }
+.v-dual_purpose { --v: var(--v-dual); --vb: var(--v-dual-bg); }
+.v-needs_prescription { --v: var(--v-rx); --vb: var(--v-rx-bg); }
+.v-needs_review { --v: var(--v-review); --vb: var(--v-review-bg); }
+
+.source { border: 1px solid var(--accent); background: var(--paper); padding: 14px; display: grid; gap: 8px; }
+.source .path { font: 12px var(--f-mono); color: var(--ink-2); }
+.source .body { font-size: 13.5px; white-space: pre-wrap; max-height: 300px; overflow-y: auto; }
+.source button { justify-self: start; font: 12px var(--f-mono); background: none; border: 0; color: var(--accent); cursor: pointer; padding: 0; }
+.empty { color: var(--ink-2); padding: 24px; border: 1px dashed var(--rule); text-align: left; }
+.steps { font: 13px var(--f-mono); color: var(--ink-2); display: grid; gap: 4px; }
+.steps .on { color: var(--ink); }
+.error { color: var(--v-not); font-weight: 600; }
+footer { font-size: 12.5px; color: var(--ink-2); }
+@media (max-width: 860px) { .grid { grid-template-columns: minmax(0, 1fr); } textarea { min-height: 260px; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>Eligible <small>Can an FSA or HSA pay for this receipt?</small></h1>
+    <span class="eyebrow" id="health">checking server…</span>
+  </header>
+
+  <div class="grid">
+    <form class="panel" id="form">
+      <label for="receipt">Receipt text</label>
+      <div class="row">
+        <select id="sample" aria-label="Load a synthetic sample receipt"><option value="">Load a sample receipt…</option></select>
+        <input type="file" id="file" accept=".txt,text/plain" aria-label="Upload a receipt text file">
+      </div>
+      <textarea id="receipt" spellcheck="false" placeholder="Paste receipt text here"></textarea>
+      <div class="row">
+        <button class="primary" id="go" type="submit">Check receipt</button>
+        <span class="hint">Samples are synthetic: fake stores, people and card numbers.</span>
+      </div>
+    </form>
+
+    <section class="panel" aria-live="polite">
+      <div id="out"><p class="empty">Load a sample or paste a receipt, then check it. Each item gets a verdict, a plain-English reason and the IRS text it rests on.</p></div>
+    </section>
+  </div>
+
+  <footer>Informational only, not medical, tax or legal advice: your plan administrator makes the real decision. Sources: IRS Publications 502 and 969 and CARES Act §3702.</footer>
+</div>
+
+<script>
+const LABEL = { eligible: "Eligible", not_eligible: "Not eligible", dual_purpose: "Dual purpose", needs_prescription: "Needs Rx / LMN", needs_review: "Needs review" };
+const FLAG = { unsupported_citation: "model cited a source it wasn't given (removed)", no_supporting_source: "no supporting source", low_confidence: "receipt line hard to read", missing_decision: "no decision returned" };
+const STEPS = ["Masking personal data", "Reading line items", "Finding IRS rules for each item", "Deciding with citations", "Checking citations and totals"];
+const $ = (id) => document.getElementById(id);
+const esc = (s) => String(s ?? "").replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+const money = (x) => "$" + Number(x).toFixed(2);
+
+fetch("/healthz").then(r => r.json()).then(h => { $("health").textContent = `${h.models.extract} · ${h.llm_mode} mode · v${h.version}`; })
+  .catch(() => { $("health").textContent = "server not reachable"; });
+fetch("/v1/samples").then(r => r.json()).then(ids => {
+  $("sample").insertAdjacentHTML("beforeend", ids.map(id => `<option value="${id}">${id}</option>`).join(""));
+});
+$("sample").addEventListener("change", async (e) => {
+  if (!e.target.value) return;
+  const s = await (await fetch(`/v1/samples/${e.target.value}`)).json();
+  $("receipt").value = s.text;
+});
+$("file").addEventListener("change", async (e) => {
+  const f = e.target.files[0];
+  if (f) $("receipt").value = await f.text();
+});
+
+let timer = null;
+function showSteps() {
+  let i = 0;
+  const render = () => { $("out").innerHTML = `<div class="steps">${STEPS.map((s, j) => `<span class="${j <= i ? "on" : ""}">${j < i ? "✓" : j === i ? "…" : "·"} ${s}</span>`).join("")}</div>`; };
+  render();
+  timer = setInterval(() => { i = Math.min(i + 1, STEPS.length - 1); render(); }, 3500);
+}
+
+$("form").addEventListener("submit", async (e) => {
+  e.preventDefault();
+  const text = $("receipt").value;
+  if (!text.trim()) { $("out").innerHTML = `<p class="error">Paste or load a receipt first.</p>`; return; }
+  $("go").disabled = true; $("go").textContent = "Checking…";
+  showSteps();
+  try {
+    const r = await fetch("/v1/check", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ text }) });
+    const body = await r.json();
+    if (!r.ok) throw new Error(body.detail || r.statusText);
+    render(body);
+  } catch (err) {
+    $("out").innerHTML = `<p class="error">The check failed: ${esc(err.message)}</p>`;
+  } finally {
+    clearInterval(timer);
+    $("go").disabled = false; $("go").textContent = "Check receipt";
+  }
+});
+
+function render(res) {
+  const rcpt = res.receipt;
+  const stats = [
+    ["Eligible subtotal", money(res.eligible_subtotal), ""],
+    ["Needs review", res.needs_review_count, res.needs_review_count ? "" : ""],
+    ["Totals", res.totals_mismatch ? "Don't add up" : "Add up", res.totals_mismatch ? "warn" : ""],
+    ["Cost", "$" + Number(res.cost_usd).toFixed(4), ""],
+    ["Time", (res.latency_ms / 1000).toFixed(1) + " s", ""],
+  ];
+  $("out").innerHTML = `
+    <div class="summary">${stats.map(([k, v, c]) => `<div class="stat"><span class="k">${k}</span><span class="v ${c}">${esc(v)}</span></div>`).join("")}</div>
+    <div class="meta"><span>${esc(rcpt.merchant || "Unknown merchant")} · ${esc(rcpt.merchant_type)} · ${esc(rcpt.date || "no date")}</span>
+      <span>prompts ${Object.entries(res.prompt_versions).map(([k, v]) => `${k}@${v}`).join(" ")}</span><span>trace ${esc(res.trace_id.slice(0, 12))}</span></div>
+    <div id="src" hidden></div>
+    <div class="items">${res.items.map(it => `
+      <article class="item v-${it.verdict}">
+        <div class="itop"><span class="iname">${esc(it.item.name)}</span><span class="row"><span class="amt">${money(it.item.amount)}</span><span class="pill">${LABEL[it.verdict]}</span></span></div>
+        <span class="iraw">${esc(it.item.raw_text)}${it.item.quantity > 1 ? ` · ${it.item.quantity}×` : ""}</span>
+        <p class="reason">${esc(it.reason)}</p>
+        ${it.flags.length ? `<span class="flag">${it.flags.map(f => FLAG[f] || f).join(" · ")}</span>` : ""}
+        <div class="chips">${it.citations.map(c => `<button type="button" class="chip" data-id="${esc(c.chunk_id)}" title="${esc(c.title)}">${esc(c.source_id)}</button>`).join("")}</div>
+      </article>`).join("")}</div>`;
+}
+
+$("out").addEventListener("click", async (e) => {
+  const chip = e.target.closest(".chip");
+  if (chip) {
+    const c = await (await fetch(`/v1/sources/${encodeURIComponent(chip.dataset.id)}`)).json();
+    const box = $("src");
+    box.className = "source";
+    box.innerHTML = `<span class="eyebrow">${esc(c.id)}</span><span class="path">${c.heading_path.map(esc).join(" › ")}</span><div class="body">${esc(c.text)}</div><button type="button" id="closesrc">Close source</button>`;
+    box.hidden = false;
+    box.scrollIntoView({ behavior: "smooth", block: "nearest" });
+  }
+  if (e.target.id === "closesrc") $("src").hidden = true;
+});
+</script>
+</body>
+</html>

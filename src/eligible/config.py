@@ -31,6 +31,9 @@ class Settings(BaseSettings):
     llm_cache_dir: Path = Path("evals/.cache")
     budget_usd: Decimal = Decimal("10")
     ledger_path: Path = Path("logs/llm_calls.jsonl")
+    # Retrieval: "hybrid" (BM25 + vectors) or "rerank" (adds the cross-encoder, ~1.6 s/item).
+    retrieval_mode: Literal["hybrid", "rerank"] = "hybrid"
+    retrieval_k: int = 5
 
 
 @lru_cache

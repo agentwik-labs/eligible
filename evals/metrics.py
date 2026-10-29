@@ -190,6 +190,8 @@ class DecisionSummary:
     confusion: dict[str, dict[str, int]]  # gold -> predicted -> count
     over_approvals: int
     not_eligible_items: int
+    conditional_approvals: int  # dual purpose / needs Rx / needs review approved outright
+    conditional_items: int
     needs_review_rate: float
     unsupported_before: int
     citations: int
@@ -207,6 +209,9 @@ def summarize_decisions(scores: list[DecisionScore]) -> DecisionSummary:
         for gold, row in confusion.items()
     }
     not_eligible = [p for g, p in pairs if g == "not_eligible"]
+    conditional = [
+        p for g, p in pairs if g in ("dual_purpose", "needs_prescription", "needs_review")
+    ]
     return DecisionSummary(
         items=len(pairs),
         accuracy=_rate(sum(g == p for g, p in pairs), len(pairs)),
@@ -214,6 +219,8 @@ def summarize_decisions(scores: list[DecisionScore]) -> DecisionSummary:
         confusion=confusion,
         over_approvals=sum(p == "eligible" for p in not_eligible),
         not_eligible_items=len(not_eligible),
+        conditional_approvals=sum(p == "eligible" for p in conditional),
+        conditional_items=len(conditional),
         needs_review_rate=_rate(sum(p == "needs_review" for _, p in pairs), len(pairs)),
         unsupported_before=sum(s.unsupported_before for s in scores),
         citations=sum(s.citations for s in scores),

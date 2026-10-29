@@ -261,6 +261,7 @@ def render(
         "|---|---|",
         f"| Verdict accuracy | {pct(d.accuracy)} ({d.items} items) |",
         f"| Over-approvals (not eligible marked eligible) | {d.over_approvals} of {d.not_eligible_items} |",
+        f"| Conditional items approved outright (no gate yet) | {d.conditional_approvals} of {d.conditional_items} |",
         f"| `needs_review` rate | {pct(d.needs_review_rate)} (golden: {pct(sum(1 for c in cases for i in c.golden.items if i.verdict == 'needs_review') / max(d.items, 1))}) |",
         f"| Unsupported citations before validation | {d.unsupported_before} of {d.citations + d.unsupported_before} |",
         f"| Verdicts with no citation after validation (other than needs_review) | {d.uncited_non_review} |",

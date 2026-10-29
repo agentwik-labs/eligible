@@ -1,0 +1,252 @@
+{
+  "suite": "smoke",
+  "date": "2026-10-29",
+  "sha": "10fb581",
+  "models": {
+    "extract": "claude-haiku-5-5",
+    "decide": "claude-sonnet-5-5"
+  },
+  "effort": "low",
+  "backend": "claude_code",
+  "prompts": {
+    "extract": "1",
+    "decide": "2-broken"
+  },
+  "gates": [
+    {
+      "metric": "Unsupported citations after validation",
+      "result": "0",
+      "gate": "0",
+      "pass": true
+    },
+    {
+      "metric": "Over-approvals",
+      "result": "0",
+      "gate": "\u2264 1 case",
+      "pass": true
+    },
+    {
+      "metric": "Verdict accuracy",
+      "result": "98.6%",
+      "gate": "\u2265 80%",
+      "pass": true
+    },
+    {
+      "metric": "Item recall (extraction)",
+      "result": "100.0%",
+      "gate": "\u2265 90%",
+      "pass": true
+    },
+    {
+      "metric": "Redaction leaks",
+      "result": "0",
+      "gate": "0",
+      "pass": true
+    }
+  ],
+  "extraction": {
+    "receipts": 10,
+    "item_recall": 1.0,
+    "item_precision": 1.0,
+    "amount_exact": 1.0,
+    "quantity_exact": 1.0,
+    "merchant_acc": 1.0,
+    "merchant_type_acc": 1.0,
+    "date_acc": 1.0,
+    "total_acc": 1.0,
+    "mismatch_recall": 1.0,
+    "mismatch_false_alarms": 0,
+    "pii_leaks": 0,
+    "flagged_fields": 4,
+    "unreadable_flagged": [
+      4,
+      4
+    ],
+    "readable_flagged": [
+      0,
+      69
+    ],
+    "calibration": [
+      [
+        "0.00-0.60",
+        0,
+        0.0
+      ],
+      [
+        "0.60-0.80",
+        0,
+        0.0
+      ],
+      [
+        "0.80-0.95",
+        4,
+        1.0
+      ],
+      [
+        "0.95-1.00",
+        69,
+        1.0
+      ]
+    ]
+  },
+  "decisions": {
+    "items": 73,
+    "accuracy": 0.9863013698630136,
+    "per_class": {
+      "eligible": [
+        39,
+        1.0
+      ],
+      "not_eligible": [
+        19,
+        1.0
+      ],
+      "dual_purpose": [
+        4,
+        0.75
+      ],
+      "needs_review": [
+        4,
+        1.0
+      ],
+      "needs_prescription": [
+        7,
+        1.0
+      ]
+    },
+    "confusion": {
+      "eligible": {
+        "eligible": 39
+      },
+      "not_eligible": {
+        "not_eligible": 19
+      },
+      "dual_purpose": {
+        "dual_purpose": 3,
+        "eligible": 1
+      },
+      "needs_review": {
+        "needs_review": 4
+      },
+      "needs_prescription": {
+        "needs_prescription": 7
+      }
+    },
+    "over_approvals": 0,
+    "not_eligible_items": 19,
+    "needs_review_rate": 0.0547945205479452,
+    "unsupported_before": 2,
+    "citations": 181,
+    "uncited_non_review": 0
+  },
+  "cost": {
+    "spend_this_run": "0.4161973",
+    "replayed_calls": 0,
+    "calls": 20,
+    "cost_per_receipt": "0.04161973",
+    "cost_per_stage": {
+      "redact": "0",
+      "extract": "0.00110957",
+      "retrieve": "0",
+      "retrieve: ketotifen eye drops, 5 mL": "0",
+      "retrieve: prescription lens, anti-reflective coati": "0",
+      "retrieve: polarized sunglasses": "0",
+      "retrieve: saline solution, 12 oz": "0",
+      "retrieve: prescription sun lenses, polarized": "0",
+      "retrieve: daily contact lenses, 90 pack": "0",
+      "retrieve: contact lens fitting service": "0",
+      "retrieve: blue light glasses": "0",
+      "retrieve: eyeglass frame, Titan, size 52-18": "0",
+      "decide": "0.04051016",
+      "validate": "0",
+      "retrieve: cetirizine 10 mg, 45 count": "0",
+      "retrieve: whole milk, 1 gallon": "0",
+      "retrieve: extra strength product, 24 count (produc": "0",
+      "retrieve: cool mist humidifier": "0",
+      "retrieve: medical tape, paper, 1 inch": "0",
+      "retrieve: daily moisturizer, 16 oz": "0",
+      "retrieve: retinol serum, 1 oz": "0",
+      "retrieve: unidentified item, health and beauty aid": "0",
+      "retrieve: condoms, lubricated, 12 count": "0",
+      "retrieve: bread, whole wheat, 20 oz": "0",
+      "retrieve: heating pad, extra large": "0",
+      "retrieve: athletic socks, 6 pair": "0",
+      "retrieve: diphenhydramine sleep aid, 32 count": "0",
+      "retrieve: blood pressure monitor, upper arm": "0",
+      "retrieve: compression socks, 15-20 mmHg": "0",
+      "retrieve: orange juice, 52 oz": "0",
+      "retrieve: HEPA air purifier": "0",
+      "retrieve: multi-purpose solution, 12 oz": "0",
+      "retrieve: toilet safety rail": "0",
+      "retrieve: diet frozen entr\u00e9e": "0",
+      "retrieve: grab bar, 24 inch, stainless steel": "0",
+      "retrieve: gauze pads 4x4 inch, 25 count": "0",
+      "retrieve: maxi pads, overnight, 28 count": "0",
+      "retrieve: unidentified item, code HBA 0414": "0",
+      "retrieve: pill organizer, 7 day": "0",
+      "retrieve: pump flange kit, 24 mm": "0",
+      "retrieve: chips, sea salt, 8 oz": "0",
+      "retrieve: nebulizer compressor": "0",
+      "retrieve: first aid kit, 100 piece": "0",
+      "retrieve: menthol pain rub, 3 oz": "0",
+      "retrieve: humidifier wick filter": "0",
+      "retrieve: hearing aid battery, size 312, 24 count": "0",
+      "retrieve: whole wheat bread, 20 oz": "0",
+      "retrieve: India pale ale beer, 6 pack, 12 oz": "0",
+      "retrieve: low dose aspirin 81 mg, 120 count": "0",
+      "retrieve: warm mist vaporizer": "0",
+      "retrieve: denture adhesive, 2.4 oz": "0",
+      "retrieve: lancets, 30 gauge, 100 count": "0",
+      "retrieve: antacid chewable tablets, 96 count": "0",
+      "retrieve: teeth whitening strips, 20 count": "0",
+      "retrieve: children's acetaminophen oral suspension": "0",
+      "retrieve: fexofenadine 180 mg, 30 count": "0",
+      "retrieve: tub transfer rail": "0",
+      "retrieve: lubricating eye drops, 0.5 oz": "0",
+      "retrieve: first aid kit, 100 count": "0",
+      "retrieve: DM cough syrup, 4 oz": "0",
+      "retrieve: Band-Aid flexible fabric bandages, 30 co": "0",
+      "retrieve: reading glasses, +2.00 power": "0",
+      "retrieve: microfiber lens cloth": "0",
+      "retrieve: hard eyeglass case": "0",
+      "retrieve: titanium eyeglass frame, 52-18 size": "0",
+      "retrieve: adult prophylaxis (cleaning), code D1110": "0",
+      "retrieve: fluoride varnish application, code D1208": "0",
+      "retrieve: miscellaneous charge, code 99199": "0",
+      "retrieve: fluoride toothpaste, 4.8 oz": "0",
+      "retrieve: tooth extraction, code D7140": "0",
+      "retrieve: posterior resin-based composite filling,": "0",
+      "retrieve: no-show fee": "0"
+    },
+    "prompt_cache_read_share": 0.5188331047483888,
+    "saved_by_prompt_cache": "-0.0162032",
+    "mean_prompt_tokens": 9442.15,
+    "mean_output_tokens": 1220.2,
+    "latency_mean_ms": 14142.16018350271,
+    "latency_p95_ms": 18632.671250001295,
+    "by_prompt": [
+      {
+        "prompt": "decide@2-broken",
+        "model": "claude-sonnet-5-5",
+        "calls": 10,
+        "cost_usd": "0.4051016",
+        "mean_cost_usd": "0.04051016",
+        "mean_prompt_tokens": 16245.7,
+        "mean_output_tokens": 634.1,
+        "prompt_cache_read_share": 0.4990736010144223,
+        "system_variants": 1
+      },
+      {
+        "prompt": "extract@1",
+        "model": "claude-haiku-5-5",
+        "calls": 10,
+        "cost_usd": "0.0110957",
+        "mean_cost_usd": "0.00110957",
+        "mean_prompt_tokens": 2638.6,
+        "mean_output_tokens": 1806.3,
+        "prompt_cache_read_share": 0.6404911695596149,
+        "system_variants": 1
+      }
+    ]
+  }
+}

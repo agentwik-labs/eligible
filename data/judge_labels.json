@@ -1,0 +1,202 @@
+[
+  {
+    "item": "chiropractic adjustment",
+    "verdict": "eligible",
+    "reason": "Chiropractic care is covered as medical care.",
+    "rule": "Fees paid to a chiropractor for medical care are includible.",
+    "sources": "Items: chiropractor, chiropractic adjustment. Verdict: eligible. Fees paid to a chiropractor for medical care are includible. Sources: p502:chiropractor. | You can include in medical expenses fees you pay to a chiropractor for medical care.",
+    "faithful": null,
+    "correct": null,
+    "clear": null
+  },
+  {
+    "item": "bitewing X-rays, 4 films (CDT D0274)",
+    "verdict": "eligible",
+    "reason": "Dental X-rays for medical reasons are covered.",
+    "rule": "Prevention and alleviation of dental disease (cleanings, sealants, fluoride, X-rays, fillings, extractions) is includible.",
+    "sources": "Items: x-ray, imaging. Verdict: eligible. X-rays for medical reasons are includible. Sources: p502:x-ray. | You can include in medical expenses amounts you pay for X-rays for medical reasons. | Items: dental cleaning, filling, extraction, dental x-ray, crown, root canal. Verdict: eligible. Prevention and alleviation of dental disease (cleanings, sealants, fluoride, X-rays, fillings, extractions) is includible. Sources: p502:dental-treatment. | You can include in medical expenses the amounts you pay for the prevention and alleviation of dental disease. Preventive treatment includes the services of a dental hygienist or dentist for such procedures as teeth cleaning, the application of sealants, and fluoride treatments\u2026",
+    "faithful": null,
+    "correct": null,
+    "clear": null
+  },
+  {
+    "item": "sore throat lozenges, 18 count",
+    "verdict": "eligible",
+    "reason": "Medicated throat lozenges are over-the-counter medicine, covered without a prescription.",
+    "rule": "Medicated cough drops and throat lozenges are OTC medicines, eligible after 2019.",
+    "sources": "Items: cough drops, throat lozenges. Verdict: eligible. Medicated cough drops and throat lozenges are OTC medicines, eligible after 2019. Sources: p969:distributions-from-an-fsa, cares:sec-3702. | long-term care. Amounts that are covered under another health plan. If you are covered under both a health FSA and an HRA, see Notice 2002-45, Part V, 2002-28 I.R.B. 93, available at IRS.gov/pub/irs-drop/n-02-45.pdf. Caution: You can\u2019t deduct qualified medical expenses as an\u2026 | care.''. (d) Effective Dates.-- (1) Distributions from savings accounts.--The amendment made by subsections (a) and (b) shall apply to amounts paid after December 31, 2019. (2) Reimbursements.--The amendment made by subsection (c) shall apply to expenses incurred after December\u2026",
+    "faithful": null,
+    "correct": null,
+    "clear": null
+  },
+  {
+    "item": "humidifier wick filter",
+    "verdict": "needs_prescription",
+    "reason": "A humidifier part is covered only if used mainly for an illness, which usually requires a doctor's letter of medical necessity.",
+    "rule": "A household item is includible only if used primarily to alleviate an illness; plans require a letter of medical necessity to show that.",
+    "sources": "Items: humidifier, vaporizer. Verdict: needs_prescription. A household item is includible only if used primarily to alleviate an illness; plans require a letter of medical necessity to show that. Sources: p502:personal-use-items, p502:what-are-medical-expenses. | You can\u2019t include in medical expenses the cost of an item ordinarily used for personal, living, or family purposes unless it is used primarily to prevent or alleviate a physical or mental disability or illness. For example, the cost of a toothbrush and toothpaste is a\u2026 | Medical expenses are the costs of diagnosis, cure, mitigation, treatment, or prevention of disease and for the purpose of affecting any part or function of the body. These expenses include payments for legal medical services rendered by physicians, surgeons, dentists, and other\u2026",
+    "faithful": null,
+    "correct": null,
+    "clear": null
+  },
+  {
+    "item": "panty liners, 60 count",
+    "verdict": "eligible",
+    "reason": "Panty liners are menstrual care products, which are covered without a prescription.",
+    "rule": "Menstrual care products (tampon, pad, liner, cup, sponge or similar) are treated as medical care for HSAs, FSAs and HRAs after 2019.",
+    "sources": "Items: tampons, pads, liners, menstrual cup, period underwear. Verdict: eligible. Menstrual care products (tampon, pad, liner, cup, sponge or similar) are treated as medical care for HSAs, FSAs and HRAs after 2019. Sources: cares:sec-3702, p969:distributions-from-an-hsa,\u2026 | (a) HSAs.--Section 223(d)(2) of the Internal Revenue Code of 1986 is amended-- (1) by striking the last sentence of subparagraph (A) and inserting the following: ``For purposes of this subparagraph, amounts paid for menstrual care products shall be treated as paid for medical\u2026 | for \u201cmedical care\u201d (as defined in Code section 213(d)) for the individual, the spouse of the individual, and any dependent of the individual, but only to the extent the amounts are not compensated for by insurance or otherwise. Amounts paid for menstrual care products are\u2026 | the health FSA. For information on these methods, see Revenue Ruling 2003-43, 2003-21 I.R.B. 935, available at IRS.gov/pub/irs-drop/rr-03-43.pdf; Notice 2006-69, 2006-31 I.R.B. 107, available at IRS.gov/irb/2006-31_IRB/ar10.html; and Notice 2007-2, 2007-2 I.R.B. 254, available\u2026",
+    "faithful": null,
+    "correct": null,
+    "clear": null
+  },
+  {
+    "item": "modular ramp, 6 ft",
+    "verdict": "needs_prescription",
+    "reason": "A ramp is covered when installed to accommodate a disability, so you'll need medical documentation such as a doctor's letter.",
+    "rule": "Grab bars, railings and ramps are includible in full when installed to accommodate a disabled condition; the receipt can't show that, so plans require medical documentation.",
+    "sources": "Items: grab bars, handrails, wheelchair ramp, bathroom modification. Verdict: needs_prescription. Grab bars, railings and ramps are includible in full when installed to accommodate a disabled condition; the receipt can't show that, so plans require medical documentation.\u2026 | You can include in medical expenses amounts you pay for special equipment installed in a home or for improvements if their main purpose is medical care for you, your spouse, or your dependent. The cost of permanent improvements that increase the value of your property may be\u2026",
+    "faithful": null,
+    "correct": null,
+    "clear": null
+  },
+  {
+    "item": "elastic bandage, 3 inch",
+    "verdict": "eligible",
+    "reason": "An elastic bandage is a medical supply and is covered.",
+    "rule": "Medical supplies such as bandages are includible.",
+    "sources": "Items: bandages, adhesive bandages, gauze, medical tape, elastic bandage. Verdict: eligible. Medical supplies such as bandages are includible. Sources: p502:bandages. | You can include in medical expenses the cost of medical supplies such as bandages.",
+    "faithful": null,
+    "correct": null,
+    "clear": null
+  },
+  {
+    "item": "weight loss program, monthly",
+    "verdict": "needs_prescription",
+    "reason": "Covered only if the program treats a specific disease diagnosed by a physician, such as obesity or hypertension. It isn't covered for appearance or general health.",
+    "rule": "A weight-loss program is includible only as treatment for a specific disease diagnosed by a physician (such as obesity or hypertension).",
+    "sources": "Items: weight loss program, weight reduction group. Verdict: needs_prescription. A weight-loss program is includible only as treatment for a specific disease diagnosed by a physician (such as obesity or hypertension). Sources: p502:weight-loss-program. | You can include in medical expenses amounts you pay to lose weight if it is a treatment for a specific disease diagnosed by a physician (such as obesity, hypertension, or heart disease). This includes fees you pay for membership in a weight reduction group as well as fees for\u2026",
+    "faithful": null,
+    "correct": null,
+    "clear": null
+  },
+  {
+    "item": "SPF 30 face lotion, 2 oz",
+    "verdict": "dual_purpose",
+    "reason": "SPF face lotion is covered only if bought mainly for a medical reason. It's also an ordinary skincare product.",
+    "rule": "Not named in the sources; sunscreen prevents skin disease but is also an ordinary personal-care product. Eligible only when used primarily for a medical reason.",
+    "sources": "Items: sunscreen, sunblock, spf. Verdict: dual_purpose. Not named in the sources; sunscreen prevents skin disease but is also an ordinary personal-care product. Eligible only when used primarily for a medical reason. Sources: p502:what-are-medical-expenses,\u2026 | You can\u2019t include in medical expenses the cost of an item ordinarily used for personal, living, or family purposes unless it is used primarily to prevent or alleviate a physical or mental disability or illness. For example, the cost of a toothbrush and toothpaste is a\u2026 | Medical expenses are the costs of diagnosis, cure, mitigation, treatment, or prevention of disease and for the purpose of affecting any part or function of the body. These expenses include payments for legal medical services rendered by physicians, surgeons, dentists, and other\u2026",
+    "faithful": null,
+    "correct": null,
+    "clear": null
+  },
+  {
+    "item": "adapalene 0.1% gel, 15 g",
+    "verdict": "eligible",
+    "reason": "Adapalene gel is an OTC acne treatment with an active drug ingredient, covered without a prescription.",
+    "rule": "Acne treatments with an active drug ingredient are OTC medicines, eligible after 2019.",
+    "sources": "Items: acne treatment, benzoyl peroxide, salicylic acid acne. Verdict: eligible. Acne treatments with an active drug ingredient are OTC medicines, eligible after 2019. Sources: p969:distributions-from-an-fsa, cares:sec-3702. | long-term care. Amounts that are covered under another health plan. If you are covered under both a health FSA and an HRA, see Notice 2002-45, Part V, 2002-28 I.R.B. 93, available at IRS.gov/pub/irs-drop/n-02-45.pdf. Caution: You can\u2019t deduct qualified medical expenses as an\u2026 | care.''. (d) Effective Dates.-- (1) Distributions from savings accounts.--The amendment made by subsections (a) and (b) shall apply to amounts paid after December 31, 2019. (2) Reimbursements.--The amendment made by subsection (c) shall apply to expenses incurred after December\u2026",
+    "faithful": null,
+    "correct": null,
+    "clear": null
+  },
+  {
+    "item": "gift card, $25",
+    "verdict": "not_eligible",
+    "reason": "A gift card is a personal purchase, not medical care.",
+    "rule": "Cards and gifts are personal purchases, not medical care.",
+    "sources": "Items: greeting card, gift card, gift wrap. Verdict: not_eligible. Cards and gifts are personal purchases, not medical care. Sources: p502:personal-use-items. | You can\u2019t include in medical expenses the cost of an item ordinarily used for personal, living, or family purposes unless it is used primarily to prevent or alleviate a physical or mental disability or illness. For example, the cost of a toothbrush and toothpaste is a\u2026",
+    "faithful": null,
+    "correct": null,
+    "clear": null
+  },
+  {
+    "item": "medical paper tape, 1 inch",
+    "verdict": "eligible",
+    "reason": "Medical tape is a medical supply like bandages, so it's covered.",
+    "rule": "Medical supplies such as bandages are includible.",
+    "sources": "Items: bandages, adhesive bandages, gauze, medical tape, elastic bandage. Verdict: eligible. Medical supplies such as bandages are includible. Sources: p502:bandages. | You can include in medical expenses the cost of medical supplies such as bandages.",
+    "faithful": null,
+    "correct": null,
+    "clear": null
+  },
+  {
+    "item": "prenatal vitamins, 90 count",
+    "verdict": "dual_purpose",
+    "reason": "Covered only if a practitioner recommends them for a specific condition; otherwise they're ordinary supplements.",
+    "rule": "Supplements are includible only when recommended by a practitioner for a specific condition; prenatal vitamins are commonly recommended but the receipt can't show it.",
+    "sources": "Items: prenatal vitamins. Verdict: dual_purpose. Supplements are includible only when recommended by a practitioner for a specific condition; prenatal vitamins are commonly recommended but the receipt can't show it. Sources: p502:nutritional-supplements. | You can\u2019t include in medical expenses the cost of nutritional supplements, vitamins, herbal supplements, \u201cnatural medicines,\u201d etc., unless they are recommended by a medical practitioner as treatment for a specific medical condition diagnosed by a physician. These items are\u2026",
+    "faithful": null,
+    "correct": null,
+    "clear": null
+  },
+  {
+    "item": "sunglasses, polarized",
+    "verdict": "not_eligible",
+    "reason": "Non-prescription sunglasses are an ordinary personal item, not medical care.",
+    "rule": "Non-prescription sunglasses are an item ordinarily used for personal purposes.",
+    "sources": "Items: sunglasses. Verdict: not_eligible. Non-prescription sunglasses are an item ordinarily used for personal purposes. Sources: p502:personal-use-items. | You can\u2019t include in medical expenses the cost of an item ordinarily used for personal, living, or family purposes unless it is used primarily to prevent or alleviate a physical or mental disability or illness. For example, the cost of a toothbrush and toothpaste is a\u2026",
+    "faithful": null,
+    "correct": null,
+    "clear": null
+  },
+  {
+    "item": "sleep aid diphenhydramine, 32 count",
+    "verdict": "eligible",
+    "reason": "Diphenhydramine sleep aids are over-the-counter medicines, covered without a prescription.",
+    "rule": "Medicated sleep aids are OTC drugs, eligible without a prescription after 2019.",
+    "sources": "Items: sleep aid, diphenhydramine, doxylamine. Verdict: eligible. Medicated sleep aids are OTC drugs, eligible without a prescription after 2019. Sources: p969:distributions-from-an-fsa, cares:sec-3702. | long-term care. Amounts that are covered under another health plan. If you are covered under both a health FSA and an HRA, see Notice 2002-45, Part V, 2002-28 I.R.B. 93, available at IRS.gov/pub/irs-drop/n-02-45.pdf. Caution: You can\u2019t deduct qualified medical expenses as an\u2026 | care.''. (d) Effective Dates.-- (1) Distributions from savings accounts.--The amendment made by subsections (a) and (b) shall apply to amounts paid after December 31, 2019. (2) Reimbursements.--The amendment made by subsection (c) shall apply to expenses incurred after December\u2026",
+    "faithful": null,
+    "correct": null,
+    "clear": null
+  },
+  {
+    "item": "cetirizine 10 mg, 45 count",
+    "verdict": "eligible",
+    "reason": "Cetirizine is an OTC allergy medicine, covered without a prescription.",
+    "rule": "Allergy medicines are OTC medicines, eligible without a prescription after 2019.",
+    "sources": "Items: antihistamine, allergy medicine, loratadine, cetirizine, fexofenadine. Verdict: eligible. Allergy medicines are OTC medicines, eligible without a prescription after 2019. Sources: p969:distributions-from-an-fsa, cares:sec-3702. | care.''. (d) Effective Dates.-- (1) Distributions from savings accounts.--The amendment made by subsections (a) and (b) shall apply to amounts paid after December 31, 2019. (2) Reimbursements.--The amendment made by subsection (c) shall apply to expenses incurred after December\u2026 | long-term care. Amounts that are covered under another health plan. If you are covered under both a health FSA and an HRA, see Notice 2002-45, Part V, 2002-28 I.R.B. 93, available at IRS.gov/pub/irs-drop/n-02-45.pdf. Caution: You can\u2019t deduct qualified medical expenses as an\u2026",
+    "faithful": null,
+    "correct": null,
+    "clear": null
+  },
+  {
+    "item": "face mask, 3-ply, 50 count",
+    "verdict": "dual_purpose",
+    "reason": "Face masks are covered only when bought mainly to prevent the spread of COVID-19; ordinary use isn't covered.",
+    "rule": "Masks, hand sanitizer and sanitizing wipes are includible when bought primarily to prevent the spread of COVID-19; ordinary cleaning use is not.",
+    "sources": "Items: face masks, hand sanitizer, sanitizing wipes. Verdict: dual_purpose. Masks, hand sanitizer and sanitizing wipes are includible when bought primarily to prevent the spread of COVID-19; ordinary cleaning use is not. Sources: p502:personal-protective-equipment. | You can include in medical expenses the amounts you pay for personal protective equipment, such as masks, hand sanitizer and hand sanitizing wipes, for the primary purpose of preventing the spread of Coronavirus Disease 2019 (COVID-19). For more information, see IRS\u2026",
+    "faithful": null,
+    "correct": null,
+    "clear": null
+  },
+  {
+    "item": "warm mist vaporizer",
+    "verdict": "needs_prescription",
+    "reason": "A vaporizer is covered only if used mainly to treat an illness, which usually needs a doctor's letter of medical necessity.",
+    "rule": "A household item is includible only if used primarily to alleviate an illness; plans require a letter of medical necessity to show that.",
+    "sources": "Items: humidifier, vaporizer. Verdict: needs_prescription. A household item is includible only if used primarily to alleviate an illness; plans require a letter of medical necessity to show that. Sources: p502:personal-use-items, p502:what-are-medical-expenses. | You can\u2019t include in medical expenses the cost of an item ordinarily used for personal, living, or family purposes unless it is used primarily to prevent or alleviate a physical or mental disability or illness. For example, the cost of a toothbrush and toothpaste is a\u2026 | Medical expenses are the costs of diagnosis, cure, mitigation, treatment, or prevention of disease and for the purpose of affecting any part or function of the body. These expenses include payments for legal medical services rendered by physicians, surgeons, dentists, and other\u2026",
+    "faithful": null,
+    "correct": null,
+    "clear": null
+  },
+  {
+    "item": "massage, 60 minutes",
+    "verdict": "needs_prescription",
+    "reason": "Massage is covered only with a physician's prescription or letter of medical necessity for a condition, not for general well-being.",
+    "rule": "Therapy received as medical treatment is includible; massage qualifies only with a physician's prescription or letter of medical necessity for a condition, not for general well-being.",
+    "sources": "Items: massage, massage therapy. Verdict: needs_prescription. Therapy received as medical treatment is includible; massage qualifies only with a physician's prescription or letter of medical necessity for a condition, not for general well-being. Sources: p502:therapy,\u2026 | You can include in medical expenses amounts you pay for therapy received as medical treatment. | You can\u2019t include in medical expenses health club dues or amounts paid to improve one\u2019s general health or to relieve physical or mental discomfort not related to a particular medical condition. You can\u2019t include in medical expenses the cost of membership in any club organized\u2026",
+    "faithful": null,
+    "correct": null,
+    "clear": null
+  },
+  {
+    "item": "unidentified item, department 54",
+    "verdict": "needs_review",
+    "reason": "The receipt line couldn't be read with confidence (name). The receipt shows only a department number, so the item can't be identified.",
+    "rule": "The line shows only a store department code; no rule can be applied to an unknown item.",
+    "sources": "Items: department code item. Verdict: needs_review. The line shows only a store department code; no rule can be applied to an unknown item. Sources: p502:what-are-medical-expenses. | Medical expenses are the costs of diagnosis, cure, mitigation, treatment, or prevention of disease and for the purpose of affecting any part or function of the body. These expenses include payments for legal medical services rendered by physicians, surgeons, dentists, and other\u2026",
+    "faithful": null,
+    "correct": null,
+    "clear": null
+  }
+]

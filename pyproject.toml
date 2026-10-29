@@ -50,6 +50,7 @@ ignore = ["S101"]  # assert is fine in tests
 "data/adversarial.py" = ["S311"]  # seeded pseudo-randomness is the point: synthetic data
 "evals/run.py" = ["E501"]  # report table rows read better unwrapped
 "evals/retrieval.py" = ["E501"]
+"evals/judge.py" = ["E501", "S311"]
 
 [tool.mypy]
 strict = true

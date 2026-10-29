@@ -1,0 +1,24 @@
+{
+  "date": "2026-10-29",
+  "sha": "39baca4",
+  "judge_model": "claude-haiku-5-5",
+  "prompt_version": "1",
+  "reasons_graded": 441,
+  "mean": {
+    "faithful": 4.2,
+    "correct": 4.71,
+    "clear": 4.29
+  },
+  "share_4_or_more": {
+    "faithful": 0.803,
+    "correct": 0.955,
+    "clear": 0.873
+  },
+  "controls": {
+    "pairs": 20,
+    "judge_preferred_real_reason": 20
+  },
+  "human_labels": 0,
+  "human_agreement_within_1": null,
+  "validated_against_humans": false
+}

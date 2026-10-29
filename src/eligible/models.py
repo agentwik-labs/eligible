@@ -103,8 +103,13 @@ class ItemResult(BaseModel):
 
 
 class Stage(BaseModel):
+    """One span of a trace (SPEC §5)."""
+
     name: str
     ms: float
+    start_ms: float = 0.0  # offset from the start of the request
+    parent: str | None = None
+    model: str = ""
     cost_usd: Decimal = Decimal(0)
     prompt_tokens: int = 0
     output_tokens: int = 0

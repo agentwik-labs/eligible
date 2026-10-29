@@ -98,8 +98,10 @@ def build_request(redacted_text: str, model: str | None = None) -> LLMRequest:
     )
 
 
-def extract(text: str, client: LLMClient, model: str | None = None) -> Extraction:
-    redaction = redact(text)
+def extract(
+    text: str, client: LLMClient, model: str | None = None, redaction: Redaction | None = None
+) -> Extraction:
+    redaction = redaction or redact(text)
     request = build_request(redaction.text, model)
     response = client.complete(request)
     receipt = Receipt.model_validate(_money_as_text(response.json_output()))

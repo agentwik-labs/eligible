@@ -15,10 +15,12 @@ from eligible.llm.client import LLMClient
 from eligible.llm.factory import build_client
 from eligible.llm.types import LLMResponse
 from eligible.models import CheckResult, Citation, FieldConfidence, ItemResult, LineItem, Stage
+from eligible.redact import redact
 from eligible.retrieve.chunk import Chunk, chunk_entry
 from eligible.retrieve.embed import BGEEmbedder, BGEReranker
 from eligible.retrieve.index import INDEX_PATH
 from eligible.retrieve.search import Retriever
+from eligible.tracing import Tracer
 from eligible.validate import quote, totals_mismatch, validate, validate_items
 
 
@@ -28,10 +30,12 @@ class Checker:
         settings: Settings | None = None,
         client: LLMClient | None = None,
         retriever: Retriever | None = None,
+        tracer: Tracer | None = None,
     ) -> None:
         self.settings = settings or get_settings()
         self._client = client
         self._retriever = retriever
+        self.tracer = tracer
 
     @cached_property
     def client(self) -> LLMClient:
@@ -92,44 +96,79 @@ class Checker:
 
     def check(self, text: str) -> CheckResult:
         started = time.perf_counter()
-        clock = started
 
-        def lap() -> float:
-            nonlocal clock
-            now = time.perf_counter()
-            elapsed, clock = (now - clock) * 1000, now
-            return elapsed
+        def now() -> float:
+            return (time.perf_counter() - started) * 1000
 
-        extraction = extract(text, self.client, self.settings.extract_model)
-        extract_ms = lap()
+        spans: list[Stage] = []
+        t0 = now()
+        redaction = redact(text)
+        masked = sum(redaction.counts.values())
+        spans.append(
+            Stage(
+                name="redact",
+                start_ms=t0,
+                ms=now() - t0,
+                detail=f"{masked} personal-data values masked",
+            )
+        )
+
+        t0 = now()
+        extraction = extract(text, self.client, self.settings.extract_model, redaction)
         receipt = extraction.receipt
-        retrieved = [self.retrieve(item.name) for item in receipt.items]
-        retrieve_ms = lap()
+        spans.append(
+            _llm_stage(
+                "extract", t0, now() - t0, extraction.response, f"{len(receipt.items)} items"
+            )
+        )
+
+        t0 = now()
+        retrieved: list[list[Chunk]] = []
+        per_item: list[Stage] = []
+        for item in receipt.items:
+            s0 = now()
+            retrieved.append(self.retrieve(item.name))
+            per_item.append(
+                Stage(
+                    name=f"retrieve: {item.name[:40]}",
+                    parent="retrieve",
+                    start_ms=s0,
+                    ms=now() - s0,
+                    detail=f"{len(retrieved[-1])} chunks",
+                )
+            )
+        unique_chunks = len({c.id for chunks in retrieved for c in chunks})
+        spans.append(
+            Stage(
+                name="retrieve",
+                start_ms=t0,
+                ms=now() - t0,
+                detail=f"{unique_chunks} unique chunks for {len(receipt.items)} items",
+            )
+        )
+        spans += per_item
+
+        t0 = now()
         decided = decide(receipt.items, retrieved, self.client)
-        decide_ms = lap()
+        spans.append(
+            _llm_stage("decide", t0, now() - t0, decided.response, "one call for the whole receipt")
+        )
+
+        t0 = now()
         # The whole eligibility list is in the decide prompt, so any entry is a provided source.
         available = [chunks + self.list_chunks for chunks in retrieved]
         items, unsupported = validate(receipt, decided.decisions, available)
         items = [self.attach_rule_sources(r) for r in items]
-        validate_ms = lap()
-        masked = sum(extraction.redaction.counts.values())
-        unique_chunks = len({c.id for chunks in retrieved for c in chunks})
-        stages = [
-            Stage(name="redact", ms=0.0, detail=f"{masked} personal-data values masked"),
-            _llm_stage("extract", extract_ms, extraction.response, f"{len(receipt.items)} items"),
-            Stage(
-                name="retrieve",
-                ms=retrieve_ms,
-                detail=f"{unique_chunks} unique chunks for {len(receipt.items)} items",
-            ),
-            _llm_stage("decide", decide_ms, decided.response, "one call for the whole receipt"),
+        spans.append(
             Stage(
                 name="validate",
-                ms=validate_ms,
+                start_ms=t0,
+                ms=now() - t0,
                 detail=f"{unsupported} unsupported citations removed",
-            ),
-        ]
-        return CheckResult(
+            )
+        )
+
+        result = CheckResult(
             receipt=receipt,
             items=items,
             eligible_subtotal=sum(
@@ -139,21 +178,26 @@ class Checker:
             needs_review_count=sum(r.verdict == "needs_review" for r in items),
             trace_id=uuid.uuid4().hex,
             cost_usd=extraction.response.cost_usd + decided.response.cost_usd,
-            latency_ms=(time.perf_counter() - started) * 1000,
+            latency_ms=now(),
             prompt_versions={
                 "extract": extraction.request.prompt_version,
                 "decide": decided.request.prompt_version,
             },
             unsupported_citations_before_validation=unsupported,
-            stages=stages,
+            stages=spans,
         )
+        if self.tracer is not None:
+            self.tracer.record(result)
+        return result
 
 
-def _llm_stage(name: str, ms: float, response: LLMResponse, detail: str) -> Stage:
+def _llm_stage(name: str, start: float, ms: float, response: LLMResponse, detail: str) -> Stage:
     replayed = response.source == "cache"
     return Stage(
         name=name,
+        start_ms=start,
         ms=ms,
+        model=response.model,
         cost_usd=response.cost_usd if not replayed else response.avoided_cost_usd,
         prompt_tokens=response.usage.prompt_tokens,
         output_tokens=response.usage.output_tokens,

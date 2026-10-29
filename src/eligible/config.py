@@ -34,6 +34,7 @@ class Settings(BaseSettings):
     # Retrieval: "hybrid" (BM25 + vectors) or "rerank" (adds the cross-encoder, ~1.6 s/item).
     retrieval_mode: Literal["hybrid", "rerank"] = "hybrid"
     retrieval_k: int = 5
+    trace_path: Path = Path("logs/traces.jsonl")
 
 
 @lru_cache

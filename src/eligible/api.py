@@ -22,6 +22,7 @@ from eligible.pipeline import Checker
 from eligible.retrieve.chunk import Chunk
 from eligible.retrieve.index import INDEX_PATH
 from eligible.showcase import engineering
+from eligible.tracing import Trace, Tracer
 
 ROOT = Path(__file__).resolve().parents[2]
 WEB = ROOT / "web"
@@ -58,7 +59,7 @@ class Sample(BaseModel):
 
 @cache
 def checker() -> Checker:
-    return Checker()
+    return Checker(tracer=Tracer(get_settings().trace_path))
 
 
 @app.get("/healthz")
@@ -114,6 +115,18 @@ def sample(sample_id: str) -> Sample:
     if not sample_id.isalnum() or not path.exists():
         raise HTTPException(404, "no such sample")
     return Sample(id=sample_id, text=path.read_text())
+
+
+@app.get("/v1/traces")
+def traces(limit: int = 50) -> list[Trace]:
+    """Recent requests with their spans, newest first."""
+    tracer = checker().tracer
+    return tracer.recent(min(max(limit, 1), 500)) if tracer else []
+
+
+@app.get("/traces", include_in_schema=False)
+def traces_page() -> FileResponse:
+    return FileResponse(WEB / "traces.html")
 
 
 @app.get("/v1/engineering")

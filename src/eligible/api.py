@@ -5,10 +5,11 @@ from __future__ import annotations
 from functools import cache
 from pathlib import Path
 
-from fastapi import FastAPI, HTTPException, Request, UploadFile
+from fastapi import FastAPI, HTTPException, Request
 from fastapi.concurrency import run_in_threadpool
 from fastapi.responses import FileResponse
 from pydantic import BaseModel, ValidationError
+from starlette.datastructures import UploadFile
 
 from eligible import __version__
 from eligible.config import get_settings

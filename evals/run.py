@@ -458,14 +458,21 @@ def main(argv: list[str] | None = None) -> int:
     injected = injection_changes(runs, checker) if args.suite == "adversarial" else (0, 0)
     gates = gate_results(args.suite, summary, dsummary, injected)
     report = render(
-        args.suite, settings, cases, runs, scores, summary, dscores, dsummary, cost, sha
+        args.suite, settings, cases, runs, scores, summary, dscores, dsummary, cost, sha, gates
     )
+    if args.suite == "adversarial":
+        report += by_kind(runs, dscores)
     REPORTS.mkdir(parents=True, exist_ok=True)
     stem = f"{date.today().isoformat()}-{sha}-{args.suite}"
     (REPORTS / f"{stem}.md").write_text(report)
     (REPORTS / f"{stem}.json").write_text(
         to_json(args.suite, settings, summary, dsummary, cost, sha, gates)
     )
+    if args.suite == "adversarial":
+        (REPORTS / "adversarial.md").write_text(report)
+        (REPORTS / "adversarial.json").write_text(
+            to_json(args.suite, settings, summary, dsummary, cost, sha, gates)
+        )
     if args.suite == "full":
         (REPORTS / "latest.md").write_text(report)
         (REPORTS / "latest.json").write_text(

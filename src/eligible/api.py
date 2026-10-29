@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+from collections.abc import AsyncIterator
+from contextlib import asynccontextmanager
 from functools import cache
 from pathlib import Path
 from typing import Any
@@ -18,13 +20,23 @@ from eligible.config import get_settings
 from eligible.models import CheckResult
 from eligible.pipeline import Checker
 from eligible.retrieve.chunk import Chunk
+from eligible.retrieve.index import INDEX_PATH
 from eligible.showcase import engineering
 
 ROOT = Path(__file__).resolve().parents[2]
 WEB = ROOT / "web"
 SAMPLES = ROOT / "data" / "receipts"
 
-app = FastAPI(title="Eligible", version=__version__)
+
+@asynccontextmanager
+async def lifespan(_: FastAPI) -> AsyncIterator[None]:
+    """Load the embedding model and index before the first visitor, not during their check."""
+    if INDEX_PATH.exists():
+        await run_in_threadpool(checker().retrieve, "warm up")
+    yield
+
+
+app = FastAPI(title="Eligible", version=__version__, lifespan=lifespan)
 app.mount("/static", StaticFiles(directory=WEB), name="static")
 
 
